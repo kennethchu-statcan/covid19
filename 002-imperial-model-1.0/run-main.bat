@@ -26,4 +26,5 @@ xcopy /E /I /Y %codeDIR% %outROOT%\code
 
 :: ########################################################
 :: R command
-Rscript %codeDIR%\main.R %dataDIR% %codeDIR% %outROOT% 1> %outROOT%\stdout.R.runall 2> %outROOT%\stderr.R.runall
+Rscript %codeDIR%\main.R %dataDIR% %codeDIR% %outROOT% 1> %outROOT%\stdout.R.main 2> %outROOT%\stderr.R.main
+
