@@ -18,7 +18,8 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
-    "eight-schools.R"
+    "eight-schools.R",
+    "getData-ECDC.R"
     );
 
 for ( code.file in code.files ) {
@@ -26,12 +27,30 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#require(foreach);
-#require(doParallel);
+require(rstan);
+require(data.table);
+require(lubridate);
+require(gdata);
+require(EnvStats);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #data.snapshot  <- "2020-02-24.03";
 #data.directory <- file.path(data.directory,data.snapshot,"Sentinal1","relative-orbit-number");
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+countries <- c(
+    "Denmark",
+    "Italy",
+    "Germany",
+    "Spain",
+    "United_Kingdom",
+    "France",
+    "Norway",
+    "Belgium",
+    "Austria",
+    "Sweden",
+    "Switzerland"
+    );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
@@ -43,11 +62,15 @@ file.copy(
     to   = file.path(output.directory,'eight-schools.stan')
     );
 
-fitted.model <- eight.schools(
-    FILE.stan = file.path(output.directory,'eight-schools.stan')
-    );
+#fitted.model <- eight.schools(
+#    FILE.stan = file.path(output.directory,'eight-schools.stan')
+#    );
+#
+#print( str(fitted.model) );
 
-print( str(fitted.model) );
+DF.ECDC <- getData.ECDC();
+print( str(    DF.ECDC) );
+print( summary(DF.ECDC) );
 
 ##################################################
 print( warnings() );
