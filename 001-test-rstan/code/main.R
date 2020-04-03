@@ -38,8 +38,13 @@ set.seed(7654321);
 
 options(mc.cores = parallel::detectCores());
 
+file.copy(
+    from = file.path(  code.directory,'eight-schools.stan'),
+    to   = file.path(output.directory,'eight-schools.stan')
+    );
+
 fitted.model <- eight.schools(
-    FILE.stan = file.path(code.directory,'eight-schools.stan')
+    FILE.stan = file.path(output.directory,'eight-schools.stan')
     );
 
 print( str(fitted.model) );
