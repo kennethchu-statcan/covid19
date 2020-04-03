@@ -19,7 +19,8 @@ setwd( output.directory );
 # source supporting R code
 code.files <- c(
     "eight-schools.R",
-    "getData-ECDC.R"
+    "getData-ECDC.R",
+    "getData-WFR.R"
     );
 
 for ( code.file in code.files ) {
@@ -34,8 +35,8 @@ require(gdata);
 require(EnvStats);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#data.snapshot  <- "2020-02-24.03";
-#data.directory <- file.path(data.directory,data.snapshot,"Sentinal1","relative-orbit-number");
+data.snapshot  <- "imperial-data-1.0";
+data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 countries <- c(
@@ -71,6 +72,12 @@ file.copy(
 DF.ECDC <- getData.ECDC();
 print( str(    DF.ECDC) );
 print( summary(DF.ECDC) );
+
+DF.weighted.fatality.ratios <- getData.WFR(
+    CSV.WFR = file.path(data.directory,"weighted_fatality.csv"),
+    );
+print( str(    DF.weighted.fatality.ratios) );
+print( summary(DF.weighted.fatality.ratios) );
 
 ##################################################
 print( warnings() );
