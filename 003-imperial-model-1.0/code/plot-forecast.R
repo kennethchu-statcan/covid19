@@ -17,14 +17,6 @@ plot.forecast <- function(
     require(ggpubr)
     require(bayesplot)
     require(cowplot)
-
-    #args <- commandArgs(trailingOnly = TRUE)
-    #filename <- args[1]
-    #load(paste0("results/", filename))
-    #data_interventions <- read.csv(
-    #    "data/interventions.csv", 
-    #    stringsAsFactors = FALSE
-    #    );
  
     StanModel         <- list.input[["StanModel"        ]];
     dates             <- list.input[["dates"            ]];
@@ -52,22 +44,9 @@ plot.forecast <- function(
         estimated_deaths_li <- colQuantiles(estimated.deaths[,1:N,i], probs=.025)
         estimated_deaths_ui <- colQuantiles(estimated.deaths[,1:N,i], probs=.975)
     
-        cat("\ndim(estimated.deaths)\n");
-        print( dim(estimated.deaths)   );
-
-        cat("\nN\n");
-        print( N   );
-
-        cat("\nN2\n");
-        print( N2   );
-
-        print("A-1");
         estimated_deaths_forecast    <- colMeans(    estimated.deaths[,1:N2,i])[N:N2]
-        print("A-2");
         estimated_deaths_li_forecast <- colQuantiles(estimated.deaths[,1:N2,i], probs=.025)[N:N2]
-        print("A-3");
         estimated_deaths_ui_forecast <- colQuantiles(estimated.deaths[,1:N2,i], probs=.975)[N:N2]
-        print("A-4");
     
         rt    <- colMeans(    out$Rt[,1:N,i])
         rt_li <- colQuantiles(out$Rt[,1:N,i],probs=.025)
