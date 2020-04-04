@@ -56,18 +56,21 @@ countries <- c(
     "Switzerland"
     );
 
-FILE.stan.model.0 <- file.path(  code.directory,'base.stan');
-FILE.stan.model   <- file.path(output.directory,'base.stan');
+StanModel <- 'base';
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-set.seed(7654321);
-
 options(mc.cores = parallel::detectCores());
+
+FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
+FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
 
 file.copy(
     from = FILE.stan.model.0,
     to   = FILE.stan.model
     );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+set.seed(7654321);
 
 DF.ECDC <- getData.ECDC();
 print( str(    DF.ECDC) );
@@ -95,6 +98,7 @@ print(         DF.covariates  );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 wrapper.stan(
+    StanModel                   = StanModel,
     FILE.stan.model             = FILE.stan.model,
     DF.ECDC                     = DF.ECDC,
     DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,

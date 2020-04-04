@@ -1,5 +1,6 @@
 
 wrapper.stan <- function(
+    StanModel                   = NULL,
     FILE.stan.model             = NULL,
     DF.ECDC                     = NULL,
     DF.weighted.fatality.ratios = NULL,
@@ -30,6 +31,7 @@ wrapper.stan <- function(
     } else {
 
         wrapper.stan_inner(
+            StanModel                   = StanModel,
             FILE.stan.model             = FILE.stan.model,
             DF.ECDC                     = DF.ECDC,
             DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
@@ -55,6 +57,7 @@ wrapper.stan <- function(
 
 ##################################################
 wrapper.stan_inner <- function(
+    StanModel                   = NULL,
     FILE.stan.model             = NULL,
     DF.ECDC                     = NULL,
     DF.weighted.fatality.ratios = NULL,
