@@ -52,6 +52,10 @@ wrapper.stan <- function(
         list.input = list.output
         );
 
+    plot.3.panel(
+        list.input = list.output
+        );
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");

@@ -19,10 +19,12 @@ setwd( output.directory );
 # source supporting R code
 code.files <- c(
     "eight-schools.R",
+    "geom-stepribbon.R",
     "getData-covariates.R",
     "getData-ECDC.R",
     "getData-serial-interval.R",
     "getData-WFR.R",
+    "plot-3-panel.R",
     "wrapper-stan.R"
     );
 

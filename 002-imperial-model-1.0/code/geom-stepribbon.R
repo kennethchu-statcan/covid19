@@ -1,3 +1,40 @@
+
+#' @rdname geom_stepribbon
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomStepribbon <- ggplot2::ggproto(
+
+    "GeomStepribbon",
+    ggplot2::GeomRibbon, 
+
+    extra_params = c("na.rm", "kmplot"),
+
+    draw_group = function(data, panel_scales, coord, na.rm = FALSE) {
+        if (na.rm) data <- data[complete.cases(data[c("x", "ymin", "ymax")]), ]
+        data <- rbind(data, data)
+        data <- data[order(data$x), ]
+        data$x <- c(data$x[2:nrow(data)], NA)
+        data <- data[complete.cases(data["x"]), ]
+        GeomRibbon$draw_group(data, panel_scales, coord, na.rm = FALSE)
+        },
+  
+    setup_data = function(data, params) {
+        if (params$kmplot) {
+            data <- data[order(data$PANEL, data$group, data$x),]
+            tmpmin <- tmpmax <- NA
+            for (i in 1:nrow(data)) {
+                if (is.na(data$ymin[i])) { data$ymin[i] <- tmpmin }
+                if (is.na(data$ymax[i])) { data$ymax[i] <- tmpmax }
+                tmpmin <- data$ymin[i]
+                tmpmax <- data$ymax[i]
+                }
+            }
+        data
+        }
+  
+    )
+
 #' We obtained permission from the authors to redistribute this code
 #' Step ribbon plots.
 #'
@@ -28,58 +65,31 @@
 #' @importFrom ggplot2 layer GeomRibbon
 #' @export
 geom_stepribbon <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, kmplot = FALSE, ...) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomStepribbon,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      kmplot = kmplot,
-      ...
-    )
-  )
-}
+    mapping     = NULL,
+    data        = NULL,
+    stat        = "identity",
+    position    = "identity",
+    na.rm       = FALSE,
+    show.legend = NA,
+    inherit.aes = TRUE,
+    kmplot      = FALSE,
+    ...
+    ) {
 
-#' @rdname geom_stepribbon
-#' @format NULL
-#' @usage NULL
-#' @export
-GeomStepribbon <- ggproto(
-  "GeomStepribbon", GeomRibbon, 
-  
-  extra_params = c("na.rm", "kmplot"),
-  
-  draw_group = function(data, panel_scales, coord, na.rm = FALSE) {
-    if (na.rm) data <- data[complete.cases(data[c("x", "ymin", "ymax")]), ]
-    data <- rbind(data, data)
-    data <- data[order(data$x), ]
-    data$x <- c(data$x[2:nrow(data)], NA)
-    data <- data[complete.cases(data["x"]), ]
-    GeomRibbon$draw_group(data, panel_scales, coord, na.rm = FALSE)
-  },
-  
-  setup_data = function(data, params) {
-    if (params$kmplot) {
-      data <- data[order(data$PANEL, data$group, data$x), ]
-      tmpmin <- tmpmax <- NA
-      for (i in 1:nrow(data)) {
-        if (is.na(data$ymin[i])) {
-          data$ymin[i] <- tmpmin
-        }
-        if (is.na(data$ymax[i])) {
-          data$ymax[i] <- tmpmax
-        }
-        tmpmin <- data$ymin[i]
-        tmpmax <- data$ymax[i]
-      }
+    layer(
+        data        = data,
+        mapping     = mapping,
+        stat        = stat,
+        geom        = GeomStepribbon,
+        position    = position,
+        show.legend = show.legend,
+        inherit.aes = inherit.aes,
+        params      = list(
+            na.rm  = na.rm,
+            kmplot = kmplot,
+            ...
+            )
+        );
+
     }
-    data
-  }
-  
-)
+
