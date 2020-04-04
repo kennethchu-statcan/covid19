@@ -22,7 +22,8 @@ code.files <- c(
     "getData-covariates.R",
     "getData-ECDC.R",
     "getData-serial-interval.R",
-    "getData-WFR.R"
+    "getData-WFR.R",
+    "wrapper-stan.R"
     );
 
 for ( code.file in code.files ) {
@@ -55,21 +56,18 @@ countries <- c(
     "Switzerland"
     );
 
+FILE.stan.model.0 <- file.path(  code.directory,'base.stan');
+FILE.stan.model   <- file.path(output.directory,'base.stan');
+
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
 options(mc.cores = parallel::detectCores());
 
 file.copy(
-    from = file.path(  code.directory,'eight-schools.stan'),
-    to   = file.path(output.directory,'eight-schools.stan')
+    from = FILE.stan.model.0,
+    to   = FILE.stan.model
     );
-
-#fitted.model <- eight.schools(
-#    FILE.stan = file.path(output.directory,'eight-schools.stan')
-#    );
-#
-#print( str(fitted.model) );
 
 DF.ECDC <- getData.ECDC();
 print( str(    DF.ECDC) );
@@ -94,6 +92,16 @@ DF.covariates <- getData.covariates(
 print( str(    DF.covariates) );
 print( summary(DF.covariates) );
 print(         DF.covariates  );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+wrapper.stan(
+    FILE.stan.model             = FILE.stan.model,
+    DF.ECDC                     = DF.ECDC,
+    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
+    DF.serial.interval          = DF.serial.interval,
+    DF.covariates               = DF.covariates,
+    DEBUG                       = TRUE
+    );
 
 ##################################################
 print( warnings() );
