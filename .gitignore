@@ -21,7 +21,6 @@ data
 graphics
 graphics-multiyear
 *.RData
-000-data
 *DELETEME*
 ARCHIVE
 *BACKUP*
@@ -30,3 +29,4 @@ stderr.*
 stdout.*
 *.rds
 *.RData
+#000-data
