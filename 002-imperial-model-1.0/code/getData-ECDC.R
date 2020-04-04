@@ -47,6 +47,11 @@ getData.ECDC <- function(
         DF.output <- d;
         remove( list = c("d") );
 
+        DF.output[,"DateRep"] <- as.Date(
+            x      = DF.output[,"DateRep"],
+            format = "%d/%m/%Y"
+            );
+
         if (!is.null(RData.output)) {
             saveRDS(object = DF.output, file = RData.output);
             }
