@@ -69,8 +69,6 @@ wrapper.stan_visualize.results <- function(
 
     # to visualize results
 
-    print("A-0");
-
     StanModel <- list.input[["StanModel"]];
 
     plot_labels <- c(
