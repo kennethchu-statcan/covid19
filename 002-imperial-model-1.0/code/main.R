@@ -19,7 +19,9 @@ setwd( output.directory );
 # source supporting R code
 code.files <- c(
     "eight-schools.R",
+    "getData-covariates.R",
     "getData-ECDC.R",
+    "getData-serial-interval.R",
     "getData-WFR.R"
     );
 
@@ -78,6 +80,20 @@ DF.weighted.fatality.ratios <- getData.WFR(
     );
 print( str(    DF.weighted.fatality.ratios) );
 print( summary(DF.weighted.fatality.ratios) );
+
+DF.serial.interval <- getData.serial.interval(
+    CSV.serial.interval = file.path(data.directory,"serial_interval.csv"),
+    );
+print( str(    DF.serial.interval) );
+print( summary(DF.serial.interval) );
+
+DF.covariates <- getData.covariates(
+    CSV.covariates     = file.path(data.directory,"interventions.csv"),
+    retained.countries = countries
+    );
+print( str(    DF.covariates) );
+print( summary(DF.covariates) );
+print(         DF.covariates  );
 
 ##################################################
 print( warnings() );
