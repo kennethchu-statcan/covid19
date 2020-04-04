@@ -18,7 +18,6 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
-    "eight-schools.R",
     "geom-stepribbon.R",
     "getData-covariates.R",
     "getData-ECDC.R",
