@@ -28,7 +28,7 @@ plot.3.panel <- function(
     dates            <- list.input[["dates"           ]];
     countries        <- list.input[["countries"       ]];
     prediction       <- list.input[["prediction"      ]];
-    estimated.deaths <- list.input[["estimated.deaths"]];
+    estimated.deaths <- list.input[["estimated_deaths"]];
     out              <- list.input[["out"             ]];
     covariates       <- list.input[["covariates"      ]];
 
