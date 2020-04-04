@@ -97,7 +97,7 @@ print( summary(DF.covariates) );
 print(         DF.covariates  );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-wrapper.stan(
+results.wrapper.stan <- wrapper.stan(
     StanModel                   = StanModel,
     FILE.stan.model             = FILE.stan.model,
     DF.ECDC                     = DF.ECDC,

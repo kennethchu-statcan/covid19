@@ -6,7 +6,7 @@ wrapper.stan <- function(
     DF.weighted.fatality.ratios = NULL,
     DF.serial.interval          = NULL,
     DF.covariates               = NULL,
-    RData.output                = "model-stan.RData",
+    RData.output                = paste0('stan-model-',StanModel,'.RData'),
     DEBUG                       = FALSE
     ) {
 
@@ -24,13 +24,13 @@ wrapper.stan <- function(
 
         cat(paste0("\n### ",RData.output," already exists; loading this file ...\n"));
 
-        DF.output <- readRDS(file = RData.output);
+        list.output <- readRDS(file = RData.output);
 
         cat(paste0("\n### Finished loading raw data.\n"));
 
     } else {
 
-        wrapper.stan_inner(
+        list.output <- wrapper.stan_inner(
             StanModel                   = StanModel,
             FILE.stan.model             = FILE.stan.model,
             DF.ECDC                     = DF.ECDC,
@@ -41,21 +41,76 @@ wrapper.stan <- function(
             DEBUG                       = DEBUG
             );
 
-        #if (!is.null(RData.output)) {
-        #    saveRDS(object = DF.output, file = RData.output);
-        #    }
+        if (!is.null(RData.output)) {
+            saveRDS(object = list.output, file = RData.output);
+            }
 
         }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    wrapper.stan_visualize.results(
+        list.input = list.output
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
     # return( DF.output );
-    return( NULL );
+    return( list.output );
 
     }
 
 ##################################################
+wrapper.stan_visualize.results <- function(
+    list.input = NULL
+    ) {
+    
+    require(bayesplot);
+
+    # to visualize results
+
+    StanModel <- list.input[["StanModel"]];
+
+    plot_labels <- c(
+        "School Closure",
+        "Self Isolation",
+        "Public Events",
+        "First Intervention",
+        "Lockdown",
+        'Social distancing'
+        );
+
+    alpha <- (as.matrix(list.input[["out"]][["alpha"]]));
+    colnames(alpha) <- plot_labels;
+
+    g <- (bayesplot::mcmc_intervals(alpha, prob = .9));
+    ggsave(sprintf("output-%s-covars-alpha-log.pdf",StanModel),g,width=4,height=6);
+
+    g <- (bayesplot::mcmc_intervals(alpha, prob = .9,transformations = function(x) exp(-x)));
+    ggsave(sprintf("output-%s-covars-alpha.pdf",StanModel),g,width=4,height=6);
+
+    mu <- (as.matrix(list.input[["out"]][["mu"]]));
+    colnames(mu) = countries;
+
+    g <- (bayesplot::mcmc_intervals(mu,prob = .9));
+    ggsave(sprintf("output-%s-covars-mu.pdf",StanModel),g,width=4,height=6)
+
+    dimensions   <- dim(list.input[["out"]][["Rt"]]);
+    Rt           <- (as.matrix(list.input[["out"]][["Rt"]][,dimensions[2],]));
+    colnames(Rt) <- countries;
+
+    g = (bayesplot::mcmc_intervals(Rt,prob = .9));
+    ggsave(sprintf("output-%s-covars-final-rt.pdf",StanModel),g,width=4,height=6);
+
+    #system(paste0("Rscript plot-3-panel.r ", filename,'.RData'));
+
+    ## to run this code you will need to adjust manual values of forecast required
+    #system(paste0("Rscript plot-forecast.r ",filename,'.RData'));
+
+    return( NULL );
+
+    }
+
 wrapper.stan_inner <- function(
     StanModel                   = NULL,
     FILE.stan.model             = NULL,
@@ -287,30 +342,20 @@ wrapper.stan_inner <- function(
         estimated.deaths    <- out$E_deaths;
         estimated.deaths.cf <- out$E_deaths0;
 
-        JOBID <- Sys.getenv("PBS_JOBID");
-        if( JOBID == "" ) {
-            JOBID <- as.character(abs(round(rnorm(1) * 1000000)))
-            }
- 
-        print(sprintf("Jobid = %s",JOBID));
-
-        save.image(paste0('stan-model-',StanModel,'-',JOBID,'.RData'));
-
-        save(
-            fit,
-            prediction,
-            dates,
-            reported_cases,
-            deaths_by_country,
-            countries,
-            estimated.deaths,
-            estimated.deaths.cf,
-            out,
-            DF.covariates,
-            file = paste0('stan-model-',StanModel,'-',JOBID,'-stanfit.RData')
+        list.output <- list(
+            fit                 = fit,
+            prediction          = prediction,
+            dates               = dates,
+            reported_cases      = reported_cases,
+            deaths_by_country   = deaths_by_country,
+            countries           = countries,
+            estimated_deaths    = estimated.deaths,
+            estimated_deaths_cf = estimated.deaths.cf,
+            out                 = out,
+            covariates          = DF.covariates
             );
 
-        return( NULL );
+        return( list.output );
 
     }
 
