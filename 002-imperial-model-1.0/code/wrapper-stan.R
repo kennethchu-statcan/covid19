@@ -257,14 +257,13 @@ wrapper.stan_inner <- function(
         stan_data$y <- t(stan_data$y);
         options(mc.cores = parallel::detectCores())
         rstan_options(auto_write = TRUE)
-        #m <- stan_model(paste0('stan-models/',StanModel,'.stan'))
         m <- rstan::stan_model(FILE.stan.model);
 
         if(DEBUG) {
-            fit <- sampling(m,data=stan_data,iter=40,warmup=20,chains=2);
+            fit <- rstan::sampling(object = m, data = stan_data, iter = 40, warmup = 20, chains = 2);
         } else {
-            # fit = sampling(
-            #     m,
+            # fit = rstan::sampling(
+            #     object  = m,
             #     data    = stan_data,
             #     iter    = 4000,
             #     warmup  = 2000,
@@ -272,8 +271,8 @@ wrapper.stan_inner <- function(
             #     thin    = 4,
             #     control = list(adapt_delta = 0.90, max_treedepth = 10)
             #     );
-            fit <- sampling(
-                m,
+            fit <- rstan::sampling(
+                object  = m,
                 data    = stan_data,
                 iter    = 200,
                 warmup  = 100,
