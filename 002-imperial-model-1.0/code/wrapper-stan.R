@@ -239,7 +239,7 @@ wrapper.stan_inner <- function(
         if( DEBUG ) {
             for(i in 1:length(countries)) {
                 write.csv(
-                    file = sprintf("%s-check-dates.csv",countries[i]),
+                    file = sprintf("check-dates-%s.csv",countries[i]),
                     x    = data.frame(
                         date                               = dates[[i]],
                         `school closure`                   = stan_data$covariate1[1:stan_data$N[i],i],
