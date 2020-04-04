@@ -307,7 +307,7 @@ wrapper.stan_inner <- function(
             estimated.deaths,
             estimated.deaths.cf,
             out,
-            covariates,
+            DF.covariates,
             file = paste0('stan-model-',StanModel,'-',JOBID,'-stanfit.RData')
             );
 
