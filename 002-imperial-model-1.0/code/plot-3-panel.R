@@ -25,12 +25,15 @@ plot.3.panel <- function(
     #covariates <- data_interventions[1:11,c(1,2,3,4,5,6,7,8)]
     #data_interventions <- read.csv("data/interventions.csv", stringsAsFactors = FALSE)
  
-    dates            <- list.input[["dates"           ]];
-    countries        <- list.input[["countries"       ]];
-    prediction       <- list.input[["prediction"      ]];
-    estimated.deaths <- list.input[["estimated_deaths"]];
-    out              <- list.input[["out"             ]];
-    covariates       <- list.input[["covariates"      ]];
+    StanModel         <- list.input[["StanModel"        ]];
+    dates             <- list.input[["dates"            ]];
+    countries         <- list.input[["countries"        ]];
+    prediction        <- list.input[["prediction"       ]];
+    estimated.deaths  <- list.input[["estimated_deaths" ]];
+    out               <- list.input[["out"              ]];
+    covariates        <- list.input[["covariates"       ]];
+    reported_cases    <- list.input[["reported_cases"   ]];
+    deaths_by_country <- list.input[["deaths_by_country"]];
 
     for( i in 1:11 ){
 
@@ -113,7 +116,7 @@ plot.3.panel <- function(
         plot.three.panel_make.plots(
             data_country            = data_country, 
             covariates_country_long = covariates_country_long,
-            filename2               = filename2,
+            StanModel               = StanModel,
             country                 = country
             );
     
@@ -127,7 +130,7 @@ plot.3.panel <- function(
 plot.three.panel_make.plots <- function(
     data_country            = NULL,
     covariates_country_long = NULL, 
-    filename2               = NULL,
+    StanModel               = NULL,
     country                 = NULL
     ) {
   
@@ -233,7 +236,7 @@ plot.three.panel_make.plots <- function(
   
   p <- plot_grid(p1, p2, p3, ncol = 3, rel_widths = c(1, 1, 2))
   save_plot(
-      filename = paste0("output-",country,"_three_pannel_",filename2,".png"),
+      filename = paste0("output-",country,"_three_pannel_",StanModel,".png"),
       p,
       base_width = 14
       )
