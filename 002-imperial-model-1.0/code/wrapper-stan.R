@@ -23,9 +23,7 @@ wrapper.stan <- function(
     if ( file.exists(RData.output) ) {
 
         cat(paste0("\n### ",RData.output," already exists; loading this file ...\n"));
-
         list.output <- readRDS(file = RData.output);
-
         cat(paste0("\n### Finished loading raw data.\n"));
 
     } else {
@@ -53,6 +51,10 @@ wrapper.stan <- function(
         );
 
     plot.3.panel(
+        list.input = list.output
+        );
+
+    plot.forecast(
         list.input = list.output
         );
 

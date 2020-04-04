@@ -17,13 +17,6 @@ plot.3.panel <- function(
     require(ggpubr)
     require(bayesplot)
     require(cowplot)
-
-    #filename2 <- args[1]
-    #load(paste0("results/", filename2))
-    #print(sprintf("loading: %s",paste0("results/",filename2)))
-    #data_interventions <- read.csv("data/interventions.csv", stringsAsFactors = FALSE)
-    #covariates <- data_interventions[1:11,c(1,2,3,4,5,6,7,8)]
-    #data_interventions <- read.csv("data/interventions.csv", stringsAsFactors = FALSE)
  
     StanModel         <- list.input[["StanModel"        ]];
     dates             <- list.input[["dates"            ]];
@@ -236,8 +229,6 @@ plot.three.panel_make.plots <- function(
   
   p <- plot_grid(p1, p2, p3, ncol = 3, rel_widths = c(1, 1, 2))
   save_plot(
-      #filename = paste0("output-",country,"_three_pannel_",StanModel,".png"),
-      #filename = paste0("output-3-panel-",StanModel,"-",country,".png"),
       filename = paste0("output-",StanModel,"-3-panel-",country,".png"),
       p,
       base_width = 14

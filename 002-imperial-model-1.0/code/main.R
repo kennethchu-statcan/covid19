@@ -25,6 +25,7 @@ code.files <- c(
     "getData-serial-interval.R",
     "getData-WFR.R",
     "plot-3-panel.R",
+    "plot-forecast.R",
     "wrapper-stan.R"
     );
 
