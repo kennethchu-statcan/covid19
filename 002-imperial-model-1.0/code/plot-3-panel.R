@@ -35,7 +35,7 @@ plot.3.panel <- function(
     reported_cases    <- list.input[["reported_cases"   ]];
     deaths_by_country <- list.input[["deaths_by_country"]];
 
-    for( i in 1:11 ){
+    for( i in 1:length(countries) ){
 
         print(i)
 
