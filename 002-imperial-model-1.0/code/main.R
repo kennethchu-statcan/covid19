@@ -75,7 +75,9 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-DF.ECDC <- getData.ECDC();
+DF.ECDC <- getData.ECDC(
+    ECDC.file = file.path(data.directory,"COVID-19-up-to-date.csv"),
+    );
 print( str(    DF.ECDC) );
 print( summary(DF.ECDC) );
 
