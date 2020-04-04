@@ -1,7 +1,7 @@
 
 getData.WFR <- function(
     CSV.WFR      = NULL,
-    RData.output = "weighted-fatality-ratios.RData"
+    RData.output = "input-weighted-fatality-ratios.RData"
     ) {
 
     thisFunctionName <- "getData.WFR";

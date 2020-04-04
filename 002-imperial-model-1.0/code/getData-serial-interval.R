@@ -1,7 +1,7 @@
 
 getData.serial.interval <- function(
     CSV.serial.interval = NULL,
-    RData.output        = "serial-interval.RData"
+    RData.output        = "input-serial-interval.RData"
     ) {
 
     thisFunctionName <- "getData.serial.interval";

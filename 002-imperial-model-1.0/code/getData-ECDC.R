@@ -1,7 +1,7 @@
 
 getData.ECDC <- function(
     url.ECDC     = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-    RData.output = "COVID-19-up-to-date.RData"
+    RData.output = "input-COVID-19-up-to-date.RData"
     ) {
 
     thisFunctionName <- "getData.ECDC";
@@ -27,7 +27,7 @@ getData.ECDC <- function(
 
         tryCatch(
             expr = {
-                code <- download.file(url = url.ECDC, destfile = "COVID-19-up-to-date.csv");
+                code <- download.file(url = url.ECDC, destfile = "input-COVID-19-up-to-date.csv");
                 if (code != 0) { stop("Error downloading file") }
                 },
             error = function(e) {
@@ -35,7 +35,7 @@ getData.ECDC <- function(
                 }
             );
 
-        d   <- read.csv("COVID-19-up-to-date.csv", stringsAsFactors = FALSE);
+        d   <- read.csv("input-COVID-19-up-to-date.csv", stringsAsFactors = FALSE);
         d$t <- lubridate::decimal_date(as.Date(d$dateRep, format = "%d/%m/%Y"));
         d   <- d[order(d$'countriesAndTerritories', d$t, decreasing = FALSE), ];
 

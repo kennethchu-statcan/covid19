@@ -1,7 +1,7 @@
 
 getData.covariates <- function(
     CSV.covariates     = NULL,
-    RData.output       = "covariates.RData",
+    RData.output       = "input-covariates.RData",
     nrows.to.read      = 11,
     retained.countries = NULL,
     retained.columns   = c(
