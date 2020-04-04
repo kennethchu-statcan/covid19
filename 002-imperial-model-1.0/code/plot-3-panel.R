@@ -237,7 +237,8 @@ plot.three.panel_make.plots <- function(
   p <- plot_grid(p1, p2, p3, ncol = 3, rel_widths = c(1, 1, 2))
   save_plot(
       #filename = paste0("output-",country,"_three_pannel_",StanModel,".png"),
-      filename = paste0("output-3-panel-",StanModel,"-",country,".png"),
+      #filename = paste0("output-3-panel-",StanModel,"-",country,".png"),
+      filename = paste0("output-",StanModel,"-3-panel-",country,".png"),
       p,
       base_width = 14
       )
