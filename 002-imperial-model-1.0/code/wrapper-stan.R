@@ -69,6 +69,8 @@ wrapper.stan_visualize.results <- function(
 
     # to visualize results
 
+    print("A-0");
+
     StanModel <- list.input[["StanModel"]];
 
     plot_labels <- c(
@@ -83,24 +85,45 @@ wrapper.stan_visualize.results <- function(
     alpha <- (as.matrix(list.input[["out"]][["alpha"]]));
     colnames(alpha) <- plot_labels;
 
-    g <- (bayesplot::mcmc_intervals(alpha, prob = .9));
-    ggsave(sprintf("output-%s-covars-alpha-log.pdf",StanModel),g,width=4,height=6);
+    g <- bayesplot::mcmc_intervals(alpha, prob = .9);
+    ggsave(
+        filename = paste0("output-",StanModel,"-covars-alpha-log.png"),
+        plot     = g,
+        device   = "png",
+        width    = 4,
+        height   = 6
+        );
 
-    g <- (bayesplot::mcmc_intervals(alpha, prob = .9,transformations = function(x) exp(-x)));
-    ggsave(sprintf("output-%s-covars-alpha.pdf",StanModel),g,width=4,height=6);
+    g <- bayesplot::mcmc_intervals(alpha, prob = .9,transformations = function(x) exp(-x));
+    ggsave(
+        filename = paste0("output-",StanModel,"-covars-alpha.png"),
+        plot     = g,
+        width    = 4,
+        height   = 6
+        );
 
-    mu <- (as.matrix(list.input[["out"]][["mu"]]));
+    mu <- as.matrix(list.input[["out"]][["mu"]]);
     colnames(mu) = countries;
 
-    g <- (bayesplot::mcmc_intervals(mu,prob = .9));
-    ggsave(sprintf("output-%s-covars-mu.pdf",StanModel),g,width=4,height=6)
+    g <- bayesplot::mcmc_intervals(mu,prob = .9);
+    ggsave(
+        filename = paste0("output-",StanModel,"-covars-mu.png"),
+        plot     = g,
+        width    = 4,
+        height   = 6
+        );
 
     dimensions   <- dim(list.input[["out"]][["Rt"]]);
-    Rt           <- (as.matrix(list.input[["out"]][["Rt"]][,dimensions[2],]));
+    Rt           <- as.matrix(list.input[["out"]][["Rt"]][,dimensions[2],]);
     colnames(Rt) <- countries;
 
-    g = (bayesplot::mcmc_intervals(Rt,prob = .9));
-    ggsave(sprintf("output-%s-covars-final-rt.pdf",StanModel),g,width=4,height=6);
+    g <- bayesplot::mcmc_intervals(Rt,prob = .9);
+    ggsave(
+        filename = paste0("output-",StanModel,"-covars-final-rt.png"),
+        plot     = g,
+        width    = 4,
+        height   = 6
+        );
 
     #system(paste0("Rscript plot-3-panel.r ", filename,'.RData'));
 
@@ -343,6 +366,7 @@ wrapper.stan_inner <- function(
         estimated.deaths.cf <- out$E_deaths0;
 
         list.output <- list(
+            StanModel           = StanModel,
             fit                 = fit,
             prediction          = prediction,
             dates               = dates,
