@@ -108,7 +108,7 @@ results.wrapper.stan <- wrapper.stan(
     DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
     DF.serial.interval          = DF.serial.interval,
     DF.covariates               = DF.covariates,
-    DEBUG                       = TRUE
+    DEBUG                       = FALSE # TRUE
     );
 
 ##################################################
