@@ -20,7 +20,7 @@ We have since made slight adaptions in order to:
 
 Execution reqirements
 ---------------------
-*  Internet connection (to download up-to-date data)
+*  Internet connection (to download up-to-date COVID-19 data)
 *  R v3.6.2
 *  R packages: gdata, EnvStats, ggplot2, tidyr, dplyr, rstan, data.table, lubridate, gdata,
    matrixStats, scales, gridExtra, ggpubr, bayesplot, cowplot, readr
