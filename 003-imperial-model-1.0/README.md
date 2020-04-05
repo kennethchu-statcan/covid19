@@ -114,7 +114,7 @@ Main Output files
 * __output-base-3-panel-Italy.png__
 
 
-    ![three-panel plot, Italy](/figures/output-base-3-panel-Italy.png)
+    ![three-panel plot, Italy](figures/output-base-3-panel-Italy.png)
 
     The left-most panel shows the number of confirmed COVID-19 infections by day,
     as well as the 50% and 95% credible intervals across time
@@ -131,7 +131,7 @@ Main Output files
 
 * __output-base-forecast-Italy.png__
 
-    ![COVID-19 death count forecast, Italy](/figures/output-base-forecast-Italy.png)
+    ![COVID-19 death count forecast, Italy](figures/output-base-forecast-Italy.png)
 
     Histogram, for Italy, of
     the (log-transformed) number of COVID-19 deaths by day,
