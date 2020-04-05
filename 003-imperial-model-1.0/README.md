@@ -88,7 +88,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\textnormal{\small{IFR}}_{m}\cdot\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
 
-   where IFR*<sub>m</sub>* stands for the infection fatality ratio of country *m*.
+   where IFR<sub>*m*</sub> stands for the infection fatality ratio of country *m*.
 
 Requirements
 ------------
