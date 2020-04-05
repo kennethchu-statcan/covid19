@@ -85,7 +85,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    that the infection-to-death time is the sum of two durations:
    the infection-to-(onset-of-symptom) time, and the (onset-of-symptom)-to-death time.
    The former is assumed to follow -- for all countries -- the *&Gamma;(5.1,0.86)* distribution,
-   while the latter *&Gamma(18.8,0.45);*.
+   while the latter *&Gamma;(18.8,0.45);*.
 
    More technically, the parameter *&pi;<sub>m,&tau;</sub>* is given by:
 
