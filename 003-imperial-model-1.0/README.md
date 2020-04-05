@@ -109,7 +109,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  The number *c<sub>m,t</sub>* of COVID-19 infected individuals
    newly infected on day *t* for country *m* is assumed to satisfy
-   the following recursive relation:
+   the following recurrence relation:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{m,t}\;=\;R_{m,t}\cdot\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot{g}_{t-\tau}"/>
 
