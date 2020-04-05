@@ -47,7 +47,7 @@ General assumed structure of hierarchical models
    of related mechanisms (probability distributions).
    This parametric family of distributions is parametrized by a (finite) number of parameters.
 *  These parameters are themselves considered **unobserved** random quantities, which had been
-   sample from their own respective pobability distributions,
+   sampled from their own respective pobability distributions,
    which in turn have their own (hyper)parameters.
 *  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
 *  (Bayesian) inference in this context refers to estimating posterior distributions
