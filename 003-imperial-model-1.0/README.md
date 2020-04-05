@@ -2,9 +2,7 @@
 Adapation of the COVID-19 intervention/fatality hierarchical Bayesian model of Flaxman et al.
 =============================================================================================
 
-What this pipeline does
------------------------
-This pipeline is an adaption of the hierarchical model described by Flaxman et al. in:
+This analysis pipeline is an adaption of the hierarchical model described by Flaxman et al. in:
 
 https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf
 
