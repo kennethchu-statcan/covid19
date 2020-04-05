@@ -128,6 +128,11 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    that an infected individual will infect someone else on the *t*-th day after his/her
    original infection.
 
+*  ABC
+
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,\tau}\;=\;R_{m,0}\cdot\exp\!\left(\sum^{K}_{k=1}\alph_{k}\cdot{I}_{m,k,t}\right)"/>
+
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
