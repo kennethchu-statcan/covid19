@@ -76,7 +76,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *  *&pi;<sub>m,&tau;</sub>* is the probability, for country *m*,
       that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
 
-*  ABC
+*  The parameter *&pi;<sub>m,&tau;</sub>* is given by:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,1}\;=\;\int_{0}^{3/2}\pi_{m}(s)\,ds"/>
 
