@@ -62,7 +62,7 @@ Brief description of the model of Flaxman et al.
       = expected number of COVID-19 deaths for country *m* on day *t*
    *  variance of the Negative Binomial, which the authors assumed to have the form
       *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/Psi*,
-      where *Psi* itself follows the rectified Gaussian distribution *N<sup>+</sup>(0,5)*.
+      where *Psi* itself follows the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
 Requirements
 ------------
