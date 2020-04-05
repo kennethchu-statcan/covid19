@@ -65,6 +65,10 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  *Psi* is assumed to follow the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
+*  the other parameter
+
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}"/>
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
