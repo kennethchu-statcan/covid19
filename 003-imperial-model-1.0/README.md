@@ -87,7 +87,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    The former is assumed to follow -- for all countries -- the *&Gamma;(5.1,0.86)* distribution,
    while the latter *&Gamma;(18.8,0.45);*.
 
-   More technically, these assumptions translate to the fact that the parameter
+   More technically, these assumptions translate to the assumption that the parameter
    *&pi;<sub>m,&tau;</sub>* above is given by:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,1}\;=\;\int_{0}^{3/2}\pi_{m}(s)\,ds"/>
