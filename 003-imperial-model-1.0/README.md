@@ -55,7 +55,7 @@ Brief description of the model of Flaxman et al.
 
    Assumed to follow a Negative Binomial distribution
    (which can be regarded as Gamma-mixture of Poisson distributions),
-   which is specified to parameters:
+   which is specified by two parameters:
 
    *  *d<sub>m,t</sub>*
       = mean of the Negative Binomial
