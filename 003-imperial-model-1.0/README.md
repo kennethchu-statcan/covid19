@@ -70,7 +70,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,t-\tau}\cdot\pi_{m,t-\tau}"/>
 
-*  *c<sub>m,\tau</sub>* is the *unobserved* number of COVID-19 infected individuals
+*  *c<sub>m,&tau;</sub>* is the *unobserved* number of COVID-19 infected individuals
    in country *m*, on day *&tau;*.
 
 Requirements
