@@ -59,7 +59,6 @@ Input files
 -----------
 The input files are located in
 `<LOCAL CLONED REPOSITORY>/000-data/2020-04-05.01/`.
-Below are descriptions of the input text files for this pipeline.
 
 * __interventions.csv__
 
