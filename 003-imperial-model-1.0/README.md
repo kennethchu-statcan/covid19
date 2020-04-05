@@ -113,11 +113,11 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    where
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{1}\;=\;\int_{0}^{3/2}g_{m}(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
 
    and
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g_{m}(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
 
    for *&tau;* = 2, 3, ... , where *g* is, for all countries, the probability density
    of the *serial interval distribution*.
