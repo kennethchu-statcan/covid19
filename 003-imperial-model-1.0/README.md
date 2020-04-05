@@ -239,8 +239,6 @@ Other input files are located in
     the probability that an infected individual will infect someone else
     on the *t*-th day after his/her original infection.
 
-Note that
-
 Main output files
 -----------------
 
