@@ -110,7 +110,7 @@ results.wrapper.stan <- wrapper.stan(
     DF.serial.interval          = DF.serial.interval,
     DF.covariates               = DF.covariates,
     forecast.window             = 30,
-    DEBUG                       = TRUE # FALSE # TRUE
+    DEBUG                       = FALSE # TRUE
     );
 
 ##################################################
