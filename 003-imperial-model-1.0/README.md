@@ -272,7 +272,7 @@ Main output files
 
 *  __output-base-covars-alpha.png__
 
-   <img src="./figures/output-base-covars-alpha.png" width="750">
+   <img src="./figures/output-base-covars-alpha.png" width="500">
 
    Posterior means and 90% Credible intervals of the (country-independent)
    exponentiated parameters:
