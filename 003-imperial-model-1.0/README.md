@@ -128,7 +128,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    that an infected individual will infect someone else on the *t*-th day after his/her
    original infection.
 
-*  ABC
+*  Lastly, Flaxman et al. assumed that the COVID-19 reproduction number
+   *R<sub>m,t</sub>* has the following form:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,t}\;=\;R_{m,0}\cdot\exp\!\left(\,-\,\sum^{K}_{k=1}\alpha_{k}\cdot{I}_{m,k,t}\,\right)"/>
 
