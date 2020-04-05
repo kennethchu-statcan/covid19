@@ -57,8 +57,11 @@ Brief description of the model of Flaxman et al.
    (which can be regarded as Gamma-mixture of Poisson distributions),
    which is specified to parameters:
 
-   *  *d<sub>m,t</sub>* = expected number of COVID-19 deaths for country *m* on day *t*
-   *  its variance
+   *  *d<sub>m,t</sub>*
+      = mean of the Negative Binomial
+      = expected number of COVID-19 deaths for country *m* on day *t*
+   *  variance of the Negative Binomial, which the authors assumed to have the form
+      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/\phi*
 
 Requirements
 ------------
