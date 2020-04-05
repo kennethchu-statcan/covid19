@@ -112,7 +112,7 @@ Main output files
 
     The left-most panel shows the number of confirmed COVID-19 infections by day,
     as well as the 50% and 95% credible intervals across time
-    for the total number of infection estimated by the model
+    for the total number of infections as estimated by the model
     of Flaxman et al, based on the given data.
 
     The middle panel shows the equivalent for the number of deaths.
