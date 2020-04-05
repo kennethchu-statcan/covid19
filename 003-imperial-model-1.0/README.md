@@ -138,8 +138,9 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for country *m*,
        intervention measure *k*, and day *t*.
 
-   *   *&alpha;<sub>k</sub>* is the (random, unobserved) country-independent effect size due to
-       intervention measure *k*, assumed to follow *&Gamma;(0.5,1)*,
+   *   *&alpha;<sub>k</sub>* is the (random, unobserved) country-independent
+       log-linear effect size parameter due to intervention measure *k*,
+       assumed to follow *&Gamma;(0.5,1)*,
 
    *   *R<sub>m,0</sub>* is the country-specific initial reproduction number,
        assumed to follow:
@@ -275,7 +276,7 @@ Main output files
    <img src="./figures/output-base-covars-alpha.png" width="500">
 
    Posterior means and 90% Credible intervals of the (country-independent)
-   exponentiated parameters:
+   effect size parameter:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
 
