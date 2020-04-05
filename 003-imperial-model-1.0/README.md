@@ -84,7 +84,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
 
-   for *&tau;* = 2, 3, ... , where
+   for *&tau;* = 2, 3, ... , where *&pi;<sub>m</sub>* is probability density
+   of the of infection-to-death time of country *m*, and is assumed to have the form;
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\textnormal{\small{IFR}}_{m}\cdot\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
 
