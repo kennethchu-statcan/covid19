@@ -43,12 +43,15 @@ We have since made slight modifications in order to:
 
 General assumed structure of hierarchical models
 ------------------------------------------------
-*  The mechanism that generated the actual observed data belongs to a parametric family
-   of related mechanisms (probability distributions) which is parametrized by a number
-   of parameters.
-*  These parameters are themselves considered **unobserved** random quantities, which had been generated
-   according to their own probability distributions, which have their own (hyper)parameters.
+*  The mechanism that generated the actual observed data belongs to a certain parametric family
+   of related mechanisms (probability distributions).
+   This parametric family of distributions is parametrized by a number of parameters.
+*  These parameters are themselves considered **unobserved** random quantities, which had been
+   generated according to their own respective pobability distributions,
+   which have their own (hyper)parameters.
 *  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
+*  (Bayesian) inference in this context refers to generating posterior distributions for
+   the (random) (hyper)parameters based on observed data, and prior probabilistic assumptions.
 
 Brief description of the hierarchical structure of the model of Flaxman et al.
 ------------------------------------------------------------------------------
