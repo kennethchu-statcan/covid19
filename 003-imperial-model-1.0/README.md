@@ -98,7 +98,7 @@ Below are descriptions of the input text files for this pipeline.
 
     This CSV file contains the assumed (discrete) *serial interval distribution*
     used by the model of Flaxman et al.
-    Given a duration \(t\) (in days), the serial interval distribution gives
+    Given a duration \\(t\\) (in days), the serial interval distribution gives
     the probability that an infected individual will infect someone else
     on the $t$th day after his/her original infection.
 
