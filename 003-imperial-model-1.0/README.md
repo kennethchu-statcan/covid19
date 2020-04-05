@@ -77,7 +77,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
       that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
 
 *  Flaxman et al. assumed that each country *m* has its own 
-   infection fatality ratio IFR<sub>*m*</sub> (probabiliy of COVID-19 death given COVID-19 infection)
+   infection fatality ratio IFR<sub>*m*</sub> (probabiliy of COVID-19 death given COVID-19 infection).
    Conversely, in country *m*, a COVID-19 infection has a probabilty of 1 - IFR<sub>*m*</sub>
    that he/she will not die from the disease, i.e. will recover.
 
