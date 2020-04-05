@@ -119,7 +119,7 @@ Main output files
 
     The right-most panel shows the 50% and 95% credible intervals through time
     of the *reproduction number* *R<sub>t</sub>* at time *t*,
-    annotated by the institution time of the various intervention measures.
+    annotated by the institution times of the various intervention measures.
 
     Similarly for the rest of the countries.
 
