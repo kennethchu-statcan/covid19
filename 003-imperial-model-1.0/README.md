@@ -130,7 +130,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  ABC
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,\tau}\;=\;R_{m,0}\cdot\exp\!\left(\sum^{K}_{k=1}\alpha_{k}\cdot{I}_{m,k,t}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,\tau}\;=\;R_{m,0}\cdot\exp\!\left(\,-\,\sum^{K}_{k=1}\alpha_{k}\cdot{I}_{m,k,t}\,\right)"/>
 
 
 Requirements
