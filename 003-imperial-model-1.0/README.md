@@ -276,12 +276,26 @@ Main output files
 
    <img src="./figures/output-base-covars-alpha.png" width="500">
 
-   Posterior means and 90% Credible intervals of the (country-independent)
+   Posterior means and 90% credible intervals of the (country-independent)
    effect size parameter:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
 
+   Note that the above plot suggests that lockdown has the strongest
+   reduction effect on the reproduction number among the invention
+   measures considered.
+
 *  __output-base-covars-mu.png__
 
+   <img src="./figures/output-base-covars-mu.png" width="500">
+
+   Posterior means and 90% credible intervals of the
+   country-specific initial COVID-19 reproduction numbers.
+
 *  __output-base-covars-final-rt.png__
+
+   <img src="./figures/output-base-covars-final-rt.png" width="500">
+
+   Posterior means and 90% credible intervals of the
+   country-specific final COVID-19 reproduction numbers.
 
