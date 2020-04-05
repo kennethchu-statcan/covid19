@@ -2,17 +2,16 @@
 Adapation of the COVID-19 intervention/fatality hierarchical Bayesian model of Flaxman et al.
 =============================================================================================
 
-This repository contains material for the workshop on
-Latent Dirichlet Allocation (LDA) during the 2020 CANDEV Data Challenge in Ottawa.
+What this pipeline does
+-----------------------
+This pipeline is an adaption of the hierarchical model described in:
 
-The __slides__ folder contains the slides presented during the workshop.
+(https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf)
 
-In addition, this repository contains a toy (textual) data set and
-a demo pipeline that applies LDA (a topic modelling technique) to the data set.
+The authors have kindly made available their code here:
 
-The data set consists of 6,000 abstracts of scientific articles downloaded
-from https://arxiv.org (hosted by Cornell University).
-The data set can be found in the __data/arXiv/__ folder.
+(https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0)
+
 
 Software reqirements of the pipeline
 ------------------------------------
@@ -50,16 +49,6 @@ This will trigger the creation of the output folder
 if it does not already exist, followed by execution of the pipeline.
 All output and log files will be saved to the output folder.
 See below for information about the contents of the output folder.
-
-What this pipeline does
------------------------
-This pipeline is an adaption of the hierarchical model described in:
-
-(https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf)
-
-The authors have kindly made available their code here:
-
-(https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0)
 
 Input files
 -----------
