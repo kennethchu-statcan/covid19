@@ -131,7 +131,7 @@ Main Output files
 
 * __output-base-forecast-Italy.png__
 
-    ![COVID-19 death count forecast, Italy](figures/output-base-forecast-Italy.png)
+    ![COVID-19 death count forecast, Italy](figures/output-base-forecast-Italy.png =250x)
 
     Histogram, for Italy, of
     the (log-transformed) number of COVID-19 deaths by day,
