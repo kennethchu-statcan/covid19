@@ -6,21 +6,27 @@ This analysis pipeline is an adaption of the hierarchical model described by Fla
 
 https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf
 
-The authors sought to estimate the effect of the various COVID-19 (social distancing)
-intervention measures on the country-specific reproduction number *R<sub>m,t</sub>*,
-as function of time *t* (in days) for country *m*, based on COVID-19 death count time
-series from the following eleven European countries:
-Austria,
-Belgium,
-Denmark,
-France,
-Germany,
-Italy,
-Norway,
-Spain,
-Sweden,
-Switzerland, and
-United Kingdom.
+The authors:
+
+*  sought to estimate the effect of the various COVID-19 (social distancing)
+   intervention measures on the country-specific reproduction number *R<sub>m,t</sub>*,
+   as function of time *t* (in days), for country *m*,
+   
+*  proceeded by fitting a hierarchical Bayesian model to the COVID-19 death count
+   time series from the following eleven European countries:
+   Austria,
+   Belgium,
+   Denmark,
+   France,
+   Germany,
+   Italy,
+   Norway,
+   Spain,
+   Sweden,
+   Switzerland, and
+   the United Kingdom.
+
+*  generated COVID-19 death count forecast using the fitted model.
 
 The authors have very kindly made available their code here:
 
