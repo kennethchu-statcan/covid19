@@ -301,89 +301,92 @@ wrapper.stan_inner <- function(
 
         } # for( Country in countries )
 
-        stan_data$covariate2 <- 0 * stan_data$covariate2 # remove travel bans
-        stan_data$covariate4 <- 0 * stan_data$covariate5 # remove sport
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    stan_data$covariate2 <- 0 * stan_data$covariate2 # remove travel bans
+    stan_data$covariate4 <- 0 * stan_data$covariate5 # remove sport
 
-        #stan_data$covariate1 <- stan_data$covariate1 # school closure
-        stan_data$covariate2  <- stan_data$covariate7 # self-isolating if ill
-        #stan_data$covariate3 <- stan_data$covariate3 # public events
+    #stan_data$covariate1 <- stan_data$covariate1 # school closure
+    stan_data$covariate2  <- stan_data$covariate7 # self-isolating if ill
+    #stan_data$covariate3 <- stan_data$covariate3 # public events
 
-        # create the `any intervention` covariate
-        stan_data$covariate4 <- 1 * as.data.frame((
-            stan_data$covariate1 + stan_data$covariate3 + stan_data$covariate5 +
-            stan_data$covariate6 + stan_data$covariate7
-            ) >= 1);
+    # create the `any intervention` covariate
+    stan_data$covariate4 <- 1 * as.data.frame((
+        stan_data$covariate1 + stan_data$covariate3 + stan_data$covariate5 +
+        stan_data$covariate6 + stan_data$covariate7
+        ) >= 1);
 
-        stan_data$covariate5 <- stan_data$covariate5 # lockdown
-        stan_data$covariate6 <- stan_data$covariate6 # social distancing encouraged
-        stan_data$covariate7 <- 0 # models should only take 6 covariates
+    stan_data$covariate5 <- stan_data$covariate5 # lockdown
+    stan_data$covariate6 <- stan_data$covariate6 # social distancing encouraged
+    stan_data$covariate7 <- 0 # models should only take 6 covariates
 
-        if( DEBUG ) {
-            for(i in 1:length(countries)) {
-                write.csv(
-                    file = sprintf("check-dates-%s.csv",countries[i]),
-                    x    = data.frame(
-                        date                               = dates[[i]],
-                        `school closure`                   = stan_data$covariate1[1:stan_data$N[i],i],
-                        `self isolating if ill`            = stan_data$covariate2[1:stan_data$N[i],i],
-                        `public events`                    = stan_data$covariate3[1:stan_data$N[i],i],
-                        `government makes any intervention`= stan_data$covariate4[1:stan_data$N[i],i],
-                        `lockdown`                         = stan_data$covariate5[1:stan_data$N[i],i],
-                        `social distancing encouraged`     = stan_data$covariate6[1:stan_data$N[i],i]
-                        ),
-                    row.names = FALSE
-                    );
-                }
-            }
-
-        stan_data$y <- t(stan_data$y);
-        options(mc.cores = parallel::detectCores())
-        rstan_options(auto_write = TRUE)
-        m <- rstan::stan_model(FILE.stan.model);
-
-        if(DEBUG) {
-            fit <- rstan::sampling(object = m, data = stan_data, iter = 40, warmup = 20, chains = 2);
-        } else {
-            # fit = rstan::sampling(
-            #     object  = m,
-            #     data    = stan_data,
-            #     iter    = 4000,
-            #     warmup  = 2000,
-            #     chains  = 8,
-            #     thin    = 4,
-            #     control = list(adapt_delta = 0.90, max_treedepth = 10)
-            #     );
-            fit <- rstan::sampling(
-                object  = m,
-                data    = stan_data,
-                iter    = 200,
-                warmup  = 100,
-                chains  = 4,
-                thin    = 4,
-                control = list(adapt_delta = 0.90, max_treedepth = 10)
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    if( DEBUG ) {
+        for(i in 1:length(countries)) {
+            write.csv(
+                file = sprintf("check-dates-%s.csv",countries[i]),
+                x    = data.frame(
+                    date                               = dates[[i]],
+                    `school closure`                   = stan_data$covariate1[1:stan_data$N[i],i],
+                    `self isolating if ill`            = stan_data$covariate2[1:stan_data$N[i],i],
+                    `public events`                    = stan_data$covariate3[1:stan_data$N[i],i],
+                    `government makes any intervention`= stan_data$covariate4[1:stan_data$N[i],i],
+                    `lockdown`                         = stan_data$covariate5[1:stan_data$N[i],i],
+                    `social distancing encouraged`     = stan_data$covariate6[1:stan_data$N[i],i]
+                    ),
+                row.names = FALSE
                 );
             }
+        }
 
-        out                 <- rstan::extract(fit);
-        prediction          <- out$prediction;
-        estimated.deaths    <- out$E_deaths;
-        estimated.deaths.cf <- out$E_deaths0;
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    stan_data$y <- t(stan_data$y);
+    options(mc.cores = parallel::detectCores())
+    rstan_options(auto_write = TRUE)
+    m <- rstan::stan_model(FILE.stan.model);
 
-        list.output <- list(
-            StanModel           = StanModel,
-            fit                 = fit,
-            prediction          = prediction,
-            dates               = dates,
-            reported_cases      = reported_cases,
-            deaths_by_country   = deaths_by_country,
-            countries           = countries,
-            estimated_deaths    = estimated.deaths,
-            estimated_deaths_cf = estimated.deaths.cf,
-            out                 = out,
-            covariates          = DF.covariates
+    if(DEBUG) {
+        fit <- rstan::sampling(object = m, data = stan_data, iter = 40, warmup = 20, chains = 2);
+    } else {
+        # fit = rstan::sampling(
+        #     object  = m,
+        #     data    = stan_data,
+        #     iter    = 4000,
+        #     warmup  = 2000,
+        #     chains  = 8,
+        #     thin    = 4,
+        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
+        #     );
+        fit <- rstan::sampling(
+            object  = m,
+            data    = stan_data,
+            iter    = 200,
+            warmup  = 100,
+            chains  = 4,
+            thin    = 4,
+            control = list(adapt_delta = 0.90, max_treedepth = 10)
             );
+        }
 
-        return( list.output );
+    out                 <- rstan::extract(fit);
+    prediction          <- out$prediction;
+    estimated.deaths    <- out$E_deaths;
+    estimated.deaths.cf <- out$E_deaths0;
+
+    list.output <- list(
+        StanModel           = StanModel,
+        fit                 = fit,
+        prediction          = prediction,
+        dates               = dates,
+        reported_cases      = reported_cases,
+        deaths_by_country   = deaths_by_country,
+        countries           = countries,
+        estimated_deaths    = estimated.deaths,
+        estimated_deaths_cf = estimated.deaths.cf,
+        out                 = out,
+        covariates          = DF.covariates
+        );
+
+    return( list.output );
 
     }
 
