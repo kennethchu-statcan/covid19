@@ -61,7 +61,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
       = mean of the Negative Binomial
       = expected number of COVID-19 deaths for country *m* on day *t*
    *  variance of the Negative Binomial, which the authors assumed to have the form
-      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/Psi*
+      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/&Psi;*
 
 *  *&Psi;* is assumed to follow the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
