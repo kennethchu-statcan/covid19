@@ -67,7 +67,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  the other parameter
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}=\overset{t-1}{\underset{\tau = 0}{\sum}}\frac{-b\pm\sqrt{b^2-4ac}}{2a}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}=\sum\frac{-b\pm\sqrt{b^2-4ac}}{2a}"/>
 
 Requirements
 ------------
