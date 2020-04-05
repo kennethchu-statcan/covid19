@@ -80,6 +80,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
 
+   for *&tau;* = 2, 3, ...
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
