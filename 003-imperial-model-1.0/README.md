@@ -146,6 +146,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,0}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
 
+       where *&kappa;* is also a country-independent (random, unobserved) parameter.
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
