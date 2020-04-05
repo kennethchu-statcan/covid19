@@ -49,8 +49,16 @@ General assumed structure of hierarchical models
    according to their own probability distributions, which have their own (hyper)parameters.
 *  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
 
-Description of the model of Flaxman et al.
-------------------------------------------
+Brief description of the model of Flaxman et al.
+------------------------------------------------
+*  Observed COVID-19 death count, for given (country,day)
+
+   Assumed to follow a Negative Binomial distribution
+   (which can be regarded as Gamma-mixture of Poisson distributions),
+   which is specified to parameters:
+
+   *  *d<sub>m,t</sub>* = expected number of COVID-19 deaths for country *m* on day *t*
+   *  its variance
 
 Requirements
 ------------
