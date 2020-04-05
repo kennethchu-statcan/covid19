@@ -86,6 +86,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    for *&tau;* = 2, 3, ... , where
 
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
