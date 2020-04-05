@@ -68,7 +68,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *  variance of the Negative Binomial, which the authors assumed to have the form
       *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/&Psi;*
 
-*  *&Psi;* is assumed to follow the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
+*  *&Psi;* is assumed to have been sampled from
+   the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
 *  The expected number *d<sub>m,t</sub>* of COVID-19 deaths
    for country *m* on day *t* is assumed to be given by:
@@ -145,7 +146,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
        intervention measure *k*, and day *t*.
 
    *   *&alpha;<sub>k</sub>*
-       -- assumed to follow *&Gamma;(0.5,1)* --
+       -- assumed to have been sampled from *&Gamma;(0.5,1)* --
        is the (random, unobserved) country-independent
        log-linear effect size parameter due to intervention measure *k*,
 
