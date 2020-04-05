@@ -45,7 +45,7 @@ General assumed structure of hierarchical models
 *  The mechanism that generated the actual observed data belongs to a parametric family
    of related mechanisms (probability distributions) which is parametrized by a number
    of parameters.
-*  These parameters are themselves considered random quantities, which had been generated
+*  These parameters are themselves considered **unobserved** random quantities, which had been generated
    according to their own probability distributions, which have their own (hyper)parameters.
 *  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
 
