@@ -50,7 +50,7 @@ General assumed structure of hierarchical models
    generated according to their own respective pobability distributions,
    which have their own (hyper)parameters.
 *  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
-*  (Bayesian) inference in this context refers to generating posterior distributions for
+*  (Bayesian) inference in this context refers to computing posterior distributions for
    the (random) (hyper)parameters based on observed data, and prior probabilistic assumptions.
 
 Brief description of the hierarchical structure of the model of Flaxman et al.
