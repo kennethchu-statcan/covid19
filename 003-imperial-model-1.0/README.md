@@ -97,7 +97,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
 
    for *&tau;* = 2, 3, ... , where *&pi;<sub>m</sub>* is the probability density
-   of the of infection-to-death time of country *m*, and is assumed to have the form;
+   of the of infection-to-death time of country *m*, and is assumed to have the form:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\textnormal{\small{IFR}}_{m}\cdot\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
 
@@ -110,6 +110,20 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 *  ABC
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{m,t}\;=\;R_{m,t}\cdot\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot{g}_{t-\tau}"/>
+
+   where
+
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{1}\;=\;\int_{0}^{3/2}g_{m}(s)\,ds"/>
+
+   and
+
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g_{m}(s)\,ds"/>
+
+   for *&tau;* = 2, 3, ... , where *g* is, for all countries, the probability density
+   of the *serial interval distribution*.
+   Note that the discretized-to-the-day serial interval distribution gives the probability
+   that an infected individual will infect someone else on the *t*-th day after his/her
+   original infection.
 
 Requirements
 ------------
