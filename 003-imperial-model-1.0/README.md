@@ -131,7 +131,7 @@ Main Output files
 
 * __output-base-forecast-Italy.png__
 
-    <img src="./figures/output-base-forecast-Italy.png" width="500" align="center">
+    <img src="./figures/output-base-forecast-Italy.png" width="750" align="right">
 
     Histogram, for Italy, of
     the (log-transformed) number of COVID-19 deaths by day,
