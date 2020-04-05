@@ -189,7 +189,13 @@ See below for information about the contents of the output folder.
 
 Input files
 -----------
-The input files are located in
+Up-to-date COVID-19 death count time series for different countries are downloaded
+by the pipeline at run-time at the following
+European Centre for Disease Prevention and Control open-data URL:
+
+https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+
+Other input files are located in
 `<LOCAL CLONED REPOSITORY>/000-data/2020-04-05.01/`.
 
 * __interventions.csv__
@@ -232,6 +238,8 @@ The input files are located in
     Given a duration *t* (in days), the serial interval distribution gives
     the probability that an infected individual will infect someone else
     on the *t*-th day after his/her original infection.
+
+Note that
 
 Main output files
 -----------------
