@@ -67,7 +67,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  the expected number of COVID-19 death for country *m* on day *t* is assumed to be given by:
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot\pi_{\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,t-\tau}\cdot\pi_{m,t-\tau}"/>
 
 Requirements
 ------------
