@@ -76,7 +76,18 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *  *&pi;<sub>m,&tau;</sub>* is the probability, for country *m*,
       that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
 
-*  The parameter *&pi;<sub>m,&tau;</sub>* is given by:
+*  The authors of Flaxman et al. assumed that each country *m* has its own 
+   infection fatality ratio IFR<sub>*m*</sub> (probabiliy of COVID-19 death given COVID-19 infection)
+   Conversely, in country *m*, a COVID-19 infection has a probabilty of 1 - IFR<sub>*m*</sub>
+   that he/she will not die from the disease, i.e. will recover.
+
+   For a COVID-19 infected individual who dies from COVID-19, Flaxman et al. assumed
+   that the infection-to-death time is the sum of two durations:
+   the infection-to-(onset-of-symptom) time, and the (onset-of-symptom)-to-death time.
+   The former is assumed to follow -- for all countries -- the *&Gamma;(5.1,0.86)* distribution,
+   while the latter *&Gamma(18.8,0.45);*.
+
+   More technically, the parameter *&pi;<sub>m,&tau;</sub>* is given by:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,1}\;=\;\int_{0}^{3/2}\pi_{m}(s)\,ds"/>
 
@@ -94,6 +105,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    as well as in
 
    https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7
+
 
 Requirements
 ------------
