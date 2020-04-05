@@ -67,7 +67,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  the other parameter
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}=\sum_{\tau = 0}^{t-1}\,c_{m,\tau}\pi_{\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}=\sum_{\tau=0}^{t-1}\,c_{m,\tau}\pi_{\tau}"/>
 
 Requirements
 ------------
