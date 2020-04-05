@@ -1,6 +1,7 @@
 
 plot.forecast <- function(
-    list.input = NULL
+    list.input      = NULL,
+    forecast.window = 7
     ){
   
     require(ggplot2)
@@ -33,7 +34,7 @@ plot.forecast <- function(
     for( i in 1:length(countries) ) {
 
         N       <- length(dates[[i]])
-        N2      <- min(N + 7,max.N2)
+        N2      <- min(N + forecast.window,max.N2)
         country <- countries[[i]]
     
         predicted_cases    <- colMeans(    prediction[,1:N,i])

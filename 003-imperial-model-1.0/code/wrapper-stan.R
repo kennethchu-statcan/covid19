@@ -6,6 +6,7 @@ wrapper.stan <- function(
     DF.weighted.fatality.ratios = NULL,
     DF.serial.interval          = NULL,
     DF.covariates               = NULL,
+    forecast.window             = 7,
     RData.output                = paste0('stan-model-',StanModel,'.RData'),
     DEBUG                       = FALSE
     ) {
@@ -55,7 +56,8 @@ wrapper.stan <- function(
         );
 
     plot.forecast(
-        list.input = list.output
+        list.input      = list.output,
+        forecast.window = forecast.window
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -86,7 +88,12 @@ wrapper.stan_visualize.results <- function(
         'Social distancing'
         );
 
-    alpha <- (as.matrix(list.input[["out"]][["alpha"]]));
+    print("A-1");
+    cat("\nnames(list.input[['out']])\n");
+    print( names(list.input[['out']])   );
+    alpha <- as.matrix(list.input[["out"]][["alpha"]]);
+    print("A-2");
+
     colnames(alpha) <- plot_labels;
 
     g <- bayesplot::mcmc_intervals(alpha, prob = .9);
@@ -129,11 +136,6 @@ wrapper.stan_visualize.results <- function(
         height   = 6
         );
 
-    #system(paste0("Rscript plot-3-panel.r ", filename,'.RData'));
-
-    ## to run this code you will need to adjust manual values of forecast required
-    #system(paste0("Rscript plot-forecast.r ",filename,'.RData'));
-
     return( NULL );
 
     }
@@ -153,11 +155,11 @@ wrapper.stan_inner <- function(
     forecast     <- 0;
 
     if( DEBUG == FALSE ) {
-        N2 = 75 # Increase this for a further forecast
+        N2 = 100 # Increase this for a further forecast
     }  else  {
         ### For faster runs:
         # countries = c("Austria","Belgium") #,Spain")
-        N2 = 75
+        N2 = 100
         }
 
     dates          <- list();
@@ -230,12 +232,13 @@ wrapper.stan_inner <- function(
 
         h <- rep(0,forecast+N) # discrete hazard rate from time t = 1, ..., 100
         if( DEBUG ) { # OLD -- but faster for testing this part of the code
+
             mean <- 18.8;
             cv   <- 0.45;
 
             for( i in 1:length(h) ) {
                 h[i] <- (
-                    CFR * pgammaAlt(i,mean = mean,cv=cv)
+                    CFR * pgammaAlt(i,  mean = mean,cv=cv)
                     -
                     CFR * pgammaAlt(i-1,mean = mean,cv=cv)
                     ) / (
