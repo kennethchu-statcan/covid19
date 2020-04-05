@@ -138,6 +138,14 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for country *m*,
        intervention measure *k*, and day *t*.
 
+   *   *&alpha;<sub>k</sub>* is the (random, unobserved) effect size due to
+       intervention measure *k*, assumed to follow *&Gamma;(0.5,1)*,
+
+   *   *R<sub>m,0</sub>* is the country-specific initial reproduction number,
+       assumed to follow:
+
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,0}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert)"/>
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
