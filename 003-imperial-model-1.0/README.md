@@ -104,7 +104,7 @@ Below are descriptions of the input text files for this pipeline.
     the probability that an infected individual will infect someone else
     on the $t$th day after his/her original infection.
 
-Main Output files
+Main output files
 -----------------
 
 * __output-base-3-panel-Italy.png__
