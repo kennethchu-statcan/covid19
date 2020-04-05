@@ -52,7 +52,7 @@ If you are using a Windows computer, execute the following batch script at the C
 ```
 
 This will trigger the creation of the output folder
-`<LOCAL CLONED REPOSITORY>/output/`
+`<LOCAL CLONED REPOSITORY>/003-imperial-model-1.0/output/`
 if it does not already exist, followed by execution of the pipeline.
 All output and log files will be saved to the output folder.
 See below for information about the contents of the output folder.
