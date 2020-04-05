@@ -124,7 +124,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    for *&tau;* = 2, 3, ... , where *g* is, for all countries, the probability density
    of the *serial interval distribution*.
-   Note that the discretized-to-the-day serial interval distribution gives the probability
+   The discretized-to-the-day serial interval distribution gives the probability
    that an infected individual will infect someone else on the *t*-th day after his/her
    original infection.
 
