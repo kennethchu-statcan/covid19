@@ -68,7 +68,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 *  The expected number *d<sub>m,t</sub>* of COVID-19 deaths
    for country *m* on day *t* is assumed to be given by:
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,t-\tau}\cdot\pi_{m,t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot\pi_{m,t-\tau}"/>
 
    for *t* = 1, 2, ... , where
    *  *c<sub>m,&tau;</sub>* is the *unobserved* number of **new** COVID-19 infected individuals
