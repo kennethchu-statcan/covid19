@@ -8,7 +8,7 @@ This pipeline is an adaption of the hierarchical model described by Flaxman et a
 
 https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf
 
-The authors have kindly made available their code here:
+The authors have very kindly made available their code here:
 
 https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
 
