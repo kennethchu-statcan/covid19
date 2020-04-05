@@ -278,7 +278,7 @@ Main output files
    <img src="./figures/output-base-covars-alpha.png" width="500">
 
    Posterior means and 90% credible intervals of the (country-independent)
-   effect size parameter:
+   effect size parameters:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
 
