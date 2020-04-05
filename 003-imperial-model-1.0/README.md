@@ -53,7 +53,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 ------------------------------------------------------------------------------
 *  Observed COVID-19 death count, for given (country,day)
 
-   Assumed to follow a Negative Binomial distribution
+   Assumed to follow a **Negative Binomial** distribution
    (which can be regarded as Gamma-mixture of Poisson distributions),
    which is specified by two parameters:
 
