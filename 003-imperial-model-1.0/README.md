@@ -282,7 +282,7 @@ Main output files
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
 
    Note that the above plot suggests that lockdown has the strongest
-   reduction effect on the reproduction number among the invention
+   reduction effect on the reproduction number among the intervention
    measures considered.
 
 *  __output-base-covars-mu.png__
