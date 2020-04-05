@@ -78,7 +78,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  ABC
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,t}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
 
 Requirements
 ------------
