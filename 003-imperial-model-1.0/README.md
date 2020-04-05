@@ -70,10 +70,11 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,t-\tau}\cdot\pi_{m,t-\tau}"/>
 
-   where *c<sub>m,&tau;</sub>* is the *unobserved* number of COVID-19 infected individuals
-   in country *m*, on day *&tau;*, and
-   *&pi;<sub>m,&tau;</sub>* is the probability, for country *m*,
-   that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
+   where
+   *  *c<sub>m,&tau;</sub>* is the *unobserved* number of COVID-19 infected individuals
+      in country *m*, on day *&tau;*, and
+   *  *&pi;<sub>m,&tau;</sub>* is the probability, for country *m*,
+      that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
 
 Requirements
 ------------
