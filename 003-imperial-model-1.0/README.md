@@ -70,7 +70,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,t-\tau}\cdot\pi_{m,t-\tau}"/>
 
-   for *t = 1,2, ... *, where
+   for *t* = 1, 2, ... , where
    *  *c<sub>m,&tau;</sub>* is the *unobserved* number of **new** COVID-19 infected individuals
       in country *m*, on day *&tau;*, and
    *  *&pi;<sub>m,&tau;</sub>* is the probability, for country *m*,
