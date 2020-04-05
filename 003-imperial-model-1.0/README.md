@@ -40,6 +40,18 @@ We have since made slight adaptions in order to:
 *  use data up April 4, 2020, and
 *  use a 30-day forecast window.
 
+General assumed structure of hierarchical models
+------------------------------------------------
+*  The mechanism that generated the actual observed data belongs to a parametric family
+   of related mechanisms (probability distributions) which is parametrized by a number
+   of parameters.
+*  These parameters are themselves considered random quantities, which had been generated
+   according to their own probability distributions, which have their own (hyper)parameters.
+*  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
+
+Description of the model of Flaxman et al.
+------------------------------------------
+
 Requirements
 ------------
 *  Internet connection (to download up-to-date COVID-19 data)
