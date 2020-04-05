@@ -124,9 +124,10 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    for *&tau;* = 2, 3, ... , where *g* is, for all countries, the probability density
    of the *serial interval distribution*.
-   We remark that the discretized-to-the-day serial interval distribution gives the probability
-   that an infected individual will infect someone else on the *t*-th day after his/her
-   original infection.
+   We remark that the discretized-to-the-day serial interval distribution
+   (determined precisely by *g<sub>1</sub>*, *g<sub>2</sub>*, *g<sub>3</sub>*, ...)
+   gives the probability that an infected individual will infect someone else
+   on the *t*-th day after his/her original infection.
 
 *  Lastly, Flaxman et al. assumed that the COVID-19 reproduction number
    *R<sub>m,t</sub>* has the following form:
