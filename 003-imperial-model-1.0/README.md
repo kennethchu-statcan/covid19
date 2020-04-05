@@ -36,7 +36,7 @@ https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
 We were able to reproduce the results of the above article
 (based on data available up to March 28, 2020, with a 7-day death count forecast window).
 
-We have since made slight adaptions in order to:
+We have since made slight modifications in order to:
 
 *  use data up April 4, 2020, and
 *  use a 30-day forecast window.
