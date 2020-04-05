@@ -242,32 +242,44 @@ Other input files are located in
 Main output files
 -----------------
 
-* __output-base-3-panel-Italy.png__
+*  __output-base-3-panel-Italy.png__
 
+   ![three-panel plot, Italy](./figures/output-base-3-panel-Italy.png)
 
-    ![three-panel plot, Italy](./figures/output-base-3-panel-Italy.png)
+   The left-most panel shows the number of confirmed COVID-19 infections by day,
+   as well as the 50% and 95% credible intervals across time
+   for the total number of infections as estimated by the model
+   of Flaxman et al., based on the given data.
 
-    The left-most panel shows the number of confirmed COVID-19 infections by day,
-    as well as the 50% and 95% credible intervals across time
-    for the total number of infections as estimated by the model
-    of Flaxman et al., based on the given data.
+   The middle panel shows the equivalent for the number of deaths.
 
-    The middle panel shows the equivalent for the number of deaths.
+   The right-most panel shows the 50% and 95% credible intervals through time
+   of the *reproduction number* *R<sub>t</sub>* at time *t*,
+   annotated by the institution times of the various intervention measures.
 
-    The right-most panel shows the 50% and 95% credible intervals through time
-    of the *reproduction number* *R<sub>t</sub>* at time *t*,
-    annotated by the institution times of the various intervention measures.
+   Similarly for the rest of the countries.
 
-    Similarly for the rest of the countries.
+*  __output-base-forecast-Italy.png__
 
-* __output-base-forecast-Italy.png__
+   <img src="./figures/output-base-forecast-Italy.png" width="750">
 
-    <img src="./figures/output-base-forecast-Italy.png" width="750">
+   Histogram, for Italy, of
+   the (log-transformed) number of COVID-19 deaths by day,
+   overlaid with the corresponding credible intervals across time
+   for the forecast of the number of COVID-19 deaths.
 
-    Histogram, for Italy, of
-    the (log-transformed) number of COVID-19 deaths by day,
-    overlaid with the corresponding credible intervals across time
-    for the forecast of the number of COVID-19 deaths.
+*  Similarly for the rest of the countries.
 
-    Similarly for the rest of the countries.
+*  __output-base-covars-alpha.png__
+
+   <img src="./figures/output-base-covars-alpha.png" width="750">
+
+   Posterior means and 90% Credible intervals of the (country-independent)
+   exponentiated parameters:
+
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
+
+*  __output-base-covars-mu.png__
+
+*  __output-base-covars-final-rt.png__
 
