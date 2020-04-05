@@ -138,7 +138,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for country *m*,
        intervention measure *k*, and day *t*.
 
-   *   *&alpha;<sub>k</sub>* is the (random, unobserved) effect size due to
+   *   *&alpha;<sub>k</sub>* is the (random, unobserved) country-independent effect size due to
        intervention measure *k*, assumed to follow *&Gamma;(0.5,1)*,
 
    *   *R<sub>m,0</sub>* is the country-specific initial reproduction number,
