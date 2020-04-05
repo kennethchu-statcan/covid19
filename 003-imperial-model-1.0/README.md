@@ -90,8 +90,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    For a COVID-19 infected individual who dies from COVID-19, Flaxman et al. assumed,
    based on earlier studies, that the infection-to-death time is the sum of two durations:
    the infection-to-(onset-of-symptom) time, and the (onset-of-symptom)-to-death time.
-   The former is assumed to follow -- for all countries --
-   the *&Gamma;(5.1,0.86)* distribution, while the latter *&Gamma;(18.8,0.45)*.
+   The former is assumed -- for all countries -- to have been sampled from
+   the *&Gamma;(5.1,0.86)* distribution, while the latter from *&Gamma;(18.8,0.45)*.
 
    More technically, these assumptions translate to the assumption that the parameter
    *&pi;<sub>m,&tau;</sub>* above is given by:
