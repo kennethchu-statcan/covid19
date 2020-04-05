@@ -9,7 +9,8 @@ https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowsh
 The authors:
 
 *  sought to estimate the effect of the various COVID-19 (social distancing)
-   intervention measures on the country-specific reproduction number *R<sub>m,t</sub>*,
+   intervention measures on the country-specific time-varying
+   reproduction number *R<sub>m,t</sub>*,
    for country *m*, as function of time *t* (in days),
    
 *  proceeded by fitting a hierarchical Bayesian model to the COVID-19 death count
