@@ -40,7 +40,8 @@ require(gdata);
 require(EnvStats);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot  <- "imperial-data-1.0";
+#data.snapshot <- "imperial-data-1.0";
+data.snapshot  <- "2020-04-04.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -109,7 +110,7 @@ results.wrapper.stan <- wrapper.stan(
     DF.serial.interval          = DF.serial.interval,
     DF.covariates               = DF.covariates,
     forecast.window             = 30,
-    DEBUG                       = FALSE # TRUE
+    DEBUG                       = TRUE # FALSE # TRUE
     );
 
 ##################################################
