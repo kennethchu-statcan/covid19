@@ -108,7 +108,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7
 
 *  The number *c<sub>m,t</sub>* of newly COVID-19 infected individuals
-   for country *m* and day *t* is given by:
+   on day *t* for country *m* is given by:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{m,t}\;=\;R_{m,t}\cdot\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot{g}_{t-\tau}"/>
 
