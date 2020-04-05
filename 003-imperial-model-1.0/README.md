@@ -6,11 +6,11 @@ What this pipeline does
 -----------------------
 This pipeline is an adaption of the hierarchical model described in:
 
-(https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf)
+https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf
 
 The authors have kindly made available their code here:
 
-(https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0)
+https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
 
 
 Software reqirements of the pipeline
@@ -82,7 +82,7 @@ Below are descriptions of the input text files for this pipeline.
     The estimation procedure of the weighted infection fatality
     ratios is described in this article:
 
-    (https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext)
+    https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
 
 * __ages.csv__
 
