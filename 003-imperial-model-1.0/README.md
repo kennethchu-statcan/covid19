@@ -118,7 +118,7 @@ Main output files
     The middle panel shows the equivalent for the number of deaths.
 
     The right-most panel shows the 50% and 95% credible intervals through time
-    of the *reproduction number* $R_{t}$ at time $t$, annotated by the institutions
+    of the *reproduction number* *R<sub>t</sub>* at time *t*, annotated by the institutions
     of various intervention measures.
 
     Similarly for the rest of the countries.
