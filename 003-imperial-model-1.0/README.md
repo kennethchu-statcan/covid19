@@ -40,8 +40,8 @@ We have since made slight adaptions in order to:
 *  use data up April 4, 2020, and
 *  use a 30-day forecast window.
 
-Reqirements
------------
+Requirements
+------------
 *  Internet connection (to download up-to-date COVID-19 data)
 *  R v3.6.2
 *  R packages: gdata, EnvStats, ggplot2, tidyr, dplyr, rstan, data.table, lubridate, gdata,
