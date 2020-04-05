@@ -49,8 +49,8 @@ General assumed structure of hierarchical models
    according to their own probability distributions, which have their own (hyper)parameters.
 *  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
 
-Brief description of the model of Flaxman et al.
-------------------------------------------------
+Brief description of the hierarchical structure of the model of Flaxman et al.
+------------------------------------------------------------------------------
 *  Observed COVID-19 death count, for given (country,day)
 
    Assumed to follow a Negative Binomial distribution
@@ -61,8 +61,9 @@ Brief description of the model of Flaxman et al.
       = mean of the Negative Binomial
       = expected number of COVID-19 deaths for country *m* on day *t*
    *  variance of the Negative Binomial, which the authors assumed to have the form
-      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/Psi*,
-      where *Psi* itself follows the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
+      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/Psi*
+
+*  *Psi* is assumed to follow the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
 Requirements
 ------------
