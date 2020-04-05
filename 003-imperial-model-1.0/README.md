@@ -133,8 +133,10 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,t}\;=\;R_{m,0}\cdot\exp\!\left(\,-\,\sum^{K}_{k=1}\alpha_{k}\cdot{I}_{m,k,t}\,\right)"/>
 
-   where *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for country *m*,
-   intervention measure *k*, and day *t*.
+   where
+   
+   *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for country *m*,
+       intervention measure *k*, and day *t*.
 
 Requirements
 ------------
