@@ -274,8 +274,8 @@ Main output files
 
    Histogram, for Italy, of
    the (log-transformed) number of COVID-19 deaths by day,
-   overlaid with the corresponding credible intervals across time
-   for the forecast of the number of COVID-19 deaths.
+   overlaid with the corresponding posterior means and 95% credible intervals
+   across time for the forecast of the number of COVID-19 deaths.
 
 *  Similarly for the rest of the countries.
 
