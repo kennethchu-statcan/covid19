@@ -15,7 +15,7 @@ The authors:
 *  sought to estimate the effect of the various COVID-19 (social distancing)
    intervention measures on the country-specific time-varying
    reproduction number *R<sub>m,t</sub>*,
-   for country *m*, as function of time *t* (in days),
+   for country *m*, as a function of time *t* (in days),
    
 *  proceeded by fitting a hierarchical Bayesian model to the COVID-19 death count
    time series from the following eleven European countries:
