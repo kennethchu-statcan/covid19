@@ -38,23 +38,23 @@ getData.JHU <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases <- getData.JHU_reformat(
-        DF.input      = DF.JHU.cases,
-        colname.value = "Cases"
-        );
-
-    DF.JHU.deaths <- getData.JHU_reformat(
-        DF.input      = DF.JHU.deaths,
-        colname.value = "Deaths"
-        );
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases <- getData.JHU_undo.cumulative.sum(
         DF.input      = DF.JHU.cases,
         colname.value = "Cases"
         );
 
     DF.JHU.deaths <- getData.JHU_undo.cumulative.sum(
+        DF.input      = DF.JHU.deaths,
+        colname.value = "Deaths"
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.JHU.cases <- getData.JHU_reformat(
+        DF.input      = DF.JHU.cases,
+        colname.value = "Cases"
+        );
+
+    DF.JHU.deaths <- getData.JHU_reformat(
         DF.input      = DF.JHU.deaths,
         colname.value = "Deaths"
         );
@@ -95,10 +95,36 @@ getData.JHU_undo.cumulative.sum <- function(
     DF.input      = NULL,
     colname.value = NULL
     ) {
+
     DF.output <- DF.input;
-    forward.shift.1 <- c(0,DF.input[1:(nrow(DF.input)-1),colname.value]);
-    DF.output[,colname.value] <- DF.output[,colname.value] - forward.shift.1;
+
+    colnames.count <- grep(
+        x       = colnames(DF.output),
+        pattern = "^X",
+        value   = TRUE
+        );
+
+    colnames.non.count <- setdiff(colnames(DF.output),colnames.count);
+
+    DF.count <- DF.output[,colnames.count];
+    colnames.DF.count <- colnames(DF.count);
+
+    rightward.shift.1 <- cbind(
+        rep(0,nrow(DF.count)),
+        DF.count[,1:(ncol(DF.count)-1)]
+        );
+
+    DF.count <- as.matrix(DF.count) - as.matrix(rightward.shift.1);
+    DF.count <- as.data.frame(DF.count);
+    colnames(DF.count) <- colnames.DF.count;
+
+    DF.output <- cbind(
+        DF.output[,colnames.non.count],
+        DF.count
+        );
+
     return( DF.output );
+
     }
 
 getData.JHU_standardize.output <- function(
