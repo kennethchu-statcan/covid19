@@ -1,13 +1,14 @@
 
 getData.covid19 <- function(
-    ECDC.file       = NULL, 
-    ECDC.url        = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-    ECDC.RData      = "input-covid19-ECDC.RData",
-    JHU.file.cases  = NULL,
-    JHU.file.deaths = NULL,
-    JHU.url.cases   = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    JHU.url.deaths  = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    JHU.RData       = "input-covid19-JHU.RData"
+    retained.countries = NULL,
+    ECDC.file          = NULL, 
+    ECDC.url           = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
+    ECDC.RData         = "input-covid19-ECDC.RData",
+    JHU.file.cases     = NULL,
+    JHU.file.deaths    = NULL,
+    JHU.url.cases      = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+    JHU.url.deaths     = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+    JHU.RData          = "input-covid19-JHU.RData"
     ) {
 
     thisFunctionName <- "getData.covid19";
@@ -24,6 +25,10 @@ getData.covid19 <- function(
         ECDC.url     = ECDC.url,
         ECDC.RData   = ECDC.RData
         );
+
+    is.retained.countries <- ( DF.ECDC[,"Countries.and.territories"] %in% retained.countries);
+    DF.ECDC <- DF.ECDC[is.retained.countries,];
+
     print( str(    DF.ECDC) );
     print( summary(DF.ECDC) );
 
