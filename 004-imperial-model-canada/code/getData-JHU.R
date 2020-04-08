@@ -18,9 +18,7 @@ getData.JHU <- function(
     if ( file.exists(JHU.RData) ) {
 
         cat(paste0("\n### ",JHU.RData," already exists; loading this file ...\n"));
-
         DF.output <- readRDS(file = JHU.RData);
-
         cat(paste0("\n### Finished loading raw data.\n"));
 
     } else {
@@ -51,6 +49,17 @@ getData.JHU <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.JHU.cases <- getData.JHU_undo.cumulative.sum(
+        DF.input      = DF.JHU.cases,
+        colname.value = "Cases"
+        );
+
+    DF.JHU.deaths <- getData.JHU_undo.cumulative.sum(
+        DF.input      = DF.JHU.deaths,
+        colname.value = "Deaths"
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- dplyr::full_join(
         x  = DF.JHU.cases,
         y  = DF.JHU.deaths,
@@ -64,12 +73,16 @@ getData.JHU <- function(
         DF.input = DF.output
         );
 
-    #cat("\nstr(DF.output)\n");
-    #print( str(DF.output)   );
-
-    #cat("\nsummary(DF.output)\n");
-    #print( summary(DF.output)   );
-
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    if (!is.null(JHU.RData)) {
+        saveRDS(object = DF.output, file = JHU.RData);
+        write.csv(
+            x         = DF.output,
+            file      = gsub(x = JHU.RData, pattern = "\\.RData", replacement = ".csv"),
+            row.names = FALSE
+            );
+        }
+    
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
@@ -78,6 +91,16 @@ getData.JHU <- function(
     }
 
 ##################################################
+getData.JHU_undo.cumulative.sum <- function(
+    DF.input      = NULL,
+    colname.value = NULL
+    ) {
+    DF.output <- DF.input;
+    forward.shift.1 <- c(0,DF.input[1:(nrow(DF.input)-1),colname.value]);
+    DF.output[,colname.value] <- DF.output[,colname.value] - forward.shift.1;
+    return( DF.output );
+    }
+
 getData.JHU_standardize.output <- function(
     DF.input = NULL
     ) {

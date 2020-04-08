@@ -49,9 +49,12 @@ getData.covid19 <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.output <- rbind(
-        DF.ECDC,
-        DF.JHU
+    DF.output <- rbind(DF.ECDC,DF.JHU);
+
+    write.csv(
+        x         = DF.output,
+        file      = "input-covid19.csv",
+        row.names = FALSE
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
