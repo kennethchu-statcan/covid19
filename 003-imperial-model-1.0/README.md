@@ -8,7 +8,7 @@ https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/repor
 
 or directly:
 
-https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-Europe-estimates-and-NPI-impact-30-03-2020.pdf
+https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-03-30-COVID19-Report-13.pdf
 
 The authors:
 
