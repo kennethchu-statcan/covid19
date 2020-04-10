@@ -199,9 +199,6 @@ getData.JHU_standardize.output <- function(
             )
         );
 
-    cat("\nDF.dictionary\n");
-    print( DF.dictionary   );
-
     DF.output <- DF.output[DF.output[,"jurisdiction"] %in% DF.dictionary[,"province.long"],  ];
 
     for ( i in 1:nrow(DF.dictionary)) {

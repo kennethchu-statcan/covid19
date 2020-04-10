@@ -40,12 +40,6 @@ getData.GoCInfobase <- function(
         colname.value = "numdeaths"
         );
 
-    cat("\nstr(DF.GoCInfobase.cases)\n");
-    print( str(DF.GoCInfobase.cases)   );
-
-    cat("\nstr(DF.GoCInfobase.deaths)\n");
-    print( str(DF.GoCInfobase.deaths)   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase.cases <- getData.GoCInfobase_undo.cumulative.sum(
         DF.input = DF.GoCInfobase.cases
@@ -54,12 +48,6 @@ getData.GoCInfobase <- function(
     DF.GoCInfobase.deaths <- getData.GoCInfobase_undo.cumulative.sum(
         DF.input = DF.GoCInfobase.deaths
         );
-
-    cat("\nstr(DF.GoCInfobase.cases)\n");
-    print( str(DF.GoCInfobase.cases)   );
-
-    cat("\nstr(DF.GoCInfobase.deaths)\n");
-    print( str(DF.GoCInfobase.deaths)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase.cases <- getData.GoCInfobase_elongate(
@@ -72,12 +60,6 @@ getData.GoCInfobase <- function(
         colname.value = "deaths"
         );
 
-    cat("\nstr(DF.GoCInfobase.cases)\n");
-    print( str(DF.GoCInfobase.cases)   );
-
-    cat("\nstr(DF.GoCInfobase.deaths)\n");
-    print( str(DF.GoCInfobase.deaths)   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- dplyr::full_join(
         x  = DF.GoCInfobase.cases,
@@ -86,9 +68,6 @@ getData.GoCInfobase <- function(
         );
 
     DF.output <- as.data.frame(DF.output);
-
-    cat("\nstr(DF.output)\n");
-    print( str(DF.output)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- getData.GoCInfobase_standardize.output(
@@ -283,9 +262,6 @@ getData.GoCInfobase_standardize.output <- function(
             "Northwest Territories"    
             )
         );
-
-    cat("\nDF.dictionary\n");
-    print( DF.dictionary   );
 
     DF.output <- DF.output[DF.output[,"jurisdiction"] %in% DF.dictionary[,"province.long"],  ];
 
