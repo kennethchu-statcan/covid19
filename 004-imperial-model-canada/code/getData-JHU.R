@@ -229,7 +229,7 @@ getData.JHU_download <- function(
         tryCatch(
             expr = {
                 code <- download.file(url = target.url, destfile = output.file);
-                 if (code != 0) { stop("Error downloading file") }
+                if (code != 0) { stop("Error downloading file") }
                 },
             error = function(e) {
                 stop(sprintf("Error downloading file '%s': %s, please check %s", url, e$message, url_page));

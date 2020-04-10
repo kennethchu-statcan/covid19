@@ -22,6 +22,7 @@ code.files <- c(
     "getData-covariates.R",
     "getData-covid19.R",
     "getData-ECDC.R",
+    "getData-GoCInfobase.R",
     "getData-JHU.R",
     "getData-serial-interval.R",
     "getData-WFR.R",
@@ -92,26 +93,32 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-DF.covid19 <- getData.covid19(
-    retained.countries = countries,
-    ECDC.file          = file.path(data.directory,"input-covid19-ECDC.csv"),
-    JHU.file.cases     = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
-    JHU.file.deaths    = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
-    );
+DF.GoCInfobase <- getData.GoCInfobase();
 
-print( str(DF.covid19) );
+print( str(DF.GoCInfobase) );
 
-print( summary(DF.covid19)   );
+print( summary(DF.GoCInfobase) );
+
+#DF.covid19 <- getData.covid19(
+#    retained.countries = countries,
+#    ECDC.file          = file.path(data.directory,"input-covid19-ECDC.csv"),
+#    JHU.file.cases     = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
+#    JHU.file.deaths    = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
+#    );
+
+#print( str(DF.covid19) );
+
+#print( summary(DF.covid19) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.weighted.fatality.ratios <- getData.WFR(
-    CSV.WFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
-    CSV.WFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
-    );
+#DF.weighted.fatality.ratios <- getData.WFR(
+#    CSV.WFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
+#    CSV.WFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
+#    );
 
-print( str(DF.weighted.fatality.ratios)   );
+#print( str(DF.weighted.fatality.ratios) );
 
-print( summary(DF.weighted.fatality.ratios)   );
+#print( summary(DF.weighted.fatality.ratios) );
 
 #DF.covariates <- getData.covariates(
 #    CSV.covariates.europe = file.path(data.directory,"interventions-europe.csv"),
@@ -119,9 +126,9 @@ print( summary(DF.weighted.fatality.ratios)   );
 #    retained.countries    = countries
 #    );
 
-#print( str(DF.covariates)   );
+#print( str(DF.covariates) );
 
-#print( summary(DF.covariates)   );
+#print( summary(DF.covariates) );
 
 #cat("\nDF.covariates\n");
 #print( DF.covariates   );
@@ -131,9 +138,9 @@ print( summary(DF.weighted.fatality.ratios)   );
 #    CSV.serial.interval = file.path(data.directory,"serial-interval.csv")
 #    );
 
-#print( str(DF.serial.interval)   );
+#print( str(DF.serial.interval) );
 
-#print( summary(DF.serial.interval)   );
+#print( summary(DF.serial.interval) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #results.wrapper.stan <- wrapper.stan(
