@@ -17,14 +17,12 @@ getData.ECDC <- function(
     if ( file.exists(ECDC.RData) ) {
 
         cat(paste0("\n### ",ECDC.RData," already exists; loading this file ...\n"));
-
         DF.output <- readRDS(file = ECDC.RData);
-
         cat(paste0("\n### Finished loading raw data.\n"));
 
     } else {
 
-        #url_page <- "https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"
+        url_page <- "https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide"
 
         if ( !is.null(ECDC.file) ) {
             d <- read.csv(ECDC.file, stringsAsFactors = FALSE);
@@ -45,18 +43,18 @@ getData.ECDC <- function(
         d$t <- lubridate::decimal_date(as.Date(d$dateRep, format = "%d/%m/%Y"));
         d   <- d[order(d$'countriesAndTerritories', d$t, decreasing = FALSE), ];
 
-        names(d)[names(d) == "countriesAndTerritories"] <- "Countries.and.territories";
-        names(d)[names(d) == "deaths"]                  <- "Deaths";
-        names(d)[names(d) == "cases"]                   <- "Cases";
-        names(d)[names(d) == "dateRep"]                 <- "DateRep";
+        names(d)[names(d) == "countriesAndTerritories"] <- "jurisdiction";
+        names(d)[names(d) == "dateRep"]                 <- "date";
 
         DF.output <- d;
         remove( list = c("d") );
 
-        DF.output[,"DateRep"] <- as.Date(
-            x      = DF.output[,"DateRep"],
+        DF.output[,"date"] <- as.Date(
+            x      = DF.output[,"date"],
             format = "%d/%m/%Y"
             );
+
+        DF.output <- DF.output[,c("jurisdiction","date","year","month","day","cases","deaths")];
 
         if (!is.null(ECDC.RData)) {
             saveRDS(object = DF.output, file = ECDC.RData);

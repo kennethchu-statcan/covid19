@@ -49,7 +49,7 @@ data.snapshot  <- "2020-04-07.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-countries <- c(
+jurisdictions <- c(
     "Denmark",
     "Italy",
     "Germany",
@@ -99,16 +99,16 @@ print( str(DF.GoCInfobase) );
 
 print( summary(DF.GoCInfobase) );
 
-#DF.covid19 <- getData.covid19(
-#    retained.countries = countries,
-#    ECDC.file          = file.path(data.directory,"input-covid19-ECDC.csv"),
-#    JHU.file.cases     = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
-#    JHU.file.deaths    = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
-#    );
+DF.covid19 <- getData.covid19(
+    retained.jurisdictions = jurisdictions,
+    ECDC.file              = file.path(data.directory,"input-covid19-ECDC.csv"),
+    JHU.file.cases         = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
+    JHU.file.deaths        = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
+    );
 
-#print( str(DF.covid19) );
+print( str(DF.covid19) );
 
-#print( summary(DF.covid19) );
+print( summary(DF.covid19) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #DF.weighted.fatality.ratios <- getData.WFR(

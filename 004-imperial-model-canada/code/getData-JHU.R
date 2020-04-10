@@ -51,19 +51,19 @@ getData.JHU <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases <- getData.JHU_reformat(
         DF.input      = DF.JHU.cases,
-        colname.value = "Cases"
+        colname.value = "cases"
         );
 
     DF.JHU.deaths <- getData.JHU_reformat(
         DF.input      = DF.JHU.deaths,
-        colname.value = "Deaths"
+        colname.value = "deaths"
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- dplyr::full_join(
         x  = DF.JHU.cases,
         y  = DF.JHU.deaths,
-        by = c("province","date")
+        by = c("jurisdiction","date")
         );
 
     DF.output <- as.data.frame(DF.output);
@@ -170,20 +170,16 @@ getData.JHU_standardize.output <- function(
         );
     DF.output[,"day"] <- as.integer(DF.output[,"day"]);
 
-    DF.output[,"DateRep"] <- as.Date(paste(
+    DF.output[,"date"] <- as.Date(paste(
         DF.output[,"year"],
         DF.output[,"month"],
         DF.output[,"day"],
         sep="-"
         ));
 
-    DF.output <- DF.output[,c("DateRep","day","month","year","Cases","Deaths","province")];
-    DF.output <- DF.output %>% dplyr::arrange(province,DateRep);
+    DF.output <- DF.output[,c("jurisdiction","date","year","month","day","cases","deaths")];
+    DF.output <- DF.output %>% dplyr::arrange(jurisdiction,date);
     DF.output <- as.data.frame(DF.output);
-
-    DF.output <- DF.output[DF.output[,"province"] != "Grand Princess",  ];
-    DF.output <- DF.output[DF.output[,"province"] != "Diamond Princess",];
-    DF.output <- DF.output[DF.output[,"province"] != "Recovered",       ];
 
     DF.dictionary <- data.frame(
         province.short = c('BC','AB','SK','MB','ON','QC','NB','NL','NS','PE','YK','NT'),
@@ -206,9 +202,11 @@ getData.JHU_standardize.output <- function(
     cat("\nDF.dictionary\n");
     print( DF.dictionary   );
 
+    DF.output <- DF.output[DF.output[,"jurisdiction"] %in% DF.dictionary[,"province.long"],  ];
+
     for ( i in 1:nrow(DF.dictionary)) {
-        DF.output[,"province"] <- gsub(
-            x           = DF.output[,"province"],
+        DF.output[,"jurisdiction"] <- gsub(
+            x           = DF.output[,"jurisdiction"],
             pattern     = DF.dictionary[i,"province.long"],
             replacement = DF.dictionary[i,"province.short"]
             );
@@ -262,13 +260,13 @@ getData.JHU_reformat <- function(
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "Province\\.State",
-        replacement = "province"
+        replacement = "jurisdiction"
         );
 
     DF.output <- DF.output %>% tidyr::gather(
         key   = "date",
         value = "colname_temp",
-        -province
+        -jurisdiction
         );
 
     DF.output <- as.data.frame(DF.output);

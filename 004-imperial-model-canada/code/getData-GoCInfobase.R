@@ -255,15 +255,15 @@ getData.GoCInfobase_standardize.output <- function(
         );
     DF.output[,"day"] <- as.integer(DF.output[,"day"]);
 
-    DF.output[,"DateRep"] <- as.Date(paste(
+    DF.output[,"date"] <- as.Date(paste(
         DF.output[,"year"],
         DF.output[,"month"],
         DF.output[,"day"],
         sep="-"
         ));
 
-    DF.output <- DF.output[,c("DateRep","day","month","year","cases","deaths","jurisdiction")];
-    DF.output <- DF.output %>% dplyr::arrange(jurisdiction,DateRep);
+    DF.output <- DF.output[,c("jurisdiction","date","year","month","day","cases","deaths")];
+    DF.output <- DF.output %>% dplyr::arrange(jurisdiction,date);
     DF.output <- as.data.frame(DF.output);
 
     DF.dictionary <- data.frame(

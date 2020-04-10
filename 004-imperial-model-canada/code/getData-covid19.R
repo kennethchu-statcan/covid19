@@ -1,14 +1,14 @@
 
 getData.covid19 <- function(
-    retained.countries = NULL,
-    ECDC.file          = NULL, 
-    ECDC.url           = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-    ECDC.RData         = "input-covid19-ECDC.RData",
-    JHU.file.cases     = NULL,
-    JHU.file.deaths    = NULL,
-    JHU.url.cases      = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    JHU.url.deaths     = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    JHU.RData          = "input-covid19-JHU.RData"
+    retained.jurisdictions = NULL,
+    ECDC.file              = NULL, 
+    ECDC.url               = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
+    ECDC.RData             = "input-covid19-ECDC.RData",
+    JHU.file.cases         = NULL,
+    JHU.file.deaths        = NULL,
+    JHU.url.cases          = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+    JHU.url.deaths         = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+    JHU.RData              = "input-covid19-JHU.RData"
     ) {
 
     thisFunctionName <- "getData.covid19";
@@ -26,8 +26,8 @@ getData.covid19 <- function(
         ECDC.RData   = ECDC.RData
         );
 
-    is.retained.countries <- ( DF.ECDC[,"Countries.and.territories"] %in% retained.countries);
-    DF.ECDC <- DF.ECDC[is.retained.countries,];
+    is.retained.jurisdictions <- ( DF.ECDC[,"jurisdiction"] %in% retained.jurisdictions);
+    DF.ECDC <- DF.ECDC[is.retained.jurisdictions,];
 
     print( str(    DF.ECDC) );
     print( summary(DF.ECDC) );
@@ -45,13 +45,6 @@ getData.covid19 <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     retained.columns <- setdiff(colnames(DF.ECDC),c("geoId","countryterritoryCode","popData2018","t"));
     DF.ECDC <- DF.ECDC[,retained.columns];
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    colnames(DF.JHU) <- gsub(
-        x           = colnames(DF.JHU),
-        pattern     = "province",
-        replacement = "Countries.and.territories"
-        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- rbind(DF.ECDC,DF.JHU);
