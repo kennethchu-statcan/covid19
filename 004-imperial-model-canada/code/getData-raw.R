@@ -62,13 +62,13 @@ getData.raw_load.or.download <- function(
 
     if ( file.exists(csv.file) ) {
 
-        cat(paste0("\n### Data file ",csv.file," already exists; loading this file ...\n"));
+        cat(paste0("\n# Data file ",csv.file," already exists; loading this file ...\n"));
         DF.output <- read.csv(file = csv.file, stringsAsFactors = FALSE);
-        cat(paste0("\n### Loading complete: ",csv.file,".\n"));
+        cat(paste0("\n# Loading complete: ",csv.file,".\n"));
     
     } else {
 
-        cat(paste0("\n### Data file ",csv.file," does NOT yet exists; downloading it from: ",target.url,"\n"));
+        cat(paste0("\n# Data file ",csv.file," does NOT yet exists; downloading it from: ",target.url,"\n"));
         tryCatch(
             expr = {
                 code <- download.file(url = target.url, destfile = csv.file);
@@ -78,7 +78,7 @@ getData.raw_load.or.download <- function(
                 stop(sprintf("Error downloading file '%s': %s", target.url, e$message));
                 }
             );
-        cat(paste0("\n### Download complete: ",target.url,".\n"));
+        cat(paste0("\n# Download complete: ",target.url,".\n"));
         DF.output <- read.csv(file = csv.file, stringsAsFactors = FALSE);
 
         }
