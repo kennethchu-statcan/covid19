@@ -18,7 +18,7 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
-    "cross-check-JHU-GoCInfobase.R",
+    "cross-check.R",
     "geom-stepribbon.R",
     "getData-covariates.R",
     "getData-covid19.R",
