@@ -44,23 +44,25 @@ data.directory <- file.path(data.directory,data.snapshot);
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-list.raw.data <- getData.raw(
+list.covid19.data <- getData.raw(
     csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
     csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
     csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
     );
 
-print( names(list.raw.data) );
+print( names(list.covid19.data) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
-    list.raw.data = list.raw.data
+    list.covid19.data = list.covid19.data,
+    csv.output        = "diagnostics-compare-JHU-GoCInfobase-raw.csv"
     );
 print(str(DF.cross.check.JHU.GoCInfobase));
 
 DF.cross.check.JHU.ECDC <- cross.check.JHU.ECDC(
-    list.raw.data = list.raw.data
+    list.covid19.data = list.covid19.data,
+    csv.output        = "diagnostics-compare-JHU-ECDC-raw.csv"
     );
 print(str(DF.cross.check.JHU.ECDC));
 

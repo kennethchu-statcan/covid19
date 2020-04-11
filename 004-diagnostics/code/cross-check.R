@@ -1,7 +1,8 @@
 
 cross.check.JHU.ECDC <- function(
     retained.jurisdictions = NULL,
-    list.raw.data          = NULL
+    list.covid19.data      = NULL,
+    csv.output             = "diagnostics-compare-JHU-ECDC.csv"
     ) {
 
     thisFunctionName <- "cross.check.JHU.ECDC";
@@ -13,9 +14,9 @@ cross.check.JHU.ECDC <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases  <- list.raw.data[["JHU.cases" ]];
-    DF.JHU.deaths <- list.raw.data[["JHU.deaths"]];
-    DF.ECDC       <- list.raw.data[["ECDC"      ]];
+    DF.JHU.cases  <- list.covid19.data[["JHU.cases" ]];
+    DF.JHU.deaths <- list.covid19.data[["JHU.deaths"]];
+    DF.ECDC       <- list.covid19.data[["ECDC"      ]];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
@@ -77,7 +78,7 @@ cross.check.JHU.ECDC <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     write.csv(
         x         = DF.cross.check,
-        file      = "diagnostics-compare-JHU-ECDC.csv",
+        file      = csv.output,
         row.names = FALSE
         );
 
@@ -91,7 +92,8 @@ cross.check.JHU.ECDC <- function(
 ##################################################
 cross.check.JHU.GoCInfobase <- function(
     retained.jurisdictions = NULL,
-    list.raw.data          = NULL
+    list.covid19.data      = NULL,
+    csv.output             = "diagnostics-compare-JHU-GoCInfobase.csv"
     ) {
 
     thisFunctionName <- "cross.check.JHU.GoCInfobase";
@@ -103,9 +105,9 @@ cross.check.JHU.GoCInfobase <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases   <- list.raw.data[["JHU.cases"  ]];
-    DF.JHU.deaths  <- list.raw.data[["JHU.deaths" ]];
-    DF.GoCInfobase <- list.raw.data[["GoCInfobase"]];
+    DF.JHU.cases   <- list.covid19.data[["JHU.cases"  ]];
+    DF.JHU.deaths  <- list.covid19.data[["JHU.deaths" ]];
+    DF.GoCInfobase <- list.covid19.data[["GoCInfobase"]];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
@@ -157,7 +159,7 @@ cross.check.JHU.GoCInfobase <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     write.csv(
         x         = DF.cross.check,
-        file      = "diagnostics-compare-JHU-GoCInfobase.csv",
+        file      = csv.output,
         row.names = FALSE
         );
 
