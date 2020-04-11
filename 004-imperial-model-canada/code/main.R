@@ -47,7 +47,8 @@ require(EnvStats);
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #data.snapshot <- "imperial-data-1.0";
 #data.snapshot  <- "2020-04-05.01";
-data.snapshot  <- "2020-04-07.01";
+#data.snapshot  <- "2020-04-07.01";
+data.snapshot  <- "2020-04-11.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -96,7 +97,12 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-list.raw.data <- getData.raw();
+list.raw.data <- getData.raw(
+#    csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
+#    csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
+#    csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
+#    csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
+    );
 
 print( str(list.raw.data) );
 
