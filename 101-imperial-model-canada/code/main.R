@@ -27,7 +27,7 @@ code.files <- c(
     "getData-JHU.R",
     "getData-raw.R",
     "getData-serial-interval.R",
-    "getData-WFR.R",
+    "getData-wIFR.R",
     "patchData.R",
     "plot-3-panel.R",
     "plot-forecast.R",
