@@ -2,7 +2,7 @@
 getData.ECDC <- function(
     ECDC.file  = NULL, 
     ECDC.url   = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-    ECDC.RData = "input-covid19-ECDC.RData"
+    ECDC.RData = "raw-covid19-ECDC.RData"
     ) {
 
     thisFunctionName <- "getData.ECDC";
@@ -27,16 +27,17 @@ getData.ECDC <- function(
         if ( !is.null(ECDC.file) ) {
             d <- read.csv(ECDC.file, stringsAsFactors = FALSE);
         } else {
+            temp.file <- gsub(x=ECDC.RData,pattern="\\.RData",replacement=".csv");
             tryCatch(
                 expr = {
-                    code <- download.file(url = ECDC.url, destfile = "input-covid19-ECDC.csv");
+                    code <- download.file(url = ECDC.url, destfile = temp.file);
                     if (code != 0) { stop("Error downloading file") }
                     },
                 error = function(e) {
                     stop(sprintf("Error downloading file '%s': %s, please check %s", url, e$message, url_page));
                     }
                 );
-            d <- read.csv("input-covid19-ECDC.csv", stringsAsFactors = FALSE);
+            d <- read.csv(temp.file, stringsAsFactors = FALSE);
             } 
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###

@@ -4,7 +4,7 @@ getData.JHU <- function(
     JHU.file.deaths = NULL, 
     JHU.url.cases   = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
     JHU.url.deaths  = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    JHU.RData       = "input-covid19-JHU.RData"
+    JHU.RData       = "raw-covid19-JHU.RData"
     ) {
 
     thisFunctionName <- "getData.JHU";
@@ -26,13 +26,13 @@ getData.JHU <- function(
         DF.JHU.cases <- getData.JHU_download(
             input.file  = JHU.file.cases,
             target.url  = JHU.url.cases,
-            output.file = "input-covid19-JHU-cases.csv"
+            output.file = "raw-covid19-JHU-cases.csv"
             )
 
         DF.JHU.deaths <- getData.JHU_download(
             input.file  = JHU.file.deaths,
             target.url  = JHU.url.deaths,
-            output.file = "input-covid19-JHU-deaths.csv"
+            output.file = "raw-covid19-JHU-deaths.csv"
             )
 
         }

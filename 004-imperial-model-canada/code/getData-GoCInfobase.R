@@ -21,10 +21,14 @@ getData.GoCInfobase <- function(
 
     } else {
 
+        temp.file <- gsub(x = GoCInfobase.RData, pattern = "input-",   replacement = ""    );
+        temp.file <- gsub(x = GoCInfobase.RData, pattern = "\\.RData", replacement = ".csv");
+        temp.file <- paste0("raw-",temp.file);
+
         DF.GoCInfobase <- getData.GoCInfobase_download(
             input.file  = GoCInfobase.file,
             target.url  = GoCInfobase.url,
-            output.file = gsub(x = GoCInfobase.RData, pattern = "\\.RData", replacement = "-raw.csv")
+            output.file = temp.file
             )
 
         }
@@ -40,6 +44,18 @@ getData.GoCInfobase <- function(
         colname.value = "numdeaths"
         );
 
+    write.csv(
+        x         = DF.GoCInfobase.cases,
+        file      = "diagnostics-GoCInfobase-cases-wide.csv",
+        row.names = FALSE
+        );
+
+    write.csv(
+        x         = DF.GoCInfobase.deaths,
+        file      = "diagnostics-GoCInfobase-deaths-wide.csv",
+        row.names = FALSE
+        );
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase.cases <- getData.GoCInfobase_undo.cumulative.sum(
         DF.input = DF.GoCInfobase.cases
@@ -47,6 +63,18 @@ getData.GoCInfobase <- function(
 
     DF.GoCInfobase.deaths <- getData.GoCInfobase_undo.cumulative.sum(
         DF.input = DF.GoCInfobase.deaths
+        );
+
+    write.csv(
+        x         = DF.GoCInfobase.cases,
+        file      = "diagnostics-GoCInfobase-cases-wide-1.csv",
+        row.names = FALSE
+        );
+
+    write.csv(
+        x         = DF.GoCInfobase.deaths,
+        file      = "diagnostics-GoCInfobase-deaths-wide-1.csv",
+        row.names = FALSE
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -161,7 +189,7 @@ getData.GoCInfobase_undo.cumulative.sum <- function(
 
     DF.output <- DF.input;
 
-    colnames.non.count <- "jurisdiction";
+    colnames.non.count <- c("jurisdiction");
     colnames.count     <- setdiff(colnames(DF.output),colnames.non.count);
 
     DF.count <- DF.output[,colnames.count];
@@ -178,6 +206,7 @@ getData.GoCInfobase_undo.cumulative.sum <- function(
         DF.count[,1:(ncol(DF.count)-1)]
         );
 
+    DF.count <- as.matrix(DF.count) - as.matrix(rightward.shift.1);
     DF.count <- as.data.frame(DF.count);
     colnames(DF.count) <- colnames.DF.count;
 

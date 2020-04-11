@@ -26,19 +26,10 @@ cross.check.JHU.GoCInfobase <- function(
     DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
     DF.JHU.deaths <- DF.JHU.deaths[DF.JHU.deaths[,"Country.Region"] == "Canada",];
 
-    cat("\nstr(DF.JHU.cases)\n");
-    print( str(DF.JHU.cases)   );
-
-    cat("\nstr(DF.JHU.deaths)\n");
-    print( str(DF.JHU.deaths)   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase <- cross.check.JHU.GoCInfobase_download(
         target.url = GoCInfobase.url
         );
-
-    cat("\nstr(DF.GoCInfobase)\n");
-    print( str(DF.GoCInfobase)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases <- cross.check.JHU.GoCInfobase_reformat.JHU(
@@ -51,19 +42,10 @@ cross.check.JHU.GoCInfobase <- function(
         colname.value = "deaths.JHU"
         );
 
-    cat("\nstr(DF.JHU.cases)\n");
-    print( str(DF.JHU.cases)   );
-
-    cat("\nstr(DF.JHU.deaths)\n");
-    print( str(DF.JHU.deaths)   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase <- cross.check.JHU.GoCInfobase_reformat.GoCInfobase(
         DF.input = DF.GoCInfobase
         );
-
-    cat("\nstr(DF.GoCInfobase)\n");
-    print( str(DF.GoCInfobase)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU <- dplyr::full_join(

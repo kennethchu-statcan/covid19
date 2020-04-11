@@ -18,6 +18,7 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
+    "cross-check-JHU-GoCInfobase.R",
     "geom-stepribbon.R",
     "getData-covariates.R",
     "getData-covid19.R",
@@ -61,6 +62,7 @@ jurisdictions <- c(
     "Austria",
     "Sweden",
     "Switzerland",
+    "Canada",
     "CA",
     "BC",
     "AB",
@@ -93,22 +95,21 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-DF.GoCInfobase <- getData.GoCInfobase();
-
-print( str(DF.GoCInfobase) );
-
-print( summary(DF.GoCInfobase) );
+DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase();
+print(str(DF.cross.check.JHU.GoCInfobase));
 
 DF.covid19 <- getData.covid19(
-    retained.jurisdictions = jurisdictions,
-    ECDC.file              = file.path(data.directory,"input-covid19-ECDC.csv"),
-    JHU.file.cases         = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
-    JHU.file.deaths        = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
+    retained.jurisdictions = jurisdictions
+    #,ECDC.file            = file.path(data.directory,"input-covid19-ECDC.csv"),
+    # JHU.file.cases       = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
+    # JHU.file.deaths      = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
     );
 
 print( str(DF.covid19) );
 
 print( summary(DF.covid19) );
+
+print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #DF.weighted.fatality.ratios <- getData.WFR(
