@@ -98,10 +98,10 @@ file.copy(
 set.seed(7654321);
 
 list.raw.data <- getData.raw(
-#    csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
-#    csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
-#    csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
-#    csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
+    csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
+    csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
+    csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
+    csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
     );
 
 print( str(list.raw.data) );
