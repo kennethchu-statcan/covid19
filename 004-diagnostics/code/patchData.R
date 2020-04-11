@@ -57,7 +57,7 @@ patchData_GoCInfobase <- function(
     DF.dictionary.pruid <- unique(DF.input[,c("pruid","prname","prnameFR")]);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    retained.colnames <- setdiff(colnames.input,c("prname","prnameFR"));
+    retained.colnames <- c("pruid","date",colnames.numeric);
     DF.counts <- DF.input[,retained.colnames];
     DF.counts[,"Date.Obj"] <- as.Date(x = DF.counts[,"date"], tryFormats = c("%d-%m-%Y"));
     DF.counts <- DF.counts[,setdiff(colnames(DF.counts),"date")];
