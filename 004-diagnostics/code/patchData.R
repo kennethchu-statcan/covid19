@@ -84,7 +84,7 @@ patchData_GoCInfobase <- function(
     DF.output <- as.data.frame(DF.output %>% dplyr::arrange(pruid,Date.Obj));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    leading.colnames <- c("pruid","Date.Obj");
+    leading.colnames <- c("pruid","prname","prnameFR","Date.Obj");
     ordered.colnames <- c(
         leading.colnames,
         setdiff(colnames(DF.output),leading.colnames)
