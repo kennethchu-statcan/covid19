@@ -1,6 +1,7 @@
 
 patchData <- function(
-    list.covid19.data = NULL
+    list.covid19.data = NULL,
+    min.Date          = as.Date("2019-12-31")
     ) {
 
     thisFunctionName <- "patchData";
@@ -15,7 +16,8 @@ patchData <- function(
     list.output <- list.covid19.data;
 
     list.output[["GoCInfobase"]] <- patchData_GoCInfobase(
-        DF.input = list.output[["GoCInfobase"]]
+        DF.input = list.output[["GoCInfobase"]],
+        min.Date = min.Date
         );
 
     write.csv(
@@ -34,6 +36,7 @@ patchData <- function(
 ###################################################
 patchData_GoCInfobase <- function(
     DF.input               = NULL,
+    min.Date               = NULL,
     dateFormat.GoCInfobase = "%d-%m-%Y"
     ) {
 
@@ -48,7 +51,7 @@ patchData_GoCInfobase <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     unique.pruids <- unique(DF.input[,"pruid"]);
     unique.dates  <- as.Date(x = unique(DF.input[,"date"]), tryFormats = dateFormat.GoCInfobase);
-    unique.dates  <- seq(min(unique.dates),max(unique.dates),by=1);
+    unique.dates  <- seq(min(min.Date,min(unique.dates)),max(unique.dates),by=1);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.dictionary.pruid <- unique(DF.input[,c("pruid","prname","prnameFR")]);
