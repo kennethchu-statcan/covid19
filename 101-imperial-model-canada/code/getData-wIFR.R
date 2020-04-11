@@ -59,22 +59,16 @@ getData.wIFR_canada <- function(
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "^Region.+",
-        replacement = "country"
+        replacement = "jurisdiction"
         );
 
-    DF.output[,"country"   ] <- as.character(DF.output[,"country"   ]);
-    DF.output[,"population"] <- as.integer(  DF.output[,"population"]);
+    DF.output[,"jurisdiction"] <- as.character(DF.output[,"jurisdiction"]);
+    DF.output[,"population"  ] <- as.integer(  DF.output[,"population"  ]);
 
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "^X$",
         replacement = "ID"
-        );
-
-    colnames(DF.output) <- gsub(
-        x           = colnames(DF.output),
-        pattern     = "Region.+",
-        replacement = "jurisdiction"
         );
 
     colnames(DF.output) <- gsub(
@@ -120,21 +114,15 @@ getData.wIFR_europe <- function(
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "^Region.+",
-        replacement = "country"
+        replacement = "jurisdiction"
         );
 
-    DF.output[,"country"] <- as.character(DF.output[,"country"]);
+    DF.output[,"jurisdiction"] <- as.character(DF.output[,"jurisdiction"]);
 
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "^X$",
         replacement = "ID"
-        );
-
-    colnames(DF.output) <- gsub(
-        x           = colnames(DF.output),
-        pattern     = "Region.+",
-        replacement = "jurisdiction"
         );
 
     colnames(DF.output) <- gsub(
