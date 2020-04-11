@@ -160,25 +160,27 @@ cat("\nDF.covariates\n");
 print( DF.covariates   );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#DF.serial.interval <- getData.serial.interval(
-#    CSV.serial.interval = file.path(data.directory,"serial-interval.csv")
-#    );
+DF.serial.interval <- getData.serial.interval(
+    csv.serial.interval = file.path(data.directory,"serial-interval.csv")
+    );
 
-#print( str(DF.serial.interval) );
+print( str(DF.serial.interval) );
 
-#print( summary(DF.serial.interval) );
+print( summary(DF.serial.interval) );
+
+print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#results.wrapper.stan <- wrapper.stan(
-#    StanModel                   = StanModel,
-#    FILE.stan.model             = FILE.stan.model,
-#    DF.ECDC                     = DF.ECDC,
-#    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
-#    DF.serial.interval          = DF.serial.interval,
-#    DF.covariates               = DF.covariates,
-#    forecast.window             = 30,
-#    DEBUG                       = TRUE # FALSE # TRUE
-#    );
+results.wrapper.stan <- wrapper.stan(
+    StanModel                   = StanModel,
+    FILE.stan.model             = FILE.stan.model,
+    DF.covid19                  = DF.covid19,
+    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
+    DF.serial.interval          = DF.serial.interval,
+    DF.covariates               = DF.covariates,
+    forecast.window             = 30,
+    DEBUG                       = TRUE # FALSE # TRUE
+    );
 
 ##################################################
 print( warnings() );

@@ -2,7 +2,7 @@
 wrapper.stan <- function(
     StanModel                   = NULL,
     FILE.stan.model             = NULL,
-    DF.ECDC                     = NULL,
+    DF.covid19                  = NULL,
     DF.weighted.fatality.ratios = NULL,
     DF.serial.interval          = NULL,
     DF.covariates               = NULL,
@@ -32,7 +32,7 @@ wrapper.stan <- function(
         list.output <- wrapper.stan_inner(
             StanModel                   = StanModel,
             FILE.stan.model             = FILE.stan.model,
-            DF.ECDC                     = DF.ECDC,
+            DF.covid19                  = DF.covid19,
             DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
             DF.serial.interval          = DF.serial.interval,
             DF.covariates               = DF.covariates,
@@ -77,7 +77,8 @@ wrapper.stan_visualize.results <- function(
 
     # to visualize results
 
-    StanModel <- list.input[["StanModel"]];
+    StanModel     <- list.input[["StanModel"]];
+    jurisdictions <- list.input[["jurisdictions"]];
 
     plot_labels <- c(
         "School Closure",
@@ -110,7 +111,7 @@ wrapper.stan_visualize.results <- function(
         );
 
     mu <- as.matrix(list.input[["out"]][["mu"]]);
-    colnames(mu) = countries;
+    colnames(mu) = jurisdictions;
 
     g <- bayesplot::mcmc_intervals(mu,prob = .9);
     ggsave(
@@ -122,7 +123,7 @@ wrapper.stan_visualize.results <- function(
 
     dimensions   <- dim(list.input[["out"]][["Rt"]]);
     Rt           <- as.matrix(list.input[["out"]][["Rt"]][,dimensions[2],]);
-    colnames(Rt) <- countries;
+    colnames(Rt) <- jurisdictions;
 
     g <- bayesplot::mcmc_intervals(Rt,prob = .9);
     ggsave(
@@ -139,7 +140,7 @@ wrapper.stan_visualize.results <- function(
 wrapper.stan_inner <- function(
     StanModel                   = NULL,
     FILE.stan.model             = NULL,
-    DF.ECDC                     = NULL,
+    DF.covid19                  = NULL,
     DF.weighted.fatality.ratios = NULL,
     DF.serial.interval          = NULL,
     DF.covariates               = NULL,
@@ -147,14 +148,15 @@ wrapper.stan_inner <- function(
     DEBUG                       = FALSE
     ) {
 
-    n.covariates <- ncol(DF.covariates) - 1;
-    forecast     <- 0;
+    n.covariates  <- ncol(DF.covariates) - 1;
+    jurisdictions <- unique(DF.covid19[,'jurisdiction']);
+    forecast      <- 0;
 
     if( DEBUG == FALSE ) {
         N2 = 100 # Increase this for a further forecast
     }  else  {
         ### For faster runs:
-        # countries = c("Austria","Belgium") #,Spain")
+        # jurisdictions <- c("Austria","Belgium") #,Spain")
         N2 = 100
         }
 
@@ -162,7 +164,7 @@ wrapper.stan_inner <- function(
     reported_cases <- list();
 
     stan_data <- list(
-        M             = length(countries),
+        M             = length(jurisdictions),
         N             = NULL,
         p             = n.covariates,
         x1            = poly(1:N2,2)[,1],
@@ -184,23 +186,22 @@ wrapper.stan_inner <- function(
         EpidemicStart = NULL
         );
 
-    deaths_by_country = list();
+    deaths_by_jurisdiction = list();
 
-    for( Country in countries ) {
+    for( jurisdiction in jurisdictions ) {
 
-        #CFR <- cfr.by.country$weighted_fatality[cfr.by.country$country == Country];
-        CFR <- DF.weighted.fatality.ratios$weighted_fatality[DF.weighted.fatality.ratios$country == Country];
+        CFR <- DF.weighted.fatality.ratios$weighted_fatality[DF.weighted.fatality.ratios$jurisdiction == jurisdiction];
 
-        date.colnames <- setdiff(colnames(DF.covariates),"Country");
-        covariates1   <- DF.covariates[DF.covariates$Country == Country,date.colnames];
+        date.colnames <- setdiff(colnames(DF.covariates),"jurisdiction");
+        covariates1   <- DF.covariates[DF.covariates$jurisdiction == jurisdiction,date.colnames];
 
-        d1      <- DF.ECDC[DF.ECDC$Countries.and.territories == Country,];
-        d1$date <- d1$DateRep;
+        d1      <- DF.covid19[DF.covid19$jurisdiction == jurisdiction,];
+        #d1$date <- d1$DateRep;
         d1$t    <- decimal_date(d1$date);
         d1      <- d1[order(d1$t),];
 
-        index  <- which(d1$Cases>0)[1];
-        index1 <- which(cumsum(d1$Deaths)>=10)[1]; # also 5
+        index  <- which(d1$cases>0)[1];
+        index1 <- which(cumsum(d1$deaths)>=10)[1]; # also 5
         index2 <- index1 - 30;
 
         print(sprintf("First non-zero cases is on day %d, and 30 days before 5 days is day %d",index,index2));
@@ -211,16 +212,17 @@ wrapper.stan_inner <- function(
             covariate <- names(covariates1)[ii];
             # should this be > or >=?
             #d1[covariate] <- (as.Date(d1$DateRep,format='%d/%m/%Y') >= as.Date(covariates1[1,covariate])) * 1
-            d1[covariate] <- (d1$DateRep >= as.Date(covariates1[1,covariate])) * 1
+            #d1[covariate] <- (d1$DateRep >= as.Date(covariates1[1,covariate])) * 1
+            d1[covariate] <- (d1$date >= as.Date(covariates1[1,covariate])) * 1
             }
 
-        dates[[Country]] = d1$date;
+        dates[[jurisdiction]] = d1$date;
         # hazard estimation
-        N <- length(d1$Cases);
-        print(sprintf("%s has %d days of data",Country,N));
+        N <- length(d1$cases);
+        print(sprintf("%s has %d days of data",jurisdiction,N));
         forecast <- N2 - N;
         if( forecast < 0 ) {
-            print(sprintf("%s: %d", Country, N))
+            print(sprintf("%s: %d", jurisdiction, N))
             print("ERROR!!!! increasing N2")
             N2 <- N;
             forecast <- N2 - N;
@@ -267,11 +269,11 @@ wrapper.stan_inner <- function(
             }
         f <- s * h;
 
-        y <- c(as.vector(as.numeric(d1$Cases)),rep(-1,forecast));
-        reported_cases[[Country]] <- as.vector(as.numeric(d1$Cases));
-        deaths <- c(as.vector(as.numeric(d1$Deaths)),rep(-1,forecast));
-        cases  <- c(as.vector(as.numeric(d1$Cases)),rep(-1,forecast));
-        deaths_by_country[[Country]] <- as.vector(as.numeric(d1$Deaths))
+        y <- c(as.vector(as.numeric(d1$cases)),rep(-1,forecast));
+        reported_cases[[jurisdiction]] <- as.vector(as.numeric(d1$cases));
+        deaths <- c(as.vector(as.numeric(d1$deaths)),rep(-1,forecast));
+        cases  <- c(as.vector(as.numeric(d1$cases)),rep(-1,forecast));
+        deaths_by_jurisdiction[[jurisdiction]] <- as.vector(as.numeric(d1$deaths))
         covariates2 <- as.data.frame(d1[, colnames(covariates1)]);
 
         # x=1:(N+forecast)
@@ -298,7 +300,7 @@ wrapper.stan_inner <- function(
             stan_data$N <- as.array(stan_data$N);
             }
 
-        } # for( Country in countries )
+        } # for( jurisdiction in jurisdictions )
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     stan_data$covariate2 <- 0 * stan_data$covariate2 # remove travel bans
@@ -320,9 +322,9 @@ wrapper.stan_inner <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if( DEBUG ) {
-        for(i in 1:length(countries)) {
+        for(i in 1:length(jurisdictions)) {
             write.csv(
-                file = sprintf("check-dates-%s.csv",countries[i]),
+                file = sprintf("check-dates-%s.csv",jurisdictions[i]),
                 x    = data.frame(
                     date                               = dates[[i]],
                     `school closure`                   = stan_data$covariate1[1:stan_data$N[i],i],
@@ -372,17 +374,17 @@ wrapper.stan_inner <- function(
     estimated.deaths.cf <- out$E_deaths0;
 
     list.output <- list(
-        StanModel           = StanModel,
-        fit                 = fit,
-        prediction          = prediction,
-        dates               = dates,
-        reported_cases      = reported_cases,
-        deaths_by_country   = deaths_by_country,
-        countries           = countries,
-        estimated_deaths    = estimated.deaths,
-        estimated_deaths_cf = estimated.deaths.cf,
-        out                 = out,
-        covariates          = DF.covariates
+        StanModel              = StanModel,
+        fit                    = fit,
+        prediction             = prediction,
+        dates                  = dates,
+        reported_cases         = reported_cases,
+        deaths_by_jurisdiction = deaths_by_jurisdiction,
+        jurisdictions          = jurisdictions,
+        estimated_deaths       = estimated.deaths,
+        estimated_deaths_cf    = estimated.deaths.cf,
+        out                    = out,
+        covariates             = DF.covariates
         );
 
     return( list.output );
