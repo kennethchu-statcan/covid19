@@ -1,11 +1,11 @@
 
 getData.covariates <- function(
-    CSV.covariates     = NULL,
-    RData.output       = "input-covariates.RData",
-    nrows.to.read      = 11,
-    retained.countries = NULL,
-    retained.columns   = c(
-        "Country",
+    csv.covariates.europe  = NULL,
+    csv.covariates.canada  = NULL,
+    csv.output             = "input-covariates.csv",
+    retained.jurisdictions = NULL,
+    retained.columns       = c(
+        "jurisdiction",
         "schools_universities",
         "travel_restrictions",
         "public_events",
@@ -25,52 +25,36 @@ getData.covariates <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if ( file.exists(RData.output) ) {
+    if ( file.exists(csv.output) ) {
 
-        cat(paste0("\n### ",RData.output," already exists; loading this file ...\n"));
-
-        DF.output <- readRDS(file = RData.output);
-
-        cat(paste0("\n### Finished loading raw data.\n"));
+        cat(paste0("\n# ",csv.output," already exists; loading this file ...\n"));
+        DF.output <- read.csv(file = csv.output, stringsAsFactors = FALSE);
+        cat(paste0("\n# Loading complete: ",csv.output,"\n"));
 
     } else {
 
-        covariates <- read.csv(
-            file  = CSV.covariates,
-            nrows = nrows.to.read,
-            stringsAsFactors = FALSE
+        DF.covariates.europe <- getData.covariates_load(
+            csv.covariates   = csv.covariates.europe,
+            retained.columns = retained.columns
             );
 
-        covariates <- covariates[,retained.columns];
+        #DF.covariates.canada <- getData.covariates_load(
+        #    csv.covariates   = csv.covariates.canada,
+        #    retained.columns = retained.columns
+        #    );
 
-        date.colnames <- setdiff(colnames(covariates),"Country");
-        for ( temp.colname in date.colnames ) {
-            covariates[,temp.colname] <- as.Date(
-                x      = covariates[,temp.colname],
-                format = "%Y-%m-%d"
-                );
-            }
+        #DF.output <- rbind(
+        #    DF.covariates.europe,
+        #    DF.covariates.canada
+        #    );
 
-        # making all covariates that happen after lockdown to have same date as lockdown
-        date.colnames <- setdiff(colnames(covariates),c("Country","lockdown"));
-        for ( temp.colname in date.colnames ) {
-            is.after.lockdown <- (covariates[,temp.colname] > covariates[,"lockdown"]);
-            covariates[is.after.lockdown,temp.colname] <- covariates[is.after.lockdown,"lockdown"];
-            }
+        DF.output <- DF.covariates.europe;
 
-#        covariates$schools_universities[covariates$schools_universities > covariates$lockdown] <- covariates$lockdown[covariates$schools_universities > covariates$lockdown]
-#        covariates$travel_restrictions[covariates$travel_restrictions > covariates$lockdown] <- covariates$lockdown[covariates$travel_restrictions > covariates$lockdown]
-#        covariates$public_events[covariates$public_events > covariates$lockdown] <- covariates$lockdown[covariates$public_events > covariates$lockdown]
-#        covariates$sport[covariates$sport > covariates$lockdown] <- covariates$lockdown[covariates$sport > covariates$lockdown]
-#        covariates$social_distancing_encouraged[covariates$social_distancing_encouraged > covariates$lockdown] <- covariates$lockdown[covariates$social_distancing_encouraged > covariates$lockdown]
-#        covariates$self_isolating_if_ill[covariates$self_isolating_if_ill > covariates$lockdown] <- covariates$lockdown[covariates$self_isolating_if_ill > covariates$lockdown]
-
-        DF.output <- covariates;
-        remove( list = c("covariates") );
-
-        if (!is.null(RData.output)) {
-            saveRDS(object = DF.output, file = RData.output);
-            }
+        write.csv(
+            x         = DF.output,
+            file      = csv.output,
+            row.names = FALSE
+            );
 
         }
 
@@ -82,4 +66,34 @@ getData.covariates <- function(
     }
 
 ##################################################
+getData.covariates_load <- function(
+    csv.covariates   = NULL,
+    retained.columns = NULL
+    ) {
+
+    DF.covariates <- read.csv(
+        file  = csv.covariates,
+        stringsAsFactors = FALSE
+        );
+
+    DF.covariates <- DF.covariates[,retained.columns];
+
+    date.colnames <- setdiff(colnames(DF.covariates),"jurisdiction");
+    for ( temp.colname in date.colnames ) {
+        DF.covariates[,temp.colname] <- as.Date(
+            x      = DF.covariates[,temp.colname],
+            format = "%Y-%m-%d"
+            );
+        }
+
+    # making all covariates that happen after lockdown to have same date as lockdown
+    date.colnames <- setdiff(colnames(DF.covariates),c("jurisdiction","lockdown"));
+    for ( temp.colname in date.colnames ) {
+        is.after.lockdown <- (DF.covariates[,temp.colname] > DF.covariates[,"lockdown"]);
+        DF.covariates[is.after.lockdown,temp.colname] <- DF.covariates[is.after.lockdown,"lockdown"];
+        }
+
+    return( DF.covariates );
+
+    }
 

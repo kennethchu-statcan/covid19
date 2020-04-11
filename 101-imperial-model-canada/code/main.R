@@ -146,23 +146,18 @@ print( str(DF.weighted.fatality.ratios) );
 print( summary(DF.weighted.fatality.ratios) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-quit(save='no');
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.covariates <- getData.covariates(
+    csv.covariates.europe  = file.path(data.directory,"interventions-europe.csv"),
+    csv.covariates.canada  = file.path(data.directory,"interventions-canada.csv"),
+    retained.jurisdictions = jurisdictions
+    );
 
-#DF.covariates <- getData.covariates(
-#    CSV.covariates.europe = file.path(data.directory,"interventions-europe.csv"),
-#    CSV.covariates.canada = file.path(data.directory,"interventions-canada.csv"),
-#    retained.countries    = countries
-#    );
+print( str(DF.covariates) );
 
-#print( str(DF.covariates) );
+print( summary(DF.covariates) );
 
-#print( summary(DF.covariates) );
-
-#cat("\nDF.covariates\n");
-#print( DF.covariates   );
+cat("\nDF.covariates\n");
+print( DF.covariates   );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #DF.serial.interval <- getData.serial.interval(
