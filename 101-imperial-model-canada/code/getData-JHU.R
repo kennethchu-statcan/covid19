@@ -17,9 +17,9 @@ getData.JHU <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(JHU.RData) ) {
 
-        cat(paste0("\n### ",JHU.RData," already exists; loading this file ...\n"));
+        cat(paste0("\n# ",JHU.RData," already exists; loading this file ...\n"));
         DF.output <- readRDS(file = JHU.RData);
-        cat(paste0("\n### Finished loading raw data.\n"));
+        cat(paste0("\n# Loading complete: ",JHU.RData,"\n"));
 
     } else {
 
