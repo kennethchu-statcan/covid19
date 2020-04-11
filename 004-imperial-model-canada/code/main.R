@@ -104,16 +104,20 @@ list.raw.data <- getData.raw(
     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
     );
 
-print( str(list.raw.data) );
-
-quit(save='no');
+print( names(list.raw.data) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase();
+DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
+    list.raw.data = list.raw.data
+    );
 print(str(DF.cross.check.JHU.GoCInfobase));
 
-DF.cross.check.JHU.ECDC <- cross.check.JHU.ECDC();
+DF.cross.check.JHU.ECDC <- cross.check.JHU.ECDC(
+    list.raw.data = list.raw.data
+    );
 print(str(DF.cross.check.JHU.ECDC));
+
+quit(save='no');
 
 DF.covid19 <- getData.covid19(
     retained.jurisdictions = jurisdictions

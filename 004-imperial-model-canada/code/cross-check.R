@@ -1,9 +1,7 @@
 
 cross.check.JHU.ECDC <- function(
     retained.jurisdictions = NULL,
-    JHU.url.cases          = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    JHU.url.deaths         = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    ECDC.url               = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
+    list.raw.data          = NULL
     ) {
 
     thisFunctionName <- "cross.check.JHU.ECDC";
@@ -15,23 +13,14 @@ cross.check.JHU.ECDC <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases <- cross.check_download(
-        target.url = JHU.url.cases
-        );
-
-    DF.JHU.deaths <- cross.check_download(
-        target.url = JHU.url.deaths
-        );
-
-    DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
-    DF.JHU.deaths <- DF.JHU.deaths[DF.JHU.deaths[,"Country.Region"] == "Canada",];
+    DF.JHU.cases  <- list.raw.data[["JHU.cases" ]];
+    DF.JHU.deaths <- list.raw.data[["JHU.deaths"]];
+    DF.ECDC       <- list.raw.data[["ECDC"      ]];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.ECDC <- cross.check_download(
-        target.url = ECDC.url
-        );
-
-    DF.ECDC <- DF.ECDC[ DF.ECDC[,"countriesAndTerritories"] == "Canada",];
+    DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
+    DF.JHU.deaths <- DF.JHU.deaths[DF.JHU.deaths[,"Country.Region"] == "Canada",];
+    DF.ECDC       <- DF.ECDC[ DF.ECDC[,"countriesAndTerritories"] == "Canada",];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases <- cross.check_reformat.JHU(
@@ -49,9 +38,6 @@ cross.check.JHU.ECDC <- function(
         DF.input = DF.ECDC
         );
 
-    cat("\nstr(DF.ECDC)\n");
-    print( str(DF.ECDC)   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU <- dplyr::full_join(
         x  = DF.JHU.cases,
@@ -64,17 +50,11 @@ cross.check.JHU.ECDC <- function(
     is.retained.rows <- !(DF.JHU[,"jurisdiction"] %in% excluded.jurisdictions);
     DF.JHU <- DF.JHU[is.retained.rows,];
 
-    cat("\nunqiue(DF.JHU[,'jurisdiction'])\n");
-    print( unique(DF.JHU[,'jurisdiction'])   );
-
     DF.JHU <- DF.JHU %>%
         dplyr::arrange(jurisdiction,date) %>%
         dplyr::group_by( date ) %>%
         dplyr::summarize( cases.JHU = sum(cases.JHU), deaths.JHU = sum(deaths.JHU) );
     DF.JHU <- as.data.frame(DF.JHU);
-
-    cat("\nstr(DF.JHU)\n");
-    print( str(DF.JHU)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.cross.check <- dplyr::full_join(
@@ -108,11 +88,10 @@ cross.check.JHU.ECDC <- function(
 
     }
 
+##################################################
 cross.check.JHU.GoCInfobase <- function(
     retained.jurisdictions = NULL,
-    JHU.url.cases          = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    JHU.url.deaths         = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    GoCInfobase.url        = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+    list.raw.data          = NULL
     ) {
 
     thisFunctionName <- "cross.check.JHU.GoCInfobase";
@@ -124,21 +103,13 @@ cross.check.JHU.GoCInfobase <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases <- cross.check_download(
-        target.url = JHU.url.cases
-        );
-
-    DF.JHU.deaths <- cross.check_download(
-        target.url = JHU.url.deaths
-        );
-
-    DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
-    DF.JHU.deaths <- DF.JHU.deaths[DF.JHU.deaths[,"Country.Region"] == "Canada",];
+    DF.JHU.cases   <- list.raw.data[["JHU.cases"  ]];
+    DF.JHU.deaths  <- list.raw.data[["JHU.deaths" ]];
+    DF.GoCInfobase <- list.raw.data[["GoCInfobase"]];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.GoCInfobase <- cross.check_download(
-        target.url = GoCInfobase.url
-        );
+    DF.JHU.cases  <- DF.JHU.cases[ DF.JHU.cases[, "Country.Region"] == "Canada",];
+    DF.JHU.deaths <- DF.JHU.deaths[DF.JHU.deaths[,"Country.Region"] == "Canada",];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU.cases <- cross.check_reformat.JHU(
@@ -151,7 +122,6 @@ cross.check.JHU.GoCInfobase <- function(
         colname.value = "deaths.JHU"
         );
 
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase <- cross.check_reformat.GoCInfobase(
         DF.input = DF.GoCInfobase
         );
@@ -341,23 +311,5 @@ cross.check_reformat.JHU <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     return( DF.output );
 
-    }
-
-cross.check_download <- function(
-    target.url = NULL
-    ) {
-    temp.file <- "temp.csv";
-    tryCatch(
-        expr = {
-            code <- download.file(url = target.url, destfile = temp.file);
-            if (code != 0) { stop("Error downloading file") }
-            },
-        error = function(e) {
-            stop(sprintf("Error downloading file '%s': %s", url, e$message));
-            }
-        );
-    DF.output <- read.csv(temp.file, stringsAsFactors = FALSE);
-    file.remove(temp.file);
-    return( DF.output );
     }
 
