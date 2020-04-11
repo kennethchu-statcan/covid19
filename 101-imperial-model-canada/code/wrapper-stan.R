@@ -23,9 +23,9 @@ wrapper.stan <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(RData.output) ) {
 
-        cat(paste0("\n### ",RData.output," already exists; loading this file ...\n"));
+        cat(paste0("\n# ",RData.output," already exists; loading this file ...\n"));
         list.output <- readRDS(file = RData.output);
-        cat(paste0("\n### Finished loading raw data.\n"));
+        cat(paste0("\n# Loading complete: ",RData.output,"\n"));
 
     } else {
 
