@@ -28,6 +28,7 @@ code.files <- c(
     "getData-raw.R",
     "getData-serial-interval.R",
     "getData-WFR.R",
+    "patchData.R",
     "plot-3-panel.R",
     "plot-forecast.R",
     "wrapper-stan.R"
@@ -46,9 +47,10 @@ require(EnvStats);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #data.snapshot <- "imperial-data-1.0";
-#data.snapshot  <- "2020-04-05.01";
-#data.snapshot  <- "2020-04-07.01";
-data.snapshot  <- "2020-04-11.01";
+#data.snapshot <- "2020-04-05.01";
+#data.snapshot <- "2020-04-07.01";
+#data.snapshot <- "2020-04-11.01";
+data.snapshot  <- "2020-04-11.02";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -107,23 +109,29 @@ list.raw.data <- getData.raw(
 print( names(list.raw.data) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+list.patched.data <- patchData(
+    list.covid19.data = list.raw.data
+    );
+
+print( names(list.patched.data) );
+
+print( str(list.patched.data[['GoCInfobase']]) );
+
 DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
-    list.raw.data = list.raw.data
+    list.covid19.data = list.patched.data,
+    csv.output        = "diagnostics-compare-JHU-GoCInfobase-patched.csv"
     );
 print(str(DF.cross.check.JHU.GoCInfobase));
 
-DF.cross.check.JHU.ECDC <- cross.check.JHU.ECDC(
-    list.raw.data = list.raw.data
-    );
-print(str(DF.cross.check.JHU.ECDC));
-
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 quit(save='no');
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
 DF.covid19 <- getData.covid19(
-    retained.jurisdictions = jurisdictions
-    #,ECDC.file            = file.path(data.directory,"input-covid19-ECDC.csv"),
-    # JHU.file.cases       = file.path(data.directory,"input-covid19-JHU-cases.csv" ),
-    # JHU.file.deaths      = file.path(data.directory,"input-covid19-JHU-deaths.csv" )
+    retained.jurisdictions = jurisdictions,
+    list.covid19.data      = list.patched.data
     );
 
 print( str(DF.covid19) );
