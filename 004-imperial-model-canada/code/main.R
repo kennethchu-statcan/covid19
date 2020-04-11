@@ -98,6 +98,9 @@ set.seed(7654321);
 DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase();
 print(str(DF.cross.check.JHU.GoCInfobase));
 
+DF.cross.check.JHU.ECDC <- cross.check.JHU.ECDC();
+print(str(DF.cross.check.JHU.ECDC));
+
 DF.covid19 <- getData.covid19(
     retained.jurisdictions = jurisdictions
     #,ECDC.file            = file.path(data.directory,"input-covid19-ECDC.csv"),

@@ -3,7 +3,7 @@ cross.check.JHU.ECDC <- function(
     retained.jurisdictions = NULL,
     JHU.url.cases          = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
     JHU.url.deaths         = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    GoCInfobase.url        = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+    ECDC.url               = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
     ) {
 
     thisFunctionName <- "cross.check.JHU.ECDC";
@@ -15,11 +15,11 @@ cross.check.JHU.ECDC <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases <- cross.check.JHU.GoCInfobase_download(
+    DF.JHU.cases <- cross.check_download(
         target.url = JHU.url.cases
         );
 
-    DF.JHU.deaths <- cross.check.JHU.GoCInfobase_download(
+    DF.JHU.deaths <- cross.check_download(
         target.url = JHU.url.deaths
         );
 
@@ -27,25 +27,30 @@ cross.check.JHU.ECDC <- function(
     DF.JHU.deaths <- DF.JHU.deaths[DF.JHU.deaths[,"Country.Region"] == "Canada",];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.GoCInfobase <- cross.check.JHU.GoCInfobase_download(
-        target.url = GoCInfobase.url
+    DF.ECDC <- cross.check_download(
+        target.url = ECDC.url
         );
 
+    DF.ECDC <- DF.ECDC[ DF.ECDC[,"countriesAndTerritories"] == "Canada",];
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU.cases <- cross.check.JHU.GoCInfobase_reformat.JHU(
+    DF.JHU.cases <- cross.check_reformat.JHU(
         DF.input      = DF.JHU.cases,
         colname.value = "cases.JHU"
         );
 
-    DF.JHU.deaths <- cross.check.JHU.GoCInfobase_reformat.JHU(
+    DF.JHU.deaths <- cross.check_reformat.JHU(
         DF.input      = DF.JHU.deaths,
         colname.value = "deaths.JHU"
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.GoCInfobase <- cross.check.JHU.GoCInfobase_reformat.GoCInfobase(
-        DF.input = DF.GoCInfobase
+    DF.ECDC <- cross.check_reformat.ECDC(
+        DF.input = DF.ECDC
         );
+
+    cat("\nstr(DF.ECDC)\n");
+    print( str(DF.ECDC)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.JHU <- dplyr::full_join(
@@ -53,22 +58,36 @@ cross.check.JHU.ECDC <- function(
         y  = DF.JHU.deaths,
         by = c("jurisdiction","date")
         );
-
-    DF.JHU <- DF.JHU %>% dplyr::arrange(jurisdiction,date);
     DF.JHU <- as.data.frame(DF.JHU);
+
+    excluded.jurisdictions <- c("Diamond Princess","Grand Princess","Recovered");
+    is.retained.rows <- !(DF.JHU[,"jurisdiction"] %in% excluded.jurisdictions);
+    DF.JHU <- DF.JHU[is.retained.rows,];
+
+    cat("\nunqiue(DF.JHU[,'jurisdiction'])\n");
+    print( unique(DF.JHU[,'jurisdiction'])   );
+
+    DF.JHU <- DF.JHU %>%
+        dplyr::arrange(jurisdiction,date) %>%
+        dplyr::group_by( date ) %>%
+        dplyr::summarize( cases.JHU = sum(cases.JHU), deaths.JHU = sum(deaths.JHU) );
+    DF.JHU <- as.data.frame(DF.JHU);
+
+    cat("\nstr(DF.JHU)\n");
+    print( str(DF.JHU)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.cross.check <- dplyr::full_join(
         x  = DF.JHU,
-        y  = DF.GoCInfobase,
-        by = c("jurisdiction","date")
+        y  = DF.ECDC,
+        by = c("date")
         );
 
-    DF.cross.check <- DF.cross.check %>% dplyr::arrange(jurisdiction,date);
+    DF.cross.check <- DF.cross.check %>% dplyr::arrange(date);
     DF.cross.check <- as.data.frame(DF.cross.check);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    colnames.integer <- setdiff(colnames(DF.cross.check),c("jurisdiction","date")); 
+    colnames.integer <- setdiff(colnames(DF.cross.check),c("date")); 
     for ( temp.colname in colnames.integer) {
         temp.vector <- DF.cross.check[,temp.colname];
         temp.vector[is.na(temp.vector)] <- 0;
@@ -78,7 +97,7 @@ cross.check.JHU.ECDC <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     write.csv(
         x         = DF.cross.check,
-        file      = "diagnostics-compare-JHU-GoCInfobase.csv",
+        file      = "diagnostics-compare-JHU-ECDC.csv",
         row.names = FALSE
         );
 
@@ -180,6 +199,37 @@ cross.check.JHU.GoCInfobase <- function(
     }
 
 ##################################################
+cross.check_reformat.ECDC <- function(
+    DF.input = NULL
+    ) {
+    require(dplyr);
+    require(tidyr);
+    retained.columns <- c("dateRep","cases","deaths");
+    DF.output <- DF.input[,retained.columns];
+    colnames(DF.output) <- gsub(
+        x           = colnames(DF.output),
+        pattern     = "dateRep",
+        replacement = "date"
+        );
+    DF.output[,"date"] <- as.Date(
+        x          = DF.output[,"date"],
+        tryFormats = c("%d/%m/%Y")
+        );
+    colnames(DF.output) <- gsub(
+        x           = colnames(DF.output),
+        pattern     = "cases",
+        replacement = "cases.ECDC"
+        );
+    colnames(DF.output) <- gsub(
+        x           = colnames(DF.output),
+        pattern     = "deaths",
+        replacement = "deaths.ECDC"
+        );
+    DF.output <- DF.output %>% dplyr::arrange(date);
+    DF.output <- as.data.frame(DF.output);
+    return( DF.output );
+    }
+
 cross.check_reformat.GoCInfobase <- function(
     DF.input = NULL
     ) {
