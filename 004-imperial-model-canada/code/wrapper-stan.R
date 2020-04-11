@@ -88,11 +88,7 @@ wrapper.stan_visualize.results <- function(
         'Social distancing'
         );
 
-    print("A-1");
-    cat("\nnames(list.input[['out']])\n");
-    print( names(list.input[['out']])   );
     alpha <- as.matrix(list.input[["out"]][["alpha"]]);
-    print("A-2");
 
     colnames(alpha) <- plot_labels;
 
