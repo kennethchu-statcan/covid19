@@ -19,7 +19,8 @@ setwd( output.directory );
 # source supporting R code
 code.files <- c(
     "cross-check.R",
-    "getData-raw.R"
+    "getData-raw.R",
+    "patchData.R"
     );
 
 for ( code.file in code.files ) {
@@ -44,29 +45,44 @@ data.directory <- file.path(data.directory,data.snapshot);
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-list.covid19.data <- getData.raw(
+list.raw.data <- getData.raw(
     csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
     csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
     csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
     );
 
-print( names(list.covid19.data) );
+print( names(list.raw.data) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
-    list.covid19.data = list.covid19.data,
+    list.covid19.data = list.raw.data,
     csv.output        = "diagnostics-compare-JHU-GoCInfobase-raw.csv"
     );
 print(str(DF.cross.check.JHU.GoCInfobase));
 
 DF.cross.check.JHU.ECDC <- cross.check.JHU.ECDC(
-    list.covid19.data = list.covid19.data,
+    list.covid19.data = list.raw.data,
     csv.output        = "diagnostics-compare-JHU-ECDC-raw.csv"
     );
 print(str(DF.cross.check.JHU.ECDC));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+list.patched.data <- patchData(
+    list.covid19.data = list.raw.data
+    );
+
+print( names(list.patched.data) );
+
+print( str(list.patched.data[['GoCInfobase']]) );
+
+# print( list.patched.data[['GoCInfobase']] );
+
+DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
+    list.covid19.data = list.patched.data,
+    csv.output        = "diagnostics-compare-JHU-GoCInfobase-patched.csv"
+    );
+print(str(DF.cross.check.JHU.GoCInfobase));
 
 ##################################################
 print( warnings() );

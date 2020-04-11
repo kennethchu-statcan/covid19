@@ -1,0 +1,123 @@
+
+patchData <- function(
+    list.covid19.data = NULL
+    ) {
+
+    thisFunctionName <- "patchData";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    require(lubridate);
+    require(readr);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.output <- list.covid19.data;
+    list.output[["GoCInfobase"]] <- patchData_GoCInfobase(
+        DF.input = list.output[["GoCInfobase"]]
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( list.output );
+
+    }
+
+###################################################
+patchData_GoCInfobase <- function(
+    DF.input               = NULL,
+    dateFormat.GoCInfobase = "%d-%m-%Y"
+    ) {
+
+    require(dplyr);
+    require(tidyr);
+    require(lubridate);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    colnames.input   <- colnames(DF.input);
+    colnames.numeric <- setdiff(colnames.input,c("pruid","prname","prnameFR","date"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    unique.pruids <- unique(DF.input[,"pruid"]);
+    unique.dates  <- as.Date(x = unique(DF.input[,"date"]), tryFormats = dateFormat.GoCInfobase);
+    unique.dates  <- seq(min(unique.dates),max(unique.dates),by=1);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.dictionary.pruid <- unique(DF.input[,c("pruid","prname","prnameFR")]);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    retained.colnames <- setdiff(colnames.input,c("prname","prnameFR"));
+    DF.counts <- DF.input[,retained.colnames];
+    DF.counts[,"Date.Obj"] <- as.Date(x = DF.counts[,"date"], tryFormats = c("%d-%m-%Y"));
+    DF.counts <- DF.counts[,setdiff(colnames(DF.counts),"date")];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.grid <- expand.grid(pruid = unique.pruids, Date.Obj = unique.dates);
+    attr(DF.grid,"out.attrs") <- NULL;
+
+    DF.grid[,"date"] <- format(x = DF.grid[,"Date.Obj"], dateFormat.GoCInfobase);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.output <- dplyr::full_join(
+        x  = DF.grid,
+        y  = DF.dictionary.pruid,
+        by = c("pruid")
+        );
+
+    DF.output <- dplyr::full_join(
+        x  = DF.output,
+        y  = DF.counts,
+        by = c("pruid","Date.Obj")
+        );
+
+    DF.output <- as.data.frame(DF.output %>% dplyr::arrange(pruid,Date.Obj));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    leading.colnames <- c("pruid","Date.Obj");
+    ordered.colnames <- c(
+        leading.colnames,
+        setdiff(colnames(DF.output),leading.colnames)
+        );
+    DF.output <- DF.output[,ordered.colnames];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    for ( temp.colname in colnames.numeric ) {
+        temp.vector <- DF.output[,temp.colname];
+        temp.vector[is.na(temp.vector)] <- 0;
+        DF.output[,temp.colname] <- temp.vector;
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+#    for ( temp.pruid in unique(DF.output[,"pruid"]) ) {
+#        DF.temp <- DF.output[DF.output[,"pruid"] == temp.pruid,];
+#        for ( temp.colname in colnames.numeric ) {
+#            temp.vector.0 <- DF.temp[,temp.colname];
+#            temp.vector.1 <- c(0,temp.vector.0[1:(nrow(DF.temp)-1)]);
+#            is.a.drop     <- (temp.vector.0 < temp.vector.1);
+#            temp.vector.2 <- temp.vector.0;
+#            temp.vector.2[is.a.drop] <- temp.vector.1[is.a.drop];
+#            DF.temp[,temp.colname] <- temp.vector.2;
+#            }
+#        DF.output[DF.output[,"pruid"] == temp.pruid,] <- DF.temp;
+#        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    for ( temp.pruid in unique(DF.output[,"pruid"]) ) {
+        DF.temp <- DF.output[DF.output[,"pruid"] == temp.pruid,];
+        for ( temp.index in 2:nrow(DF.temp) ) {
+            temp.vector.zero   <- DF.temp[temp.index,  colnames.numeric];
+            temp.vector.minus1 <- DF.temp[temp.index-1,colnames.numeric];
+            is.a.drop <- (temp.vector.zero < temp.vector.minus1);
+            temp.vector.two            <- temp.vector.zero;
+            temp.vector.two[is.a.drop] <- temp.vector.minus1[is.a.drop];
+            DF.temp[temp.index,colnames.numeric] <- temp.vector.two;
+            }
+        DF.output[DF.output[,"pruid"] == temp.pruid,] <- DF.temp;
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    return( DF.output );
+
+    }
+
