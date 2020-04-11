@@ -25,6 +25,7 @@ code.files <- c(
     "getData-ECDC.R",
     "getData-GoCInfobase.R",
     "getData-JHU.R",
+    "getData-raw.R",
     "getData-serial-interval.R",
     "getData-WFR.R",
     "plot-3-panel.R",
@@ -95,6 +96,13 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
+list.raw.data <- getData.raw();
+
+print( str(list.raw.data) );
+
+quit(save='no');
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase();
 print(str(DF.cross.check.JHU.GoCInfobase));
 
