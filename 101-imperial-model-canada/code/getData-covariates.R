@@ -38,17 +38,16 @@ getData.covariates <- function(
             retained.columns = retained.columns
             );
 
-        #DF.covariates.canada <- getData.covariates_load(
-        #    csv.covariates   = csv.covariates.canada,
-        #    retained.columns = retained.columns
-        #    );
+        DF.covariates.canada <- getData.covariates_load(
+            csv.covariates   = csv.covariates.canada,
+            retained.columns = retained.columns
+            );
 
-        #DF.output <- rbind(
-        #    DF.covariates.europe,
-        #    DF.covariates.canada
-        #    );
-
-        DF.output <- DF.covariates.europe;
+        # DF.output <- DF.covariates.europe;
+        DF.output <- rbind(
+            DF.covariates.europe,
+            DF.covariates.canada
+            );
 
         write.csv(
             x         = DF.output,
