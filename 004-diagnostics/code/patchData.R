@@ -46,7 +46,7 @@ patchData_GoCInfobase <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     colnames.input   <- colnames(DF.input);
-    colnames.numeric <- setdiff(colnames.input,c("pruid","prname","prnameFR","date"));
+    colnames.numeric <- c("numconf","numprob","numdeaths","numtotal","numtested","numrecover");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     unique.pruids <- unique(DF.input[,"pruid"]);
