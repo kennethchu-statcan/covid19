@@ -13,8 +13,15 @@ patchData <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output <- list.covid19.data;
+
     list.output[["GoCInfobase"]] <- patchData_GoCInfobase(
         DF.input = list.output[["GoCInfobase"]]
+        );
+
+    write.csv(
+        x         = list.output[["GoCInfobase"]],
+        file      = 'raw-covid19-GoCInfobase-patched.csv',
+        row.names = FALSE
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
