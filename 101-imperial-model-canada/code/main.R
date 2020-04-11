@@ -124,11 +124,6 @@ DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
 print(str(DF.cross.check.JHU.GoCInfobase));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-quit(save='no');
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-
 DF.covid19 <- getData.covid19(
     retained.jurisdictions = jurisdictions,
     list.covid19.data      = list.patched.data
@@ -141,14 +136,20 @@ print( summary(DF.covid19) );
 print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#DF.weighted.fatality.ratios <- getData.WFR(
-#    CSV.WFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
-#    CSV.WFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
-#    );
+DF.weighted.fatality.ratios <- getData.wIFR(
+    csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
+    csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
+    );
 
-#print( str(DF.weighted.fatality.ratios) );
+print( str(DF.weighted.fatality.ratios) );
 
-#print( summary(DF.weighted.fatality.ratios) );
+print( summary(DF.weighted.fatality.ratios) );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+quit(save='no');
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
 #DF.covariates <- getData.covariates(
 #    CSV.covariates.europe = file.path(data.directory,"interventions-europe.csv"),

@@ -1,8 +1,7 @@
 
 getData.GoCInfobase <- function(
-    GoCInfobase.file  = NULL, 
-    GoCInfobase.url   = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv",
-    GoCInfobase.RData = "input-covid19-GoCInfobase.RData"
+    list.covid19.data = NULL,
+    csv.GoCInfobase   = "raw-covid19-GoCInfobase.csv"
     ) {
 
     thisFunctionName <- "getData.GoCInfobase";
@@ -13,27 +12,8 @@ getData.GoCInfobase <- function(
     require(dplyr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if ( file.exists(GoCInfobase.RData) ) {
+    DF.GoCInfobase <- list.covid19.data[["GoCInfobase"]];
 
-        cat(paste0("\n### ",GoCInfobase.RData," already exists; loading this file ...\n"));
-        DF.output <- readRDS(file = GoCInfobase.RData);
-        cat(paste0("\n### Finished loading raw data.\n"));
-
-    } else {
-
-        temp.file <- gsub(x = GoCInfobase.RData, pattern = "input-",   replacement = ""    );
-        temp.file <- gsub(x = GoCInfobase.RData, pattern = "\\.RData", replacement = ".csv");
-        temp.file <- paste0("raw-",temp.file);
-
-        DF.GoCInfobase <- getData.GoCInfobase_download(
-            input.file  = GoCInfobase.file,
-            target.url  = GoCInfobase.url,
-            output.file = temp.file
-            )
-
-        }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.GoCInfobase.cases <- getData.GoCInfobase_widen(
         DF.input      = DF.GoCInfobase,
         colname.value = "numconf"
@@ -103,14 +83,11 @@ getData.GoCInfobase <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if (!is.null(GoCInfobase.RData)) {
-        saveRDS(object = DF.output, file = GoCInfobase.RData);
-        write.csv(
-            x         = DF.output,
-            file      = gsub(x = GoCInfobase.RData, pattern = "\\.RData", replacement = ".csv"),
-            row.names = FALSE
-            );
-        }
+    write.csv(
+        x         = DF.output,
+        file      = csv.GoCInfobase,
+        row.names = FALSE
+        );
     
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));

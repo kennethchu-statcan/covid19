@@ -1,15 +1,10 @@
 
 getData.covid19 <- function(
     retained.jurisdictions = NULL,
-    list.raw.data          = NULL
-#    ECDC.file              = NULL, 
-#    ECDC.url               = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-#    ECDC.RData             = "raw-covid19-ECDC.RData",
-#    JHU.file.cases         = NULL,
-#    JHU.file.deaths        = NULL,
-#    JHU.url.cases          = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-#    JHU.url.deaths         = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-#    JHU.RData              = "raw-covid19-JHU.RData"
+    list.covid19.data      = NULL,
+    csv.ECDC               = "raw-covid19-ECDC.csv",
+    csv.GoCInfobase        = "raw-covid19-GoCInfobase.csv",
+    csv.covid19            = "input-covid19.csv"
     ) {
 
     thisFunctionName <- "getData.covid19";
@@ -22,9 +17,8 @@ getData.covid19 <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.ECDC <- getData.ECDC(
-        ECDC.file    = ECDC.file,
-        ECDC.url     = ECDC.url,
-        ECDC.RData   = ECDC.RData
+        list.covid19.data = list.covid19.data,
+        csv.ECDC          = csv.ECDC
         );
 
     is.retained.jurisdictions <- ( DF.ECDC[,"jurisdiction"] %in% retained.jurisdictions);
@@ -33,31 +27,32 @@ getData.covid19 <- function(
     retained.columns <- setdiff(colnames(DF.ECDC),c("geoId","countryterritoryCode","popData2018","t"));
     DF.ECDC <- DF.ECDC[,retained.columns];
 
-    print( str(    DF.ECDC) );
-    print( summary(DF.ECDC) );
+    cat("\nstr(DF.ECDC)\n");
+    print( str(DF.ECDC)   );
+
+    cat("\nsummary(DF.ECDC)\n");
+    print( summary(DF.ECDC)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.JHU <- getData.JHU(
-        JHU.file.cases  = JHU.file.cases,
-        JHU.file.deaths = JHU.file.deaths,
-        JHU.url.cases   = JHU.url.cases,
-        JHU.url.deaths  = JHU.url.deaths,
-        JHU.RData       = JHU.RData
+    DF.GoCInfobase <- getData.GoCInfobase(
+        list.covid19.data = list.covid19.data,
+        csv.GoCInfobase   = csv.GoCInfobase
         );
-    print( str(    DF.JHU) );
-    print( summary(DF.JHU) );
+
+    cat("\nstr(DF.GoCInfobase)\n");
+    print( str(DF.GoCInfobase)   );
+
+    cat("\nsummary(DF.GoCInfobase)\n");
+    print( summary(DF.GoCInfobase)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.output <- rbind(DF.ECDC,DF.JHU);
+    DF.output <- rbind(DF.ECDC,DF.GoCInfobase);
 
-    temp.file <- "input-covid19.csv";
-    if ( !file.exists(temp.file) ) {
-        write.csv(
-            x         = DF.output,
-            file      = temp.file,
-            row.names = FALSE
-            );
-        }
+    write.csv(
+        x         = DF.output,
+        file      = csv.covid19,
+        row.names = FALSE
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));

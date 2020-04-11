@@ -1,11 +1,11 @@
 
-getData.WFR <- function(
-    CSV.WFR.europe = NULL,
-    CSV.WFR.canada = NULL,
-    RData.output   = "input-weighted-fatality-ratios.RData"
+getData.wIFR <- function(
+    csv.wIFR.europe = NULL,
+    csv.wIFR.canada = NULL,
+    csv.output      = "input-wIFR.csv"
     ) {
 
-    thisFunctionName <- "getData.WFR";
+    thisFunctionName <- "getData.wIFR";
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
@@ -14,45 +14,32 @@ getData.WFR <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if ( file.exists(RData.output) ) {
+    DF.wIFR.europe <- getData.wIFR_europe(
+        csv.input = csv.wIFR.europe
+        );
 
-        cat(paste0("\n### ",RData.output," already exists; loading this file ...\n"));
-        DF.output <- readRDS(file = RData.output);
-        cat(paste0("\n### Finished loading raw data.\n"));
+    DF.wIFR.canada <- getData.wIFR_canada(
+        csv.input      = csv.wIFR.canada,
+        DF.wIFR.europe = DF.wIFR.europe
+        );
 
-    } else {
+    cat("\nstr(DF.wIFR.europe)\n");
+    print( str(DF.wIFR.europe)   );
 
-        DF.WFR.europe <- getData.WFR_europe(
-            CSV.input = CSV.WFR.europe
-            );
+    cat("\nstr(DF.wIFR.canada)\n");
+    print( str(DF.wIFR.canada)   );
 
-        DF.WFR.canada <- getData.WFR_canada(
-            CSV.input     = CSV.WFR.canada,
-            DF.WFR.europe = DF.WFR.europe
-            );
-
-        cat("\nstr(DF.WFR.europe)\n");
-        print( str(DF.WFR.europe)   );
-
-        cat("\nstr(DF.WFR.canada)\n");
-        print( str(DF.WFR.canada)   );
-
-        DF.output <- rbind(
-            DF.WFR.europe,
-            DF.WFR.canada
-            );
-
-        }
+    DF.output <- rbind(
+        DF.wIFR.europe,
+        DF.wIFR.canada
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if (!is.null(RData.output)) {
-        saveRDS(object = DF.output, file = RData.output);
-        write.csv(
-            x         = DF.output,
-            file      = gsub(x = RData.output,pattern="\\.RData",replacement=".csv"),
-            row.names = FALSE
-            );
-        }
+    write.csv(
+        x         = DF.output,
+        file      = csv.output,
+        row.names = FALSE
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
@@ -62,12 +49,12 @@ getData.WFR <- function(
     }
 
 ##################################################
-getData.WFR_canada <- function(
-    CSV.input     = NULL,
-    DF.WFR.europe = NULL
+getData.wIFR_canada <- function(
+    csv.input      = NULL,
+    DF.wIFR.europe = NULL
     ) {
 
-    DF.output <- read.csv( CSV.input );
+    DF.output <- read.csv( csv.input );
 
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
@@ -115,7 +102,7 @@ getData.WFR_canada <- function(
         );
 
     DF.output[,"weighted_fatality"] <- sample(
-        x       = DF.WFR.europe[,"weighted_fatality"],
+        x       = DF.wIFR.europe[,"weighted_fatality"],
         size    = nrow(DF.output),
         replace = TRUE
         );
@@ -124,11 +111,11 @@ getData.WFR_canada <- function(
 
     }
 
-getData.WFR_europe <- function(
-    CSV.input = NULL
+getData.wIFR_europe <- function(
+    csv.input = NULL
     ) {
 
-    DF.output <- read.csv( CSV.input );
+    DF.output <- read.csv( csv.input );
 
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
