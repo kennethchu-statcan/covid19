@@ -1,13 +1,13 @@
 
 getData.raw <- function(
-    csv.ECDC               = 'raw-covid19-ECDC.csv', 
-    csv.JHU.cases          = 'raw-covid19-JHU-cases.csv', 
-    csv.JHU.deaths         = 'raw-covid19-JHU-deaths.csv', 
-    csv.GoCInfobase        = 'raw-covid19-GoCInfobase.csv', 
-    url.ECDC               = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-    url.JHU.cases          = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    url.JHU.deaths         = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    url.GoCInfobase        = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+    csv.ECDC        = 'raw-covid19-ECDC.csv', 
+    csv.JHU.cases   = 'raw-covid19-JHU-cases.csv', 
+    csv.JHU.deaths  = 'raw-covid19-JHU-deaths.csv', 
+    csv.GoCInfobase = 'raw-covid19-GoCInfobase.csv', 
+    url.ECDC        = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
+    url.JHU.cases   = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+    url.JHU.deaths  = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+    url.GoCInfobase = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
     ) {
 
     thisFunctionName <- "getData.raw";
