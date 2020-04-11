@@ -66,21 +66,21 @@ jurisdictions <- c(
     "Austria",
     "Sweden",
     "Switzerland",
-    "Canada",
-    "CA",
+#   "Canada",
+#   "CA",
     "BC",
     "AB",
-    "SK",
-    "MB",
+#   "SK",
+#   "MB",
     "ON",
-    "QC",
-    "NB",
-    "NL",
-    "NS",
-    "PE",
-    "YK",
-    "NT",
-    "NV"
+    "QC"
+#  ,"NB",
+#   "NL",
+#   "NS",
+#   "PE",
+#   "YK",
+#   "NT",
+#   "NV"
     );
 
 StanModel <- 'base';

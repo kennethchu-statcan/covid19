@@ -39,6 +39,9 @@ getData.covid19 <- function(
         csv.GoCInfobase   = csv.GoCInfobase
         );
 
+    is.retained.jurisdictions <- ( DF.GoCInfobase[,"jurisdiction"] %in% retained.jurisdictions);
+    DF.GoCInfobase <- DF.GoCInfobase[is.retained.jurisdictions,];
+
     cat("\nstr(DF.GoCInfobase)\n");
     print( str(DF.GoCInfobase)   );
 
