@@ -63,7 +63,7 @@ getData.raw_load.or.download <- function(
     if ( file.exists(csv.file) ) {
 
         cat(paste0("\n# Data file ",csv.file," already exists; loading this file ...\n"));
-        DF.output <- read.csv(file = csv.file, stringsAsFactors = FALSE);
+        DF.output <- read.csv(file = csv.file, stringsAsFactors = FALSE, na.strings = c("NA","N/A"));
         cat(paste0("\n# Loading complete: ",csv.file,".\n"));
     
     } else {
