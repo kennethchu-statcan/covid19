@@ -89,20 +89,6 @@ patchData_GoCInfobase <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#    for ( temp.pruid in unique(DF.output[,"pruid"]) ) {
-#        DF.temp <- DF.output[DF.output[,"pruid"] == temp.pruid,];
-#        for ( temp.colname in colnames.numeric ) {
-#            temp.vector.0 <- DF.temp[,temp.colname];
-#            temp.vector.1 <- c(0,temp.vector.0[1:(nrow(DF.temp)-1)]);
-#            is.a.drop     <- (temp.vector.0 < temp.vector.1);
-#            temp.vector.2 <- temp.vector.0;
-#            temp.vector.2[is.a.drop] <- temp.vector.1[is.a.drop];
-#            DF.temp[,temp.colname] <- temp.vector.2;
-#            }
-#        DF.output[DF.output[,"pruid"] == temp.pruid,] <- DF.temp;
-#        }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     for ( temp.pruid in unique(DF.output[,"pruid"]) ) {
         DF.temp <- DF.output[DF.output[,"pruid"] == temp.pruid,];
         for ( temp.index in 2:nrow(DF.temp) ) {
@@ -115,6 +101,9 @@ patchData_GoCInfobase <- function(
             }
         DF.output[DF.output[,"pruid"] == temp.pruid,] <- DF.temp;
         }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.output <- DF.output[,setdiff(colnames(DF.output),"Date.Obj")];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     return( DF.output );
