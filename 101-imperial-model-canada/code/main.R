@@ -65,15 +65,15 @@ jurisdictions <- c(
     "Belgium",
     "Austria",
     "Sweden",
-    "Switzerland",
-#   "Canada",
+    "Switzerland"
+#  ,"Canada",
 #   "CA",
-    "BC",
-    "AB",
+#   "BC",
+#   "AB",
 #   "SK",
 #   "MB",
-    "ON",
-    "QC"
+#   "ON",
+#   "QC"
 #  ,"NB",
 #   "NL",
 #   "NS",
