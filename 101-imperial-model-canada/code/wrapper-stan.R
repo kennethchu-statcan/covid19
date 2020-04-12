@@ -153,11 +153,11 @@ wrapper.stan_inner <- function(
     forecast      <- 0;
 
     if( DEBUG == FALSE ) {
-        N2 = 100 # Increase this for a further forecast
+        N2 = 200 # Increase this for a further forecast
     }  else  {
         ### For faster runs:
         # jurisdictions <- c("Austria","Belgium") #,Spain")
-        N2 = 100
+        N2 = 200
         }
 
     dates          <- list();
