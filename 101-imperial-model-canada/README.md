@@ -255,6 +255,33 @@ Other input files are located in
 Main output files
 -----------------
 
+*  __output-base-covars-alpha.png__
+
+   <img src="./supplementary/output-base-covars-alpha.png" width="500">
+
+   Posterior means and 90% credible intervals of the (country-independent)
+   effect size parameters:
+
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
+
+   Note that the above plot suggests that lockdown has the strongest
+   reduction effect on the reproduction number among the intervention
+   measures considered.
+
+*  __output-base-covars-mu.png__
+
+   <img src="./supplementary/output-base-covars-mu.png" width="500">
+
+   Posterior means and 90% credible intervals of the
+   country-specific initial COVID-19 reproduction numbers.
+
+*  __output-base-covars-final-rt.png__
+
+   <img src="./supplementary/output-base-covars-final-rt.png" width="500">
+
+   Posterior means and 90% credible intervals of the
+   country-specific final COVID-19 reproduction numbers.
+
 *  __output-base-3-panel-Italy.png__
 
    ![three-panel plot, Italy](./supplementary/output-base-3-panel-Italy.png)
@@ -282,31 +309,4 @@ Main output files
    across time for the forecast of the number of COVID-19 deaths.
 
 *  Similarly for the rest of the countries.
-
-*  __output-base-covars-alpha.png__
-
-   <img src="./supplementary/output-base-covars-alpha.png" width="500">
-
-   Posterior means and 90% credible intervals of the (country-independent)
-   effect size parameters:
-
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
-
-   Note that the above plot suggests that lockdown has the strongest
-   reduction effect on the reproduction number among the intervention
-   measures considered.
-
-*  __output-base-covars-mu.png__
-
-   <img src="./supplementary/output-base-covars-mu.png" width="500">
-
-   Posterior means and 90% credible intervals of the
-   country-specific initial COVID-19 reproduction numbers.
-
-*  __output-base-covars-final-rt.png__
-
-   <img src="./supplementary/output-base-covars-final-rt.png" width="500">
-
-   Posterior means and 90% credible intervals of the
-   country-specific final COVID-19 reproduction numbers.
 
