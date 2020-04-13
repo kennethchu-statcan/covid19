@@ -6,48 +6,55 @@ This comparative analysis was performed in order to inform us of which of the fo
 could be used as the primary data source for modelling the effects on physical distancing measures
 on COVID-19 transmissibility:
 
-*  Public Health Infobase, Public Health Agency of Canada:
+*  Public Health Infobase (PHI), Public Health Agency of Canada (PHAC):
 
-    https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+       https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
-*  European Centre of Disease Prevention and Control open data portal:
+*  European Centre of Disease Prevention and Control (ECDC) open data portal:
 
-   https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+       https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 
 *  Center for Systems Science and Engineering (CSSE), Johns Hopkins University:
 
-    https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
+       https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
 
-    https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
+       https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
 
-General assumed structure of hierarchical models
-------------------------------------------------
-*  The mechanism that generated the actual observed data belongs to a certain parametric family
-   of related mechanisms (probability distributions).
-   This parametric family of distributions is parametrized by a (finite) number of parameters.
-*  These parameters are themselves considered **unobserved** random quantities, which had been
-   sampled from their own respective pobability distributions,
-   which in turn have their own (hyper)parameters.
-*  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
-*  (Bayesian) inference in this context refers to estimating posterior distributions
-   (or sometimes, more easily computable derived quantities)
-   for the (hyper)parameters based on observed data, and prior probabilistic assumptions.
+Recommendations
+---------------
+*  A comparison of the three data sets above suggests that using a certain "patched" version
+   of the PHAC Public Health Infobase data set should be the most straightforward.
 
-Brief description of the hierarchical structure of the model of Flaxman et al.
-------------------------------------------------------------------------------
-*  Observed COVID-19 death count, for given (country,day)
+Observations on the PHI data
+----------------------------
+*  During the early phase of the COVID-19 pandemic, the PHI data (as downloaded on April 11, 2020)
+   do not contain records for days when there were no new reported COVID-19 infections or deaths.
 
-   Assumed to follow a **Negative Binomial** distribution
-   (which can be regarded as Gamma-mixture of Poisson distributions),
-   which is specified by two parameters:
+   For example, for British Columbia, in the following file (as downloaded on April 11, 2020) 
 
-   *  *d<sub>m,t</sub>*
-      = mean of the Negative Binomial
-      = expected number of COVID-19 deaths for country *m* on day *t*
-   *  variance of the Negative Binomial, which the authors assumed to have the form
-      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/&Psi;*
+   https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
-*  *&Psi;* is assumed to have been sampled from
+   the first three days with reported are: 2020-01-31, 2020-02-08 and 2020-02-16,
+   whose respective reported confirmed case counts are: 1, 4 and 5.
+
+   In particular, the above file (as downloaded on April 11, 2020) contain no records for
+   2020-02-01 through 2020-02-07, during which presumably there were neither
+   reported new COVID-19 confirmed cases nor deaths.
+
+Comparison between the PHI and CSSE data:
+-----------------------------------------
+Both sources report cumulative COVID-19 case and death count time series for Canada.
+A comparison in tabular form can be viewed here:
+
+https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supplementary/diagnostics-compare-JHU-GoCInfobase-raw.csv
+
+*  The two data sources appear to agree well with each other, though not perfectly.
+
+*  Generally, the CSSE data appear to lag behind the PHI data for a small number of days.
+   Otherwise, the two sources agree very well.
+
+*  During the early phase of the COVID-19 pandemic in Canada, the PHI data 
+*&Psi;* is assumed to have been sampled from
    the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
 *  The expected number *d<sub>m,t</sub>* of COVID-19 deaths
