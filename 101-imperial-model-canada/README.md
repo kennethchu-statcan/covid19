@@ -164,7 +164,6 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
 Requirements
 ------------
-*  Internet connection (to download up-to-date COVID-19 data)
 *  R v3.6.2
 *  R packages: gdata, EnvStats, ggplot2, tidyr, dplyr, rstan, data.table, lubridate, gdata,
    matrixStats, scales, gridExtra, ggpubr, bayesplot, cowplot, readr
