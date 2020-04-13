@@ -22,7 +22,8 @@ on COVID-19 transmissibility:
 
 Recommendation
 --------------
-A comparison of the three data sets above suggests that using a certain "patched" version
+A comparison of the three data sets above suggests that
+using a certain "patched" (see below) version
 of the PHI data set of PHAC should be the most straightforward.
 
 Key observation on the PHI data (of cumulative counts)
@@ -71,8 +72,8 @@ https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supple
 *  Generally, the CSSE data appear to lag behind the PHI data for a small number of days.
    Otherwise, the two sources agree very well.
 
-Observation on the ECDC data for Canada:
-----------------------------------------
+Comment on the ECDC data for Canada:
+------------------------------------
 The ECDC data for Canada contain data only at the national level, and cannot be used
 for analysis at the provincial level.
 
