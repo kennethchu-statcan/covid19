@@ -62,7 +62,8 @@ https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supple
 
 The unaltered PHI data (as downloaded on April 11, 2020) have been "patched" in precisely two ways for downstream analysis:
 
-*  Records corresponding to days for which there were no new reported cases or deaths have been explictly added.
+*  Records corresponding to days for which there were no new reported cases or deaths have been explictly added,
+   by repeating the cumulative counts of the preceding day whenever necessary.
 
 *  The data file has been extended backward in time to 2019-12-31 by prepending zeros.
    This is done to match the starting day of the time series downloaded from the ECDC.
