@@ -312,57 +312,121 @@ Main output files
 
    *  __output-base-3-panel-AB.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-AB.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-AB.png)
 
    *  __output-base-3-panel-BC.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-BC.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-BC.png)
 
    *  __output-base-3-panel-ON.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-ON.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-ON.png)
 
    *  __output-base-3-panel-QC.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-QC.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-QC.png)
 
    *  __output-base-3-panel-Austria.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Austria.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Austria.png)
 
    *  __output-base-3-panel-Belgium.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Belgium.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Belgium.png)
 
    *  __output-base-3-panel-Denmark.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Denmark.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Denmark.png)
 
    *  __output-base-3-panel-France.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-France.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-France.png)
 
    *  __output-base-3-panel-Germany.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Germany.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Germany.png)
+
+   *  __output-base-3-panel-Italy.png__
+
+   ![three-panel plot](./supplementary/output-base-3-panel-Italy.png)
 
    *  __output-base-3-panel-Norway.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Norway.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Norway.png)
 
    *  __output-base-3-panel-Spain.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Spain.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Spain.png)
 
    *  __output-base-3-panel-Sweden.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Sweden.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Sweden.png)
 
    *  __output-base-3-panel-Switzerland.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Switzerland.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-Switzerland.png)
 
    *  __output-base-3-panel-United_Kingdom.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-United_Kingdom.png)
+   ![three-panel plot](./supplementary/output-base-3-panel-United_Kingdom.png)
+
+   *  __output-base-forecast-AB.png__
+
+   <img src="./supplementary/output-base-forecast-AB.png" width="750">
+
+   *  __output-base-forecast-BC.png__
+
+   <img src="./supplementary/output-base-forecast-BC.png" width="750">
+
+   *  __output-base-forecast-ON.png__
+
+   <img src="./supplementary/output-base-forecast-ON.png" width="750">
+
+   *  __output-base-forecast-QC.png__
+
+   <img src="./supplementary/output-base-forecast-QC.png" width="750">
+
+   *  __output-base-forecast-Austria.png__
+
+   <img src="./supplementary/output-base-forecast-Austria.png" width="750">
+
+   *  __output-base-forecast-Belgium.png__
+
+   <img src="./supplementary/output-base-forecast-Belgium.png" width="750">
+
+   *  __output-base-forecast-Denmark.png__
+
+   <img src="./supplementary/output-base-forecast-Denmark.png" width="750">
+
+   *  __output-base-forecast-France.png__
+
+   <img src="./supplementary/output-base-forecast-France.png" width="750">
+
+   *  __output-base-forecast-Germany.png__
+
+   <img src="./supplementary/output-base-forecast-Germany.png" width="750">
+
+   *  __output-base-forecast-Italy.png__
+
+   <img src="./supplementary/output-base-forecast-Italy.png" width="750">
+
+   *  __output-base-forecast-Norway.png__
+
+   <img src="./supplementary/output-base-forecast-Norway.png" width="750">
+
+   *  __output-base-forecast-Spain.png__
+
+   <img src="./supplementary/output-base-forecast-Spain.png" width="750">
+
+   *  __output-base-forecast-Sweden.png__
+
+   <img src="./supplementary/output-base-forecast-Sweden.png" width="750">
+
+   *  __output-base-forecast-Switzerland.png__
+
+   <img src="./supplementary/output-base-forecast-Switzerland.png" width="750">
+
+   *  __output-base-forecast-United_Kingdom.png__
+
+   <img src="./supplementary/output-base-forecast-United_Kingdom.png" width="750">
 
