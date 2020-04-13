@@ -257,7 +257,7 @@ Main output files
 
 *  __output-base-3-panel-Italy.png__
 
-   ![three-panel plot, Italy](./output.2020-04-12.03/output-base-3-panel-Italy.png)
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Italy.png)
 
    The left-most panel shows the number of confirmed COVID-19 infections by day,
    as well as the 50% and 95% credible intervals across time
@@ -274,7 +274,7 @@ Main output files
 
 *  __output-base-forecast-Italy.png__
 
-   <img src="./output.2020-04-12.03/output-base-forecast-Italy.png" width="750">
+   <img src="./supplementary/output-base-forecast-Italy.png" width="750">
 
    Histogram, for Italy, of
    the (log-transformed) number of COVID-19 deaths by day,
@@ -285,7 +285,7 @@ Main output files
 
 *  __output-base-covars-alpha.png__
 
-   <img src="./output.2020-04-12.03/output-base-covars-alpha.png" width="500">
+   <img src="./supplementary/output-base-covars-alpha.png" width="500">
 
    Posterior means and 90% credible intervals of the (country-independent)
    effect size parameters:
@@ -298,14 +298,14 @@ Main output files
 
 *  __output-base-covars-mu.png__
 
-   <img src="./output.2020-04-12.03/output-base-covars-mu.png" width="500">
+   <img src="./supplementary/output-base-covars-mu.png" width="500">
 
    Posterior means and 90% credible intervals of the
    country-specific initial COVID-19 reproduction numbers.
 
 *  __output-base-covars-final-rt.png__
 
-   <img src="./output.2020-04-12.03/output-base-covars-final-rt.png" width="500">
+   <img src="./supplementary/output-base-covars-final-rt.png" width="500">
 
    Posterior means and 90% credible intervals of the
    country-specific final COVID-19 reproduction numbers.
