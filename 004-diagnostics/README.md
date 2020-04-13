@@ -47,7 +47,7 @@ For example:
    during which period presumably there were neither new reported COVID-19 confirmed cases
    nor new reported COVID-19 deaths.
 
-   A copy of the above file (as downloaded on April 11, 2020) can be found here:
+   A copy of the above file (as downloaded on April 11, 2020) can be found in this repository here:
 
    https://github.com/kennethchu-statcan/covid19/blob/master/000-data/2020-04-11.02/raw-covid19-GoCInfobase.csv
 
