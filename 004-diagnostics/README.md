@@ -69,8 +69,8 @@ The unaltered PHI data (as downloaded on April 11, 2020) have been "patched" in 
    This is done to match the starting day of the time series downloaded from the ECDC
    (for the European countries studied in Flaxman et al.).
 
-Comparison between the PHI and CSSE data:
------------------------------------------
+Comparison between the CSSE and (patch) PHI data:
+-------------------------------------------------
 Both sources report cumulative COVID-19 case and death count time series for Canada.
 A comparison in tabular form can be viewed here:
 
