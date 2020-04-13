@@ -71,7 +71,7 @@ The unaltered PHI data (as downloaded on April 11, 2020) have been "patched" in 
 
 Comparison between the CSSE and (patched) PHI data:
 ---------------------------------------------------
-Both sources report cumulative COVID-19 case and death count time series for Canada.
+Both sources report cumulative COVID-19 case and death count time series for the Canadian provinces and territories.
 A comparison in tabular form can be viewed here:
 
 https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supplementary/diagnostics-compare-JHU-GoCInfobase-patched.csv
