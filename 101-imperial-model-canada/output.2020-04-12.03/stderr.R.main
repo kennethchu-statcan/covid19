@@ -1,0 +1,182 @@
+Loading required package: rstan
+Loading required package: StanHeaders
+Loading required package: ggplot2
+rstan (Version 2.19.3, GitRev: 2e1f913d3ca3)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+Loading required package: data.table
+Loading required package: lubridate
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:data.table’:
+
+    hour, isoweek, mday, minute, month, quarter, second, wday, week,
+    yday, year
+
+The following object is masked from ‘package:base’:
+
+    date
+
+Loading required package: gdata
+gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+
+gdata: Unable to load perl libaries needed by read.xls()
+gdata: to support 'XLSX' (Excel 2007+) files.
+
+gdata: Run the function 'installXLSXsupport()'
+gdata: to automatically download and install the perl
+gdata: libaries needed to support Excel XLS and XLSX formats.
+
+Attaching package: ‘gdata’
+
+The following objects are masked from ‘package:data.table’:
+
+    first, last
+
+The following object is masked from ‘package:stats’:
+
+    nobs
+
+The following object is masked from ‘package:utils’:
+
+    object.size
+
+The following object is masked from ‘package:base’:
+
+    startsWith
+
+Loading required package: EnvStats
+
+Attaching package: ‘EnvStats’
+
+The following objects are masked from ‘package:stats’:
+
+    predict, predict.lm
+
+The following object is masked from ‘package:base’:
+
+    print.default
+
+Loading required package: readr
+Loading required package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:gdata’:
+
+    combine, first, last
+
+The following objects are masked from ‘package:lubridate’:
+
+    intersect, setdiff, union
+
+The following objects are masked from ‘package:data.table’:
+
+    between, first, last
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: tidyr
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:rstan’:
+
+    extract
+
+Loading required package: bayesplot
+This is bayesplot version 1.7.1
+- Online documentation and vignettes at mc-stan.org/bayesplot
+- bayesplot theme set to bayesplot::theme_default()
+   * Does _not_ affect other ggplot2 plots
+   * See ?bayesplot_theme_set for details on theme setting
+Loading required package: matrixStats
+
+Attaching package: ‘matrixStats’
+
+The following object is masked from ‘package:dplyr’:
+
+    count
+
+The following object is masked from ‘package:EnvStats’:
+
+    iqr
+
+Loading required package: scales
+
+Attaching package: ‘scales’
+
+The following object is masked from ‘package:readr’:
+
+    col_factor
+
+Loading required package: gridExtra
+
+Attaching package: ‘gridExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+The following object is masked from ‘package:gdata’:
+
+    combine
+
+Loading required package: ggpubr
+Loading required package: magrittr
+
+Attaching package: ‘magrittr’
+
+The following object is masked from ‘package:tidyr’:
+
+    extract
+
+The following object is masked from ‘package:rstan’:
+
+    extract
+
+Loading required package: cowplot
+
+********************************************************
+Note: As of version 1.0.0, cowplot does not change the
+  default ggplot2 theme anymore. To recover the previous
+  behavior, execute:
+  theme_set(theme_cowplot())
+********************************************************
+
+
+Attaching package: ‘cowplot’
+
+The following object is masked from ‘package:ggpubr’:
+
+    get_legend
+
+The following object is masked from ‘package:lubridate’:
+
+    stamp
+
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+Saving 10 x 7 in image
+There were 50 or more warnings (use warnings() to see the first 50)
