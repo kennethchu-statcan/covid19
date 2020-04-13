@@ -212,17 +212,21 @@ https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 Other input files are located in
 `<LOCAL CLONED REPOSITORY>/000-data/2020-04-11.02/`.
 
-* __interventions.csv__
+* __interventions-europe.csv__
 
     This CSV file contains the COVID-19 intervention histories 
     (social distancing measures and the dates they were instituted)
-    of eleven European jurisdictions.
+    of the eleven European jurisdictions.
     
     It is a simplified version of the original one supplied
     by Flaxman et al, in the sense that data not directly used
     by the model have been removed.
 
-* __weighted\_fatality.csv__
+* __interventions-canada.csv__
+
+    The counterpart of interventions-europe.csv for the Canadian provinces
+
+* __weighted-fatality-europe.csv__
 
     This CSV file contains the estimates of the
     _weighted infection fatality ratio_
@@ -240,12 +244,23 @@ Other input files are located in
 
     https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
 
+* __weighted-fatality-canada.csv__
+
+    The counterpart of weighted-fatality-europe.csv for the Canadian provinces
+
+    However, we are still in the process of estimating
+    the weighted infection fatality ratios
+    for the Canadian provinces.
+    As a result, this input parameter file currently contains NULL values.
+    For the time being, this file is populated at run-time via donor imputation
+    using the European jurisdictions as donor pool.
+
 * __ages.csv__
 
     This CSV file contains the estimates of the sizes of different age groups
     in the respective populations of the eleven European jurisdictions.
 
-* __serial\_interval.csv__
+* __serial-interval.csv__
 
     This CSV file contains the assumed (discrete) *serial interval distribution*
     used by the model of Flaxman et al.
