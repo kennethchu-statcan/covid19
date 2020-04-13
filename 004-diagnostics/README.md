@@ -42,14 +42,14 @@ For example:
    2020-01-31, 2020-02-08 and 2020-02-16,
    whose respective reported confirmed case counts are: 1, 4 and 5.
 
-   A copy of the above file (as downloaded on April 11, 2020) can be found here:
-
-   https://github.com/kennethchu-statcan/covid19/blob/master/000-data/2020-04-11.02/raw-covid19-GoCInfobase.csv
-
    In particular, the above file (as downloaded on April 11, 2020) contains no records
    for British Columbia for 2020-02-01 through 2020-02-07,
    during which period presumably there were neither new reported COVID-19 confirmed cases
    nor new reported COVID-19 deaths.
+
+   A copy of the above file (as downloaded on April 11, 2020) can be found here:
+
+   https://github.com/kennethchu-statcan/covid19/blob/master/000-data/2020-04-11.02/raw-covid19-GoCInfobase.csv
 
 *  The above data file (as downloaded on April 11, 2020)
    contains no records at all for 2020-03-10 for all provinces.
