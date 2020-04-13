@@ -209,7 +209,7 @@ European Centre for Disease Prevention and Control open-data URL:
 https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 
 Other input files are located in
-`<LOCAL CLONED REPOSITORY>/000-data/2020-04-05.01/`.
+`<LOCAL CLONED REPOSITORY>/000-data/2020-04-11.02/`.
 
 * __interventions.csv__
 
