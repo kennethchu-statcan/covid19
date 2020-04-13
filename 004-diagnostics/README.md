@@ -1,49 +1,22 @@
 
-Adaptation of the COVID-19 intervention/fatality hierarchical Bayesian model of Flaxman et al.
-==============================================================================================
+Comparative diagnostics of three sources of COVID-19 case and death count time series data for Canada
+=====================================================================================================
 
-This analysis pipeline is an adaptation of the hierarchical model described by Flaxman et al. in:
+We compare the following three sources of COVID-19 case and death count time series data for Canada:
 
-https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/covid-19/report-13-europe-npi-impact/
+*  Government of Canada Infobase:
 
-or directly:
+    https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
-https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-03-30-COVID19-Report-13.pdf
+*  European Centre of Disease Prevention and Control open data portal:
 
-The authors:
+   https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 
-*  sought to estimate the effect of the various COVID-19 (social distancing)
-   intervention measures on the country-specific time-varying
-   reproduction number *R<sub>m,t</sub>*,
-   for country *m*, as a function of time *t* (in days),
-   
-*  proceeded by fitting a hierarchical Bayesian model to the COVID-19 death count
-   time series from the following eleven European countries:
-   Austria,
-   Belgium,
-   Denmark,
-   France,
-   Germany,
-   Italy,
-   Norway,
-   Spain,
-   Sweden,
-   Switzerland, and
-   the United Kingdom, and
+*  Center for Systems Science and Engineering (CSSE), Johns Hopkins University:
 
-*  generated COVID-19 death count forecast using the fitted model.
+    https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
 
-The authors have very kindly made available their code here:
-
-https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
-
-We were able to reproduce the results of the above article
-(based on data available up to March 28, 2020, with a 7-day death count forecast window).
-
-We have since made slight modifications in order to:
-
-*  use data up April 4, 2020, and
-*  use a 30-day forecast window.
+    https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
 
 General assumed structure of hierarchical models
 ------------------------------------------------
