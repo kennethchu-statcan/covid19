@@ -6,7 +6,7 @@ This comparative analysis was performed in order to inform us of which of the fo
 could be used as the primary data source for modelling the effects on physical distancing measures
 on COVID-19 transmissibility:
 
-*  Government of Canada Infobase:
+*  Public Health Infobase, Public Health Agency of Canada:
 
     https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
