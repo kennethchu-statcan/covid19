@@ -74,7 +74,7 @@ Comparison between the PHI and CSSE data:
 Both sources report cumulative COVID-19 case and death count time series for Canada.
 A comparison in tabular form can be viewed here:
 
-https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supplementary/diagnostics-compare-JHU-GoCInfobase-raw.csv
+https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supplementary/diagnostics-compare-JHU-GoCInfobase-patched.csv
 
 *  The two data sources appear to agree well with each other, though not perfectly.
 
