@@ -308,5 +308,61 @@ Main output files
    overlaid with the corresponding posterior means and 95% credible intervals
    across time for the forecast of the number of COVID-19 deaths.
 
-*  Similarly for the rest of the jurisdictions.
+*  Similarly for the rest of the jurisdictions:
+
+   *  __output-base-3-panel-AB.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-AB.png)
+
+   *  __output-base-3-panel-BC.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-BC.png)
+
+   *  __output-base-3-panel-ON.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-ON.png)
+
+   *  __output-base-3-panel-QC.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-QC.png)
+
+   *  __output-base-3-panel-Austria.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Austria.png)
+
+   *  __output-base-3-panel-Belgium.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Belgium.png)
+
+   *  __output-base-3-panel-Denmark.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Denmark.png)
+
+   *  __output-base-3-panel-France.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-France.png)
+
+   *  __output-base-3-panel-Germany.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Germany.png)
+
+   *  __output-base-3-panel-Norway.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Norway.png)
+
+   *  __output-base-3-panel-Spain.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Spain.png)
+
+   *  __output-base-3-panel-Sweden.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Sweden.png)
+
+   *  __output-base-3-panel-Switzerland.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Switzerland.png)
+
+   *  __output-base-3-panel-United_Kingdom.png__
+
+   ![three-panel plot, Italy](./supplementary/output-base-3-panel-United_Kingdom.png)
 
