@@ -84,5 +84,5 @@ https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supple
 Comment on the ECDC data for Canada:
 ------------------------------------
 The ECDC data for Canada contain data only at the national level, and cannot be used
-for analysis at the provincial level.
+for analysis at the provincial/territorial level.
 
