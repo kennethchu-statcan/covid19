@@ -372,8 +372,8 @@ wrapper.stan_inner <- function(
         fit = rstan::sampling(
             object  = m,
             data    = stan_data,
-            iter    = 4000,
-            warmup  = 2000,
+            iter    = 1000,
+            warmup  =  500,
             chains  = 4,
             thin    = 4,
             control = list(adapt_delta = 0.90, max_treedepth = 10)
