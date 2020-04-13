@@ -2,7 +2,7 @@
 Comparative diagnostics of three sources of COVID-19 case and death count time series data for Canada
 =====================================================================================================
 
-This comparative analysis was performed to inform us of which of the following three data sources
+This comparative analysis was performed in order to inform us of which of the following three data sources
 could be used as the primary data source for modelling the effects on physical distancing measures
 on COVID-19 transmissibility:
 
