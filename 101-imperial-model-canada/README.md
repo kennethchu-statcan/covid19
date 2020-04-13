@@ -42,8 +42,9 @@ We were able to reproduce the results of the above article
 
 We have since made slight modifications in order to:
 
-*  use data up April 4, 2020, and
-*  use a 30-day forecast window.
+*  use data up April 10, 2020,
+*  use a 14-day forecast window,
+*  include the following four Canadian provinces in the analysis: Alberta, British Columbia, Ontario, Québec
 
 General assumed structure of hierarchical models
 ------------------------------------------------
