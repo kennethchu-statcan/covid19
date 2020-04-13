@@ -83,7 +83,7 @@ https://github.com/kennethchu-statcan/covid19/blob/master/004-diagnostics/supple
 *  The two data sources appear to agree well with each other, though not perfectly.
 
 *  Generally, the CSSE data appear to lag behind the PHI data for a small number of days.
-   Otherwise, the two sources agree very well.
+   Otherwise, the two sources arguably agree very well.
 
 Comment on the ECDC data for Canada:
 ------------------------------------
