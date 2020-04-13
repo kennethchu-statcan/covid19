@@ -203,16 +203,26 @@ See below for information about the contents of the output folder.
 
 Input files
 -----------
-Up-to-date COVID-19 death count time series for different jurisdictions are downloaded
-by the pipeline at run-time at the following
-European Centre for Disease Prevention and Control open-data URL:
-
-https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
-
-Other input files are located in
+All required input data and metadata files are located in
 `<LOCAL CLONED REPOSITORY>/000-data/2020-04-11.02/`.
 
-* __interventions-europe.csv__
+*   __raw-covid19-ECDC.csv__
+
+    COVID-19 case and death count time series for the eleven European jurisdictions
+    considered by Flaxman et al.
+    It was downloaded on April 11, 2020 from
+    the European Centre for Disease Prevention and Control open-data URL:
+
+    https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+
+*   __raw-covid19-GoCInfobase.csv__
+
+    COVID-19 case and death count time series for the Canadian provinces and territories.
+    It was downloaded on April 11, 2020 from the following URL of PHAC:
+
+    https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+
+*   __interventions-europe.csv__
 
     This CSV file contains the COVID-19 intervention histories 
     (social distancing measures and the dates they were instituted)
@@ -222,11 +232,11 @@ Other input files are located in
     by Flaxman et al, in the sense that data not directly used
     by the model have been removed.
 
-* __interventions-canada.csv__
+*   __interventions-canada.csv__
 
     The counterpart of interventions-europe.csv for the Canadian provinces
 
-* __weighted-fatality-europe.csv__
+*   __weighted-fatality-europe.csv__
 
     This CSV file contains the estimates of the
     _weighted infection fatality ratio_
@@ -244,7 +254,7 @@ Other input files are located in
 
     https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
 
-* __weighted-fatality-canada.csv__
+*   __weighted-fatality-canada.csv__
 
     The counterpart of weighted-fatality-europe.csv for the Canadian provinces
 
@@ -255,12 +265,12 @@ Other input files are located in
     For the time being, this file is populated at run-time via donor imputation
     using the European jurisdictions as donor pool.
 
-* __ages.csv__
+*   __ages.csv__
 
     This CSV file contains the estimates of the sizes of different age groups
     in the respective populations of the eleven European jurisdictions.
 
-* __serial-interval.csv__
+*   __serial-interval.csv__
 
     This CSV file contains the assumed (discrete) *serial interval distribution*
     used by the model of Flaxman et al.
