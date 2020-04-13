@@ -40,7 +40,8 @@ Observations on the PHI data
 
    In particular, the above file (again, as downloaded on April 11, 2020) contains no records
    for British Columbia for 2020-02-01 through 2020-02-07,
-   during which period presumably there were neither new reported COVID-19 confirmed cases nor deaths.
+   during which period presumably there were neither new reported COVID-19 confirmed cases
+   nor new reported COVID-19 deaths.
 
    Hence, one needs to take this into account when generating the daily COVID-19 new infection
    and death counts based on the above PHI data file (of cumulative counts).
