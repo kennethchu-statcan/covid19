@@ -28,24 +28,31 @@ of the PHI data set of PHAC should be the most straightforward.
 
 Key observation on the PHI data (of cumulative counts)
 ------------------------------------------------------
-During the early phase of the COVID-19 pandemic, the PHI data (as downloaded on April 11, 2020)
-do not contain records for days when there were no new reported COVID-19 infections or deaths.
+The PHI data (as downloaded on April 11, 2020) do not contain records
+for days when there were no new reported COVID-19 cases or deaths
+(e.g. for days during the early phase of the COVID-19 pandemic).
 
-For example, in the following file (as downloaded on April 11, 2020) 
+For example:
 
-https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+*  In the following file (as downloaded on April 11, 2020) 
 
-the first three days with reported data for British Columbia are:
-2020-01-31, 2020-02-08 and 2020-02-16,
-whose respective reported confirmed case counts are: 1, 4 and 5.
+   https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
-In particular, the above file (again, as downloaded on April 11, 2020) contains no records
-for British Columbia for 2020-02-01 through 2020-02-07,
-during which period presumably there were neither new reported COVID-19 confirmed cases
-nor new reported COVID-19 deaths.
+   the first three days with reported data for British Columbia are:
+   2020-01-31, 2020-02-08 and 2020-02-16,
+   whose respective reported confirmed case counts are: 1, 4 and 5.
 
-Hence, one needs to take this into account when generating the daily COVID-19 new infection
-and death counts based on the above PHI data file (of cumulative counts).
+   In particular, the above file (again, as downloaded on April 11, 2020) contains no records
+   for British Columbia for 2020-02-01 through 2020-02-07,
+   during which period presumably there were neither new reported COVID-19 confirmed cases
+   nor new reported COVID-19 deaths.
+
+*  The above data file (as downloaded on April 11, 2020)
+   contains no records at all for 2020-03-10 for all provinces.
+
+Hence, we need to take this into account when generating
+the daily COVID-19 new infection and death counts
+based on the above PHI data file (of cumulative counts).
 
 "Patched" PHI data (of cumulative counts)
 -----------------------------------------
