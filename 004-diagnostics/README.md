@@ -8,17 +8,17 @@ on COVID-19 transmissibility:
 
 *  Public Health Infobase (PHI), Public Health Agency of Canada (PHAC):
 
-       https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+   https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
 *  European Centre of Disease Prevention and Control (ECDC) open data portal:
 
-       https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+   https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
 
 *  Center for Systems Science and Engineering (CSSE), Johns Hopkins University:
 
-       https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
+   https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
 
-       https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
+   https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
 
 Recommendations
 ---------------
