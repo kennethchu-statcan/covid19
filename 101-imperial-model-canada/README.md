@@ -13,12 +13,12 @@ https://www.imperial.ac.uk/media/imperial-college/medicine/mrc-gida/2020-03-30-C
 The authors:
 
 *  sought to estimate the effect of the various COVID-19 (social distancing)
-   intervention measures on the country-specific time-varying
+   intervention measures on the jurisdiction-specific time-varying
    reproduction number *R<sub>m,t</sub>*,
-   for country *m*, as a function of time *t* (in days),
+   for jurisdiction *m*, as a function of time *t* (in days),
    
 *  proceeded by fitting a hierarchical Bayesian model to the COVID-19 death count
-   time series from the following eleven European countries:
+   time series from the following eleven European jurisdictions:
    Austria,
    Belgium,
    Denmark,
@@ -60,7 +60,7 @@ General assumed structure of hierarchical models
 
 Brief description of the hierarchical structure of the model of Flaxman et al.
 ------------------------------------------------------------------------------
-*  Observed COVID-19 death count, for given (country,day)
+*  Observed COVID-19 death count, for given (jurisdiction,day)
 
    Assumed to follow a **Negative Binomial** distribution
    (which can be regarded as Gamma-mixture of Poisson distributions),
@@ -68,7 +68,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    *  *d<sub>m,t</sub>*
       = mean of the Negative Binomial
-      = expected number of COVID-19 deaths for country *m* on day *t*
+      = expected number of COVID-19 deaths for jurisdiction *m* on day *t*
    *  variance of the Negative Binomial, which the authors assumed to have the form
       *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/&Psi;*
 
@@ -76,25 +76,25 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
 *  The expected number *d<sub>m,t</sub>* of COVID-19 deaths
-   for country *m* on day *t* is assumed to be given by:
+   for jurisdiction *m* on day *t* is assumed to be given by:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot\pi_{m,t-\tau}"/>
 
    for *t* = 1, 2, ... , where
    *  *c<sub>m,&tau;</sub>* is the *unobserved* number of **new** COVID-19 infected individuals
-      in country *m*, on day *&tau;*, and
-   *  *&pi;<sub>m,&tau;</sub>* is the probability, for country *m*,
+      in jurisdiction *m*, on day *&tau;*, and
+   *  *&pi;<sub>m,&tau;</sub>* is the probability, for jurisdiction *m*,
       that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
 
-*  Flaxman et al. assumed that each country *m* has its own 
+*  Flaxman et al. assumed that each jurisdiction *m* has its own 
    (weighted) *infection fatality ratio* IFR<sub>*m*</sub> (probability of COVID-19 death given COVID-19 infection).
-   Conversely, in country *m*, a COVID-19 infected individual has a probability of 1 - IFR<sub>*m*</sub>
+   Conversely, in jurisdiction *m*, a COVID-19 infected individual has a probability of 1 - IFR<sub>*m*</sub>
    that he/she will not die from the disease, i.e. will recover.
 
    For a COVID-19 infected individual who dies from COVID-19, Flaxman et al. assumed,
    based on earlier studies, that the infection-to-death time is the sum of two durations:
    the infection-to-(onset-of-symptom) time, and the (onset-of-symptom)-to-death time.
-   The former is assumed -- for all countries -- to have been sampled from
+   The former is assumed -- for all jurisdictions -- to have been sampled from
    the Gamma distribution *&Gamma;(5.1,0.86)*, while the latter from *&Gamma;(18.8,0.45)*.
 
    More technically, these assumptions translate to the assumption that the parameter
@@ -107,23 +107,23 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
 
    for *&tau;* = 2, 3, ... , where *&pi;<sub>m</sub>* is the probability density
-   of the of infection-to-death time of country *m*, and is assumed to have the form:
+   of the of infection-to-death time of jurisdiction *m*, and is assumed to have the form:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\textnormal{\small{IFR}}_{m}\cdot\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
 
-   where IFR<sub>*m*</sub> stands for the *weighted infection fatality ratio* of country *m*,
+   where IFR<sub>*m*</sub> stands for the *weighted infection fatality ratio* of jurisdiction *m*,
    whose definition/estimation is described in the original paper by Flaxman et al. cited above,
    as well as in
 
    https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7
 
 *  The number *c<sub>m,t</sub>* of COVID-19 infected individuals
-   newly infected on day *t* for country *m* is assumed to satisfy
+   newly infected on day *t* for jurisdiction *m* is assumed to satisfy
    the following recurrence relation:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{m,t}\;=\;R_{m,t}\cdot\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot{g}_{t-\tau}"/>
 
-   where *R<sub>m,t</sub>* is the COVID-19 **reproduction number** of country *m*
+   where *R<sub>m,t</sub>* is the COVID-19 **reproduction number** of jurisdiction *m*
    on day *t* (see below),
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
@@ -132,7 +132,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
 
-   for *&tau;* = 2, 3, ... , where *g* is, for all countries, the probability density
+   for *&tau;* = 2, 3, ... , where *g* is, for all jurisdictions, the probability density
    of the *serial interval distribution*.
    We remark that the discretized-to-the-day serial interval distribution
    (determined precisely by *g<sub>1</sub>*, *g<sub>2</sub>*, *g<sub>3</sub>*, ...)
@@ -146,20 +146,20 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    where
    
-   *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for country *m*,
+   *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for jurisdiction *m*,
        intervention measure *k*, and day *t*.
 
    *   *&alpha;<sub>k</sub>*
        -- assumed to have been sampled from *&Gamma;(0.5,1)* --
-       is the (random, unobserved) country-independent
+       is the (random, unobserved) jurisdiction-independent
        log-linear effect size parameter due to intervention measure *k*,
 
-   *   *R<sub>m,0</sub>* is the country-specific initial reproduction number,
+   *   *R<sub>m,0</sub>* is the jurisdiction-specific initial reproduction number,
        assumed to follow:
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,0}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
 
-       where *&kappa;* is also a country-independent (random, unobserved) parameter.
+       where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
 
 Requirements
 ------------
@@ -202,7 +202,7 @@ See below for information about the contents of the output folder.
 
 Input files
 -----------
-Up-to-date COVID-19 death count time series for different countries are downloaded
+Up-to-date COVID-19 death count time series for different jurisdictions are downloaded
 by the pipeline at run-time at the following
 European Centre for Disease Prevention and Control open-data URL:
 
@@ -215,7 +215,7 @@ Other input files are located in
 
     This CSV file contains the COVID-19 intervention histories 
     (social distancing measures and the dates they were instituted)
-    of eleven European countries.
+    of eleven European jurisdictions.
     
     It is a simplified version of the original one supplied
     by Flaxman et al, in the sense that data not directly used
@@ -225,8 +225,8 @@ Other input files are located in
 
     This CSV file contains the estimates of the
     _weighted infection fatality ratio_
-    for the eleven Europe countries.
-    These are fixed country-specific parameters used by the model
+    for the eleven Europe jurisdictions.
+    These are fixed jurisdiction-specific parameters used by the model
     of Flaxman et al.
 
     The *infection fatality ratio* refers to the conditional probability
@@ -242,7 +242,7 @@ Other input files are located in
 * __ages.csv__
 
     This CSV file contains the estimates of the sizes of different age groups
-    in the respective populations of the eleven European countries.
+    in the respective populations of the eleven European jurisdictions.
 
 * __serial\_interval.csv__
 
@@ -259,7 +259,7 @@ Main output files
 
    <img src="./supplementary/output-base-covars-alpha.png" width="500">
 
-   Posterior means and 90% credible intervals of the (country-independent)
+   Posterior means and 90% credible intervals of the (jurisdiction-independent)
    effect size parameters:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
@@ -273,14 +273,14 @@ Main output files
    <img src="./supplementary/output-base-covars-mu.png" width="500">
 
    Posterior means and 90% credible intervals of the
-   country-specific initial COVID-19 reproduction numbers.
+   jurisdiction-specific initial COVID-19 reproduction numbers.
 
 *  __output-base-covars-final-rt.png__
 
    <img src="./supplementary/output-base-covars-final-rt.png" width="500">
 
    Posterior means and 90% credible intervals of the
-   country-specific final COVID-19 reproduction numbers.
+   jurisdiction-specific final COVID-19 reproduction numbers.
 
 *  __output-base-3-panel-Italy.png__
 
@@ -297,7 +297,7 @@ Main output files
    of the *reproduction number* *R<sub>t</sub>* at time *t*,
    annotated by the institution times of the various intervention measures.
 
-   Similarly for the rest of the countries.
+   Similarly for the rest of the jurisdictions.
 
 *  __output-base-forecast-Italy.png__
 
@@ -308,5 +308,5 @@ Main output files
    overlaid with the corresponding posterior means and 95% credible intervals
    across time for the forecast of the number of COVID-19 deaths.
 
-*  Similarly for the rest of the countries.
+*  Similarly for the rest of the jurisdictions.
 
