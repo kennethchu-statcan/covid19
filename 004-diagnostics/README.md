@@ -66,7 +66,8 @@ The unaltered PHI data (as downloaded on April 11, 2020) have been "patched" in 
    by repeating the cumulative counts of the preceding day whenever necessary.
 
 *  The data file has been extended backward in time to 2019-12-31 by prepending zeros.
-   This is done to match the starting day of the time series downloaded from the ECDC.
+   This is done to match the starting day of the time series downloaded from the ECDC
+   (for the European countries studied in Flaxman et al.).
 
 Comparison between the PHI and CSSE data:
 -----------------------------------------
