@@ -264,6 +264,10 @@ All required input data and metadata files are located in
     For the time being, this file is populated at run-time via donor imputation
     using the European jurisdictions as donor pool.
 
+    The actual imputed wIFR values for the Canadian provinces can be seen here:
+
+    https://github.com/kennethchu-statcan/covid19/blob/master/101-imperial-model-canada/supplementary/input-wIFR.csv
+
 *   __ages.csv__
 
     This CSV file contains the estimates of the sizes of different age groups
