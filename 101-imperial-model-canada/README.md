@@ -315,9 +315,9 @@ Main output files
 
    ![three-panel plot, Italy](./supplementary/output-base-3-panel-Italy.png)
 
-   The left-most panel shows the number of confirmed COVID-19 infections by day,
+   The left-most panel shows the number of new confirmed COVID-19 infections by day,
    as well as the 50% and 95% credible intervals across time
-   for the total number of infections as estimated by the model
+   for the daily number of new infections as estimated by the model
    of Flaxman et al., based on the given data.
 
    The middle panel shows the equivalent for the number of deaths.
@@ -325,8 +325,6 @@ Main output files
    The right-most panel shows the 50% and 95% credible intervals through time
    of the *reproduction number* *R<sub>t</sub>* at time *t*,
    annotated by the institution times of the various intervention measures.
-
-   Similarly for the rest of the jurisdictions.
 
 *  __output-base-forecast-Italy.png__
 
