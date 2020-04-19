@@ -203,13 +203,13 @@ See below for information about the contents of the output folder.
 Input files
 -----------
 All required input data and metadata files are located in
-`<LOCAL CLONED REPOSITORY>/000-data/2020-04-11.02/`.
+`<LOCAL CLONED REPOSITORY>/000-data/2020-04-19.01/`.
 
 *   __raw-covid19-ECDC.csv__
 
     COVID-19 case and death count time series for the eleven European jurisdictions
     considered by Flaxman et al.
-    It was downloaded on April 11, 2020 from
+    It was downloaded on April 19, 2020 from
     the European Centre for Disease Prevention and Control open-data URL:
 
     https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
@@ -217,7 +217,7 @@ All required input data and metadata files are located in
 *   __raw-covid19-GoCInfobase.csv__
 
     COVID-19 case and death count time series for the Canadian provinces and territories.
-    It was downloaded on April 11, 2020 from the following URL of PHAC:
+    It was downloaded on April 19, 2020 from the following URL of PHAC:
 
     https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
