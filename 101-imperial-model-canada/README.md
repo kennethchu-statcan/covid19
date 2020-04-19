@@ -29,7 +29,7 @@ The authors:
    Spain,
    Sweden,
    Switzerland, and
-   the United Kingdom, and
+   the United Kingdom
 
 *  generated COVID-19 death count forecast using the fitted model.
 
