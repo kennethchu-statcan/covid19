@@ -1,0 +1,68 @@
+--2020-04-19 21:56:32--  https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+Resolving opendata.ecdc.europa.eu... 212.181.0.63
+Connecting to opendata.ecdc.europa.eu|212.181.0.63|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/ [following]
+--2020-04-19 21:56:33--  https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/
+Reusing existing connection to opendata.ecdc.europa.eu:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 605027 (591K) [application/octet-stream]
+Saving to: 'csv'
+
+     0K .......... .......... .......... .......... ..........  8%  185K 3s
+    50K .......... .......... .......... .......... .......... 16%  328K 2s
+   100K .......... .......... .......... .......... .......... 25%  351K 2s
+   150K .......... .......... .......... .......... .......... 33%  371K 1s
+   200K .......... .......... .......... .......... .......... 42% 1.28M 1s
+   250K .......... .......... .......... .......... .......... 50%  330K 1s
+   300K .......... .......... .......... .......... .......... 59%  420K 1s
+   350K .......... .......... .......... .......... .......... 67%  451K 1s
+   400K .......... .......... .......... .......... .......... 76%  468K 0s
+   450K .......... .......... .......... .......... .......... 84%  367K 0s
+   500K .......... .......... .......... .......... .......... 93% 1.11M 0s
+   550K .......... .......... .......... ..........           100%  372K=1.5s
+
+2020-04-19 21:56:35 (390 KB/s) - 'csv' saved [605027/605027]
+
+--2020-04-19 21:56:35--  https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+Resolving health-infobase.canada.ca... 40.82.191.96
+Connecting to health-infobase.canada.ca|40.82.191.96|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 47165 (46K) [text/csv]
+Saving to: 'covid19.csv'
+
+     0K .......... .......... .......... .......... ......    100% 8.29M=0.005s
+
+2020-04-19 21:56:35 (8.29 MB/s) - 'covid19.csv' saved [47165/47165]
+
+--2020-04-19 21:56:35--  https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
+Resolving raw.githubusercontent.com... 151.101.124.133
+Connecting to raw.githubusercontent.com|151.101.124.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 75003 (73K) [text/plain]
+Saving to: 'time_series_covid19_confirmed_global.csv'
+
+     0K .......... .......... .......... .......... .......... 68%  869K 0s
+    50K .......... .......... ...                             100% 2.40M=0.07s
+
+2020-04-19 21:56:36 (1.07 MB/s) - 'time_series_covid19_confirmed_global.csv' saved [75003/75003]
+
+--2020-04-19 21:56:36--  https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
+Resolving raw.githubusercontent.com... 151.101.124.133
+Connecting to raw.githubusercontent.com|151.101.124.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 59337 (58K) [text/plain]
+Saving to: 'time_series_covid19_deaths_global.csv'
+
+     0K .......... .......... .......... .......... .......... 86%  844K 0s
+    50K .......                                               100% 12.9M=0.06s
+
+2020-04-19 21:56:36 (968 KB/s) - 'time_series_covid19_deaths_global.csv' saved [59337/59337]
+
+--2020-04-19 21:56:36--  http://raw-covid19-jhu-deaths.csv/
+Resolving raw-covid19-jhu-deaths.csv... failed: nodename nor servname provided, or not known.
+wget: unable to resolve host address 'raw-covid19-jhu-deaths.csv'
+FINISHED --2020-04-19 21:56:36--
+Total wall clock time: 0.2s
+Downloaded: 1 files, 58K in 0.06s (968 KB/s)
+cp: interventions-canada.csv: Permission denied
