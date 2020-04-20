@@ -1,0 +1,1666 @@
+"pruid","prname","prnameFR","date","numconf","numprob","numdeaths","numtotal","numtested","numrecover"
+1,"Canada","Canada","31-12-2019",0,0,0,0,0,0
+1,"Canada","Canada","01-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","02-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","03-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","04-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","05-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","06-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","07-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","08-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","09-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","10-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","11-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","12-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","13-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","14-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","15-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","16-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","17-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","18-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","19-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","20-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","21-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","22-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","23-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","24-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","25-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","26-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","27-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","28-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","29-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","30-01-2020",0,0,0,0,0,0
+1,"Canada","Canada","31-01-2020",4,0,0,4,0,0
+1,"Canada","Canada","01-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","02-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","03-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","04-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","05-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","06-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","07-02-2020",4,0,0,4,0,0
+1,"Canada","Canada","08-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","09-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","10-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","11-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","12-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","13-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","14-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","15-02-2020",7,0,0,7,0,0
+1,"Canada","Canada","16-02-2020",8,0,0,8,0,0
+1,"Canada","Canada","17-02-2020",8,0,0,8,0,0
+1,"Canada","Canada","18-02-2020",8,0,0,8,0,0
+1,"Canada","Canada","19-02-2020",8,0,0,8,0,0
+1,"Canada","Canada","20-02-2020",8,0,0,8,0,0
+1,"Canada","Canada","21-02-2020",9,0,0,9,0,0
+1,"Canada","Canada","22-02-2020",9,0,0,9,0,0
+1,"Canada","Canada","23-02-2020",9,0,0,9,0,0
+1,"Canada","Canada","24-02-2020",10,0,0,10,0,0
+1,"Canada","Canada","25-02-2020",11,0,0,11,0,0
+1,"Canada","Canada","26-02-2020",12,0,0,12,0,0
+1,"Canada","Canada","27-02-2020",13,0,0,13,0,0
+1,"Canada","Canada","28-02-2020",13,0,0,13,0,0
+1,"Canada","Canada","29-02-2020",15,0,0,15,0,0
+1,"Canada","Canada","01-03-2020",24,0,0,24,0,0
+1,"Canada","Canada","02-03-2020",24,0,0,24,0,0
+1,"Canada","Canada","03-03-2020",33,0,0,33,0,0
+1,"Canada","Canada","04-03-2020",33,0,0,33,0,0
+1,"Canada","Canada","05-03-2020",45,0,0,45,0,0
+1,"Canada","Canada","06-03-2020",51,0,0,51,0,0
+1,"Canada","Canada","07-03-2020",57,0,0,57,0,0
+1,"Canada","Canada","08-03-2020",62,0,0,62,0,0
+1,"Canada","Canada","09-03-2020",77,0,0,77,0,0
+1,"Canada","Canada","10-03-2020",77,0,0,77,0,0
+1,"Canada","Canada","11-03-2020",103,0,0,103,11023,0
+1,"Canada","Canada","12-03-2020",138,3,0,141,15185,0
+1,"Canada","Canada","13-03-2020",176,3,0,179,15185,0
+1,"Canada","Canada","14-03-2020",193,6,0,199,22409,0
+1,"Canada","Canada","15-03-2020",249,6,0,253,24977,0
+1,"Canada","Canada","16-03-2020",324,17,0,341,37730,0
+1,"Canada","Canada","17-03-2020",424,17,0,440,44176,0
+1,"Canada","Canada","18-03-2020",569,28,0,597,53546,0
+1,"Canada","Canada","19-03-2020",846,28,0,873,65851,0
+1,"Canada","Canada","20-03-2020",971,33,12,1004,76814,0
+1,"Canada","Canada","21-03-2020",1302,69,18,1371,88883,0
+1,"Canada","Canada","22-03-2020",1430,69,20,1471,98824,0
+1,"Canada","Canada","23-03-2020",1646,445,24,2091,107147,0
+1,"Canada","Canada","24-03-2020",1959,833,27,2792,125062,0
+1,"Canada","Canada","25-03-2020",3385,833,35,3409,147789,0
+1,"Canada","Canada","26-03-2020",4018,833,39,4043,161603,0
+1,"Canada","Canada","27-03-2020",4675,833,53,4689,170644,0
+1,"Canada","Canada","28-03-2020",5386,833,59,5425,187448,0
+1,"Canada","Canada","29-03-2020",6255,833,61,6258,210435,0
+1,"Canada","Canada","30-03-2020",7424,833,89,7437,225705,0
+1,"Canada","Canada","31-03-2020",8536,833,96,8548,241138,0
+1,"Canada","Canada","01-04-2020",9595,833,109,9613,256933,0
+1,"Canada","Canada","02-04-2020",11268,833,138,11283,273666,0
+1,"Canada","Canada","03-04-2020",12519,833,187,12537,295065,0
+1,"Canada","Canada","04-04-2020",13882,833,231,13904,311971,0
+1,"Canada","Canada","05-04-2020",15496,833,280,15512,324791,2335
+1,"Canada","Canada","06-04-2020",16653,833,323,16667,336806,3616
+1,"Canada","Canada","07-04-2020",17883,833,380,17897,348105,3616
+1,"Canada","Canada","08-04-2020",19274,833,435,19289,361969,3616
+1,"Canada","Canada","09-04-2020",20748,833,509,20765,375302,3616
+1,"Canada","Canada","10-04-2020",22133,833,569,22148,391375,3616
+1,"Canada","Canada","11-04-2020",23301,833,653,23318,404651,3616
+1,"Canada","Canada","12-04-2020",24365,833,717,24383,422200,3616
+1,"Canada","Canada","13-04-2020",25663,833,780,25680,437475,3616
+1,"Canada","Canada","14-04-2020",27046,833,903,27063,454983,3616
+1,"Canada","Canada","15-04-2020",28364,833,1010,28381,467736,3616
+1,"Canada","Canada","16-04-2020",30081,833,1193,30092,487625,3616
+1,"Canada","Canada","17-04-2020",31872,833,1309,31884,507701,3616
+1,"Canada","Canada","18-04-2020",33341,833,1467,33354,528057,11178
+1,"Canada","Canada","19-04-2020",33909,833,1506,33922,536062,11520
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","31-12-2019",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","01-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","02-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","03-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","04-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","05-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","06-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","07-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","08-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","09-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","10-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","11-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","12-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","13-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","14-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","15-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","16-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","17-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","18-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","19-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","20-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","21-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","22-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","23-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","24-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","25-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","26-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","27-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","28-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","29-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","30-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","31-01-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","01-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","02-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","03-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","04-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","05-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","06-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","07-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","08-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","09-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","10-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","11-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","12-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","13-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","14-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","15-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","16-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","17-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","18-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","19-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","20-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","21-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","22-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","23-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","24-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","25-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","26-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","27-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","28-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","29-02-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","01-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","02-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","03-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","04-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","05-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","06-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","07-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","08-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","09-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","10-03-2020",0,0,0,0,0,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","11-03-2020",0,0,0,0,44,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","12-03-2020",0,0,0,0,52,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","13-03-2020",0,0,0,0,52,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","14-03-2020",0,0,0,0,62,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","15-03-2020",0,1,0,1,62,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","16-03-2020",0,1,0,1,161,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","17-03-2020",0,1,0,1,161,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","18-03-2020",0,3,0,3,161,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","19-03-2020",1,3,0,3,267,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","20-03-2020",3,3,0,4,287,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","21-03-2020",3,3,0,6,299,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","22-03-2020",3,6,0,9,299,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","23-03-2020",4,20,0,24,894,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","24-03-2020",4,31,0,35,1087,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","25-03-2020",67,31,0,67,1235,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","26-03-2020",82,31,0,82,1447,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","27-03-2020",102,31,0,102,1684,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","28-03-2020",120,31,0,120,1907,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","29-03-2020",135,31,0,135,2107,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","30-03-2020",148,31,1,148,2332,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","31-03-2020",152,31,1,152,2500,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","01-04-2020",175,31,1,175,2762,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","02-04-2020",183,31,1,183,2904,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","03-04-2020",183,31,1,183,3136,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","04-04-2020",195,31,1,195,3345,0
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","05-04-2020",217,31,1,217,3556,11
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","06-04-2020",226,31,2,226,3776,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","07-04-2020",228,31,2,228,3958,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","08-04-2020",232,31,2,232,4135,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","09-04-2020",236,31,3,236,4384,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","10-04-2020",239,31,3,239,4520,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","11-04-2020",241,31,3,241,4713,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","12-04-2020",242,31,3,242,4812,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","13-04-2020",244,31,3,244,4897,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","14-04-2020",244,31,3,244,5370,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","15-04-2020",247,31,3,247,5370,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","16-04-2020",252,31,3,252,5370,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","17-04-2020",256,31,3,256,5584,32
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","18-04-2020",257,31,3,257,5870,189
+10,"Newfoundland and Labrador","Terre-Neuve-et-Labrador","19-04-2020",257,31,3,257,6128,189
+11,"Prince Edward Island","Île-du-Prince-Édouard","31-12-2019",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","01-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","02-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","03-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","04-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","05-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","06-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","07-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","08-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","09-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","10-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","11-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","12-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","13-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","14-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","15-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","16-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","17-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","18-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","19-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","20-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","21-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","22-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","23-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","24-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","25-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","26-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","27-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","28-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","29-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","30-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","31-01-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","01-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","02-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","03-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","04-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","05-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","06-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","07-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","08-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","09-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","10-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","11-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","12-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","13-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","14-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","15-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","16-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","17-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","18-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","19-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","20-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","21-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","22-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","23-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","24-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","25-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","26-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","27-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","28-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","29-02-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","01-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","02-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","03-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","04-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","05-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","06-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","07-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","08-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","09-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","10-03-2020",0,0,0,0,0,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","11-03-2020",0,0,0,0,6,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","12-03-2020",0,0,0,0,6,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","13-03-2020",0,0,0,0,6,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","14-03-2020",0,0,0,0,6,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","15-03-2020",1,0,0,1,6,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","16-03-2020",1,0,0,1,6,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","17-03-2020",1,0,0,1,75,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","18-03-2020",1,0,0,1,75,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","19-03-2020",2,0,0,2,75,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","20-03-2020",2,0,0,2,75,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","21-03-2020",2,0,0,2,75,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","22-03-2020",3,0,0,3,75,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","23-03-2020",3,0,0,3,206,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","24-03-2020",3,0,0,3,206,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","25-03-2020",5,0,0,5,301,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","26-03-2020",9,0,0,9,353,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","27-03-2020",11,0,0,11,422,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","28-03-2020",11,0,0,11,422,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","29-03-2020",11,0,0,11,477,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","30-03-2020",18,0,0,18,477,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","31-03-2020",21,0,0,21,551,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","01-04-2020",21,0,0,21,551,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","02-04-2020",22,0,0,22,653,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","03-04-2020",22,0,0,22,653,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","04-04-2020",22,0,0,22,839,0
+11,"Prince Edward Island","Île-du-Prince-Édouard","05-04-2020",22,0,0,22,839,6
+11,"Prince Edward Island","Île-du-Prince-Édouard","06-04-2020",22,0,0,22,839,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","07-04-2020",22,0,0,22,939,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","08-04-2020",24,0,0,24,1347,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","09-04-2020",25,0,0,25,1435,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","10-04-2020",25,0,0,25,1435,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","11-04-2020",25,0,0,25,1577,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","12-04-2020",25,0,0,25,1645,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","13-04-2020",25,0,0,25,1715,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","14-04-2020",25,0,0,25,1715,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","15-04-2020",26,0,0,26,1863,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","16-04-2020",26,0,0,26,1946,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","17-04-2020",26,0,0,26,2013,8
+11,"Prince Edward Island","Île-du-Prince-Édouard","18-04-2020",26,0,0,26,2086,23
+11,"Prince Edward Island","Île-du-Prince-Édouard","19-04-2020",26,0,0,26,2086,23
+12,"Nova Scotia","Nouvelle-Écosse","31-12-2019",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","01-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","02-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","03-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","04-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","05-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","06-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","07-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","08-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","09-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","10-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","11-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","12-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","13-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","14-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","15-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","16-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","17-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","18-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","19-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","20-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","21-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","22-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","23-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","24-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","25-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","26-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","27-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","28-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","29-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","30-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","31-01-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","01-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","02-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","03-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","04-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","05-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","06-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","07-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","08-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","09-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","10-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","11-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","12-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","13-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","14-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","15-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","16-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","17-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","18-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","19-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","20-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","21-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","22-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","23-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","24-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","25-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","26-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","27-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","28-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","29-02-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","01-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","02-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","03-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","04-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","05-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","06-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","07-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","08-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","09-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","10-03-2020",0,0,0,0,0,0
+12,"Nova Scotia","Nouvelle-Écosse","11-03-2020",0,0,0,0,103,0
+12,"Nova Scotia","Nouvelle-Écosse","12-03-2020",0,0,0,0,182,0
+12,"Nova Scotia","Nouvelle-Écosse","13-03-2020",0,0,0,0,182,0
+12,"Nova Scotia","Nouvelle-Écosse","14-03-2020",0,0,0,0,481,0
+12,"Nova Scotia","Nouvelle-Écosse","15-03-2020",0,0,0,0,481,0
+12,"Nova Scotia","Nouvelle-Écosse","16-03-2020",0,3,0,3,1075,0
+12,"Nova Scotia","Nouvelle-Écosse","17-03-2020",0,5,0,5,1075,0
+12,"Nova Scotia","Nouvelle-Écosse","18-03-2020",1,6,0,7,1278,0
+12,"Nova Scotia","Nouvelle-Écosse","19-03-2020",5,9,0,14,1520,0
+12,"Nova Scotia","Nouvelle-Écosse","20-03-2020",5,10,0,15,1647,0
+12,"Nova Scotia","Nouvelle-Écosse","21-03-2020",9,12,0,21,1956,0
+12,"Nova Scotia","Nouvelle-Écosse","22-03-2020",28,12,0,28,2210,0
+12,"Nova Scotia","Nouvelle-Écosse","23-03-2020",41,12,0,41,2408,0
+12,"Nova Scotia","Nouvelle-Écosse","24-03-2020",51,12,0,51,2641,0
+12,"Nova Scotia","Nouvelle-Écosse","25-03-2020",68,12,0,68,3008,0
+12,"Nova Scotia","Nouvelle-Écosse","26-03-2020",73,12,0,73,3417,0
+12,"Nova Scotia","Nouvelle-Écosse","27-03-2020",90,12,0,90,3946,0
+12,"Nova Scotia","Nouvelle-Écosse","28-03-2020",110,12,0,110,4487,0
+12,"Nova Scotia","Nouvelle-Écosse","29-03-2020",122,12,0,122,4984,0
+12,"Nova Scotia","Nouvelle-Écosse","30-03-2020",127,12,0,127,5492,0
+12,"Nova Scotia","Nouvelle-Écosse","31-03-2020",147,12,0,147,6614,0
+12,"Nova Scotia","Nouvelle-Écosse","01-04-2020",173,12,0,173,7405,0
+12,"Nova Scotia","Nouvelle-Écosse","02-04-2020",193,12,0,193,8059,0
+12,"Nova Scotia","Nouvelle-Écosse","03-04-2020",207,12,0,207,8799,0
+12,"Nova Scotia","Nouvelle-Écosse","04-04-2020",236,12,0,236,9722,0
+12,"Nova Scotia","Nouvelle-Écosse","05-04-2020",262,12,0,262,10084,50
+12,"Nova Scotia","Nouvelle-Écosse","06-04-2020",293,12,0,293,10738,64
+12,"Nova Scotia","Nouvelle-Écosse","07-04-2020",310,12,0,310,11559,64
+12,"Nova Scotia","Nouvelle-Écosse","08-04-2020",342,12,1,342,12072,64
+12,"Nova Scotia","Nouvelle-Écosse","09-04-2020",373,12,2,373,13045,64
+12,"Nova Scotia","Nouvelle-Écosse","10-04-2020",407,12,2,407,13881,64
+12,"Nova Scotia","Nouvelle-Écosse","11-04-2020",428,12,2,428,14511,64
+12,"Nova Scotia","Nouvelle-Écosse","12-04-2020",445,12,2,445,15329,64
+12,"Nova Scotia","Nouvelle-Écosse","13-04-2020",474,12,3,474,16548,64
+12,"Nova Scotia","Nouvelle-Écosse","14-04-2020",517,12,3,517,17477,64
+12,"Nova Scotia","Nouvelle-Écosse","15-04-2020",549,12,3,549,18245,64
+12,"Nova Scotia","Nouvelle-Écosse","16-04-2020",579,12,3,579,19239,64
+12,"Nova Scotia","Nouvelle-Écosse","17-04-2020",606,12,4,606,20432,64
+12,"Nova Scotia","Nouvelle-Écosse","18-04-2020",649,12,7,649,21363,184
+12,"Nova Scotia","Nouvelle-Écosse","19-04-2020",649,12,7,649,22029,184
+13,"New Brunswick","Nouveau-Brunswick","31-12-2019",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","01-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","02-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","03-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","04-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","05-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","06-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","07-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","08-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","09-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","10-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","11-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","12-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","13-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","14-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","15-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","16-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","17-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","18-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","19-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","20-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","21-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","22-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","23-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","24-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","25-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","26-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","27-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","28-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","29-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","30-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","31-01-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","01-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","02-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","03-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","04-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","05-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","06-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","07-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","08-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","09-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","10-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","11-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","12-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","13-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","14-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","15-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","16-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","17-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","18-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","19-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","20-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","21-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","22-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","23-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","24-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","25-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","26-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","27-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","28-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","29-02-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","01-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","02-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","03-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","04-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","05-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","06-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","07-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","08-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","09-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","10-03-2020",0,0,0,0,0,0
+13,"New Brunswick","Nouveau-Brunswick","11-03-2020",0,0,0,0,22,0
+13,"New Brunswick","Nouveau-Brunswick","12-03-2020",0,1,0,1,44,0
+13,"New Brunswick","Nouveau-Brunswick","13-03-2020",1,1,0,1,44,0
+13,"New Brunswick","Nouveau-Brunswick","14-03-2020",1,1,0,2,82,0
+13,"New Brunswick","Nouveau-Brunswick","15-03-2020",1,1,0,2,82,0
+13,"New Brunswick","Nouveau-Brunswick","16-03-2020",1,5,0,6,143,0
+13,"New Brunswick","Nouveau-Brunswick","17-03-2020",2,5,0,7,295,0
+13,"New Brunswick","Nouveau-Brunswick","18-03-2020",2,6,0,8,408,0
+13,"New Brunswick","Nouveau-Brunswick","19-03-2020",7,6,0,11,527,0
+13,"New Brunswick","Nouveau-Brunswick","20-03-2020",7,6,0,11,640,0
+13,"New Brunswick","Nouveau-Brunswick","21-03-2020",9,8,0,17,865,0
+13,"New Brunswick","Nouveau-Brunswick","22-03-2020",9,8,0,17,924,0
+13,"New Brunswick","Nouveau-Brunswick","23-03-2020",9,8,0,17,1139,0
+13,"New Brunswick","Nouveau-Brunswick","24-03-2020",18,8,0,18,1261,0
+13,"New Brunswick","Nouveau-Brunswick","25-03-2020",26,8,0,26,1680,0
+13,"New Brunswick","Nouveau-Brunswick","26-03-2020",33,8,0,33,1849,0
+13,"New Brunswick","Nouveau-Brunswick","27-03-2020",45,8,0,45,2179,0
+13,"New Brunswick","Nouveau-Brunswick","28-03-2020",51,8,0,51,2512,0
+13,"New Brunswick","Nouveau-Brunswick","29-03-2020",66,8,0,66,2847,0
+13,"New Brunswick","Nouveau-Brunswick","30-03-2020",68,8,0,68,3267,0
+13,"New Brunswick","Nouveau-Brunswick","31-03-2020",70,8,0,70,3630,0
+13,"New Brunswick","Nouveau-Brunswick","01-04-2020",81,8,0,81,4121,0
+13,"New Brunswick","Nouveau-Brunswick","02-04-2020",91,8,0,91,4625,0
+13,"New Brunswick","Nouveau-Brunswick","03-04-2020",95,8,0,95,5036,0
+13,"New Brunswick","Nouveau-Brunswick","04-04-2020",98,8,0,98,5297,0
+13,"New Brunswick","Nouveau-Brunswick","05-04-2020",101,8,0,101,5421,28
+13,"New Brunswick","Nouveau-Brunswick","06-04-2020",103,8,0,103,5678,30
+13,"New Brunswick","Nouveau-Brunswick","07-04-2020",105,8,0,105,6102,30
+13,"New Brunswick","Nouveau-Brunswick","08-04-2020",108,8,0,108,6477,30
+13,"New Brunswick","Nouveau-Brunswick","09-04-2020",111,8,0,111,6949,30
+13,"New Brunswick","Nouveau-Brunswick","10-04-2020",112,8,0,112,7299,30
+13,"New Brunswick","Nouveau-Brunswick","11-04-2020",112,8,0,112,7500,30
+13,"New Brunswick","Nouveau-Brunswick","12-04-2020",114,8,0,114,7760,30
+13,"New Brunswick","Nouveau-Brunswick","13-04-2020",116,8,0,116,8004,30
+13,"New Brunswick","Nouveau-Brunswick","14-04-2020",116,8,0,116,8229,30
+13,"New Brunswick","Nouveau-Brunswick","15-04-2020",117,8,0,117,8674,30
+13,"New Brunswick","Nouveau-Brunswick","16-04-2020",117,8,0,117,8945,30
+13,"New Brunswick","Nouveau-Brunswick","17-04-2020",117,8,0,117,9684,30
+13,"New Brunswick","Nouveau-Brunswick","18-04-2020",118,8,0,118,9958,87
+13,"New Brunswick","Nouveau-Brunswick","19-04-2020",118,8,0,118,10290,87
+24,"Quebec","Québec","31-12-2019",0,0,0,0,0,0
+24,"Quebec","Québec","01-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","02-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","03-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","04-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","05-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","06-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","07-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","08-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","09-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","10-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","11-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","12-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","13-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","14-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","15-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","16-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","17-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","18-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","19-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","20-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","21-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","22-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","23-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","24-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","25-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","26-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","27-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","28-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","29-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","30-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","31-01-2020",0,0,0,0,0,0
+24,"Quebec","Québec","01-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","02-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","03-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","04-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","05-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","06-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","07-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","08-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","09-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","10-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","11-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","12-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","13-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","14-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","15-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","16-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","17-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","18-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","19-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","20-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","21-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","22-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","23-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","24-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","25-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","26-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","27-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","28-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","29-02-2020",0,0,0,0,0,0
+24,"Quebec","Québec","01-03-2020",1,0,0,1,0,0
+24,"Quebec","Québec","02-03-2020",1,0,0,1,0,0
+24,"Quebec","Québec","03-03-2020",1,0,0,1,0,0
+24,"Quebec","Québec","04-03-2020",1,0,0,1,0,0
+24,"Quebec","Québec","05-03-2020",2,0,0,2,0,0
+24,"Quebec","Québec","06-03-2020",2,0,0,2,0,0
+24,"Quebec","Québec","07-03-2020",2,0,0,2,0,0
+24,"Quebec","Québec","08-03-2020",3,0,0,3,0,0
+24,"Quebec","Québec","09-03-2020",4,0,0,4,0,0
+24,"Quebec","Québec","10-03-2020",4,0,0,4,0,0
+24,"Quebec","Québec","11-03-2020",7,0,0,7,556,0
+24,"Quebec","Québec","12-03-2020",13,0,0,13,740,0
+24,"Quebec","Québec","13-03-2020",17,0,0,17,740,0
+24,"Quebec","Québec","14-03-2020",17,0,0,17,1584,0
+24,"Quebec","Québec","15-03-2020",24,0,0,24,2337,0
+24,"Quebec","Québec","16-03-2020",39,0,0,39,3129,0
+24,"Quebec","Québec","17-03-2020",50,0,0,50,4870,0
+24,"Quebec","Québec","18-03-2020",74,0,0,74,5880,0
+24,"Quebec","Québec","19-03-2020",121,0,0,121,6757,0
+24,"Quebec","Québec","20-03-2020",139,0,1,139,8539,0
+24,"Quebec","Québec","21-03-2020",202,19,4,221,8539,0
+24,"Quebec","Québec","22-03-2020",221,19,4,221,8539,0
+24,"Quebec","Québec","23-03-2020",221,407,4,628,8539,0
+24,"Quebec","Québec","24-03-2020",221,792,4,1013,15071,0
+24,"Quebec","Québec","25-03-2020",1339,792,6,1339,27828,0
+24,"Quebec","Québec","26-03-2020",1629,792,8,1629,33311,0
+24,"Quebec","Québec","27-03-2020",2021,792,18,2021,34356,0
+24,"Quebec","Québec","28-03-2020",2498,792,22,2498,46087,0
+24,"Quebec","Québec","29-03-2020",2840,792,22,2840,52204,0
+24,"Quebec","Québec","30-03-2020",3430,792,25,3430,59715,0
+24,"Quebec","Québec","31-03-2020",4162,792,31,4162,67540,0
+24,"Quebec","Québec","01-04-2020",4611,792,33,4611,69711,0
+24,"Quebec","Québec","02-04-2020",5518,792,36,5518,74542,0
+24,"Quebec","Québec","03-04-2020",6101,792,61,6101,83570,0
+24,"Quebec","Québec","04-04-2020",6997,792,75,6997,90227,0
+24,"Quebec","Québec","05-04-2020",7944,792,94,7944,95955,0
+24,"Quebec","Québec","06-04-2020",8580,792,121,8580,100113,611
+24,"Quebec","Québec","07-04-2020",9340,792,150,9340,104526,611
+24,"Quebec","Québec","08-04-2020",10031,792,175,10031,109270,611
+24,"Quebec","Québec","09-04-2020",10912,792,216,10912,113365,611
+24,"Quebec","Québec","10-04-2020",11677,792,241,11677,118217,611
+24,"Quebec","Québec","11-04-2020",12292,792,289,12292,123115,611
+24,"Quebec","Québec","12-04-2020",12846,792,328,12846,126771,611
+24,"Quebec","Québec","13-04-2020",13557,792,360,13557,131570,611
+24,"Quebec","Québec","14-04-2020",14248,792,435,14248,137451,611
+24,"Quebec","Québec","15-04-2020",14860,792,487,14860,143174,611
+24,"Quebec","Québec","16-04-2020",15857,792,630,15857,148571,611
+24,"Quebec","Québec","17-04-2020",16798,792,688,16798,153722,611
+24,"Quebec","Québec","18-04-2020",17521,792,805,17521,158770,3315
+24,"Quebec","Québec","19-04-2020",17521,792,805,17521,163548,3315
+35,"Ontario","Ontario","31-12-2019",0,0,0,0,0,0
+35,"Ontario","Ontario","01-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","02-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","03-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","04-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","05-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","06-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","07-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","08-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","09-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","10-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","11-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","12-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","13-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","14-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","15-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","16-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","17-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","18-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","19-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","20-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","21-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","22-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","23-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","24-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","25-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","26-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","27-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","28-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","29-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","30-01-2020",0,0,0,0,0,0
+35,"Ontario","Ontario","31-01-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","01-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","02-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","03-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","04-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","05-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","06-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","07-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","08-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","09-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","10-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","11-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","12-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","13-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","14-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","15-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","16-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","17-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","18-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","19-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","20-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","21-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","22-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","23-02-2020",3,0,0,3,0,0
+35,"Ontario","Ontario","24-02-2020",4,0,0,4,0,0
+35,"Ontario","Ontario","25-02-2020",4,0,0,4,0,0
+35,"Ontario","Ontario","26-02-2020",5,0,0,5,0,0
+35,"Ontario","Ontario","27-02-2020",6,0,0,6,0,0
+35,"Ontario","Ontario","28-02-2020",6,0,0,6,0,0
+35,"Ontario","Ontario","29-02-2020",8,0,0,8,0,0
+35,"Ontario","Ontario","01-03-2020",15,0,0,15,0,0
+35,"Ontario","Ontario","02-03-2020",15,0,0,15,0,0
+35,"Ontario","Ontario","03-03-2020",20,0,0,20,0,0
+35,"Ontario","Ontario","04-03-2020",20,0,0,20,0,0
+35,"Ontario","Ontario","05-03-2020",22,0,0,22,0,0
+35,"Ontario","Ontario","06-03-2020",28,0,0,28,0,0
+35,"Ontario","Ontario","07-03-2020",28,0,0,28,0,0
+35,"Ontario","Ontario","08-03-2020",31,0,0,31,0,0
+35,"Ontario","Ontario","09-03-2020",34,0,0,34,0,0
+35,"Ontario","Ontario","10-03-2020",34,0,0,34,0,0
+35,"Ontario","Ontario","11-03-2020",42,0,0,42,3394,0
+35,"Ontario","Ontario","12-03-2020",59,0,0,59,4185,0
+35,"Ontario","Ontario","13-03-2020",79,0,0,79,4185,0
+35,"Ontario","Ontario","14-03-2020",79,0,0,79,6646,0
+35,"Ontario","Ontario","15-03-2020",103,0,0,103,8461,0
+35,"Ontario","Ontario","16-03-2020",145,0,0,145,10178,0
+35,"Ontario","Ontario","17-03-2020",177,0,0,177,11167,0
+35,"Ontario","Ontario","18-03-2020",189,0,0,189,13869,0
+35,"Ontario","Ontario","19-03-2020",258,0,0,258,18488,0
+35,"Ontario","Ontario","20-03-2020",311,0,2,311,21499,0
+35,"Ontario","Ontario","21-03-2020",377,0,3,377,25470,0
+35,"Ontario","Ontario","22-03-2020",425,0,5,425,28570,0
+35,"Ontario","Ontario","23-03-2020",503,0,6,503,30688,0
+35,"Ontario","Ontario","24-03-2020",588,0,8,588,34727,0
+35,"Ontario","Ontario","25-03-2020",688,0,13,688,38040,0
+35,"Ontario","Ontario","26-03-2020",858,0,15,858,41217,0
+35,"Ontario","Ontario","27-03-2020",993,0,18,993,43651,0
+35,"Ontario","Ontario","28-03-2020",993,0,18,993,45836,0
+35,"Ontario","Ontario","29-03-2020",1355,0,19,1355,52002,0
+35,"Ontario","Ontario","30-03-2020",1706,0,33,1706,54112,0
+35,"Ontario","Ontario","31-03-2020",1966,0,33,1966,55909,0
+35,"Ontario","Ontario","01-04-2020",2392,0,37,2392,61009,0
+35,"Ontario","Ontario","02-04-2020",2793,0,53,2793,64785,0
+35,"Ontario","Ontario","03-04-2020",3255,0,67,3255,67998,0
+35,"Ontario","Ontario","04-04-2020",3630,0,94,3630,72674,0
+35,"Ontario","Ontario","05-04-2020",4038,0,119,4038,76027,1219
+35,"Ontario","Ontario","06-04-2020",4347,0,132,4347,79125,1624
+35,"Ontario","Ontario","07-04-2020",4726,0,153,4726,82055,1624
+35,"Ontario","Ontario","08-04-2020",5276,0,174,5276,85703,1624
+35,"Ontario","Ontario","09-04-2020",5759,0,200,5759,89906,1624
+35,"Ontario","Ontario","10-04-2020",6237,0,222,6237,94271,1624
+35,"Ontario","Ontario","11-04-2020",6648,0,253,6648,97838,1624
+35,"Ontario","Ontario","12-04-2020",7049,0,274,7049,104784,1624
+35,"Ontario","Ontario","13-04-2020",7470,0,291,7470,109764,1624
+35,"Ontario","Ontario","14-04-2020",7953,0,334,7953,115189,1624
+35,"Ontario","Ontario","15-04-2020",8447,0,385,8447,120182,1624
+35,"Ontario","Ontario","16-04-2020",8961,0,423,8961,125309,1624
+35,"Ontario","Ontario","17-04-2020",9525,0,478,9525,132133,1624
+35,"Ontario","Ontario","18-04-2020",10010,0,514,10010,139448,4875
+35,"Ontario","Ontario","19-04-2020",10578,0,553,10578,139448,5209
+46,"Manitoba","Manitoba","31-12-2019",0,0,0,0,0,0
+46,"Manitoba","Manitoba","01-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","02-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","03-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","04-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","05-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","06-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","07-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","08-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","09-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","10-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","11-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","12-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","13-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","14-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","15-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","16-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","17-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","18-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","19-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","20-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","21-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","22-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","23-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","24-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","25-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","26-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","27-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","28-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","29-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","30-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","31-01-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","01-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","02-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","03-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","04-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","05-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","06-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","07-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","08-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","09-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","10-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","11-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","12-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","13-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","14-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","15-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","16-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","17-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","18-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","19-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","20-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","21-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","22-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","23-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","24-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","25-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","26-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","27-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","28-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","29-02-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","01-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","02-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","03-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","04-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","05-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","06-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","07-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","08-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","09-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","10-03-2020",0,0,0,0,0,0
+46,"Manitoba","Manitoba","11-03-2020",0,0,0,0,352,0
+46,"Manitoba","Manitoba","12-03-2020",0,1,0,1,352,0
+46,"Manitoba","Manitoba","13-03-2020",1,2,0,3,352,0
+46,"Manitoba","Manitoba","14-03-2020",1,3,0,4,837,0
+46,"Manitoba","Manitoba","15-03-2020",4,3,0,4,837,0
+46,"Manitoba","Manitoba","16-03-2020",4,3,0,7,1848,0
+46,"Manitoba","Manitoba","17-03-2020",7,3,0,7,2216,0
+46,"Manitoba","Manitoba","18-03-2020",8,7,0,15,2739,0
+46,"Manitoba","Manitoba","19-03-2020",17,7,0,17,3189,0
+46,"Manitoba","Manitoba","20-03-2020",17,7,0,17,3367,0
+46,"Manitoba","Manitoba","21-03-2020",17,8,0,19,3668,0
+46,"Manitoba","Manitoba","22-03-2020",17,8,0,19,3936,0
+46,"Manitoba","Manitoba","23-03-2020",17,9,0,20,4133,0
+46,"Manitoba","Manitoba","24-03-2020",17,10,0,21,4406,0
+46,"Manitoba","Manitoba","25-03-2020",17,24,0,35,4740,0
+46,"Manitoba","Manitoba","26-03-2020",17,25,0,36,5429,0
+46,"Manitoba","Manitoba","27-03-2020",25,25,1,39,6022,0
+46,"Manitoba","Manitoba","28-03-2020",25,39,1,64,6931,0
+46,"Manitoba","Manitoba","29-03-2020",69,39,1,72,7876,0
+46,"Manitoba","Manitoba","30-03-2020",83,39,1,96,8326,0
+46,"Manitoba","Manitoba","31-03-2020",91,39,1,103,8629,0
+46,"Manitoba","Manitoba","01-04-2020",109,39,1,127,9811,0
+46,"Manitoba","Manitoba","02-04-2020",152,39,1,167,11098,0
+46,"Manitoba","Manitoba","03-04-2020",164,39,2,182,11650,0
+46,"Manitoba","Manitoba","04-04-2020",172,39,2,194,12191,0
+46,"Manitoba","Manitoba","05-04-2020",187,39,2,203,12771,17
+46,"Manitoba","Manitoba","06-04-2020",190,39,2,204,13788,17
+46,"Manitoba","Manitoba","07-04-2020",203,39,3,217,13990,17
+46,"Manitoba","Manitoba","08-04-2020",206,39,3,221,14569,17
+46,"Manitoba","Manitoba","09-04-2020",207,39,3,224,14569,17
+46,"Manitoba","Manitoba","10-04-2020",215,39,4,230,16075,17
+46,"Manitoba","Manitoba","11-04-2020",226,39,4,243,16220,17
+46,"Manitoba","Manitoba","12-04-2020",226,39,4,243,17066,17
+46,"Manitoba","Manitoba","13-04-2020",229,39,4,246,17119,17
+46,"Manitoba","Manitoba","14-04-2020",229,39,4,246,17789,17
+46,"Manitoba","Manitoba","15-04-2020",231,39,5,246,17789,17
+46,"Manitoba","Manitoba","16-04-2020",239,39,5,250,18318,17
+46,"Manitoba","Manitoba","17-04-2020",239,39,5,250,18814,17
+46,"Manitoba","Manitoba","18-04-2020",243,39,5,253,19412,132
+46,"Manitoba","Manitoba","19-04-2020",243,39,5,253,19412,140
+47,"Saskatchewan","Saskatchewan","31-12-2019",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","01-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","02-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","03-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","04-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","05-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","06-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","07-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","08-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","09-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","10-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","11-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","12-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","13-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","14-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","15-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","16-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","17-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","18-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","19-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","20-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","21-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","22-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","23-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","24-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","25-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","26-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","27-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","28-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","29-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","30-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","31-01-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","01-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","02-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","03-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","04-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","05-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","06-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","07-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","08-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","09-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","10-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","11-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","12-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","13-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","14-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","15-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","16-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","17-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","18-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","19-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","20-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","21-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","22-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","23-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","24-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","25-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","26-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","27-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","28-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","29-02-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","01-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","02-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","03-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","04-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","05-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","06-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","07-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","08-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","09-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","10-03-2020",0,0,0,0,0,0
+47,"Saskatchewan","Saskatchewan","11-03-2020",0,0,0,0,204,0
+47,"Saskatchewan","Saskatchewan","12-03-2020",0,1,0,1,285,0
+47,"Saskatchewan","Saskatchewan","13-03-2020",0,1,0,1,285,0
+47,"Saskatchewan","Saskatchewan","14-03-2020",0,2,0,2,349,0
+47,"Saskatchewan","Saskatchewan","15-03-2020",0,2,0,2,349,0
+47,"Saskatchewan","Saskatchewan","16-03-2020",1,5,0,6,881,0
+47,"Saskatchewan","Saskatchewan","17-03-2020",2,5,0,7,1066,0
+47,"Saskatchewan","Saskatchewan","18-03-2020",2,6,0,8,1910,0
+47,"Saskatchewan","Saskatchewan","19-03-2020",8,12,0,20,1910,0
+47,"Saskatchewan","Saskatchewan","20-03-2020",8,18,0,26,1910,0
+47,"Saskatchewan","Saskatchewan","21-03-2020",25,19,0,44,3807,0
+47,"Saskatchewan","Saskatchewan","22-03-2020",33,19,0,52,4407,0
+47,"Saskatchewan","Saskatchewan","23-03-2020",65,19,0,66,5130,0
+47,"Saskatchewan","Saskatchewan","24-03-2020",72,19,0,72,5604,0
+47,"Saskatchewan","Saskatchewan","25-03-2020",86,19,0,86,6111,0
+47,"Saskatchewan","Saskatchewan","26-03-2020",95,19,0,95,6729,0
+47,"Saskatchewan","Saskatchewan","27-03-2020",104,19,0,104,7360,0
+47,"Saskatchewan","Saskatchewan","28-03-2020",134,19,0,134,8009,0
+47,"Saskatchewan","Saskatchewan","29-03-2020",134,19,0,134,8822,0
+47,"Saskatchewan","Saskatchewan","30-03-2020",175,19,2,175,9372,0
+47,"Saskatchewan","Saskatchewan","31-03-2020",184,19,2,184,9372,0
+47,"Saskatchewan","Saskatchewan","01-04-2020",193,19,3,193,10202,0
+47,"Saskatchewan","Saskatchewan","02-04-2020",206,19,3,206,11034,0
+47,"Saskatchewan","Saskatchewan","03-04-2020",220,19,3,220,11720,0
+47,"Saskatchewan","Saskatchewan","04-04-2020",231,19,3,231,12244,0
+47,"Saskatchewan","Saskatchewan","05-04-2020",249,19,3,249,13055,55
+47,"Saskatchewan","Saskatchewan","06-04-2020",253,19,3,253,13680,81
+47,"Saskatchewan","Saskatchewan","07-04-2020",260,19,3,260,14203,81
+47,"Saskatchewan","Saskatchewan","08-04-2020",271,19,3,271,15059,81
+47,"Saskatchewan","Saskatchewan","09-04-2020",278,19,3,278,16059,81
+47,"Saskatchewan","Saskatchewan","10-04-2020",285,19,3,285,16952,81
+47,"Saskatchewan","Saskatchewan","11-04-2020",289,19,4,289,17716,81
+47,"Saskatchewan","Saskatchewan","12-04-2020",296,19,4,298,18499,81
+47,"Saskatchewan","Saskatchewan","13-04-2020",300,19,4,300,18995,81
+47,"Saskatchewan","Saskatchewan","14-04-2020",301,19,4,301,19442,81
+47,"Saskatchewan","Saskatchewan","15-04-2020",304,19,4,304,20013,81
+47,"Saskatchewan","Saskatchewan","16-04-2020",305,19,4,305,20631,81
+47,"Saskatchewan","Saskatchewan","17-04-2020",306,19,4,307,21212,81
+47,"Saskatchewan","Saskatchewan","18-04-2020",310,19,4,313,21997,234
+47,"Saskatchewan","Saskatchewan","19-04-2020",310,19,4,313,22759,234
+48,"Alberta","Alberta","31-12-2019",0,0,0,0,0,0
+48,"Alberta","Alberta","01-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","02-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","03-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","04-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","05-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","06-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","07-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","08-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","09-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","10-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","11-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","12-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","13-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","14-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","15-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","16-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","17-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","18-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","19-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","20-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","21-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","22-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","23-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","24-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","25-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","26-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","27-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","28-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","29-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","30-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","31-01-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","01-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","02-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","03-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","04-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","05-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","06-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","07-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","08-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","09-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","10-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","11-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","12-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","13-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","14-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","15-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","16-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","17-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","18-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","19-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","20-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","21-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","22-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","23-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","24-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","25-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","26-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","27-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","28-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","29-02-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","01-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","02-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","03-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","04-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","05-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","06-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","07-03-2020",0,0,0,0,0,0
+48,"Alberta","Alberta","08-03-2020",1,0,0,1,0,0
+48,"Alberta","Alberta","09-03-2020",7,0,0,7,0,0
+48,"Alberta","Alberta","10-03-2020",7,0,0,7,0,0
+48,"Alberta","Alberta","11-03-2020",14,0,0,14,1969,0
+48,"Alberta","Alberta","12-03-2020",19,0,0,19,4109,0
+48,"Alberta","Alberta","13-03-2020",23,0,0,23,4109,0
+48,"Alberta","Alberta","14-03-2020",29,0,0,29,5247,0
+48,"Alberta","Alberta","15-03-2020",39,0,0,39,5247,0
+48,"Alberta","Alberta","16-03-2020",56,0,0,56,10238,0
+48,"Alberta","Alberta","17-03-2020",74,0,0,74,11487,0
+48,"Alberta","Alberta","18-03-2020",97,0,0,97,13686,0
+48,"Alberta","Alberta","19-03-2020",146,0,0,146,16507,0
+48,"Alberta","Alberta","20-03-2020",195,0,1,195,19782,0
+48,"Alberta","Alberta","21-03-2020",226,0,1,226,23060,0
+48,"Alberta","Alberta","22-03-2020",259,0,1,259,26999,0
+48,"Alberta","Alberta","23-03-2020",301,0,1,301,29757,0
+48,"Alberta","Alberta","24-03-2020",358,0,2,358,32776,0
+48,"Alberta","Alberta","25-03-2020",419,0,2,419,35508,0
+48,"Alberta","Alberta","26-03-2020",486,0,2,486,36600,0
+48,"Alberta","Alberta","27-03-2020",542,0,2,542,38215,0
+48,"Alberta","Alberta","28-03-2020",542,0,2,542,38215,0
+48,"Alberta","Alberta","29-03-2020",621,0,2,621,44097,0
+48,"Alberta","Alberta","30-03-2020",690,0,8,690,46057,0
+48,"Alberta","Alberta","31-03-2020",754,0,9,754,48692,0
+48,"Alberta","Alberta","01-04-2020",754,0,9,754,53141,0
+48,"Alberta","Alberta","02-04-2020",968,0,13,968,57096,0
+48,"Alberta","Alberta","03-04-2020",1075,0,18,1075,60508,0
+48,"Alberta","Alberta","04-04-2020",1075,0,18,1075,62520,0
+48,"Alberta","Alberta","05-04-2020",1250,0,23,1250,63315,240
+48,"Alberta","Alberta","06-04-2020",1348,0,24,1348,64183,361
+48,"Alberta","Alberta","07-04-2020",1373,0,26,1373,65265,361
+48,"Alberta","Alberta","08-04-2020",1423,0,29,1423,66783,361
+48,"Alberta","Alberta","09-04-2020",1451,0,32,1451,68116,361
+48,"Alberta","Alberta","10-04-2020",1500,0,39,1500,70080,361
+48,"Alberta","Alberta","11-04-2020",1569,0,40,1569,72779,361
+48,"Alberta","Alberta","12-04-2020",1651,0,44,1651,74709,361
+48,"Alberta","Alberta","13-04-2020",1732,0,46,1732,77007,361
+48,"Alberta","Alberta","14-04-2020",1870,0,48,1870,79695,361
+48,"Alberta","Alberta","15-04-2020",1996,0,48,1996,79695,361
+48,"Alberta","Alberta","16-04-2020",2158,0,50,2158,85502,361
+48,"Alberta","Alberta","17-04-2020",2397,0,50,2397,89144,361
+48,"Alberta","Alberta","18-04-2020",2562,0,51,2562,92962,1162
+48,"Alberta","Alberta","19-04-2020",2562,0,51,2562,92962,1162
+59,"British Columbia","Colombie-Britannique","31-12-2019",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","01-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","02-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","03-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","04-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","05-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","06-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","07-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","08-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","09-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","10-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","11-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","12-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","13-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","14-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","15-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","16-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","17-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","18-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","19-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","20-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","21-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","22-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","23-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","24-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","25-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","26-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","27-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","28-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","29-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","30-01-2020",0,0,0,0,0,0
+59,"British Columbia","Colombie-Britannique","31-01-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","01-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","02-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","03-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","04-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","05-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","06-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","07-02-2020",1,0,0,1,0,0
+59,"British Columbia","Colombie-Britannique","08-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","09-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","10-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","11-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","12-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","13-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","14-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","15-02-2020",4,0,0,4,0,0
+59,"British Columbia","Colombie-Britannique","16-02-2020",5,0,0,5,0,0
+59,"British Columbia","Colombie-Britannique","17-02-2020",5,0,0,5,0,0
+59,"British Columbia","Colombie-Britannique","18-02-2020",5,0,0,5,0,0
+59,"British Columbia","Colombie-Britannique","19-02-2020",5,0,0,5,0,0
+59,"British Columbia","Colombie-Britannique","20-02-2020",5,0,0,5,0,0
+59,"British Columbia","Colombie-Britannique","21-02-2020",6,0,0,6,0,0
+59,"British Columbia","Colombie-Britannique","22-02-2020",6,0,0,6,0,0
+59,"British Columbia","Colombie-Britannique","23-02-2020",6,0,0,6,0,0
+59,"British Columbia","Colombie-Britannique","24-02-2020",6,0,0,6,0,0
+59,"British Columbia","Colombie-Britannique","25-02-2020",7,0,0,7,0,0
+59,"British Columbia","Colombie-Britannique","26-02-2020",7,0,0,7,0,0
+59,"British Columbia","Colombie-Britannique","27-02-2020",7,0,0,7,0,0
+59,"British Columbia","Colombie-Britannique","28-02-2020",7,0,0,7,0,0
+59,"British Columbia","Colombie-Britannique","29-02-2020",7,0,0,7,0,0
+59,"British Columbia","Colombie-Britannique","01-03-2020",8,0,0,8,0,0
+59,"British Columbia","Colombie-Britannique","02-03-2020",8,0,0,8,0,0
+59,"British Columbia","Colombie-Britannique","03-03-2020",12,0,0,12,0,0
+59,"British Columbia","Colombie-Britannique","04-03-2020",12,0,0,12,0,0
+59,"British Columbia","Colombie-Britannique","05-03-2020",21,0,0,21,0,0
+59,"British Columbia","Colombie-Britannique","06-03-2020",21,0,0,21,0,0
+59,"British Columbia","Colombie-Britannique","07-03-2020",27,0,0,27,0,0
+59,"British Columbia","Colombie-Britannique","08-03-2020",27,0,0,27,0,0
+59,"British Columbia","Colombie-Britannique","09-03-2020",32,0,0,32,0,0
+59,"British Columbia","Colombie-Britannique","10-03-2020",32,0,0,32,0,0
+59,"British Columbia","Colombie-Britannique","11-03-2020",39,0,0,39,4373,0
+59,"British Columbia","Colombie-Britannique","12-03-2020",46,0,0,46,5195,0
+59,"British Columbia","Colombie-Britannique","13-03-2020",53,0,0,53,5195,0
+59,"British Columbia","Colombie-Britannique","14-03-2020",64,0,0,64,7033,0
+59,"British Columbia","Colombie-Britannique","15-03-2020",73,0,0,73,7033,0
+59,"British Columbia","Colombie-Britannique","16-03-2020",73,0,0,73,9926,0
+59,"British Columbia","Colombie-Britannique","17-03-2020",103,0,0,103,11612,0
+59,"British Columbia","Colombie-Britannique","18-03-2020",186,0,0,186,13388,0
+59,"British Columbia","Colombie-Britannique","19-03-2020",271,0,0,271,16382,0
+59,"British Columbia","Colombie-Britannique","20-03-2020",271,0,8,271,18792,0
+59,"British Columbia","Colombie-Britannique","21-03-2020",424,0,10,424,20417,0
+59,"British Columbia","Colombie-Britannique","22-03-2020",424,0,10,424,22135,0
+59,"British Columbia","Colombie-Britannique","23-03-2020",472,0,13,472,23460,0
+59,"British Columbia","Colombie-Britannique","24-03-2020",617,0,13,617,26305,0
+59,"British Columbia","Colombie-Britannique","25-03-2020",659,0,14,659,28344,0
+59,"British Columbia","Colombie-Britannique","26-03-2020",725,0,14,725,30238,0
+59,"British Columbia","Colombie-Britannique","27-03-2020",725,0,14,725,31536,0
+59,"British Columbia","Colombie-Britannique","28-03-2020",884,0,16,884,31536,0
+59,"British Columbia","Colombie-Britannique","29-03-2020",884,0,17,884,33476,0
+59,"British Columbia","Colombie-Britannique","30-03-2020",960,0,19,960,34969,0
+59,"British Columbia","Colombie-Britannique","31-03-2020",970,0,19,970,36024,0
+59,"British Columbia","Colombie-Britannique","01-04-2020",1066,0,25,1066,36364,0
+59,"British Columbia","Colombie-Britannique","02-04-2020",1121,0,31,1121,36966,0
+59,"British Columbia","Colombie-Britannique","03-04-2020",1174,0,35,1174,39926,0
+59,"British Columbia","Colombie-Britannique","04-04-2020",1203,0,38,1203,40771,0
+59,"British Columbia","Colombie-Britannique","05-04-2020",1203,0,38,1203,41556,704
+59,"British Columbia","Colombie-Britannique","06-04-2020",1266,0,39,1266,42665,783
+59,"British Columbia","Colombie-Britannique","07-04-2020",1291,0,43,1291,43257,783
+59,"British Columbia","Colombie-Britannique","08-04-2020",1336,0,48,1336,44269,783
+59,"British Columbia","Colombie-Britannique","09-04-2020",1370,0,50,1370,45156,783
+59,"British Columbia","Colombie-Britannique","10-04-2020",1410,0,55,1410,46236,783
+59,"British Columbia","Colombie-Britannique","11-04-2020",1445,0,58,1445,46236,783
+59,"British Columbia","Colombie-Britannique","12-04-2020",1445,0,58,1445,48360,783
+59,"British Columbia","Colombie-Britannique","13-04-2020",1490,0,69,1490,49370,783
+59,"British Columbia","Colombie-Britannique","14-04-2020",1517,0,72,1517,50134,783
+59,"British Columbia","Colombie-Britannique","15-04-2020",1561,0,75,1561,50438,783
+59,"British Columbia","Colombie-Britannique","16-04-2020",1561,0,75,1561,51297,783
+59,"British Columbia","Colombie-Britannique","17-04-2020",1575,0,77,1575,52378,783
+59,"British Columbia","Colombie-Britannique","18-04-2020",1618,0,78,1618,53569,966
+59,"British Columbia","Colombie-Britannique","19-04-2020",1618,0,78,1618,54778,966
+60,"Yukon","Yukon","31-12-2019",0,0,0,0,0,0
+60,"Yukon","Yukon","01-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","02-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","03-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","04-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","05-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","06-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","07-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","08-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","09-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","10-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","11-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","12-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","13-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","14-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","15-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","16-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","17-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","18-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","19-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","20-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","21-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","22-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","23-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","24-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","25-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","26-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","27-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","28-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","29-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","30-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","31-01-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","01-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","02-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","03-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","04-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","05-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","06-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","07-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","08-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","09-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","10-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","11-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","12-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","13-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","14-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","15-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","16-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","17-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","18-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","19-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","20-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","21-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","22-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","23-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","24-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","25-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","26-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","27-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","28-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","29-02-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","01-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","02-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","03-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","04-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","05-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","06-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","07-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","08-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","09-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","10-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","11-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","12-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","13-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","14-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","15-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","16-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","17-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","18-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","19-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","20-03-2020",0,0,0,0,0,0
+60,"Yukon","Yukon","21-03-2020",0,0,0,0,416,0
+60,"Yukon","Yukon","22-03-2020",0,0,0,0,416,0
+60,"Yukon","Yukon","23-03-2020",2,0,0,2,416,0
+60,"Yukon","Yukon","24-03-2020",2,0,0,2,416,0
+60,"Yukon","Yukon","25-03-2020",3,0,0,3,416,0
+60,"Yukon","Yukon","26-03-2020",3,0,0,3,416,0
+60,"Yukon","Yukon","27-03-2020",3,0,0,3,603,0
+60,"Yukon","Yukon","28-03-2020",4,0,0,4,641,0
+60,"Yukon","Yukon","29-03-2020",4,0,0,4,678,0
+60,"Yukon","Yukon","30-03-2020",5,0,0,5,688,0
+60,"Yukon","Yukon","31-03-2020",5,0,0,5,702,0
+60,"Yukon","Yukon","01-04-2020",5,0,0,5,722,0
+60,"Yukon","Yukon","02-04-2020",6,0,0,6,742,0
+60,"Yukon","Yukon","03-04-2020",6,0,0,6,753,0
+60,"Yukon","Yukon","04-04-2020",6,0,0,6,765,0
+60,"Yukon","Yukon","05-04-2020",6,0,0,6,770,4
+60,"Yukon","Yukon","06-04-2020",7,0,0,7,775,4
+60,"Yukon","Yukon","07-04-2020",7,0,0,7,787,4
+60,"Yukon","Yukon","08-04-2020",7,0,0,7,794,4
+60,"Yukon","Yukon","09-04-2020",8,0,0,8,806,4
+60,"Yukon","Yukon","10-04-2020",8,0,0,8,806,4
+60,"Yukon","Yukon","11-04-2020",8,0,0,8,815,4
+60,"Yukon","Yukon","12-04-2020",8,0,0,8,815,4
+60,"Yukon","Yukon","13-04-2020",8,0,0,8,832,4
+60,"Yukon","Yukon","14-04-2020",8,0,0,8,835,4
+60,"Yukon","Yukon","15-04-2020",8,0,0,8,841,4
+60,"Yukon","Yukon","16-04-2020",8,0,0,8,849,4
+60,"Yukon","Yukon","17-04-2020",9,0,0,9,852,4
+60,"Yukon","Yukon","18-04-2020",9,0,0,9,859,8
+60,"Yukon","Yukon","19-04-2020",9,0,0,9,859,8
+61,"Northwest Territories","Territoires du Nord-Ouest","31-12-2019",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","01-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","02-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","03-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","04-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","05-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","06-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","07-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","08-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","09-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","10-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","11-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","12-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","13-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","14-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","15-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","16-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","17-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","18-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","19-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","20-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","21-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","22-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","23-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","24-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","25-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","26-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","27-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","28-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","29-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","30-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","31-01-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","01-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","02-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","03-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","04-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","05-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","06-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","07-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","08-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","09-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","10-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","11-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","12-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","13-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","14-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","15-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","16-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","17-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","18-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","19-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","20-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","21-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","22-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","23-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","24-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","25-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","26-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","27-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","28-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","29-02-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","01-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","02-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","03-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","04-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","05-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","06-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","07-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","08-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","09-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","10-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","11-03-2020",0,0,0,0,0,0
+61,"Northwest Territories","Territoires du Nord-Ouest","12-03-2020",0,0,0,0,34,0
+61,"Northwest Territories","Territoires du Nord-Ouest","13-03-2020",0,0,0,0,34,0
+61,"Northwest Territories","Territoires du Nord-Ouest","14-03-2020",0,0,0,0,76,0
+61,"Northwest Territories","Territoires du Nord-Ouest","15-03-2020",0,0,0,0,76,0
+61,"Northwest Territories","Territoires du Nord-Ouest","16-03-2020",0,0,0,0,138,0
+61,"Northwest Territories","Territoires du Nord-Ouest","17-03-2020",0,0,0,0,145,0
+61,"Northwest Territories","Territoires du Nord-Ouest","18-03-2020",0,0,0,0,145,0
+61,"Northwest Territories","Territoires du Nord-Ouest","19-03-2020",0,0,0,0,221,0
+61,"Northwest Territories","Territoires du Nord-Ouest","20-03-2020",0,0,0,0,268,0
+61,"Northwest Territories","Territoires du Nord-Ouest","21-03-2020",1,0,0,1,301,0
+61,"Northwest Territories","Territoires du Nord-Ouest","22-03-2020",1,0,0,1,301,0
+61,"Northwest Territories","Territoires du Nord-Ouest","23-03-2020",1,0,0,1,364,0
+61,"Northwest Territories","Territoires du Nord-Ouest","24-03-2020",1,0,0,1,481,0
+61,"Northwest Territories","Territoires du Nord-Ouest","25-03-2020",1,0,0,1,481,0
+61,"Northwest Territories","Territoires du Nord-Ouest","26-03-2020",1,0,0,1,481,0
+61,"Northwest Territories","Territoires du Nord-Ouest","27-03-2020",1,0,0,1,545,0
+61,"Northwest Territories","Territoires du Nord-Ouest","28-03-2020",1,0,0,1,740,0
+61,"Northwest Territories","Territoires du Nord-Ouest","29-03-2020",1,0,0,1,740,0
+61,"Northwest Territories","Territoires du Nord-Ouest","30-03-2020",1,0,0,1,740,0
+61,"Northwest Territories","Territoires du Nord-Ouest","31-03-2020",1,0,0,1,808,0
+61,"Northwest Territories","Territoires du Nord-Ouest","01-04-2020",2,0,0,2,951,0
+61,"Northwest Territories","Territoires du Nord-Ouest","02-04-2020",2,0,0,2,969,0
+61,"Northwest Territories","Territoires du Nord-Ouest","03-04-2020",4,0,0,4,1109,0
+61,"Northwest Territories","Territoires du Nord-Ouest","04-04-2020",4,0,0,4,1169,0
+61,"Northwest Territories","Territoires du Nord-Ouest","05-04-2020",4,0,0,4,1215,1
+61,"Northwest Territories","Territoires du Nord-Ouest","06-04-2020",5,0,0,5,1217,1
+61,"Northwest Territories","Territoires du Nord-Ouest","07-04-2020",5,0,0,5,1230,1
+61,"Northwest Territories","Territoires du Nord-Ouest","08-04-2020",5,0,0,5,1251,1
+61,"Northwest Territories","Territoires du Nord-Ouest","09-04-2020",5,0,0,5,1265,1
+61,"Northwest Territories","Territoires du Nord-Ouest","10-04-2020",5,0,0,5,1342,1
+61,"Northwest Territories","Territoires du Nord-Ouest","11-04-2020",5,0,0,5,1370,1
+61,"Northwest Territories","Territoires du Nord-Ouest","12-04-2020",5,0,0,5,1386,1
+61,"Northwest Territories","Territoires du Nord-Ouest","13-04-2020",5,0,0,5,1390,1
+61,"Northwest Territories","Territoires du Nord-Ouest","14-04-2020",5,0,0,5,1393,1
+61,"Northwest Territories","Territoires du Nord-Ouest","15-04-2020",5,0,0,5,1401,1
+61,"Northwest Territories","Territoires du Nord-Ouest","16-04-2020",5,0,0,5,1438,1
+61,"Northwest Territories","Territoires du Nord-Ouest","17-04-2020",5,0,0,5,1447,1
+61,"Northwest Territories","Territoires du Nord-Ouest","18-04-2020",5,0,0,5,1459,3
+61,"Northwest Territories","Territoires du Nord-Ouest","19-04-2020",5,0,0,5,1459,3
+62,"Nunavut","Nunavut","31-12-2019",0,0,0,0,0,0
+62,"Nunavut","Nunavut","01-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","02-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","03-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","04-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","05-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","06-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","07-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","08-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","09-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","10-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","11-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","12-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","13-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","14-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","15-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","16-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","17-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","18-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","19-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","20-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","21-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","22-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","23-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","24-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","25-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","26-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","27-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","28-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","29-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","30-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","31-01-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","01-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","02-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","03-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","04-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","05-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","06-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","07-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","08-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","09-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","10-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","11-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","12-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","13-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","14-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","15-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","16-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","17-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","18-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","19-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","20-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","21-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","22-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","23-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","24-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","25-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","26-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","27-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","28-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","29-02-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","01-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","02-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","03-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","04-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","05-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","06-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","07-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","08-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","09-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","10-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","11-03-2020",0,0,0,0,0,0
+62,"Nunavut","Nunavut","12-03-2020",0,0,0,0,1,0
+62,"Nunavut","Nunavut","13-03-2020",0,0,0,0,1,0
+62,"Nunavut","Nunavut","14-03-2020",0,0,0,0,6,0
+62,"Nunavut","Nunavut","15-03-2020",0,0,0,0,6,0
+62,"Nunavut","Nunavut","16-03-2020",0,0,0,0,7,0
+62,"Nunavut","Nunavut","17-03-2020",0,0,0,0,7,0
+62,"Nunavut","Nunavut","18-03-2020",0,0,0,0,7,0
+62,"Nunavut","Nunavut","19-03-2020",0,0,0,0,8,0
+62,"Nunavut","Nunavut","20-03-2020",0,0,0,0,8,0
+62,"Nunavut","Nunavut","21-03-2020",0,0,0,0,10,0
+62,"Nunavut","Nunavut","22-03-2020",0,0,0,0,13,0
+62,"Nunavut","Nunavut","23-03-2020",0,0,0,0,13,0
+62,"Nunavut","Nunavut","24-03-2020",0,0,0,0,81,0
+62,"Nunavut","Nunavut","25-03-2020",0,0,0,0,97,0
+62,"Nunavut","Nunavut","26-03-2020",0,0,0,0,116,0
+62,"Nunavut","Nunavut","27-03-2020",0,0,0,0,125,0
+62,"Nunavut","Nunavut","28-03-2020",0,0,0,0,125,0
+62,"Nunavut","Nunavut","29-03-2020",0,0,0,0,125,0
+62,"Nunavut","Nunavut","30-03-2020",0,0,0,0,158,0
+62,"Nunavut","Nunavut","31-03-2020",0,0,0,0,167,0
+62,"Nunavut","Nunavut","01-04-2020",0,0,0,0,183,0
+62,"Nunavut","Nunavut","02-04-2020",0,0,0,0,193,0
+62,"Nunavut","Nunavut","03-04-2020",0,0,0,0,207,0
+62,"Nunavut","Nunavut","04-04-2020",0,0,0,0,207,0
+62,"Nunavut","Nunavut","05-04-2020",0,0,0,0,227,0
+62,"Nunavut","Nunavut","06-04-2020",0,0,0,0,229,0
+62,"Nunavut","Nunavut","07-04-2020",0,0,0,0,234,0
+62,"Nunavut","Nunavut","08-04-2020",0,0,0,0,240,0
+62,"Nunavut","Nunavut","09-04-2020",0,0,0,0,247,0
+62,"Nunavut","Nunavut","10-04-2020",0,0,0,0,261,0
+62,"Nunavut","Nunavut","11-04-2020",0,0,0,0,261,0
+62,"Nunavut","Nunavut","12-04-2020",0,0,0,0,264,0
+62,"Nunavut","Nunavut","13-04-2020",0,0,0,0,264,0
+62,"Nunavut","Nunavut","14-04-2020",0,0,0,0,264,0
+62,"Nunavut","Nunavut","15-04-2020",0,0,0,0,264,0
+62,"Nunavut","Nunavut","16-04-2020",0,0,0,0,275,0
+62,"Nunavut","Nunavut","17-04-2020",0,0,0,0,286,0
+62,"Nunavut","Nunavut","18-04-2020",0,0,0,0,304,0
+62,"Nunavut","Nunavut","19-04-2020",0,0,0,0,304,0
+99,"Repatriated travellers","Voyageurs rapatriés","31-12-2019",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","01-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","02-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","03-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","04-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","05-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","06-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","07-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","08-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","09-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","10-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","11-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","12-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","13-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","14-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","15-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","16-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","17-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","18-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","19-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","20-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","21-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","22-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","23-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","24-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","25-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","26-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","27-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","28-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","29-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","30-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","31-01-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","01-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","02-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","03-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","04-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","05-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","06-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","07-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","08-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","09-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","10-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","11-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","12-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","13-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","14-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","15-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","16-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","17-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","18-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","19-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","20-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","21-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","22-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","23-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","24-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","25-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","26-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","27-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","28-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","29-02-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","01-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","02-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","03-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","04-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","05-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","06-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","07-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","08-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","09-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","10-03-2020",0,0,0,0,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","11-03-2020",1,0,0,1,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","12-03-2020",1,0,0,1,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","13-03-2020",2,0,0,2,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","14-03-2020",2,0,0,2,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","15-03-2020",4,0,0,4,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","16-03-2020",4,0,0,4,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","17-03-2020",8,0,0,8,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","18-03-2020",9,0,0,9,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","19-03-2020",10,0,0,10,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","20-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","21-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","22-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","23-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","24-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","25-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","26-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","27-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","28-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","29-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","30-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","31-03-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","01-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","02-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","03-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","04-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","05-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","06-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","07-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","08-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","09-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","10-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","11-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","12-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","13-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","14-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","15-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","16-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","17-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","18-04-2020",13,0,0,13,0,0
+99,"Repatriated travellers","Voyageurs rapatriés","19-04-2020",13,0,0,13,0,0
