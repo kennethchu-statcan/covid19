@@ -1,0 +1,788 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> command.arguments <- commandArgs(trailingOnly = TRUE);
+> data.directory    <- normalizePath(command.arguments[1]);
+> code.directory    <- normalizePath(command.arguments[2]);
+> output.directory  <- normalizePath(command.arguments[3]);
+> 
+> # add custom library using .libPaths()
+> print( data.directory   );
+[1] "/home/jovyan/Work/github/kennethchu-statcan/covid19/000-data"
+> print( code.directory   );
+[1] "/home/jovyan/Work/github/kennethchu-statcan/covid19/102-imperial-model-canada/code"
+> print( output.directory );
+[1] "/home/jovyan/Work/github/kennethchu-statcan/covid19/102-imperial-model-canada/output"
+> print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+[1] "2020-04-19 22:05:02 UTC"
+> 
+> start.proc.time <- proc.time();
+> 
+> # set working directory to output directory
+> setwd( output.directory );
+> 
+> ##################################################
+> # source supporting R code
+> code.files <- c(
++     "cross-check.R",
++     "geom-stepribbon.R",
++     "getData-covariates.R",
++     "getData-covid19.R",
++     "getData-ECDC.R",
++     "getData-GoCInfobase.R",
++     "getData-JHU.R",
++     "getData-raw.R",
++     "getData-serial-interval.R",
++     "getData-wIFR.R",
++     "patchData.R",
++     "plot-3-panel.R",
++     "plot-forecast.R",
++     "wrapper-stan.R"
++     );
+> 
+> for ( code.file in code.files ) {
++     source(file.path(code.directory,code.file));
++     }
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> require(rstan);
+> require(data.table);
+> require(lubridate);
+> require(gdata);
+> require(EnvStats);
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> #data.snapshot <- "imperial-data-1.0";
+> #data.snapshot <- "2020-04-05.01";
+> #data.snapshot <- "2020-04-07.01";
+> #data.snapshot <- "2020-04-11.01";
+> #data.snapshot <- "2020-04-11.02";
+> data.snapshot  <- "2020-04-19.01";
+> data.directory <- file.path(data.directory,data.snapshot);
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> jurisdictions <- c(
++     "Denmark",
++     "Italy",
++     "Germany",
++     "Spain",
++     "United_Kingdom",
++     "France",
++     "Norway",
++     "Belgium",
++     "Austria",
++     "Sweden",
++     "Switzerland",
++ #  ,"Canada",
++ #   "CA",
++     "BC",
++     "AB",
++ #   "SK",
++ #   "MB",
++     "ON",
++     "QC"
++ #  ,"NB",
++ #   "NL",
++ #   "NS",
++ #   "PE",
++ #   "YK",
++ #   "NT",
++ #   "NV"
++     );
+> 
+> StanModel <- 'base';
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> options(mc.cores = parallel::detectCores());
+> 
+> FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
+> FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
+> 
+> file.copy(
++     from = FILE.stan.model.0,
++     to   = FILE.stan.model
++     );
+[1] TRUE
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> set.seed(7654321);
+> 
+> list.raw.data <- getData.raw(
++     csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
++     csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
++     csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
++     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.raw() starts.
+
+
+# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-ECDC.csv already exists; loading this file ...
+
+# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-ECDC.csv.
+
+# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-cases.csv already exists; loading this file ...
+
+# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-cases.csv.
+
+# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-deaths.csv already exists; loading this file ...
+
+# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-deaths.csv.
+
+# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-GoCInfobase.csv already exists; loading this file ...
+
+# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-GoCInfobase.csv.
+
+getData.raw() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( names(list.raw.data) );
+[1] "ECDC"        "JHU.cases"   "JHU.deaths"  "GoCInfobase"
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> list.patched.data <- patchData(
++     list.covid19.data = list.raw.data
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+patchData() starts.
+
+
+patchData() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( names(list.patched.data) );
+[1] "ECDC"        "JHU.cases"   "JHU.deaths"  "GoCInfobase"
+> 
+> print( str(list.patched.data[['GoCInfobase']]) );
+'data.frame':	1665 obs. of  10 variables:
+ $ pruid     : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ prname    : chr  "Canada" "Canada" "Canada" "Canada" ...
+ $ prnameFR  : chr  "Canada" "Canada" "Canada" "Canada" ...
+ $ date      : chr  "31-12-2019" "01-01-2020" "02-01-2020" "03-01-2020" ...
+ $ numconf   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numprob   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numdeaths : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtotal  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtested : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numrecover: num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+> 
+> DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
++     list.covid19.data = list.patched.data,
++     csv.output        = "diagnostics-compare-JHU-GoCInfobase-patched.csv"
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+cross.check.JHU.GoCInfobase() starts.
+
+
+cross.check.JHU.GoCInfobase() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> print(str(DF.cross.check.JHU.GoCInfobase));
+'data.frame':	1929 obs. of  8 variables:
+ $ jurisdiction: chr  "Alberta" "Alberta" "Alberta" "Alberta" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ cases.JHU   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ deaths.JHU  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numconf     : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numprob     : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numdeaths   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtotal    : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> DF.covid19 <- getData.covid19(
++     retained.jurisdictions = jurisdictions,
++     list.covid19.data      = list.patched.data
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.covid19() starts.
+
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.ECDC() starts.
+
+
+getData.ECDC() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+
+str(DF.ECDC)
+'data.frame':	1221 obs. of  7 variables:
+ $ jurisdiction: chr  "Austria" "Austria" "Austria" "Austria" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ year        : int  2019 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
+ $ month       : int  12 1 1 1 1 1 1 1 1 1 ...
+ $ day         : int  31 1 2 3 4 5 6 7 8 9 ...
+ $ cases       : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ deaths      : int  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+
+summary(DF.ECDC)
+ jurisdiction            date                 year          month       
+ Length:1221        Min.   :2019-12-31   Min.   :2019   Min.   : 1.000  
+ Class :character   1st Qu.:2020-01-27   1st Qu.:2020   1st Qu.: 1.000  
+ Mode  :character   Median :2020-02-24   Median :2020   Median : 2.000  
+                    Mean   :2020-02-24   Mean   :2020   Mean   : 2.432  
+                    3rd Qu.:2020-03-23   3rd Qu.:2020   3rd Qu.: 3.000  
+                    Max.   :2020-04-19   Max.   :2020   Max.   :12.000  
+      day            cases            deaths       
+ Min.   : 1.00   Min.   :   0.0   Min.   :   0.00  
+ 1st Qu.: 7.00   1st Qu.:   0.0   1st Qu.:   0.00  
+ Median :14.00   Median :   0.0   Median :   0.00  
+ Mean   :14.85   Mean   : 688.6   Mean   :  74.83  
+ 3rd Qu.:22.00   3rd Qu.: 329.0   3rd Qu.:  12.00  
+ Max.   :31.00   Max.   :9222.0   Max.   :2004.00  
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.GoCInfobase() starts.
+
+
+getData.GoCInfobase() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+
+str(DF.GoCInfobase)
+'data.frame':	444 obs. of  7 variables:
+ $ jurisdiction: chr  "AB" "AB" "AB" "AB" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ year        : int  2019 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
+ $ month       : int  12 1 1 1 1 1 1 1 1 1 ...
+ $ day         : int  31 1 2 3 4 5 6 7 8 9 ...
+ $ cases       : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ deaths      : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+
+summary(DF.GoCInfobase)
+ jurisdiction            date                 year          month       
+ Length:444         Min.   :2019-12-31   Min.   :2019   Min.   : 1.000  
+ Class :character   1st Qu.:2020-01-27   1st Qu.:2020   1st Qu.: 1.000  
+ Mode  :character   Median :2020-02-24   Median :2020   Median : 2.000  
+                    Mean   :2020-02-24   Mean   :2020   Mean   : 2.432  
+                    3rd Qu.:2020-03-23   3rd Qu.:2020   3rd Qu.: 3.000  
+                    Max.   :2020-04-19   Max.   :2020   Max.   :12.000  
+      day            cases            deaths       
+ Min.   : 1.00   Min.   :   0.0   Min.   :  0.000  
+ 1st Qu.: 7.00   1st Qu.:   0.0   1st Qu.:  0.000  
+ Median :14.00   Median :   0.0   Median :  0.000  
+ Mean   :14.85   Mean   :  72.7   Mean   :  3.349  
+ 3rd Qu.:22.00   3rd Qu.:  25.0   3rd Qu.:  0.000  
+ Max.   :31.00   Max.   :1118.0   Max.   :143.000  
+
+getData.covid19() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.covid19) );
+'data.frame':	1665 obs. of  7 variables:
+ $ jurisdiction: chr  "Austria" "Austria" "Austria" "Austria" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ year        : int  2019 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
+ $ month       : int  12 1 1 1 1 1 1 1 1 1 ...
+ $ day         : int  31 1 2 3 4 5 6 7 8 9 ...
+ $ cases       : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ deaths      : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+> 
+> print( summary(DF.covid19) );
+ jurisdiction            date                 year          month       
+ Length:1665        Min.   :2019-12-31   Min.   :2019   Min.   : 1.000  
+ Class :character   1st Qu.:2020-01-27   1st Qu.:2020   1st Qu.: 1.000  
+ Mode  :character   Median :2020-02-24   Median :2020   Median : 2.000  
+                    Mean   :2020-02-24   Mean   :2020   Mean   : 2.432  
+                    3rd Qu.:2020-03-23   3rd Qu.:2020   3rd Qu.: 3.000  
+                    Max.   :2020-04-19   Max.   :2020   Max.   :12.000  
+      day            cases            deaths       
+ Min.   : 1.00   Min.   :   0.0   Min.   :   0.00  
+ 1st Qu.: 7.00   1st Qu.:   0.0   1st Qu.:   0.00  
+ Median :14.00   Median :   0.0   Median :   0.00  
+ Mean   :14.85   Mean   : 524.4   Mean   :  55.77  
+ 3rd Qu.:22.00   3rd Qu.: 191.0   3rd Qu.:   4.00  
+ Max.   :31.00   Max.   :9222.0   Max.   :2004.00  
+> 
+> print( unique( DF.covid19[,"jurisdiction"] ) );
+ [1] "Austria"        "Belgium"        "Denmark"        "France"        
+ [5] "Germany"        "Italy"          "Norway"         "Spain"         
+ [9] "Sweden"         "Switzerland"    "United_Kingdom" "AB"            
+[13] "BC"             "ON"             "QC"            
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> DF.weighted.fatality.ratios <- getData.wIFR(
++     csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
++     csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.wIFR() starts.
+
+
+str(DF.wIFR.europe)
+'data.frame':	11 obs. of  4 variables:
+ $ ID               : int  3345 3450 3465 3480 3570 3675 3705 3720 3735 3750 ...
+ $ jurisdiction     : chr  "Denmark" "Norway" "Sweden" "United_Kingdom" ...
+ $ weighted_fatality: num  0.00879 0.00792 0.00886 0.00919 0.01089 ...
+ $ population       : num  5792 5421 10099 67886 60462 ...
+NULL
+
+str(DF.wIFR.canada)
+'data.frame':	13 obs. of  4 variables:
+ $ ID               : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ jurisdiction     : chr  "BC" "AB" "SK" "MB" ...
+ $ weighted_fatality: num  0.00879 0.00881 0.00792 0.00792 0.01093 ...
+ $ population       : int  NA NA NA NA NA NA NA NA NA NA ...
+NULL
+
+getData.wIFR() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.weighted.fatality.ratios) );
+'data.frame':	24 obs. of  4 variables:
+ $ ID               : int  3345 3450 3465 3480 3570 3675 3705 3720 3735 3750 ...
+ $ jurisdiction     : chr  "Denmark" "Norway" "Sweden" "United_Kingdom" ...
+ $ weighted_fatality: num  0.00879 0.00792 0.00886 0.00919 0.01089 ...
+ $ population       : num  5792 5421 10099 67886 60462 ...
+NULL
+> 
+> print( summary(DF.weighted.fatality.ratios) );
+       ID          jurisdiction       weighted_fatality    population   
+ Min.   :   1.00   Length:24          Min.   :0.007924   Min.   : 5421  
+ 1st Qu.:   6.75   Class :character   1st Qu.:0.008809   1st Qu.: 8831  
+ Median :  12.50   Mode  :character   Median :0.008911   Median :11590  
+ Mean   :1657.54                      Mean   :0.009351   Mean   :34066  
+ 3rd Qu.:3596.25                      3rd Qu.:0.009818   3rd Qu.:62868  
+ Max.   :3795.00                      Max.   :0.011526   Max.   :83784  
+                                                         NA's   :13     
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> DF.covariates <- getData.covariates(
++     csv.covariates.europe  = file.path(data.directory,"interventions-europe.csv"),
++     csv.covariates.canada  = file.path(data.directory,"interventions-canada.csv"),
++     retained.jurisdictions = jurisdictions
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.covariates() starts.
+
+
+getData.covariates() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.covariates) );
+'data.frame':	24 obs. of  8 variables:
+ $ jurisdiction                : chr  "Austria" "Belgium" "Denmark" "France" ...
+ $ schools_universities        : Date, format: "2020-03-14" "2020-03-14" ...
+ $ travel_restrictions         : Date, format: "2020-03-13" "2020-03-18" ...
+ $ public_events               : Date, format: "2020-03-10" "2020-03-12" ...
+ $ sport                       : Date, format: "2020-03-15" "2020-03-14" ...
+ $ lockdown                    : Date, format: "2020-03-16" "2020-03-18" ...
+ $ social_distancing_encouraged: Date, format: "2020-03-16" "2020-03-14" ...
+ $ self_isolating_if_ill       : Date, format: "2020-03-16" "2020-03-10" ...
+NULL
+> 
+> print( summary(DF.covariates) );
+ jurisdiction       schools_universities travel_restrictions 
+ Length:24          Min.   :2020-03-05   Min.   :2020-03-09  
+ Class :character   1st Qu.:2020-03-13   1st Qu.:2020-03-13  
+ Mode  :character   Median :2020-03-15   Median :2020-03-14  
+                    Mean   :2020-03-15   Mean   :2020-03-15  
+                    3rd Qu.:2020-03-17   3rd Qu.:2020-03-18  
+                    Max.   :2020-03-21   Max.   :2020-03-24  
+ public_events            sport               lockdown         
+ Min.   :2020-03-09   Min.   :2020-02-13   Min.   :2020-03-11  
+ 1st Qu.:2020-03-12   1st Qu.:2020-03-13   1st Qu.:2020-03-17  
+ Median :2020-03-16   Median :2020-03-15   Median :2020-03-18  
+ Mean   :2020-03-16   Mean   :2020-03-14   Mean   :2023-02-17  
+ 3rd Qu.:2020-03-22   3rd Qu.:2020-03-18   3rd Qu.:2020-03-23  
+ Max.   :2020-03-26   Max.   :2020-03-25   Max.   :2090-03-21  
+ social_distancing_encouraged self_isolating_if_ill
+ Min.   :2020-03-09           Min.   :2020-02-25   
+ 1st Qu.:2020-03-13           1st Qu.:2020-03-10   
+ Median :2020-03-16           Median :2020-03-13   
+ Mean   :2020-03-16           Mean   :2020-03-13   
+ 3rd Qu.:2020-03-18           3rd Qu.:2020-03-16   
+ Max.   :2020-03-27           Max.   :2020-03-25   
+> 
+> cat("\nDF.covariates\n");
+
+DF.covariates
+> print( DF.covariates   );
+     jurisdiction schools_universities travel_restrictions public_events
+1         Austria           2020-03-14          2020-03-13    2020-03-10
+2         Belgium           2020-03-14          2020-03-18    2020-03-12
+3         Denmark           2020-03-13          2020-03-13    2020-03-12
+4          France           2020-03-14          2020-03-17    2020-03-13
+5         Germany           2020-03-14          2020-03-16    2020-03-22
+6           Italy           2020-03-05          2020-03-09    2020-03-09
+7          Norway           2020-03-13          2020-03-13    2020-03-12
+8           Spain           2020-03-13          2020-03-12    2020-03-14
+9          Sweden           2020-03-18          2020-03-19    2020-03-12
+10    Switzerland           2020-03-14          2020-03-18    2020-03-13
+11 United_Kingdom           2020-03-21          2020-03-24    2020-03-24
+12             BC           2020-03-17          2020-03-12    2020-03-12
+13             AB           2020-03-15          2020-03-12    2020-03-25
+14             SK           2020-03-20          2020-03-18    2020-03-26
+15             MB           2020-03-20          2020-03-20    2020-03-20
+16             ON           2020-03-12          2020-03-13    2020-03-16
+17             QC           2020-03-13          2020-03-13    2020-03-13
+18             NB           2020-03-19          2020-03-14    2020-03-19
+19             NL           2020-03-16          2020-03-14    2020-03-23
+20             NS           2020-03-15          2020-03-22    2020-03-22
+21             PE           2020-03-16          2020-03-13    2020-03-16
+22             YK           2020-03-18          2020-03-18    2020-03-18
+23             NT           2020-03-16          2020-03-14    2020-03-18
+24             NV           2020-03-17          2020-03-13    2020-03-23
+        sport   lockdown social_distancing_encouraged self_isolating_if_ill
+1  2020-03-15 2020-03-16                   2020-03-16            2020-03-16
+2  2020-03-14 2020-03-18                   2020-03-14            2020-03-10
+3  2020-03-12 2020-03-18                   2020-03-13            2020-03-12
+4  2020-02-13 2020-03-17                   2020-03-16            2020-03-16
+5  2020-03-13 2020-03-22                   2020-03-12            2020-03-06
+6  2020-03-09 2020-03-11                   2020-03-09            2020-03-09
+7  2020-03-13 2020-03-24                   2020-03-16            2020-03-15
+8  2020-03-13 2020-03-14                   2020-03-09            2020-03-14
+9  2020-03-12 2090-03-21                   2020-03-16            2020-03-10
+10 2020-03-16 2020-03-20                   2020-03-16            2020-03-02
+11 2020-03-13 2020-03-24                   2020-03-16            2020-03-12
+12 2020-03-12 2020-03-18                   2020-03-18            2020-02-25
+13 2020-03-25 2020-03-27                   2020-03-27            2020-03-25
+14 2020-03-19 2020-03-26                   2020-03-20            2020-03-19
+15 2020-03-20 2020-03-20                   2020-03-12            2020-03-12
+16 2020-03-16 2020-03-17                   2020-03-16            2020-03-16
+17 2020-03-13 2020-03-13                   2020-03-13            2020-03-13
+18 2020-03-19 2020-03-19                   2020-03-19            2020-03-19
+19 2020-03-23 2020-03-23                   2020-03-23            2020-03-23
+20 2020-03-17 2020-03-22                   2020-03-13            2020-03-13
+21 2020-03-16 2020-03-16                   2020-03-13            2020-03-09
+22 2020-03-16 2020-03-18                   2020-03-18            2020-03-16
+23 2020-03-18 2020-03-18                   2020-03-18            2020-03-18
+24 2020-03-23 2020-03-23                   2020-03-23            2020-03-23
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> DF.serial.interval <- getData.serial.interval(
++     csv.serial.interval = file.path(data.directory,"serial-interval.csv")
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.serial.interval() starts.
+
+
+getData.serial.interval() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.serial.interval) );
+'data.frame':	366 obs. of  2 variables:
+ $ X  : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ fit: num  0.0183 0.0666 0.1019 0.1177 0.1184 ...
+NULL
+> 
+> print( summary(DF.serial.interval) );
+       X               fit          
+ Min.   :  1.00   Min.   :0.000000  
+ 1st Qu.: 92.25   1st Qu.:0.000000  
+ Median :183.50   Median :0.000000  
+ Mean   :183.50   Mean   :0.002732  
+ 3rd Qu.:274.75   3rd Qu.:0.000000  
+ Max.   :366.00   Max.   :0.118386  
+> 
+> print( sum(DF.serial.interval[,"fit"]) );
+[1] 1
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> results.wrapper.stan <- wrapper.stan(
++     StanModel                   = StanModel,
++     FILE.stan.model             = FILE.stan.model,
++     DF.covid19                  = DF.covid19,
++     DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
++     DF.serial.interval          = DF.serial.interval,
++     DF.covariates               = DF.covariates,
++     forecast.window             = 14,
++     DEBUG                       = FALSE # TRUE
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+wrapper.stan() starts.
+
+[1] "First non-zero cases is on day 58, and 30 days before 5 days is day 54"
+[1] "Austria has 58 days of data"
+[1] "First non-zero cases is on day 36, and 30 days before 5 days is day 50"
+[1] "Belgium has 62 days of data"
+[1] "First non-zero cases is on day 59, and 30 days before 5 days is day 53"
+[1] "Denmark has 59 days of data"
+[1] "First non-zero cases is on day 26, and 30 days before 5 days is day 39"
+[1] "France has 73 days of data"
+[1] "First non-zero cases is on day 29, and 30 days before 5 days is day 47"
+[1] "Germany has 65 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 28"
+[1] "Italy has 84 days of data"
+[1] "First non-zero cases is on day 59, and 30 days before 5 days is day 56"
+[1] "Norway has 56 days of data"
+[1] "First non-zero cases is on day 33, and 30 days before 5 days is day 41"
+[1] "Spain has 71 days of data"
+[1] "First non-zero cases is on day 33, and 30 days before 5 days is day 50"
+[1] "Sweden has 62 days of data"
+[1] "First non-zero cases is on day 58, and 30 days before 5 days is day 46"
+[1] "Switzerland has 66 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 44"
+[1] "United_Kingdom has 68 days of data"
+[1] "First non-zero cases is on day 69, and 30 days before 5 days is day 64"
+[1] "AB has 48 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 52"
+[1] "BC has 60 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 56"
+[1] "ON has 56 days of data"
+[1] "First non-zero cases is on day 62, and 30 days before 5 days is day 58"
+[1] "QC has 54 days of data"
+
+SAMPLING FOR MODEL 'base' NOW (CHAIN 1).
+
+SAMPLING FOR MODEL 'base' NOW (CHAIN 2).
+
+SAMPLING FOR MODEL 'base' NOW (CHAIN 3).
+
+SAMPLING FOR MODEL 'base' NOW (CHAIN 4).
+Chain 1: 
+Chain 1: Gradient evaluation took 0.056912 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 569.12 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 3: 
+Chain 3: Gradient evaluation took 0.057394 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 573.94 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 4: 
+Chain 4: Gradient evaluation took 0.059046 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 590.46 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 2: 
+Chain 2: Gradient evaluation took 0.062257 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 622.57 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 3: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 2: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 4: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 1: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 4: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 1: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 2: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 3: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 2: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 4: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 1: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 2: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 3: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 4: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 2: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 3: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 1: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 4: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 3: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 2: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 2: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 1: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 4: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 4: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 3: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 3: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 1: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 1: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 2: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 3: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 4: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 1: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 3: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 4: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 2: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 1: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 3: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 4: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 1: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 3: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 4: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 2: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 5720.76 seconds (Warm-up)
+Chain 3:                4190.65 seconds (Sampling)
+Chain 3:                9911.41 seconds (Total)
+Chain 3: 
+Chain 1: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 4: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 5559.97 seconds (Warm-up)
+Chain 4:                5258.64 seconds (Sampling)
+Chain 4:                10818.6 seconds (Total)
+Chain 4: 
+Chain 1: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 5925.07 seconds (Warm-up)
+Chain 1:                5022.3 seconds (Sampling)
+Chain 1:                10947.4 seconds (Total)
+Chain 1: 
+Chain 2: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 2: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 4806.41 seconds (Warm-up)
+Chain 2:                8014.3 seconds (Sampling)
+Chain 2:                12820.7 seconds (Total)
+Chain 2: 
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1] 15
+
+wrapper.stan() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> ##################################################
+> print( warnings() );
+Warning messages:
+1: There were 1 divergent transitions after warmup. Increasing adapt_delta above 0.9 may help. See
+http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+2: Examine the pairs() plot to diagnose sampling problems
+
+3: The largest R-hat is NA, indicating chains have not mixed.
+Running the chains for more iterations may help. See
+http://mc-stan.org/misc/warnings.html#r-hat
+4: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+http://mc-stan.org/misc/warnings.html#bulk-ess
+5: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+http://mc-stan.org/misc/warnings.html#tail-ess
+6: Removed 1 rows containing missing values (geom_segment).
+7: Removed 1 rows containing missing values (geom_point).
+8: Transformation introduced infinite values in continuous y-axis
+9: Removed 26 rows containing missing values (geom_bar).
+10: Transformation introduced infinite values in continuous y-axis
+11: Removed 26 rows containing missing values (geom_bar).
+12: Transformation introduced infinite values in continuous y-axis
+13: Removed 27 rows containing missing values (geom_bar).
+14: Transformation introduced infinite values in continuous y-axis
+15: Removed 27 rows containing missing values (geom_bar).
+16: Transformation introduced infinite values in continuous y-axis
+17: Removed 27 rows containing missing values (geom_bar).
+18: Transformation introduced infinite values in continuous y-axis
+19: Removed 27 rows containing missing values (geom_bar).
+20: Transformation introduced infinite values in continuous y-axis
+21: Removed 24 rows containing missing values (geom_bar).
+22: Transformation introduced infinite values in continuous y-axis
+23: Removed 24 rows containing missing values (geom_bar).
+24: Transformation introduced infinite values in continuous y-axis
+25: Removed 28 rows containing missing values (geom_bar).
+26: Transformation introduced infinite values in continuous y-axis
+27: Removed 28 rows containing missing values (geom_bar).
+28: Transformation introduced infinite values in continuous y-axis
+29: Removed 28 rows containing missing values (geom_bar).
+30: Transformation introduced infinite values in continuous y-axis
+31: Removed 28 rows containing missing values (geom_bar).
+32: Transformation introduced infinite values in continuous y-axis
+33: Removed 26 rows containing missing values (geom_bar).
+34: Transformation introduced infinite values in continuous y-axis
+35: Removed 26 rows containing missing values (geom_bar).
+36: Transformation introduced infinite values in continuous y-axis
+37: Removed 27 rows containing missing values (geom_bar).
+38: Transformation introduced infinite values in continuous y-axis
+39: Removed 27 rows containing missing values (geom_bar).
+40: Transformation introduced infinite values in continuous y-axis
+41: Removed 27 rows containing missing values (geom_bar).
+42: Transformation introduced infinite values in continuous y-axis
+43: Removed 27 rows containing missing values (geom_bar).
+44: Transformation introduced infinite values in continuous y-axis
+45: Removed 26 rows containing missing values (geom_bar).
+46: Transformation introduced infinite values in continuous y-axis
+47: Removed 26 rows containing missing values (geom_bar).
+48: Transformation introduced infinite values in continuous y-axis
+49: Removed 26 rows containing missing values (geom_bar).
+50: Transformation introduced infinite values in continuous y-axis
+> 
+> print( getOption('repos') );
+    CRAN 
+"@CRAN@" 
+> 
+> print( .libPaths() );
+[1] "/opt/conda/lib/R/library"
+> 
+> print( sessionInfo() );
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.4 LTS
+
+Matrix products: default
+BLAS/LAPACK: /opt/conda/lib/libopenblasp-r0.3.7.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] cowplot_1.0.0        ggpubr_0.2.5         magrittr_1.5        
+ [4] gridExtra_2.3        scales_1.1.0         matrixStats_0.56.0  
+ [7] bayesplot_1.7.1      tidyr_1.0.2          dplyr_0.8.5         
+[10] readr_1.3.1          EnvStats_2.3.1       gdata_2.18.0        
+[13] lubridate_1.7.4      data.table_1.12.8    rstan_2.19.3        
+[16] ggplot2_3.3.0        StanHeaders_2.21.0-1
+
+loaded via a namespace (and not attached):
+ [1] gtools_3.8.2      tidyselect_1.0.0  purrr_0.3.3       reshape2_1.4.3   
+ [5] colorspace_1.4-1  vctrs_0.2.4       stats4_3.6.2      loo_2.2.0        
+ [9] rlang_0.4.5       pkgbuild_1.0.6    pillar_1.4.3      glue_1.3.2       
+[13] withr_2.1.2       lifecycle_0.2.0   plyr_1.8.6        stringr_1.4.0    
+[17] ggsignif_0.6.0    munsell_0.5.0     gtable_0.3.0      codetools_0.2-16 
+[21] labeling_0.3      inline_0.3.15     callr_3.4.2       ps_1.3.2         
+[25] parallel_3.6.2    fansi_0.4.1       Rcpp_1.0.4        farver_2.0.3     
+[29] hms_0.5.3         digest_0.6.25     stringi_1.4.6     processx_3.4.2   
+[33] grid_3.6.2        cli_2.0.2         tools_3.6.2       tibble_2.1.3     
+[37] crayon_1.3.4      pkgconfig_2.0.3   ellipsis_0.3.0    prettyunits_1.1.1
+[41] ggridges_0.5.2    assertthat_0.2.1  R6_2.4.1          compiler_3.6.2   
+> 
+> print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+[1] "2020-04-20 01:42:26 UTC"
+> 
+> stop.proc.time <- proc.time();
+> print( stop.proc.time - start.proc.time );
+     user    system   elapsed 
+44717.034    28.303 13044.389 
+> 
+> 
