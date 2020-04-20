@@ -1,7 +1,7 @@
 
 R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
 Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -25,13 +25,13 @@ Type 'q()' to quit R.
 > 
 > # add custom library using .libPaths()
 > print( data.directory   );
-[1] "/home/jovyan/Work/github/kennethchu-statcan/covid19/000-data"
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data"
 > print( code.directory   );
-[1] "/home/jovyan/Work/github/kennethchu-statcan/covid19/102-imperial-model-canada/code"
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/102-imperial-model-canada/code"
 > print( output.directory );
-[1] "/home/jovyan/Work/github/kennethchu-statcan/covid19/102-imperial-model-canada/output"
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/102-imperial-model-canada/output"
 > print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-[1] "2020-04-19 22:05:02 UTC"
+[1] "2020-04-19 15:09:36 EDT"
 > 
 > start.proc.time <- proc.time();
 > 
@@ -135,21 +135,21 @@ Type 'q()' to quit R.
 getData.raw() starts.
 
 
-# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-ECDC.csv already exists; loading this file ...
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-ECDC.csv already exists; loading this file ...
 
-# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-ECDC.csv.
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-ECDC.csv.
 
-# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-cases.csv already exists; loading this file ...
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-cases.csv already exists; loading this file ...
 
-# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-cases.csv.
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-cases.csv.
 
-# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-deaths.csv already exists; loading this file ...
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-deaths.csv already exists; loading this file ...
 
-# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-deaths.csv.
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-JHU-deaths.csv.
 
-# Data file /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-GoCInfobase.csv already exists; loading this file ...
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-GoCInfobase.csv already exists; loading this file ...
 
-# Loading complete: /home/jovyan/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-GoCInfobase.csv.
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-19.01/raw-covid19-GoCInfobase.csv.
 
 getData.raw() quits.
 ### ~~~~~~~~~~~~~~~~~~~~ ###
@@ -550,37 +550,37 @@ wrapper.stan() starts.
 [1] "First non-zero cases is on day 62, and 30 days before 5 days is day 58"
 [1] "QC has 54 days of data"
 
-SAMPLING FOR MODEL 'base' NOW (CHAIN 1).
 
-SAMPLING FOR MODEL 'base' NOW (CHAIN 2).
 
-SAMPLING FOR MODEL 'base' NOW (CHAIN 3).
-
-SAMPLING FOR MODEL 'base' NOW (CHAIN 4).
+SAMPLING
+SAMPLINGSAMPLINGSAMPLING FOR MODEL ' FOR MODEL ' FOR MODEL 'basebase FOR MODEL 'base' NOW (CHAIN ' NOW (CHAIN ' NOW (CHAIN base' NOW (CHAIN 214).
+3).
+).
+).
+Chain 2: 
+Chain 2: Gradient evaluation took 0.115449 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1154.49 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 4: 
+Chain 4: Gradient evaluation took 0.120297 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1202.97 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
 Chain 1: 
-Chain 1: Gradient evaluation took 0.056912 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 569.12 seconds.
+Chain 1: Gradient evaluation took 0.126899 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1268.99 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
 Chain 3: 
-Chain 3: Gradient evaluation took 0.057394 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 573.94 seconds.
+Chain 3: Gradient evaluation took 0.125791 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1257.91 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
-Chain 4: 
-Chain 4: Gradient evaluation took 0.059046 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 590.46 seconds.
-Chain 4: Adjust your expectations accordingly!
-Chain 4: 
-Chain 4: 
-Chain 2: 
-Chain 2: Gradient evaluation took 0.062257 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 622.57 seconds.
-Chain 2: Adjust your expectations accordingly!
-Chain 2: 
-Chain 2: 
 Chain 3: Iteration:   1 / 1000 [  0%]  (Warmup)
 Chain 2: Iteration:   1 / 1000 [  0%]  (Warmup)
 Chain 4: Iteration:   1 / 1000 [  0%]  (Warmup)
@@ -589,66 +589,66 @@ Chain 4: Iteration: 100 / 1000 [ 10%]  (Warmup)
 Chain 1: Iteration: 100 / 1000 [ 10%]  (Warmup)
 Chain 2: Iteration: 100 / 1000 [ 10%]  (Warmup)
 Chain 3: Iteration: 100 / 1000 [ 10%]  (Warmup)
-Chain 2: Iteration: 200 / 1000 [ 20%]  (Warmup)
 Chain 4: Iteration: 200 / 1000 [ 20%]  (Warmup)
 Chain 1: Iteration: 200 / 1000 [ 20%]  (Warmup)
-Chain 2: Iteration: 300 / 1000 [ 30%]  (Warmup)
-Chain 3: Iteration: 200 / 1000 [ 20%]  (Warmup)
-Chain 4: Iteration: 300 / 1000 [ 30%]  (Warmup)
-Chain 2: Iteration: 400 / 1000 [ 40%]  (Warmup)
-Chain 3: Iteration: 300 / 1000 [ 30%]  (Warmup)
 Chain 1: Iteration: 300 / 1000 [ 30%]  (Warmup)
-Chain 4: Iteration: 400 / 1000 [ 40%]  (Warmup)
-Chain 3: Iteration: 400 / 1000 [ 40%]  (Warmup)
-Chain 2: Iteration: 500 / 1000 [ 50%]  (Warmup)
-Chain 2: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 4: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 2: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 3: Iteration: 200 / 1000 [ 20%]  (Warmup)
 Chain 1: Iteration: 400 / 1000 [ 40%]  (Warmup)
-Chain 4: Iteration: 500 / 1000 [ 50%]  (Warmup)
-Chain 4: Iteration: 501 / 1000 [ 50%]  (Sampling)
-Chain 3: Iteration: 500 / 1000 [ 50%]  (Warmup)
-Chain 3: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 4: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 2: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 3: Iteration: 300 / 1000 [ 30%]  (Warmup)
 Chain 1: Iteration: 500 / 1000 [ 50%]  (Warmup)
 Chain 1: Iteration: 501 / 1000 [ 50%]  (Sampling)
-Chain 2: Iteration: 600 / 1000 [ 60%]  (Sampling)
-Chain 3: Iteration: 600 / 1000 [ 60%]  (Sampling)
-Chain 4: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 2: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 4: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 4: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 3: Iteration: 400 / 1000 [ 40%]  (Warmup)
 Chain 1: Iteration: 600 / 1000 [ 60%]  (Sampling)
-Chain 3: Iteration: 700 / 1000 [ 70%]  (Sampling)
-Chain 4: Iteration: 700 / 1000 [ 70%]  (Sampling)
-Chain 2: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 2: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 2: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 4: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 3: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 3: Iteration: 501 / 1000 [ 50%]  (Sampling)
 Chain 1: Iteration: 700 / 1000 [ 70%]  (Sampling)
-Chain 3: Iteration: 800 / 1000 [ 80%]  (Sampling)
-Chain 4: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 2: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 4: Iteration: 700 / 1000 [ 70%]  (Sampling)
 Chain 1: Iteration: 800 / 1000 [ 80%]  (Sampling)
-Chain 3: Iteration: 900 / 1000 [ 90%]  (Sampling)
-Chain 4: Iteration: 900 / 1000 [ 90%]  (Sampling)
-Chain 2: Iteration: 800 / 1000 [ 80%]  (Sampling)
-Chain 3: Iteration: 1000 / 1000 [100%]  (Sampling)
-Chain 3: 
-Chain 3:  Elapsed Time: 5720.76 seconds (Warm-up)
-Chain 3:                4190.65 seconds (Sampling)
-Chain 3:                9911.41 seconds (Total)
-Chain 3: 
+Chain 3: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 2: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 4: Iteration: 800 / 1000 [ 80%]  (Sampling)
 Chain 1: Iteration: 900 / 1000 [ 90%]  (Sampling)
-Chain 4: Iteration: 1000 / 1000 [100%]  (Sampling)
-Chain 4: 
-Chain 4:  Elapsed Time: 5559.97 seconds (Warm-up)
-Chain 4:                5258.64 seconds (Sampling)
-Chain 4:                10818.6 seconds (Total)
-Chain 4: 
+Chain 2: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 3: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 4: Iteration: 900 / 1000 [ 90%]  (Sampling)
 Chain 1: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 5925.07 seconds (Warm-up)
-Chain 1:                5022.3 seconds (Sampling)
-Chain 1:                10947.4 seconds (Total)
+Chain 1:  Elapsed Time: 9289.93 seconds (Warm-up)
+Chain 1:                9475.31 seconds (Sampling)
+Chain 1:                18765.2 seconds (Total)
 Chain 1: 
 Chain 2: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 4: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 10354.2 seconds (Warm-up)
+Chain 4:                8948.35 seconds (Sampling)
+Chain 4:                19302.6 seconds (Total)
+Chain 4: 
+Chain 3: Iteration: 800 / 1000 [ 80%]  (Sampling)
 Chain 2: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 4806.41 seconds (Warm-up)
-Chain 2:                8014.3 seconds (Sampling)
-Chain 2:                12820.7 seconds (Total)
+Chain 2:  Elapsed Time: 11686.8 seconds (Warm-up)
+Chain 2:                8529.48 seconds (Sampling)
+Chain 2:                20216.3 seconds (Total)
 Chain 2: 
+Chain 3: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 3: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 12791.4 seconds (Warm-up)
+Chain 3:                9377.22 seconds (Sampling)
+Chain 3:                22168.6 seconds (Total)
+Chain 3: 
 [1] 1
 [1] 2
 [1] 3
@@ -671,25 +671,23 @@ wrapper.stan() quits.
 > ##################################################
 > print( warnings() );
 Warning messages:
-1: There were 1 divergent transitions after warmup. Increasing adapt_delta above 0.9 may help. See
-http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-2: Examine the pairs() plot to diagnose sampling problems
-
-3: The largest R-hat is NA, indicating chains have not mixed.
+1: The largest R-hat is NA, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#r-hat
-4: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+2: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#bulk-ess
-5: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+3: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#tail-ess
-6: Removed 1 rows containing missing values (geom_segment).
-7: Removed 1 rows containing missing values (geom_point).
+4: Removed 1 rows containing missing values (geom_segment).
+5: Removed 1 rows containing missing values (geom_point).
+6: Transformation introduced infinite values in continuous y-axis
+7: Removed 26 rows containing missing values (geom_bar).
 8: Transformation introduced infinite values in continuous y-axis
 9: Removed 26 rows containing missing values (geom_bar).
 10: Transformation introduced infinite values in continuous y-axis
-11: Removed 26 rows containing missing values (geom_bar).
+11: Removed 27 rows containing missing values (geom_bar).
 12: Transformation introduced infinite values in continuous y-axis
 13: Removed 27 rows containing missing values (geom_bar).
 14: Transformation introduced infinite values in continuous y-axis
@@ -697,11 +695,11 @@ http://mc-stan.org/misc/warnings.html#tail-ess
 16: Transformation introduced infinite values in continuous y-axis
 17: Removed 27 rows containing missing values (geom_bar).
 18: Transformation introduced infinite values in continuous y-axis
-19: Removed 27 rows containing missing values (geom_bar).
+19: Removed 24 rows containing missing values (geom_bar).
 20: Transformation introduced infinite values in continuous y-axis
 21: Removed 24 rows containing missing values (geom_bar).
 22: Transformation introduced infinite values in continuous y-axis
-23: Removed 24 rows containing missing values (geom_bar).
+23: Removed 28 rows containing missing values (geom_bar).
 24: Transformation introduced infinite values in continuous y-axis
 25: Removed 28 rows containing missing values (geom_bar).
 26: Transformation introduced infinite values in continuous y-axis
@@ -709,11 +707,11 @@ http://mc-stan.org/misc/warnings.html#tail-ess
 28: Transformation introduced infinite values in continuous y-axis
 29: Removed 28 rows containing missing values (geom_bar).
 30: Transformation introduced infinite values in continuous y-axis
-31: Removed 28 rows containing missing values (geom_bar).
+31: Removed 26 rows containing missing values (geom_bar).
 32: Transformation introduced infinite values in continuous y-axis
 33: Removed 26 rows containing missing values (geom_bar).
 34: Transformation introduced infinite values in continuous y-axis
-35: Removed 26 rows containing missing values (geom_bar).
+35: Removed 27 rows containing missing values (geom_bar).
 36: Transformation introduced infinite values in continuous y-axis
 37: Removed 27 rows containing missing values (geom_bar).
 38: Transformation introduced infinite values in continuous y-axis
@@ -721,7 +719,7 @@ http://mc-stan.org/misc/warnings.html#tail-ess
 40: Transformation introduced infinite values in continuous y-axis
 41: Removed 27 rows containing missing values (geom_bar).
 42: Transformation introduced infinite values in continuous y-axis
-43: Removed 27 rows containing missing values (geom_bar).
+43: Removed 26 rows containing missing values (geom_bar).
 44: Transformation introduced infinite values in continuous y-axis
 45: Removed 26 rows containing missing values (geom_bar).
 46: Transformation introduced infinite values in continuous y-axis
@@ -735,23 +733,20 @@ http://mc-stan.org/misc/warnings.html#tail-ess
 "@CRAN@" 
 > 
 > print( .libPaths() );
-[1] "/opt/conda/lib/R/library"
+[1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library"                                                 
+[2] "/Users/woodenbeauty/Work/github/kennethchu-statcan/buildRLib/ARCHIVE/output.2020-04-04.01/library/3.6.2/library"
 > 
 > print( sessionInfo() );
 R version 3.6.2 (2019-12-12)
-Platform: x86_64-conda_cos6-linux-gnu (64-bit)
-Running under: Ubuntu 18.04.4 LTS
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS High Sierra 10.13.6
 
 Matrix products: default
-BLAS/LAPACK: /opt/conda/lib/libopenblasp-r0.3.7.so
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+[1] en_CA.UTF-8/en_CA.UTF-8/en_CA.UTF-8/C/en_CA.UTF-8/en_CA.UTF-8
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -767,22 +762,22 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] gtools_3.8.2      tidyselect_1.0.0  purrr_0.3.3       reshape2_1.4.3   
  [5] colorspace_1.4-1  vctrs_0.2.4       stats4_3.6.2      loo_2.2.0        
- [9] rlang_0.4.5       pkgbuild_1.0.6    pillar_1.4.3      glue_1.3.2       
+ [9] rlang_0.4.5       pkgbuild_1.0.6    pillar_1.4.3      glue_1.4.0       
 [13] withr_2.1.2       lifecycle_0.2.0   plyr_1.8.6        stringr_1.4.0    
 [17] ggsignif_0.6.0    munsell_0.5.0     gtable_0.3.0      codetools_0.2-16 
-[21] labeling_0.3      inline_0.3.15     callr_3.4.2       ps_1.3.2         
+[21] labeling_0.3      inline_0.3.15     callr_3.4.3       ps_1.3.2         
 [25] parallel_3.6.2    fansi_0.4.1       Rcpp_1.0.4        farver_2.0.3     
 [29] hms_0.5.3         digest_0.6.25     stringi_1.4.6     processx_3.4.2   
-[33] grid_3.6.2        cli_2.0.2         tools_3.6.2       tibble_2.1.3     
+[33] grid_3.6.2        cli_2.0.2         tools_3.6.2       tibble_3.0.0     
 [37] crayon_1.3.4      pkgconfig_2.0.3   ellipsis_0.3.0    prettyunits_1.1.1
 [41] ggridges_0.5.2    assertthat_0.2.1  R6_2.4.1          compiler_3.6.2   
 > 
 > print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-[1] "2020-04-20 01:42:26 UTC"
+[1] "2020-04-19 22:59:15 EDT"
 > 
 > stop.proc.time <- proc.time();
 > print( stop.proc.time - start.proc.time );
      user    system   elapsed 
-44717.034    28.303 13044.389 
+80115.831   598.416 28178.293 
 > 
 > 
