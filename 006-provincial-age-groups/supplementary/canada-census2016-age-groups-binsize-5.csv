@@ -1,0 +1,274 @@
+"census.year","jurisdiction","age.group","total","male","female"
+2016,"Newfoundland and Labrador","0 to 4 years",22365,11435,10930
+2016,"Newfoundland and Labrador","5 to 9 years",26040,13435,12605
+2016,"Newfoundland and Labrador","10 to 14 years",26035,13335,12700
+2016,"Newfoundland and Labrador","15 to 19 years",27250,13980,13275
+2016,"Newfoundland and Labrador","20 to 24 years",27705,13920,13785
+2016,"Newfoundland and Labrador","25 to 29 years",28245,14095,14150
+2016,"Newfoundland and Labrador","30 to 34 years",29405,14185,15215
+2016,"Newfoundland and Labrador","35 to 39 years",30740,14555,16190
+2016,"Newfoundland and Labrador","40 to 44 years",34505,16745,17765
+2016,"Newfoundland and Labrador","45 to 49 years",38665,18740,19925
+2016,"Newfoundland and Labrador","50 to 54 years",42620,20735,21890
+2016,"Newfoundland and Labrador","55 to 59 years",43080,21035,22045
+2016,"Newfoundland and Labrador","60 to 64 years",42025,20570,21460
+2016,"Newfoundland and Labrador","65 to 69 years",37485,18310,19180
+2016,"Newfoundland and Labrador","70 to 74 years",26170,12720,13445
+2016,"Newfoundland and Labrador","75 to 79 years",16945,8015,8935
+2016,"Newfoundland and Labrador","80 to 84 years",11060,4885,6175
+2016,"Newfoundland and Labrador","85 to 89 years",6170,2305,3875
+2016,"Newfoundland and Labrador","90 to 94 years",2485,790,1700
+2016,"Newfoundland and Labrador","95 to 99 years",615,140,475
+2016,"Newfoundland and Labrador","100 years and over",90,15,75
+2016,"Prince Edward Island","0 to 4 years",7005,3640,3360
+2016,"Prince Edward Island","5 to 9 years",7905,3985,3920
+2016,"Prince Edward Island","10 to 14 years",7775,3940,3830
+2016,"Prince Edward Island","15 to 19 years",8650,4435,4210
+2016,"Prince Edward Island","20 to 24 years",8620,4390,4230
+2016,"Prince Edward Island","25 to 29 years",7650,3700,3945
+2016,"Prince Edward Island","30 to 34 years",7760,3740,4025
+2016,"Prince Edward Island","35 to 39 years",8175,3885,4295
+2016,"Prince Edward Island","40 to 44 years",8820,4240,4585
+2016,"Prince Edward Island","45 to 49 years",9560,4650,4915
+2016,"Prince Edward Island","50 to 54 years",11255,5430,5820
+2016,"Prince Edward Island","55 to 59 years",11335,5415,5915
+2016,"Prince Edward Island","60 to 64 years",10685,5210,5475
+2016,"Prince Edward Island","65 to 69 years",9945,4830,5110
+2016,"Prince Edward Island","70 to 74 years",6625,3170,3455
+2016,"Prince Edward Island","75 to 79 years",4695,2180,2515
+2016,"Prince Edward Island","80 to 84 years",3370,1440,1930
+2016,"Prince Edward Island","85 to 89 years",1895,715,1180
+2016,"Prince Edward Island","90 to 94 years",910,260,650
+2016,"Prince Edward Island","95 to 99 years",250,40,205
+2016,"Prince Edward Island","100 years and over",30,5,25
+2016,"Nova Scotia","0 to 4 years",42005,21365,20640
+2016,"Nova Scotia","5 to 9 years",45980,23655,22325
+2016,"Nova Scotia","10 to 14 years",45845,23355,22490
+2016,"Nova Scotia","15 to 19 years",51255,26245,25015
+2016,"Nova Scotia","20 to 24 years",56155,28145,28015
+2016,"Nova Scotia","25 to 29 years",53725,26790,26935
+2016,"Nova Scotia","30 to 34 years",51730,25130,26600
+2016,"Nova Scotia","35 to 39 years",52010,24560,27450
+2016,"Nova Scotia","40 to 44 years",57050,27245,29805
+2016,"Nova Scotia","45 to 49 years",61885,29715,32170
+2016,"Nova Scotia","50 to 54 years",75675,36610,39065
+2016,"Nova Scotia","55 to 59 years",76500,36925,39580
+2016,"Nova Scotia","60 to 64 years",69960,33735,36225
+2016,"Nova Scotia","65 to 69 years",63710,30815,32905
+2016,"Nova Scotia","70 to 74 years",45005,21520,23485
+2016,"Nova Scotia","75 to 79 years",31545,14520,17030
+2016,"Nova Scotia","80 to 84 years",21910,9420,12490
+2016,"Nova Scotia","85 to 89 years",13205,4845,8360
+2016,"Nova Scotia","90 to 94 years",6315,1830,4485
+2016,"Nova Scotia","95 to 99 years",1850,420,1435
+2016,"Nova Scotia","100 years and over",270,40,230
+2016,"New Brunswick","0 to 4 years",34370,17510,16860
+2016,"New Brunswick","5 to 9 years",38250,19515,18735
+2016,"New Brunswick","10 to 14 years",37880,19290,18585
+2016,"New Brunswick","15 to 19 years",40605,20905,19700
+2016,"New Brunswick","20 to 24 years",41445,21280,20165
+2016,"New Brunswick","25 to 29 years",39245,19740,19500
+2016,"New Brunswick","30 to 34 years",41505,20140,21365
+2016,"New Brunswick","35 to 39 years",44435,21590,22845
+2016,"New Brunswick","40 to 44 years",48425,23520,24910
+2016,"New Brunswick","45 to 49 years",51295,25190,26105
+2016,"New Brunswick","50 to 54 years",61060,29795,31265
+2016,"New Brunswick","55 to 59 years",61735,30210,31525
+2016,"New Brunswick","60 to 64 years",58065,28165,29895
+2016,"New Brunswick","65 to 69 years",52160,25590,26570
+2016,"New Brunswick","70 to 74 years",36050,17695,18360
+2016,"New Brunswick","75 to 79 years",25300,11835,13460
+2016,"New Brunswick","80 to 84 years",17650,7515,10135
+2016,"New Brunswick","85 to 89 years",10670,3910,6760
+2016,"New Brunswick","90 to 94 years",5310,1595,3715
+2016,"New Brunswick","95 to 99 years",1435,330,1105
+2016,"New Brunswick","100 years and over",210,25,180
+2016,"Quebec","0 to 4 years",444930,227965,216970
+2016,"Quebec","5 to 9 years",469165,240230,228940
+2016,"Quebec","10 to 14 years",419155,214345,204815
+2016,"Quebec","15 to 19 years",429825,219070,210755
+2016,"Quebec","20 to 24 years",500095,252595,247500
+2016,"Quebec","25 to 29 years",495410,248030,247380
+2016,"Quebec","30 to 34 years",515505,256435,259070
+2016,"Quebec","35 to 39 years",550535,274595,275940
+2016,"Quebec","40 to 44 years",506525,254105,252420
+2016,"Quebec","45 to 49 years",519425,260410,259020
+2016,"Quebec","50 to 54 years",619435,309070,310365
+2016,"Quebec","55 to 59 years",636475,314190,322285
+2016,"Quebec","60 to 64 years",562675,276140,286535
+2016,"Quebec","65 to 69 years",488175,236395,251780
+2016,"Quebec","70 to 74 years",373590,176905,196690
+2016,"Quebec","75 to 79 years",256905,116015,140890
+2016,"Quebec","80 to 84 years",187840,78385,109450
+2016,"Quebec","85 to 89 years",120635,43795,76845
+2016,"Quebec","90 to 94 years",53165,15150,38015
+2016,"Quebec","95 to 99 years",13035,2685,10345
+2016,"Quebec","100 years and over",1850,255,1600
+2016,"Ontario","0 to 4 years",697360,357305,340060
+2016,"Ontario","5 to 9 years",756085,387320,368765
+2016,"Ontario","10 to 14 years",754530,386995,367530
+2016,"Ontario","15 to 19 years",811670,416725,394945
+2016,"Ontario","20 to 24 years",894390,457820,436570
+2016,"Ontario","25 to 29 years",874350,436345,438005
+2016,"Ontario","30 to 34 years",864765,420800,443965
+2016,"Ontario","35 to 39 years",842480,402900,439585
+2016,"Ontario","40 to 44 years",871875,418465,453410
+2016,"Ontario","45 to 49 years",937380,453110,484280
+2016,"Ontario","50 to 54 years",1056345,517170,539170
+2016,"Ontario","55 to 59 years",989460,482280,507180
+2016,"Ontario","60 to 64 years",846145,406500,439640
+2016,"Ontario","65 to 69 years",737745,352470,385270
+2016,"Ontario","70 to 74 years",528645,250455,278185
+2016,"Ontario","75 to 79 years",393010,179810,213200
+2016,"Ontario","80 to 84 years",291190,126825,164360
+2016,"Ontario","85 to 89 years",188465,73050,115420
+2016,"Ontario","90 to 94 years",88390,27400,60990
+2016,"Ontario","95 to 99 years",21210,5150,16055
+2016,"Ontario","100 years and over",3005,490,2515
+2016,"Manitoba","0 to 4 years",81065,41710,39355
+2016,"Manitoba","5 to 9 years",83375,42570,40805
+2016,"Manitoba","10 to 14 years",79380,40840,38540
+2016,"Manitoba","15 to 19 years",82440,42550,39885
+2016,"Manitoba","20 to 24 years",86765,44465,42300
+2016,"Manitoba","25 to 29 years",86695,43570,43125
+2016,"Manitoba","30 to 34 years",85190,42215,42975
+2016,"Manitoba","35 to 39 years",81100,39890,41220
+2016,"Manitoba","40 to 44 years",79325,39535,39790
+2016,"Manitoba","45 to 49 years",79350,39220,40130
+2016,"Manitoba","50 to 54 years",89840,44485,45355
+2016,"Manitoba","55 to 59 years",87765,43550,44215
+2016,"Manitoba","60 to 64 years",77105,37780,39325
+2016,"Manitoba","65 to 69 years",64905,31280,33625
+2016,"Manitoba","70 to 74 years",45980,21945,24040
+2016,"Manitoba","75 to 79 years",33555,15250,18305
+2016,"Manitoba","80 to 84 years",25315,10740,14575
+2016,"Manitoba","85 to 89 years",17335,6460,10870
+2016,"Manitoba","90 to 94 years",8940,2710,6230
+2016,"Manitoba","95 to 99 years",2520,580,1940
+2016,"Manitoba","100 years and over",420,60,350
+2016,"Saskatchewan","0 to 4 years",73130,37335,35795
+2016,"Saskatchewan","5 to 9 years",74460,38155,36310
+2016,"Saskatchewan","10 to 14 years",68095,34920,33175
+2016,"Saskatchewan","15 to 19 years",67660,34680,32980
+2016,"Saskatchewan","20 to 24 years",70060,36075,33985
+2016,"Saskatchewan","25 to 29 years",77525,39290,38235
+2016,"Saskatchewan","30 to 34 years",77520,38605,38915
+2016,"Saskatchewan","35 to 39 years",71590,35940,35655
+2016,"Saskatchewan","40 to 44 years",64950,32515,32435
+2016,"Saskatchewan","45 to 49 years",63580,31785,31800
+2016,"Saskatchewan","50 to 54 years",75245,37225,38015
+2016,"Saskatchewan","55 to 59 years",76195,38070,38125
+2016,"Saskatchewan","60 to 64 years",67920,33930,33985
+2016,"Saskatchewan","65 to 69 years",53230,26285,26945
+2016,"Saskatchewan","70 to 74 years",37735,18225,19510
+2016,"Saskatchewan","75 to 79 years",29400,13410,15985
+2016,"Saskatchewan","80 to 84 years",23120,9950,13170
+2016,"Saskatchewan","85 to 89 years",16280,6305,9975
+2016,"Saskatchewan","90 to 94 years",8005,2510,5490
+2016,"Saskatchewan","95 to 99 years",2285,525,1760
+2016,"Saskatchewan","100 years and over",375,50,325
+2016,"Alberta","0 to 4 years",266520,136525,129995
+2016,"Alberta","5 to 9 years",270715,138990,131720
+2016,"Alberta","10 to 14 years",241925,124060,117860
+2016,"Alberta","15 to 19 years",240035,123625,116415
+2016,"Alberta","20 to 24 years",261835,133990,127840
+2016,"Alberta","25 to 29 years",310940,156715,154225
+2016,"Alberta","30 to 34 years",333170,167550,165620
+2016,"Alberta","35 to 39 years",305505,153655,151855
+2016,"Alberta","40 to 44 years",281210,142550,138660
+2016,"Alberta","45 to 49 years",269035,135855,133180
+2016,"Alberta","50 to 54 years",284305,142200,142105
+2016,"Alberta","55 to 59 years",275540,138570,136970
+2016,"Alberta","60 to 64 years",226230,113440,112790
+2016,"Alberta","65 to 69 years",173680,85505,88175
+2016,"Alberta","70 to 74 years",117035,56425,60610
+2016,"Alberta","75 to 79 years",83955,39110,44845
+2016,"Alberta","80 to 84 years",62160,27590,34580
+2016,"Alberta","85 to 89 years",39965,16050,23920
+2016,"Alberta","90 to 94 years",18030,5755,12275
+2016,"Alberta","95 to 99 years",4735,1145,3595
+2016,"Alberta","100 years and over",650,115,535
+2016,"British Columbia","0 to 4 years",220630,113355,107275
+2016,"British Columbia","5 to 9 years",236900,122070,114830
+2016,"British Columbia","10 to 14 years",233865,119975,113885
+2016,"British Columbia","15 to 19 years",258980,133000,125980
+2016,"British Columbia","20 to 24 years",287560,147615,139945
+2016,"British Columbia","25 to 29 years",302995,151590,151410
+2016,"British Columbia","30 to 34 years",313745,155030,158715
+2016,"British Columbia","35 to 39 years",293590,143065,150525
+2016,"British Columbia","40 to 44 years",295040,141930,153115
+2016,"British Columbia","45 to 49 years",322365,155325,167040
+2016,"British Columbia","50 to 54 years",354375,172065,182310
+2016,"British Columbia","55 to 59 years",354930,171210,183715
+2016,"British Columbia","60 to 64 years",324095,156445,167650
+2016,"British Columbia","65 to 69 years",287525,139490,148030
+2016,"British Columbia","70 to 74 years",201785,97675,104115
+2016,"British Columbia","75 to 79 years",145225,68715,76515
+2016,"British Columbia","80 to 84 years",105255,48645,56610
+2016,"British Columbia","85 to 89 years",67505,27930,39575
+2016,"British Columbia","90 to 94 years",31815,10610,21200
+2016,"British Columbia","95 to 99 years",8545,2220,6325
+2016,"British Columbia","100 years and over",1320,275,1050
+2016,"Yukon","0 to 4 years",2140,1155,985
+2016,"Yukon","5 to 9 years",2120,1125,995
+2016,"Yukon","10 to 14 years",2020,1075,945
+2016,"Yukon","15 to 19 years",1935,1005,930
+2016,"Yukon","20 to 24 years",1960,1035,930
+2016,"Yukon","25 to 29 years",2550,1245,1310
+2016,"Yukon","30 to 34 years",2890,1390,1500
+2016,"Yukon","35 to 39 years",2590,1235,1355
+2016,"Yukon","40 to 44 years",2540,1170,1370
+2016,"Yukon","45 to 49 years",2460,1215,1250
+2016,"Yukon","50 to 54 years",2885,1390,1490
+2016,"Yukon","55 to 59 years",2995,1505,1490
+2016,"Yukon","60 to 64 years",2525,1315,1215
+2016,"Yukon","65 to 69 years",1845,980,870
+2016,"Yukon","70 to 74 years",1090,610,480
+2016,"Yukon","75 to 79 years",645,345,295
+2016,"Yukon","80 to 84 years",375,165,215
+2016,"Yukon","85 to 89 years",195,95,105
+2016,"Yukon","90 to 94 years",85,30,50
+2016,"Yukon","95 to 99 years",25,0,20
+2016,"Yukon","100 years and over",0,0,0
+2016,"Northwest Territories","0 to 4 years",3120,1605,1515
+2016,"Northwest Territories","5 to 9 years",3015,1520,1500
+2016,"Northwest Territories","10 to 14 years",2735,1350,1380
+2016,"Northwest Territories","15 to 19 years",2715,1405,1305
+2016,"Northwest Territories","20 to 24 years",3065,1635,1430
+2016,"Northwest Territories","25 to 29 years",3470,1760,1710
+2016,"Northwest Territories","30 to 34 years",3390,1670,1715
+2016,"Northwest Territories","35 to 39 years",3215,1565,1655
+2016,"Northwest Territories","40 to 44 years",2825,1365,1460
+2016,"Northwest Territories","45 to 49 years",2885,1485,1400
+2016,"Northwest Territories","50 to 54 years",3200,1620,1575
+2016,"Northwest Territories","55 to 59 years",2825,1480,1345
+2016,"Northwest Territories","60 to 64 years",2105,1105,1005
+2016,"Northwest Territories","65 to 69 years",1415,785,630
+2016,"Northwest Territories","70 to 74 years",820,450,370
+2016,"Northwest Territories","75 to 79 years",470,230,235
+2016,"Northwest Territories","80 to 84 years",300,155,145
+2016,"Northwest Territories","85 to 89 years",150,65,85
+2016,"Northwest Territories","90 to 94 years",55,20,35
+2016,"Northwest Territories","95 to 99 years",20,5,10
+2016,"Northwest Territories","100 years and over",5,5,5
+2016,"Nunavut","0 to 4 years",4160,2130,2025
+2016,"Nunavut","5 to 9 years",4120,2130,1985
+2016,"Nunavut","10 to 14 years",3415,1720,1695
+2016,"Nunavut","15 to 19 years",3135,1600,1540
+2016,"Nunavut","20 to 24 years",3045,1535,1510
+2016,"Nunavut","25 to 29 years",3185,1610,1580
+2016,"Nunavut","30 to 34 years",2820,1395,1425
+2016,"Nunavut","35 to 39 years",2390,1210,1180
+2016,"Nunavut","40 to 44 years",2030,1065,965
+2016,"Nunavut","45 to 49 years",2065,1060,1010
+2016,"Nunavut","50 to 54 years",1845,960,885
+2016,"Nunavut","55 to 59 years",1405,750,655
+2016,"Nunavut","60 to 64 years",975,535,440
+2016,"Nunavut","65 to 69 years",655,340,310
+2016,"Nunavut","70 to 74 years",345,180,165
+2016,"Nunavut","75 to 79 years",205,110,100
+2016,"Nunavut","80 to 84 years",100,50,50
+2016,"Nunavut","85 to 89 years",40,20,25
+2016,"Nunavut","90 to 94 years",5,5,5
+2016,"Nunavut","95 to 99 years",5,5,0
+2016,"Nunavut","100 years and over",0,0,5

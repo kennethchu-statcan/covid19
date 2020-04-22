@@ -1,0 +1,228 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> command.arguments <- commandArgs(trailingOnly = TRUE);
+> data.directory    <- normalizePath(command.arguments[1]);
+> code.directory    <- normalizePath(command.arguments[2]);
+> output.directory  <- normalizePath(command.arguments[3]);
+> 
+> # add custom library using .libPaths()
+> print( data.directory   );
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data"
+> print( code.directory   );
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/006-provincial-age-groups/code"
+> print( output.directory );
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/006-provincial-age-groups/output"
+> print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+[1] "2020-04-22 17:45:58 EDT"
+> 
+> start.proc.time <- proc.time();
+> 
+> # set working directory to output directory
+> setwd( output.directory );
+> 
+> ##################################################
+> # source supporting R code
+> code.files <- c(
++     "getData-provincial.R",
++     "getData-raw.R"
++     );
+> 
+> for ( code.file in code.files ) {
++     source(file.path(code.directory,code.file));
++     }
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> require(rstan);
+> require(data.table);
+> require(lubridate);
+> require(gdata);
+> require(EnvStats);
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> data.snapshot  <- "2020-04-22.01";
+> data.directory <- file.path(data.directory,data.snapshot);
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> set.seed(7654321);
+> 
+> DF.raw.Census2016.age.sex <- getData.raw(
++     csv.Census2016.age.sex = file.path(data.directory,'98-400-X2016001_English_CSV_data.csv')
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.raw() starts.
+
+
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-22.01/98-400-X2016001_English_CSV_data.csv already exists; loading this file ...
+
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-04-22.01/98-400-X2016001_English_CSV_data.csv.
+
+getData.raw() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.raw.Census2016.age.sex) );
+'data.frame':	44196 obs. of  16 variables:
+ $ CENSUS_YEAR                                           : int  2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+ $ GEO_CODE..POR.                                        : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ GEO_LEVEL                                             : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ GEO_NAME                                              : chr  "Canada" "Canada" "Canada" "Canada" ...
+ $ GNR                                                   : num  4 4 4 4 4 4 4 4 4 4 ...
+ $ DATA_QUALITY_FLAG                                     : int  20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 ...
+ $ ALT_GEO_CODE                                          : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ DIM..Census.year..2.                                  : int  2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+ $ Member.ID..Census.year..2.                            : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ Notes..Census.year..2.                                : logi  NA NA NA NA NA NA ...
+ $ DIM..Age..in.single.years..and.average.age..127.      : chr  "Total - Age" "0 to 14 years" "0 to 4 years" "Under 1 year" ...
+ $ Member.ID..Age..in.single.years..and.average.age..127.: int  1 2 3 4 5 6 7 8 9 10 ...
+ $ Notes..Age..in.single.years..and.average.age..127.    : logi  NA NA NA NA NA NA ...
+ $ Dim..Sex..3...Member.ID...1...Total...Sex             : num  35151725 5839565 1898790 369730 372615 ...
+ $ Dim..Sex..3...Member.ID...2...Male                    : num  17264200 2992920 973035 189085 190900 ...
+ $ Dim..Sex..3...Member.ID...3...Female                  : num  17887530 2846645 925760 180650 181710 ...
+NULL
+> 
+> list.Census2016.age.sex <- getData.provincial(
++     DF.input = DF.raw.Census2016.age.sex
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.provincial() starts.
+
+
+str(DF.temp) -- preprocessed
+'data.frame':	1651 obs. of  6 variables:
+ $ census.year : int  2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+ $ jurisdiction: chr  "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" ...
+ $ age.group   : chr  "Total - Age" "0 to 14 years" "0 to 4 years" "Under 1 year" ...
+ $ total       : num  519720 74440 22365 4260 4345 ...
+ $ male        : num  253925 38205 11435 2210 2190 ...
+ $ female      : num  265790 36240 10930 2045 2155 ...
+NULL
+
+str(DF.output.1)
+'data.frame':	1313 obs. of  6 variables:
+ $ census.year : int  2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+ $ jurisdiction: chr  "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" ...
+ $ age.group   : chr  "Under 1 year" "1" "2" "3" ...
+ $ total       : num  4260 4345 4640 4475 4640 ...
+ $ male        : num  2210 2190 2405 2275 2345 ...
+ $ female      : num  2045 2155 2235 2200 2295 ...
+NULL
+
+str(DF.output.5)
+'data.frame':	273 obs. of  6 variables:
+ $ census.year : int  2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+ $ jurisdiction: chr  "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" ...
+ $ age.group   : chr  "0 to 4 years" "5 to 9 years" "10 to 14 years" "15 to 19 years" ...
+ $ total       : num  22365 26040 26035 27250 27705 ...
+ $ male        : num  11435 13435 13335 13980 13920 ...
+ $ female      : num  10930 12605 12700 13275 13785 ...
+NULL
+
+getData.provincial() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(list.Census2016.age.sex) );
+List of 2
+ $ bin.size.1:'data.frame':	1313 obs. of  6 variables:
+  ..$ census.year : int [1:1313] 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+  ..$ jurisdiction: chr [1:1313] "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" ...
+  ..$ age.group   : chr [1:1313] "Under 1 year" "1" "2" "3" ...
+  ..$ total       : num [1:1313] 4260 4345 4640 4475 4640 ...
+  ..$ male        : num [1:1313] 2210 2190 2405 2275 2345 ...
+  ..$ female      : num [1:1313] 2045 2155 2235 2200 2295 ...
+ $ bin.size.5:'data.frame':	273 obs. of  6 variables:
+  ..$ census.year : int [1:273] 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 ...
+  ..$ jurisdiction: chr [1:273] "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" "Newfoundland and Labrador" ...
+  ..$ age.group   : chr [1:273] "0 to 4 years" "5 to 9 years" "10 to 14 years" "15 to 19 years" ...
+  ..$ total       : num [1:273] 22365 26040 26035 27250 27705 ...
+  ..$ male        : num [1:273] 11435 13435 13335 13980 13920 ...
+  ..$ female      : num [1:273] 10930 12605 12700 13275 13785 ...
+NULL
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> write.csv(
++     x         = list.Census2016.age.sex[['bin.size.1']],
++     file      = "canada-census2016-age-groups-binsize-1.csv",
++     row.names = FALSE
++     );
+> 
+> write.csv(
++     x         = list.Census2016.age.sex[['bin.size.5']],
++     file      = "canada-census2016-age-groups-binsize-5.csv",
++     row.names = FALSE
++     );
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> ##################################################
+> print( warnings() );
+NULL
+> 
+> print( getOption('repos') );
+    CRAN 
+"@CRAN@" 
+> 
+> print( .libPaths() );
+[1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library"                                                 
+[2] "/Users/woodenbeauty/Work/github/kennethchu-statcan/buildRLib/ARCHIVE/output.2020-04-04.01/library/3.6.2/library"
+> 
+> print( sessionInfo() );
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS High Sierra 10.13.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_CA.UTF-8/en_CA.UTF-8/en_CA.UTF-8/C/en_CA.UTF-8/en_CA.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] readr_1.3.1          EnvStats_2.3.1       gdata_2.18.0        
+[4] lubridate_1.7.4      data.table_1.12.8    rstan_2.19.3        
+[7] ggplot2_3.3.0        StanHeaders_2.21.0-1
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.4         pillar_1.4.3       compiler_3.6.2     prettyunits_1.1.1 
+ [5] tools_3.6.2        pkgbuild_1.0.6     lifecycle_0.2.0    tibble_3.0.0      
+ [9] gtable_0.3.0       pkgconfig_2.0.3    rlang_0.4.5        cli_2.0.2         
+[13] parallel_3.6.2     loo_2.2.0          gridExtra_2.3      stringr_1.4.0     
+[17] withr_2.1.2        dplyr_0.8.5        hms_0.5.3          gtools_3.8.2      
+[21] vctrs_0.2.4        stats4_3.6.2       grid_3.6.2         tidyselect_1.0.0  
+[25] glue_1.4.0         inline_0.3.15      R6_2.4.1           processx_3.4.2    
+[29] fansi_0.4.1        purrr_0.3.3        callr_3.4.3        magrittr_1.5      
+[33] scales_1.1.0       ps_1.3.2           ellipsis_0.3.0     matrixStats_0.56.0
+[37] assertthat_0.2.1   colorspace_1.4-1   stringi_1.4.6      munsell_0.5.0     
+[41] crayon_1.3.4      
+> 
+> print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+[1] "2020-04-22 17:46:02 EDT"
+> 
+> stop.proc.time <- proc.time();
+> print( stop.proc.time - start.proc.time );
+   user  system elapsed 
+  2.675   0.192   4.355 
+> 
+> 
