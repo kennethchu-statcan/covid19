@@ -56,8 +56,13 @@ getData.provincial_by.discretization <- function(
     ) {
     
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    age.groups.to.exclude <- c(
+        "0 to 14 years","15 to 64 years","65 years and over",
+        "85 years and over","Average age","Total - Age"
+        );
+
     temp.levels <- unique(DF.input[,'age.group']);
-    temp.levels <- setdiff(temp.levels,"0 to 14 years");
+    temp.levels <- setdiff(temp.levels,age.groups.to.exclude);
 
     groups.of.five <- grep(
         x       = temp.levels,
@@ -67,7 +72,7 @@ getData.provincial_by.discretization <- function(
     groups.of.five <- c(groups.of.five,"100 years and over");
 
     groups.of.one <- setdiff(temp.levels,groups.of.five);
-    groups.of.one <- setdiff(groups.of.one,c("65 years and over","85 years and over","Average age","Total - Age"));
+    groups.of.one <- c(groups.of.one,"100 years and over");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( bin.size == 1 ) {
