@@ -9,7 +9,7 @@ This task generates the following two CSV files:
    https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-5.csv
 
 
-each of which is a tabulation -- according to different age discretizations --
+each of which is a tabulation -- according to two different age discretizations --
 of the Canadian provincial age group sizes based on Census 2016 of Canada.
 The bin sizes of the two discretizations by age are respectively 1 and 5.
 
