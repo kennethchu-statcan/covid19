@@ -1,0 +1,23 @@
+--2020-04-22 10:27:17--  https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/dt-td/CompDataDownload.cfm?LANG=E&PID=109523&OFT=CSV
+Resolving www12.statcan.gc.ca... 205.193.226.138
+Connecting to www12.statcan.gc.ca|205.193.226.138|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /open-gc-ouvert/2016/CSV/98-400-X2016001_ENG_CSV.ZIP [following]
+--2020-04-22 10:27:17--  https://www12.statcan.gc.ca/open-gc-ouvert/2016/CSV/98-400-X2016001_ENG_CSV.ZIP
+Reusing existing connection to www12.statcan.gc.ca:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 451154 (441K) [application/x-zip-compressed]
+Saving to: 'CompDataDownload.cfm?LANG=E&PID=109523&OFT=CSV'
+
+     0K .......... .......... .......... .......... .......... 11%  912K 0s
+    50K .......... .......... .......... .......... .......... 22%  987K 0s
+   100K .......... .......... .......... .......... .......... 34% 1.25M 0s
+   150K .......... .......... .......... .......... .......... 45% 1.04M 0s
+   200K .......... .......... .......... .......... .......... 56% 1.08M 0s
+   250K .......... .......... .......... .......... .......... 68% 1.53M 0s
+   300K .......... .......... .......... .......... .......... 79% 1.08M 0s
+   350K .......... .......... .......... .......... .......... 90% 1.06M 0s
+   400K .......... .......... .......... ..........           100% 1.27M=0.4s
+
+2020-04-22 10:27:17 (1.10 MB/s) - 'CompDataDownload.cfm?LANG=E&PID=109523&OFT=CSV' saved [451154/451154]
+
