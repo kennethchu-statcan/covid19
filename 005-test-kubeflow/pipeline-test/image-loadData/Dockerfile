@@ -1,16 +1,33 @@
-FROM amd64/r-base:latest
+FROM continuumio/miniconda3
 
-RUN apt-get       update
-RUN apt-get --yes upgrade
+RUN apt-get update \
+    && apt-get --yes install wget jq \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get --yes install wget
-RUN apt-get --yes install jq
+# Default environment
+RUN conda install --quiet --yes \
+      -c conda-forge \
+      "r-bayesplot" \
+      "r-cowplot" \
+      "r-data.table" \
+      "r-dplyr" \
+      "r-EnvStats" \
+      "r-gdata" \
+      "r-gdata"\
+      "r-ggplot2" \
+      "r-ggpubr" \
+      "r-gridExtra" \
+      "r-lubridate" \
+      "r-matrixStats" \
+      "r-readr" \
+      "r-rstan" \
+      "r-scales" \
+      "r-tidyr" \
+    && conda clean --all -f -y
 
 RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc && \
     chmod +x mc && \
     mv mc /usr/bin/
-
-RUN R -e 'install.packages(c("gdata", "EnvStats", "ggplot2", "tidyr", "dplyr", "rstan", "data.table", "lubridate", "gdata", "matrixStats", "scales", "gridExtra", "ggpubr", "bayesplot", "cowplot", "readr"))'
 
 COPY data    /data
 COPY src     /src
