@@ -2,8 +2,14 @@
 Tabulation of Canadian provincial age group sizes based on Census 2016 of Canada
 ================================================================================
 
-This task generates two CSV files, each of which is a tabulation
--- according to different age discretizations --
+This task generates the following two CSV files:
+
+   https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-1.csv
+
+   https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-5.csv
+
+
+each of which is a tabulation -- according to different age discretizations --
 of the Canadian provincial age group sizes based on Census 2016 of Canada.
 The bin sizes of the two discretizations by age are respectively 1 and 5.
 
@@ -20,10 +26,4 @@ weighted infection fatality ratio estimates for the Canadian provinces.
 *  The exact copy of the downloaded file can be accessed here:
 
    https://github.com/kennethchu-statcan/covid19/blob/master/000-data/2020-04-22.01/98-400-X2016001_English_CSV_data.csv
-
-*  The two resulting CSV files can be found here:
-
-   https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-1.csv
-
-   https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-5.csv
 
