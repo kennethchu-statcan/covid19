@@ -93,13 +93,13 @@ getData.provincial_preprocess <- function(
     colnames(DF.output) <- tolower(colnames(DF.output));
 
     retained.colnames <- c(
-        'census_year',
-        'geo_code..por.',
+#       'census_year',
+#       'geo_code..por.',
         'geo_level',
         'geo_name',
-        'gnr',
-        'data_quality_flag',
-        'alt_geo_code',
+#       'gnr',
+#       'data_quality_flag',
+#       'alt_geo_code',
         'dim..census.year..2.',
         'dim..age..in.single.years..and.average.age..127.',
         'dim..sex..3...member.id...1...total...sex',
@@ -108,18 +108,19 @@ getData.provincial_preprocess <- function(
         );
 
     DF.output <- DF.output[,retained.colnames];
-    DF.output <- DF.output[DF.output[,'geo_level'] == 1,];
+    DF.output <- DF.output[DF.output[,'geo_level'           ] ==    1,];
+    DF.output <- DF.output[DF.output[,'dim..census.year..2.'] == 2016,];
 
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
-        pattern     = "geo_code..por.",
-        replacement = "geo.code"
+        pattern     = "geo_name",
+        replacement = "jurisdiction"
         );
 
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "dim..census.year..2.",
-        replacement = "census.year.2"
+        replacement = "census.year"
         );
 
     colnames(DF.output) <- gsub(
@@ -151,6 +152,17 @@ getData.provincial_preprocess <- function(
         pattern     = "_",
         replacement = "."
         );
+
+    ordered.colnames <- c(
+        'census.year',
+        'jurisdiction',
+        'age.group',
+        'total',
+        'male',
+        'female'
+        );
+
+    DF.output <- DF.output[,ordered.colnames];
 
     return( DF.output );
 
