@@ -17,7 +17,7 @@ weighted infection fatality ratio estimates for the Canadian provinces.
 
    https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/dt-td/CompDataDownload.cfm?LANG=E&PID=109523&OFT=CSV
 
-*  The exact copy of the downloaded file can be access here:
+*  The exact copy of the downloaded file can be accessed here:
 
    https://github.com/kennethchu-statcan/covid19/blob/master/000-data/2020-04-22.01/98-400-X2016001_English_CSV_data.csv
 
