@@ -23,4 +23,7 @@ weighted infection fatality ratio estimates for the Canadian provinces.
 
 *  The two resulting CSV files can be found here:
 
+   https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-1.csv
+
+   https://github.com/kennethchu-statcan/covid19/blob/master/006-provincial-age-groups/supplementary/canada-census2016-age-groups-binsize-5.csv
 
