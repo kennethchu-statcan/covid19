@@ -162,9 +162,9 @@ getData.provincial_preprocess <- function(
         'census.year',
         'jurisdiction',
         'age.group',
-        'total',
-        'male',
-        'female'
+        'total'
+#      ,'male',
+#       'female'
         );
 
     DF.output <- DF.output[,ordered.colnames];
