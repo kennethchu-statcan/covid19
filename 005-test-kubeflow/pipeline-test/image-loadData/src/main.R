@@ -19,6 +19,10 @@ print( getwd() );
 
 print( list.files(getwd()) );
 
+print( list.files(file.path(getwd(),"/data")) );
+
+print( list.files(data.directory) );
+
 ##################################################
 # set working directory to output directory
 setwd( output.directory );
