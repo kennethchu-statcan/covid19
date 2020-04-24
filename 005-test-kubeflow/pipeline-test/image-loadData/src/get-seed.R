@@ -8,6 +8,9 @@ get.seed <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+    # output.seed <- jsonlite::read_json(input.json)[["seed"]];
+
     my.system.command <- paste0('egrep "seed" ',input.json);
     temp              <- system(command = my.system.command);
     temp              <- gsub(x = temp, pattern = '(\"|A-Za-z|:)', replacement = '');
