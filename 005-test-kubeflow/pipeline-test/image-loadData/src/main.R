@@ -67,6 +67,7 @@ bucket.root <- "ken-wifr-data";
 data.snapshot  <- "2020-04-24.01";
 
 data.directory <- file.path(data.directory,bucket.root,"data",data.snapshot);
+print( data.directory );
 print( list.files(data.directory) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
