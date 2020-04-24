@@ -10,6 +10,8 @@ print( code.directory   );
 print( output.directory );
 print( format(Sys.time(),"%Y-%m-%d %T %Z") );
 
+data.directory.2 <- data.directory;
+
 start.proc.time <- proc.time();
 
 ##################################################
@@ -45,7 +47,7 @@ run.specific.seed <- get.seed(
     input.json = file.path(output.directory,'in.json')
     );
 
-print( 'run.specific.seed' );
+print( run.specific.seed );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 require(rstan);
@@ -65,7 +67,11 @@ require(EnvStats);
 data.snapshot  <- "ken-wifr-data";
 data.directory <- file.path(data.directory,data.snapshot);
 
-print("AAA-1");
+bucket.root.2    <- "ken-wifr-data";
+data.snapshot.2  <- "2020-04-24.01";
+data.directory.2 <- file.path(data.directory.2,bucket.root.2,"data",data.snapshot.2);
+
+print( list.files(data.directory.2) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 jurisdictions <- c(
