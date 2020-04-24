@@ -12,6 +12,10 @@ print( format(Sys.time(),"%Y-%m-%d %T %Z") );
 
 start.proc.time <- proc.time();
 
+##################################################
+print( getwd() );
+
+##################################################
 # set working directory to output directory
 setwd( output.directory );
 
