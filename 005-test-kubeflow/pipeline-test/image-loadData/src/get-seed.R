@@ -11,10 +11,10 @@ get.seed <- function(
 
     # output.seed <- jsonlite::read_json(input.json)[["seed"]];
 
-    my.system.command <- paste0('egrep "seed" ',input.json);
-    temp              <- system(command = my.system.command, intern = TRUE);
-    temp              <- gsub(x = temp, pattern = '(\"|A-Za-z|:)', replacement = '');
-    output.seed       <- as.integer(temp);
+    my.command  <- paste0('egrep "seed" ',input.json);
+    temp.string <- system(command = my.command, intern = TRUE);
+    temp.string <- gsub(x = temp.string, pattern = '(\"|[A-Za-z]|:)', replacement = '');
+    output.seed <- as.integer(temp.string);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
