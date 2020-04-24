@@ -64,7 +64,8 @@ require(EnvStats);
 #data.snapshot <- "2020-04-11.01";
 #data.snapshot <- "2020-04-11.02";
 #data.snapshot <- "2020-04-19.01";
-data.snapshot  <- "2020-04-19.02";
+#data.snapshot <- "2020-04-19.02";
+data.snapshot  <- "ken-wifr-data";
 data.directory <- file.path(data.directory,data.snapshot);
 
 print("AAA-1");
