@@ -16,6 +16,9 @@ start.proc.time <- proc.time();
 # set working directory to output directory
 setwd( output.directory );
 
+run.specific.seed <- jsonlite::read_json("in.json")[["seed"]];
+print( 'run.specific.seed' );
+
 ##################################################
 # source supporting R code
 code.files <- c(
@@ -103,7 +106,7 @@ file.copy(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-set.seed(7654321);
+set.seed(7654321 + run.specific.seed);
 
 list.raw.data <- getData.raw(
     csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
@@ -177,16 +180,16 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.wrapper.stan <- wrapper.stan(
-    StanModel                   = StanModel,
-    FILE.stan.model             = FILE.stan.model,
-    DF.covid19                  = DF.covid19,
-    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
-    DF.serial.interval          = DF.serial.interval,
-    DF.covariates               = DF.covariates,
-    forecast.window             = 14,
-    DEBUG                       = FALSE # TRUE
-    );
+#results.wrapper.stan <- wrapper.stan(
+#    StanModel                   = StanModel,
+#    FILE.stan.model             = FILE.stan.model,
+#    DF.covid19                  = DF.covid19,
+#    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
+#    DF.serial.interval          = DF.serial.interval,
+#    DF.covariates               = DF.covariates,
+#    forecast.window             = 14,
+#    DEBUG                       = FALSE # TRUE
+#    );
 
 ##################################################
 print( warnings() );
