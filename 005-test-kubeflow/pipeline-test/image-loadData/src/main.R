@@ -55,6 +55,8 @@ require(EnvStats);
 data.snapshot  <- "2020-04-19.02";
 data.directory <- file.path(data.directory,data.snapshot);
 
+print("AAA-1");
+
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 jurisdictions <- c(
     "Denmark",
