@@ -43,7 +43,7 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-run.specific.seed <- getSeed(input.json = 'in.json');
+run.specific.seed <- get.seed(input.json = 'in.json');
 print( 'run.specific.seed' );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
