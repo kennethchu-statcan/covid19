@@ -16,14 +16,14 @@ start.proc.time <- proc.time();
 # set working directory to output directory
 setwd( output.directory );
 
-run.specific.seed <- jsonlite::read_json("in.json")[["seed"]];
-print( 'run.specific.seed' );
+# run.specific.seed <- jsonlite::read_json("in.json")[["seed"]];
 
 ##################################################
 # source supporting R code
 code.files <- c(
     "cross-check.R",
     "geom-stepribbon.R",
+    "get-seed.R",
     "getData-covariates.R",
     "getData-covid19.R",
     "getData-ECDC.R",
@@ -41,6 +41,10 @@ code.files <- c(
 for ( code.file in code.files ) {
     source(file.path(code.directory,code.file));
     }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+run.specific.seed <- getSeed(input.json = 'in.json');
+print( 'run.specific.seed' );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 require(rstan);
