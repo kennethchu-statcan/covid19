@@ -17,6 +17,8 @@ print( normalizePath(getwd()) );
 
 print( getwd() );
 
+print( list.files(getwd()) );
+
 ##################################################
 # set working directory to output directory
 setwd( output.directory );
