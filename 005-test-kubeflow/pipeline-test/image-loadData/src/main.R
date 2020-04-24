@@ -21,7 +21,7 @@ print( list.files(getwd()) );
 
 print( list.files(file.path(getwd(),"/data")) );
 
-print( list.files(data.directory) );
+print( list.files(file.path(data.directory,"ken-wifr-data")) );
 
 ##################################################
 # set working directory to output directory
