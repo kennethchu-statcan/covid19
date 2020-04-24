@@ -13,17 +13,6 @@ print( format(Sys.time(),"%Y-%m-%d %T %Z") );
 start.proc.time <- proc.time();
 
 ##################################################
-print( normalizePath(getwd()) );
-
-print( getwd() );
-
-print( list.files(getwd()) );
-
-print( list.files(file.path(getwd(),"/data")) );
-
-print( list.files(file.path(data.directory,"ken-wifr-data")) );
-
-##################################################
 # set working directory to output directory
 setwd( output.directory );
 
@@ -188,16 +177,16 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#results.wrapper.stan <- wrapper.stan(
-#    StanModel                   = StanModel,
-#    FILE.stan.model             = FILE.stan.model,
-#    DF.covid19                  = DF.covid19,
-#    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
-#    DF.serial.interval          = DF.serial.interval,
-#    DF.covariates               = DF.covariates,
-#    forecast.window             = 14,
-#    DEBUG                       = FALSE # TRUE
-#    );
+results.wrapper.stan <- wrapper.stan(
+    StanModel                   = StanModel,
+    FILE.stan.model             = FILE.stan.model,
+    DF.covid19                  = DF.covid19,
+    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
+    DF.serial.interval          = DF.serial.interval,
+    DF.covariates               = DF.covariates,
+    forecast.window             = 14,
+    DEBUG                       = FALSE # TRUE
+    );
 
 ##################################################
 print( warnings() );
