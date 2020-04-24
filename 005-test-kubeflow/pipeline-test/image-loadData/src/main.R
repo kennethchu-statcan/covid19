@@ -153,9 +153,16 @@ print( summary(DF.covid19) );
 print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+seed.wIFR <- 7654321 + run.specific.seed;
+
+print( run.specific.seed );
+
+print( seed.wIFR );
+
 DF.weighted.fatality.ratios <- getData.wIFR(
     csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
-    csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
+    csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv"),
+    seed.wIFR       = seed.wIFR
     );
 
 print( str(DF.weighted.fatality.ratios) );
