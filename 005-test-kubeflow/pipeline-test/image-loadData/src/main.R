@@ -10,8 +10,6 @@ print( code.directory   );
 print( output.directory );
 print( format(Sys.time(),"%Y-%m-%d %T %Z") );
 
-data.directory.2 <- data.directory;
-
 start.proc.time <- proc.time();
 
 ##################################################
@@ -57,6 +55,8 @@ require(gdata);
 require(EnvStats);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+bucket.root <- "ken-wifr-data";
+
 #data.snapshot <- "imperial-data-1.0";
 #data.snapshot <- "2020-04-05.01";
 #data.snapshot <- "2020-04-07.01";
@@ -64,14 +64,10 @@ require(EnvStats);
 #data.snapshot <- "2020-04-11.02";
 #data.snapshot <- "2020-04-19.01";
 #data.snapshot <- "2020-04-19.02";
-data.snapshot  <- "ken-wifr-data";
-data.directory <- file.path(data.directory,data.snapshot);
+data.snapshot  <- "2020-04-24.01";
 
-bucket.root.2    <- "ken-wifr-data";
-data.snapshot.2  <- "2020-04-24.01";
-data.directory.2 <- file.path(data.directory.2,bucket.root.2,"data",data.snapshot.2);
-
-print( list.files(data.directory.2) );
+data.directory <- file.path(data.directory,bucket.root,"data",data.snapshot);
+print( list.files(data.directory) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 jurisdictions <- c(
