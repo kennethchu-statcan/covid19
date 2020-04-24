@@ -16,8 +16,6 @@ start.proc.time <- proc.time();
 # set working directory to output directory
 setwd( output.directory );
 
-# run.specific.seed <- jsonlite::read_json("in.json")[["seed"]];
-
 ##################################################
 # source supporting R code
 code.files <- c(
@@ -43,7 +41,10 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-run.specific.seed <- get.seed(input.json = 'in.json');
+run.specific.seed <- get.seed(
+    input.json = file.path(output.directory,'in.json')
+    );
+
 print( 'run.specific.seed' );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
