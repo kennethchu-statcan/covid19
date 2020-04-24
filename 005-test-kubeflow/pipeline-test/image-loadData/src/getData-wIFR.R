@@ -2,6 +2,7 @@
 getData.wIFR <- function(
     csv.wIFR.europe = NULL,
     csv.wIFR.canada = NULL,
+    seed.wIFR       = 7654321,
     csv.output      = "input-wIFR.csv"
     ) {
 
@@ -20,7 +21,8 @@ getData.wIFR <- function(
 
     DF.wIFR.canada <- getData.wIFR_canada(
         csv.input      = csv.wIFR.canada,
-        DF.wIFR.europe = DF.wIFR.europe
+        DF.wIFR.europe = DF.wIFR.europe,
+        seed.wIFR      = seed.wIFR
         );
 
     cat("\nstr(DF.wIFR.europe)\n");
@@ -51,7 +53,8 @@ getData.wIFR <- function(
 ##################################################
 getData.wIFR_canada <- function(
     csv.input      = NULL,
-    DF.wIFR.europe = NULL
+    DF.wIFR.europe = NULL,
+    seed.wIFR      = NULL
     ) {
 
     DF.output <- read.csv( csv.input );
@@ -95,12 +98,22 @@ getData.wIFR_canada <- function(
         replacement = "age_80_or_above"
         );
 
-    DF.output[,"weighted_fatality"] <- sample(
-        x       = DF.wIFR.europe[,"weighted_fatality"],
-        size    = nrow(DF.output),
-        replace = TRUE
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    set.seed( seed.wIFR ):
+
+    #DF.output[,"weighted_fatality"] <- sample(
+    #    x       = DF.wIFR.europe[,"weighted_fatality"],
+    #    size    = nrow(DF.output),
+    #    replace = TRUE
+    #    );
+
+    DF.output[,"weighted_fatality"] <- runif(
+        n   = nrow(DF.output),
+        min = 0.8 * min(DF.wIFR.europe[,"weighted_fatality"]),
+        max = 1.2 * max(DF.wIFR.europe[,"weighted_fatality"])
         );
 
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     return( DF.output );
 
     }
