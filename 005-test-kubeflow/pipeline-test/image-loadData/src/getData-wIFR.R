@@ -99,7 +99,7 @@ getData.wIFR_canada <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    set.seed( seed.wIFR ):
+    set.seed( seed.wIFR );
 
     #DF.output[,"weighted_fatality"] <- sample(
     #    x       = DF.wIFR.europe[,"weighted_fatality"],
