@@ -13,6 +13,8 @@ print( format(Sys.time(),"%Y-%m-%d %T %Z") );
 start.proc.time <- proc.time();
 
 ##################################################
+print( normalsizePath(getwd()) );
+
 print( getwd() );
 
 ##################################################
