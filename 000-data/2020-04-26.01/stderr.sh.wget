@@ -1,0 +1,65 @@
+--2020-04-25 12:02:32--  https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+Resolving opendata.ecdc.europa.eu... 212.181.0.63
+Connecting to opendata.ecdc.europa.eu|212.181.0.63|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/ [following]
+--2020-04-25 12:02:33--  https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/
+Reusing existing connection to opendata.ecdc.europa.eu:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 756471 (739K) [application/octet-stream]
+Saving to: 'csv'
+
+     0K .......... .......... .......... .......... ..........  6% 48.5K 14s
+    50K .......... .......... .......... .......... .......... 13%  366K 7s
+   100K .......... .......... .......... .......... .......... 20%  360K 5s
+   150K .......... .......... .......... .......... .......... 27%  426K 4s
+   200K .......... .......... .......... .......... .......... 33%  441K 3s
+   250K .......... .......... .......... .......... .......... 40% 1.29M 2s
+   300K .......... .......... .......... .......... .......... 47%  401K 2s
+   350K .......... .......... .......... .......... .......... 54%  456K 2s
+   400K .......... .......... .......... .......... .......... 60%  486K 1s
+   450K .......... .......... .......... .......... .......... 67%  396K 1s
+   500K .......... .......... .......... .......... .......... 74% 1.22M 1s
+   550K .......... .......... .......... .......... .......... 81%  400K 1s
+   600K .......... .......... .......... .......... .......... 87%  448K 0s
+   650K .......... .......... .......... .......... .......... 94%  448K 0s
+   700K .......... .......... .......... ........             100% 1.57M=2.5s
+
+2020-04-25 12:02:36 (301 KB/s) - 'csv' saved [756471/756471]
+
+--2020-04-25 12:02:36--  https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+Resolving health-infobase.canada.ca... 40.82.191.96
+Connecting to health-infobase.canada.ca|40.82.191.96|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 54493 (53K) [text/csv]
+Saving to: 'covid19.csv'
+
+     0K .......... .......... .......... .......... .......... 93% 1.45M 0s
+    50K ...                                                   100% 64.3K=0.03s
+
+2020-04-25 12:02:36 (1.54 MB/s) - 'covid19.csv' saved [54493/54493]
+
+--2020-04-25 12:02:36--  https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
+Resolving raw.githubusercontent.com... 151.101.124.133
+Connecting to raw.githubusercontent.com|151.101.124.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 80466 (79K) [text/plain]
+Saving to: 'time_series_covid19_confirmed_global.csv'
+
+     0K .......... .......... .......... .......... .......... 63%  902K 0s
+    50K .......... .......... ........                        100% 2.03M=0.07s
+
+2020-04-25 12:02:36 (1.11 MB/s) - 'time_series_covid19_confirmed_global.csv' saved [80466/80466]
+
+--2020-04-25 12:02:36--  https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
+Resolving raw.githubusercontent.com... 151.101.124.133
+Connecting to raw.githubusercontent.com|151.101.124.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 62926 (61K) [text/plain]
+Saving to: 'time_series_covid19_deaths_global.csv'
+
+     0K .......... .......... .......... .......... .......... 81%  922K 0s
+    50K .......... .                                          100% 18.4M=0.05s
+
+2020-04-25 12:02:36 (1.09 MB/s) - 'time_series_covid19_deaths_global.csv' saved [62926/62926]
+

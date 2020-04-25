@@ -19,6 +19,16 @@ if ! git clone --depth=1 \
 fi
 mv /tmp/covid19/005-test-kubeflow/pipeline-test/image-loadData/src /src
 
+# Get the source
+if ! git clone --depth=1 \
+    https://github.com/kennethchu-statcan/covid19/ \
+    /tmp/covid19; then
+    echo "Couldn't git clone. Exiting. Network Error?"
+    exit 1
+fi
+mv /tmp/covid19/005-test-kubeflow/pipeline-test/image-loadData/src /src
+
+
 while test -n "$1"; do
     case "$1" in
         --data)
@@ -84,4 +94,3 @@ echo mc cp -r /output "daaas/$OUTPUT"
 mc cp -r /output "daaas/$OUTPUT"
 
 echo "Done."
-
