@@ -195,16 +195,16 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#results.wrapper.stan <- wrapper.stan(
-#    StanModel                   = StanModel,
-#    FILE.stan.model             = FILE.stan.model,
-#    DF.covid19                  = DF.covid19,
-#    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
-#    DF.serial.interval          = DF.serial.interval,
-#    DF.covariates               = DF.covariates,
-#    forecast.window             = 14,
-#    DEBUG                       = FALSE # TRUE
-#    );
+results.wrapper.stan <- wrapper.stan(
+    StanModel                   = StanModel,
+    FILE.stan.model             = FILE.stan.model,
+    DF.covid19                  = DF.covid19,
+    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
+    DF.serial.interval          = DF.serial.interval,
+    DF.covariates               = DF.covariates,
+    forecast.window             = 14,
+    DEBUG                       = FALSE # TRUE
+    );
 
 ##################################################
 print( warnings() );
