@@ -5,11 +5,6 @@
 #     --output  Output bucket/folder
 #     --params  Json parameters
 
-# Just incase istio is slow.
-while ! ping -c 1 www.google.com; do
-    sleep 2
-done
-
 # Get the source
 if ! git clone --depth=1 \
     https://github.com/kennethchu-statcan/covid19/ \

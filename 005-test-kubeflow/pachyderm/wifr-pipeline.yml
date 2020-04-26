@@ -1,17 +1,17 @@
 pipeline:
   name: wifr-sensitivity
 description: "Create wifr simulation from input random seeds"
-standby: true
+#standby: true
 transform:
-  image: k8scc01covidacr.azurecr.io/kenchu-wifr-analysis:v1
+  image: k8scc01covidacr.azurecr.io/kenchu-wifr-analysis:v8
   image_pull_secrets:
     - k8scc01covidacr-registry-connection
   cmd:
     - "/main.sh"
     - "--params"
-    - "/pfs/input/params/"
+    - "/pfs/params/"
     - "--data"
-    - "/pfs/input/data/"
+    - "/pfs/data/"
     - "--output"
     - "/pfs/out"
 resource_requests:
@@ -19,14 +19,12 @@ resource_requests:
   cpu: 2
 parallelism_spec:
   constant: 2   # use N computers
-chunk_spec:
-  number: 1
 input:
   cross:
     - pfs:
         name: params
         repo: wifr-params
-        glob: "/seeds.json/*"
+        glob: "/*/*"
     - pfs:
         name: data
         repo: wifr-data

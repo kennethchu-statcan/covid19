@@ -5,20 +5,6 @@
 #     --data    Input  folder
 #     --output  Output folder
 
-# Just incase istio is slow.
-while ! ping -c 1 www.google.com; do
-    sleep 2
-done
-
-# Get the source
-if ! git clone --depth=1 \
-    https://github.com/kennethchu-statcan/covid19/ \
-    /tmp/covid19; then
-    echo "Couldn't git clone. Exiting. Network Error?"
-    exit 1
-fi
-mv /tmp/covid19/005-test-kubeflow/pipeline-test/image-loadData/src /src
-
 while test -n "$1"; do
     case "$1" in
         --data)
@@ -62,7 +48,7 @@ fi
 
   dataDIR="$DATA"
   codeDIR=/src
-outputDIR=/output
+outputDIR="$OUTPUT"
 
  myRscript=${codeDIR}/main-pachyderm.R
 stdoutFile=${outputDIR}/stdout.R.`basename ${myRscript} .R`
