@@ -1,6 +1,7 @@
 
 extract.estimates <- function(
-    input.directory = NULL
+    input.directory = NULL,
+    RData.output    = "posterior-means.RData"
     ) {
 
     thisFunctionName <- "extract.estimates";
@@ -33,6 +34,11 @@ extract.estimates <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    if (!is.null(RData.output)) {
+        saveRDS(object = list.output, file = RData.output);
+        }
+    
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
     return( list.output );
@@ -51,7 +57,7 @@ extract.estimates_by.simulation <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     RData.input <- file.path(input.directory,"stan-model-base.RData");
-    list.input <- readRDS(file = RData.input);
+    list.input  <- readRDS(file = RData.input);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     # cat("\nnames(list.input)\n");
@@ -93,6 +99,9 @@ extract.estimates_by.simulation <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     # cat("\nstr(list.output)\n");
     # print( str(list.output)   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    remove( list = c("list.input") );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
