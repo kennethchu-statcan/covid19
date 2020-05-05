@@ -26,13 +26,6 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#require(rstan);
-#require(data.table);
-#require(lubridate);
-#require(gdata);
-#require(EnvStats);
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 data.snapshot  <- "sensitivity.2020-04-23.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
@@ -42,10 +35,11 @@ options(mc.cores = parallel::detectCores());
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-list.results <- extract.estimates(
-    simulation.ID   = 1,
-    input.directory = file.path(data.directory,"3","output")
+list.estimates <- extract.estimates(
+    input.directory = data.directory
     );
+
+print( str(list.estimates) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 

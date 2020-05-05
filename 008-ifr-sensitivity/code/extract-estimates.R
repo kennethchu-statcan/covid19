@@ -1,10 +1,51 @@
 
 extract.estimates <- function(
+    input.directory = NULL
+    ) {
+
+    thisFunctionName <- "extract.estimates";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.output <- list();
+
+    simulation.IDs <- list.files(path = input.directory, recursive = FALSE);
+    cat("\nsimulation.IDs\n");
+    print( simulation.IDs   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    for ( simulation.ID in simulation.IDs ) {
+        temp.list <- extract.estimates_by.simulation(
+            input.directory = file.path(input.directory,simulation.ID,"output"),
+            simulation.ID   = simulation.ID
+            );
+        for ( temp.name in names(temp.list) ) {
+            if ( is.null(list.output[[temp.name]]) ) {
+                list.output[[temp.name]] <- temp.list[[temp.name]];
+            } else {
+                list.output[[temp.name]] <- rbind(
+                    list.output[[temp.name]],
+                    temp.list[[temp.name]]
+                    );
+                }
+            }
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( list.output );
+
+    }
+
+###################################################
+extract.estimates_by.simulation <- function(
     input.directory = NULL,
     simulation.ID   = NULL
     ) {
 
-    thisFunctionName <- "extract.estimates";
+    thisFunctionName <- "extract.estimates_by.simulation";
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
@@ -13,11 +54,11 @@ extract.estimates <- function(
     list.input <- readRDS(file = RData.input);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    cat("\nnames(list.input)\n");
-    print( names(list.input)   );
+    # cat("\nnames(list.input)\n");
+    # print( names(list.input)   );
 
-    cat("\nstr(list.input)\n");
-    print( str(list.input)   );
+    # cat("\nstr(list.input)\n");
+    # print( str(list.input)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output  <- list();
@@ -50,14 +91,13 @@ extract.estimates <- function(
         }
     
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    cat("\nstr(list.output)\n");
-    print( str(list.output)   );
+    # cat("\nstr(list.output)\n");
+    # print( str(list.output)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
-    # return( list.output );
-    return( NULL );
+    return( list.output );
 
     }
 
