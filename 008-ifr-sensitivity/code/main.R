@@ -18,7 +18,9 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
-    "extract-estimates.R"
+    "extract-estimates.R",
+    "initializePlot.R",
+    "visualize-estimates.R"
     );
 
 for ( code.file in code.files ) {
@@ -43,6 +45,9 @@ list.estimates <- extract.estimates(
 print( str(list.estimates) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+visualize.estimates(
+    list.input = list.estimates
+    );
 
 ##################################################
 print( warnings() );
