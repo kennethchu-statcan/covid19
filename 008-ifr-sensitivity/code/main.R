@@ -26,7 +26,8 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot  <- "sensitivity.2020-04-23.01";
+#data.snapshot <- "sensitivity.2020-04-23.01";
+data.snapshot  <- "sensitivity.2020-05-06.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###

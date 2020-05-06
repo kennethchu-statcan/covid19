@@ -9,35 +9,45 @@ extract.estimates <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    list.output <- list();
+    if ( file.exists(RData.output) ) {
 
-    simulation.IDs <- list.files(path = input.directory, recursive = FALSE);
-    cat("\nsimulation.IDs\n");
-    print( simulation.IDs   );
+        cat(paste0("\n# Data file ",RData.output," already exists; loading this file ...\n"));
+        list.output <- readRDS(file = RData.output);
+        cat(paste0("\n# Loading complete: ",RData.output,".\n"));
+    
+    } else {
 
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    for ( simulation.ID in simulation.IDs ) {
-        temp.list <- extract.estimates_by.simulation(
-            input.directory = file.path(input.directory,simulation.ID,"output"),
-            simulation.ID   = simulation.ID
-            );
-        for ( temp.name in names(temp.list) ) {
-            if ( is.null(list.output[[temp.name]]) ) {
-                list.output[[temp.name]] <- temp.list[[temp.name]];
-            } else {
-                list.output[[temp.name]] <- rbind(
-                    list.output[[temp.name]],
-                    temp.list[[temp.name]]
-                    );
+        list.output <- list();
+
+        simulation.IDs <- list.files(path = input.directory, recursive = FALSE);
+        cat("\nsimulation.IDs\n");
+        print( simulation.IDs   );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        for ( simulation.ID in simulation.IDs ) {
+            temp.list <- extract.estimates_by.simulation(
+                input.directory = file.path(input.directory,simulation.ID),
+                simulation.ID   = simulation.ID
+                );
+            for ( temp.name in names(temp.list) ) {
+                if ( is.null(list.output[[temp.name]]) ) {
+                    list.output[[temp.name]] <- temp.list[[temp.name]];
+                } else {
+                    list.output[[temp.name]] <- rbind(
+                        list.output[[temp.name]],
+                        temp.list[[temp.name]]
+                        );
+                    }
                 }
             }
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        if (!is.null(RData.output)) {
+            saveRDS(object = list.output, file = RData.output);
+            }
+    
         }
 
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if (!is.null(RData.output)) {
-        saveRDS(object = list.output, file = RData.output);
-        }
-    
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
