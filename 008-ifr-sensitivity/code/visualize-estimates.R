@@ -44,7 +44,7 @@ visualize.estimates_alpha <- function(
             data    = DF.temp,
             mapping = aes(x = posterior.mean),
             #size    = 0.2,
-            alpha   = 0.3
+            alpha   = 0.5
             );
 
         temp.string <- gsub(x=temp.covariate,pattern="\\.",replacement="-");
