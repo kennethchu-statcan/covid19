@@ -29,6 +29,14 @@ visualize.estimates <- function(
     }
 
 ###################################################
+beautify.variable <- function(input.string = NULL) {
+    output.string <- input.string;
+    output.string <- gsub(x = output.string, pattern = "prediction", replacement = "estimated daily new infection count");
+    output.string <- gsub(x = output.string, pattern = "E_deaths",   replacement = "estimated daily death count");
+    output.string <- gsub(x = output.string, pattern = "Rt",         replacement = "daily reproduction number");
+    return( output.string );
+    }
+
 visualize.estimates_time.series <- function(
     variable   = NULL,
     list.input = NULL
@@ -57,7 +65,9 @@ visualize.estimates_time.series <- function(
                 my.quantile975 = quantile(posterior.mean,0.975)
                 );
 
-        temp.subtitle <- paste0(gsub(x=temp.jurisdiction,pattern="\\.",replacement=" "),", ",variable);
+        beautified.variable <- beautify.variable(input.string = variable);
+        temp.subtitle <- paste0(gsub(x=temp.jurisdiction,pattern="\\.",replacement=" "),", ",beautified.variable);
+
         my.ggplot <- initializePlot(
             title    = NULL,
             subtitle = temp.subtitle
