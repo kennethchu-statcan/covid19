@@ -29,14 +29,16 @@ extract.estimates <- function(
                 input.directory = file.path(input.directory,simulation.ID),
                 simulation.ID   = simulation.ID
                 );
-            for ( temp.name in names(temp.list) ) {
-                if ( is.null(list.output[[temp.name]]) ) {
-                    list.output[[temp.name]] <- temp.list[[temp.name]];
-                } else {
-                    list.output[[temp.name]] <- rbind(
-                        list.output[[temp.name]],
-                        temp.list[[temp.name]]
-                        );
+            if ( !is.null(temp.list) ) {
+                for ( temp.name in names(temp.list) ) {
+                    if ( is.null(list.output[[temp.name]]) ) {
+                        list.output[[temp.name]] <- temp.list[[temp.name]];
+                    } else {
+                        list.output[[temp.name]] <- rbind(
+                            list.output[[temp.name]],
+                            temp.list[[temp.name]]
+                            );
+                        }
                     }
                 }
             }
@@ -67,6 +69,9 @@ extract.estimates_by.simulation <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     RData.input <- file.path(input.directory,"stan-model-base.RData");
+    if ( !file.exists(RData.input) ) { return( NULL ); }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.input  <- readRDS(file = RData.input);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
