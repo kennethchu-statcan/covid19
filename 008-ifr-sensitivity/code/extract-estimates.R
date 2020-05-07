@@ -69,7 +69,12 @@ extract.estimates_by.simulation <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     RData.input <- file.path(input.directory,"stan-model-base.RData");
-    if ( !file.exists(RData.input) ) { return( NULL ); }
+
+    if ( !file.exists(RData.input) ) {
+        cat(paste0("\n",thisFunctionName,"() quits."));
+        cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+        return( NULL );
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.input  <- readRDS(file = RData.input);
