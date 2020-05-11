@@ -1,0 +1,69 @@
+--2020-05-10 20:55:29--  https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+Resolving opendata.ecdc.europa.eu... 212.181.0.63
+Connecting to opendata.ecdc.europa.eu|212.181.0.63|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/ [following]
+--2020-05-10 20:55:31--  https://opendata.ecdc.europa.eu/covid19/casedistribution/csv/
+Reusing existing connection to opendata.ecdc.europa.eu:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 938310 (916K) [application/octet-stream]
+Saving to: 'csv'
+
+     0K .......... .......... .......... .......... ..........  5%  173K 5s
+    50K .......... .......... .......... .......... .......... 10%  351K 4s
+   100K .......... .......... .......... .......... .......... 16%  366K 3s
+   150K .......... .......... .......... .......... .......... 21%  354K 3s
+   200K .......... .......... .......... .......... .......... 27% 1.26M 2s
+   250K .......... .......... .......... .......... .......... 32%  392K 2s
+   300K .......... .......... .......... .......... .......... 38%  377K 2s
+   350K .......... .......... .......... .......... .......... 43%  379K 1s
+   400K .......... .......... .......... .......... .......... 49% 1.25M 1s
+   450K .......... .......... .......... .......... .......... 54%  395K 1s
+   500K .......... .......... .......... .......... .......... 60%  368K 1s
+   550K .......... .......... .......... .......... .......... 65%  412K 1s
+   600K .......... .......... .......... .......... .......... 70%  357K 1s
+   650K .......... .......... .......... .......... .......... 76%  408K 1s
+   700K .......... .......... .......... .......... .......... 81% 1.16M 0s
+   750K .......... .......... .......... .......... .......... 87%  345K 0s
+   800K .......... .......... .......... .......... .......... 92%  399K 0s
+   850K .......... .......... .......... .......... .......... 98%  474K 0s
+   900K .......... ......                                     100%  507K=2.3s
+
+2020-05-10 20:55:34 (403 KB/s) - 'csv' saved [938310/938310]
+
+--2020-05-10 20:55:34--  https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+Resolving health-infobase.canada.ca... 40.82.191.96
+Connecting to health-infobase.canada.ca|40.82.191.96|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 82898 (81K) [text/csv]
+Saving to: 'covid19.csv'
+
+     0K .......... .......... .......... .......... .......... 61% 22.9M 0s
+    50K .......... .......... ..........                      100% 26.5M=0.003s
+
+2020-05-10 20:55:34 (24.2 MB/s) - 'covid19.csv' saved [82898/82898]
+
+--2020-05-10 20:55:34--  https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
+Resolving raw.githubusercontent.com... 151.101.124.133
+Connecting to raw.githubusercontent.com|151.101.124.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 97813 (96K) [text/plain]
+Saving to: 'time_series_covid19_confirmed_global.csv'
+
+     0K .......... .......... .......... .......... .......... 52%  798K 0s
+    50K .......... .......... .......... .......... .....     100%  939K=0.1s
+
+2020-05-10 20:55:34 (859 KB/s) - 'time_series_covid19_confirmed_global.csv' saved [97813/97813]
+
+--2020-05-10 20:55:34--  https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
+Resolving raw.githubusercontent.com... 151.101.124.133
+Connecting to raw.githubusercontent.com|151.101.124.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 74573 (73K) [text/plain]
+Saving to: 'time_series_covid19_deaths_global.csv'
+
+     0K .......... .......... .......... .......... .......... 68% 1.03M 0s
+    50K .......... .......... ..                              100% 1.11M=0.07s
+
+2020-05-10 20:55:35 (1.05 MB/s) - 'time_series_covid19_deaths_global.csv' saved [74573/74573]
+
