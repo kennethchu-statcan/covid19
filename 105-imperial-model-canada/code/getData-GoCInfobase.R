@@ -1,7 +1,7 @@
 
 getData.GoCInfobase <- function(
     list.covid19.data = NULL,
-    csv.GoCInfobase   = "raw-covid19-GoCInfobase.csv"
+    csv.GoCInfobase   = "tmp-covid19-GoCInfobase.csv"
     ) {
 
     thisFunctionName <- "getData.GoCInfobase";
@@ -281,27 +281,5 @@ getData.GoCInfobase_standardize.output <- function(
 
     return( DF.output );
 
-    }
-
-getData.GoCInfobase_download <- function(
-    input.file  = NULL,
-    target.url  = NULL,
-    output.file = NULL
-    ) {
-    if ( !is.null(input.file) ) {
-        DF.output <- read.csv(input.file, stringsAsFactors = FALSE);
-    } else {
-        tryCatch(
-            expr = {
-                code <- download.file(url = target.url, destfile = output.file);
-                if (code != 0) { stop("Error downloading file") }
-                },
-            error = function(e) {
-                stop(sprintf("Error downloading file '%s': %s", target.url, e$message));
-                }
-            );
-        DF.output <- read.csv(output.file, stringsAsFactors = FALSE);
-        } 
-    return( DF.output );
     }
 

@@ -2,8 +2,8 @@
 getData.covid19 <- function(
     retained.jurisdictions = NULL,
     list.covid19.data      = NULL,
-    csv.ECDC               = "raw-covid19-ECDC.csv",
-    csv.GoCInfobase        = "raw-covid19-GoCInfobase.csv",
+    csv.ECDC               = "tmp-covid19-ECDC.csv",
+    csv.GoCInfobase        = "tmp-covid19-GoCInfobase.csv",
     csv.covid19            = "input-covid19.csv"
     ) {
 
