@@ -22,7 +22,7 @@ patchData <- function(
 
     write.csv(
         x         = list.output[["GoCInfobase"]],
-        file      = 'raw-covid19-GoCInfobase-patched.csv',
+        file      = 'tmp-covid19-GoCInfobase-patched.csv',
         row.names = FALSE
         );
 
@@ -47,6 +47,17 @@ patchData_GoCInfobase <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     colnames.input   <- colnames(DF.input);
     colnames.numeric <- c("numconf","numprob","numdeaths","numtotal","numtested","numrecover");
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    for ( temp.colname in colnames.numeric ) {
+        if ( is.character(DF.input[,temp.colname]) ) {
+            DF.input[,temp.colname] <- as.integer(gsub(
+                x           = DF.input[,temp.colname],
+                pattern     = '\\s+',
+                replacement = ""
+                ));
+            }
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     unique.pruids <- unique(DF.input[,"pruid"]);

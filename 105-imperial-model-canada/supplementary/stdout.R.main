@@ -31,7 +31,7 @@ Type 'q()' to quit R.
 > print( output.directory );
 [1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/105-imperial-model-canada/output"
 > print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-[1] "2020-05-11 06:19:07 EDT"
+[1] "2020-05-11 21:57:51 EDT"
 > 
 > start.proc.time <- proc.time();
 > 
@@ -182,12 +182,12 @@ patchData() quits.
  $ prname    : chr  "Canada" "Canada" "Canada" "Canada" ...
  $ prnameFR  : chr  "Canada" "Canada" "Canada" "Canada" ...
  $ date      : chr  "31-12-2019" "01-01-2020" "02-01-2020" "03-01-2020" ...
- $ numconf   : chr  "0" "0" "0" "0" ...
- $ numprob   : chr  "0" "0" "0" "0" ...
+ $ numconf   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numprob   : num  0 0 0 0 0 0 0 0 0 0 ...
  $ numdeaths : num  0 0 0 0 0 0 0 0 0 0 ...
- $ numtotal  : chr  "0" "0" "0" "0" ...
- $ numtested : chr  "0" "0" "0" "0" ...
- $ numrecover: chr  "0" "0" "0" "0" ...
+ $ numtotal  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtested : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numrecover: num  0 0 0 0 0 0 0 0 0 0 ...
 NULL
 > 
 > DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
@@ -207,10 +207,10 @@ cross.check.JHU.GoCInfobase() quits.
  $ date        : Date, format: "2019-12-31" "2020-01-01" ...
  $ cases.JHU   : num  0 0 0 0 0 0 0 0 0 0 ...
  $ deaths.JHU  : num  0 0 0 0 0 0 0 0 0 0 ...
- $ numconf     : chr  "0" "0" "0" "0" ...
- $ numprob     : chr  "0" "0" "0" "0" ...
+ $ numconf     : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numprob     : num  0 0 0 0 0 0 0 0 0 0 ...
  $ numdeaths   : num  0 0 0 0 0 0 0 0 0 0 ...
- $ numtotal    : chr  "0" "0" "0" "0" ...
+ $ numtotal    : num  0 0 0 0 0 0 0 0 0 0 ...
 NULL
 > 
 > ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -287,9 +287,9 @@ summary(DF.GoCInfobase)
  Min.   : 1.00   Min.   :   0.00   Min.   :  0.000  
  1st Qu.: 7.00   1st Qu.:   0.00   1st Qu.:  0.000  
  Median :14.50   Median :   0.00   Median :  0.000  
- Mean   :14.98   Mean   :  21.59   Mean   :  9.106  
- 3rd Qu.:23.00   3rd Qu.:   0.00   3rd Qu.:  2.000  
- Max.   :31.00   Max.   :7870.00   Max.   :163.000  
+ Mean   :14.98   Mean   : 126.03   Mean   :  9.106  
+ 3rd Qu.:23.00   3rd Qu.:  72.25   3rd Qu.:  2.000  
+ Max.   :31.00   Max.   :2209.00   Max.   :163.000  
 
 getData.covid19() quits.
 ### ~~~~~~~~~~~~~~~~~~~~ ###
@@ -316,9 +316,9 @@ NULL
       day            cases             deaths       
  Min.   : 1.00   Min.   :-1430.0   Min.   :   0.00  
  1st Qu.: 7.00   1st Qu.:    0.0   1st Qu.:   0.00  
- Median :15.00   Median :    0.0   Median :   0.00  
- Mean   :14.99   Mean   :  565.7   Mean   :  71.58  
- 3rd Qu.:23.00   3rd Qu.:  238.5   3rd Qu.:  18.00  
+ Median :15.00   Median :    6.0   Median :   0.00  
+ Mean   :14.99   Mean   :  593.5   Mean   :  71.58  
+ 3rd Qu.:23.00   3rd Qu.:  404.5   3rd Qu.:  18.00  
  Max.   :31.00   Max.   : 9222.0   Max.   :2004.00  
 > 
 > print( unique( DF.covid19[,"jurisdiction"] ) );
@@ -554,34 +554,34 @@ wrapper.stan() starts.
 [1] "First non-zero cases is on day 62, and 30 days before 5 days is day 58"
 [1] "QC has 75 days of data"
 
-SAMPLING FOR MODEL 'base' NOW (CHAIN 1).
 
-SAMPLING FOR MODEL 'base' NOW (CHAIN 2).
 
-SAMPLING
-SAMPLING FOR MODEL 'base' NOW (CHAIN  FOR MODEL 'base' NOW (CHAIN 43).
-).
-Chain 1: 
-Chain 1: Gradient evaluation took 0.131877 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1318.77 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
+SAMPLINGSAMPLING
+ FOR MODEL ' FOR MODEL 'baseSAMPLINGbase' NOW (CHAIN SAMPLING' NOW (CHAIN  FOR MODEL '1 FOR MODEL 'base).
+' NOW (CHAIN base2).
+3).
+' NOW (CHAIN 4).
 Chain 2: 
-Chain 2: Gradient evaluation took 0.131459 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1314.59 seconds.
+Chain 2: Gradient evaluation took 0.132074 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1320.74 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
+Chain 1: 
+Chain 1: Gradient evaluation took 0.14418 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1441.8 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
 Chain 3: 
-Chain 3: Gradient evaluation took 0.133573 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1335.73 seconds.
+Chain 3: Gradient evaluation took 0.143148 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1431.48 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
 Chain 4: 
-Chain 4: Gradient evaluation took 0.134414 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1344.14 seconds.
+Chain 4: Gradient evaluation took 0.143198 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1431.98 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -618,8 +618,8 @@ Chain 1: Iteration: 700 / 1000 [ 70%]  (Sampling)
 Chain 4: Iteration: 600 / 1000 [ 60%]  (Sampling)
 Chain 2: Iteration: 600 / 1000 [ 60%]  (Sampling)
 Chain 3: Iteration: 600 / 1000 [ 60%]  (Sampling)
-Chain 4: Iteration: 700 / 1000 [ 70%]  (Sampling)
 Chain 1: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 4: Iteration: 700 / 1000 [ 70%]  (Sampling)
 Chain 4: Iteration: 800 / 1000 [ 80%]  (Sampling)
 Chain 2: Iteration: 700 / 1000 [ 70%]  (Sampling)
 Chain 1: Iteration: 900 / 1000 [ 90%]  (Sampling)
@@ -627,31 +627,31 @@ Chain 3: Iteration: 700 / 1000 [ 70%]  (Sampling)
 Chain 4: Iteration: 900 / 1000 [ 90%]  (Sampling)
 Chain 1: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 11581 seconds (Warm-up)
-Chain 1:                11745.6 seconds (Sampling)
-Chain 1:                23326.6 seconds (Total)
+Chain 1:  Elapsed Time: 11380.5 seconds (Warm-up)
+Chain 1:                11256.7 seconds (Sampling)
+Chain 1:                22637.2 seconds (Total)
 Chain 1: 
 Chain 2: Iteration: 800 / 1000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 14227.8 seconds (Warm-up)
-Chain 4:                10626.5 seconds (Sampling)
-Chain 4:                24854.3 seconds (Total)
+Chain 4:  Elapsed Time: 13917.2 seconds (Warm-up)
+Chain 4:                10146.6 seconds (Sampling)
+Chain 4:                24063.7 seconds (Total)
 Chain 4: 
 Chain 3: Iteration: 800 / 1000 [ 80%]  (Sampling)
 Chain 2: Iteration: 900 / 1000 [ 90%]  (Sampling)
 Chain 3: Iteration: 900 / 1000 [ 90%]  (Sampling)
 Chain 2: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 12879.9 seconds (Warm-up)
-Chain 2:                18047.4 seconds (Sampling)
-Chain 2:                30927.3 seconds (Total)
+Chain 2:  Elapsed Time: 12662.8 seconds (Warm-up)
+Chain 2:                16589.7 seconds (Sampling)
+Chain 2:                29252.5 seconds (Total)
 Chain 2: 
 Chain 3: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 14187.6 seconds (Warm-up)
-Chain 3:                16826.3 seconds (Sampling)
-Chain 3:                31013.9 seconds (Total)
+Chain 3:  Elapsed Time: 13845.8 seconds (Warm-up)
+Chain 3:                15484.7 seconds (Sampling)
+Chain 3:                29330.5 seconds (Total)
 Chain 3: 
 [1] 1
 [1] 2
@@ -779,11 +779,11 @@ loaded via a namespace (and not attached):
 [41] ggridges_0.5.2    assertthat_0.2.1  R6_2.4.1          compiler_3.6.2   
 > 
 > print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-[1] "2020-05-11 17:01:24 EDT"
+[1] "2020-05-12 11:18:49 EDT"
 > 
 > stop.proc.time <- proc.time();
 > print( stop.proc.time - start.proc.time );
       user     system    elapsed 
-109618.579    812.451  38536.355 
+104704.663    866.729  48058.256 
 > 
 > 
