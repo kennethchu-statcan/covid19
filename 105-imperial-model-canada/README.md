@@ -42,7 +42,7 @@ We were able to reproduce the results of the above article
 
 We have since made slight modifications in order to:
 
-*  use data up May 3, 2020,
+*  use data up May 10, 2020,
 *  use a 14-day forecast window,
 *  include the following four Canadian provinces in the analysis: Alberta, British Columbia, Ontario, Québec
 
@@ -179,7 +179,7 @@ git clone https://github.com/kennethchu-statcan/covid19.git
 Change directory to the folder of this pipeline in the local cloned repository:
 
 ```
-cd <LOCAL CLONED REPOSITORY>/102-imperial-model-canada/
+cd <LOCAL CLONED REPOSITORY>/105-imperial-model-canada/
 ```
 
 If you are using a Linux or macOS computer, execute the following shell script (in order to run the full pipeline):
@@ -195,7 +195,7 @@ If you are using a Windows computer, execute the following batch script at the C
 ```
 
 This will trigger the creation of the output folder
-`<LOCAL CLONED REPOSITORY>/102-imperial-model-canada/output/`
+`<LOCAL CLONED REPOSITORY>/105-imperial-model-canada/output/`
 if it does not already exist, followed by execution of the pipeline.
 All output and log files will be saved to the output folder.
 See below for information about the contents of the output folder.
@@ -203,13 +203,13 @@ See below for information about the contents of the output folder.
 Input files
 -----------
 All required input data and metadata files are located in
-`<LOCAL CLONED REPOSITORY>/000-data/2020-05-04.01/`.
+`<LOCAL CLONED REPOSITORY>/000-data/2020-05-10.01/`.
 
 *   __raw-covid19-ECDC.csv__
 
     COVID-19 case and death count time series for the eleven European jurisdictions
     considered by Flaxman et al.
-    It was downloaded on May 4, 2020 from
+    It was downloaded on May 10, 2020 from
     the European Centre for Disease Prevention and Control open-data URL:
 
     https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
@@ -217,7 +217,7 @@ All required input data and metadata files are located in
 *   __raw-covid19-GoCInfobase.csv__
 
     COVID-19 case and death count time series for the Canadian provinces and territories.
-    It was downloaded on May 4, 2020 from the following URL of PHAC:
+    It was downloaded on May 10, 2020 from the following URL of PHAC:
 
     https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
@@ -266,7 +266,7 @@ All required input data and metadata files are located in
 
     The current (temporary) imputed wIFR values for the Canadian provinces can be seen here:
 
-    https://github.com/kennethchu-statcan/covid19/blob/master/102-imperial-model-canada/supplementary/input-wIFR.csv
+    https://github.com/kennethchu-statcan/covid19/blob/master/105-imperial-model-canada/supplementary/input-wIFR.csv
 
 *   __ages.csv__
 
