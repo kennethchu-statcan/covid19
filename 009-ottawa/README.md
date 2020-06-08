@@ -6,7 +6,7 @@ Diagnostics of COVID-19 Hospitalization Data for Ottawa Residents
 
     https://open.ottawa.ca/datasets/covid-19-hospitalization-data-for-ottawa-residents
 
-*  Preprocessed data in tabular form can be viewed at:
+*  Preprocessed data ("discharged" column added) in tabular form can be viewed at:
 
     https://github.com/kennethchu-statcan/covid19/blob/master/009-ottawa/supplementary/preprocessed-ottawa.csv
 
