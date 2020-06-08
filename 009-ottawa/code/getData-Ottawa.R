@@ -41,6 +41,12 @@ getData.Ottawa <- function(
         object = DF.output
         );
 
+    write.csv(
+        x         = DF.output,
+        file      = "preprocessed-ottawa.csv",
+        row.names = FALSE
+        );
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
