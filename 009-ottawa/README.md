@@ -1,6 +1,6 @@
 
-Diagnostics of COVID-19 Hospitalization Data for Ottawa Residents
-=================================================================
+COVID-19 Hospitalization Data for Ottawa Residents
+==================================================
 
 *  Raw data were downloaded from:
 
