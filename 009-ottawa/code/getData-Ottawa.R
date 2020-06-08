@@ -29,10 +29,17 @@ getData.Ottawa <- function(
             DF.input = DF.ottawa
             );
 
+        DF.ottawa <- getData.Ottawa_add.discharge(
+            DF.input = DF.ottawa
+            );
+
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- DF.ottawa;
+
+    cat("\nDF.output\n");
+    print( DF.output   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     base::saveRDS(
@@ -48,6 +55,26 @@ getData.Ottawa <- function(
     }
 
 ##################################################
+getData.Ottawa_add.discharge <- function(
+    DF.input = NULL
+    ) {
+
+    DF.output <- DF.input;
+
+    temp.vector <- c(DF.output[2:nrow(DF.output),"admission"],NA);
+    temp.vector <- DF.output[,"hospitalized"] + temp.vector;
+    DF.output[,"temp"] <- c(NA,temp.vector[1:(nrow(DF.output)-1)]);
+
+    temp.vector <- DF.output[,"temp"] - DF.output[,"hospitalized"];
+    #DF.output[,"discharge"] <- c(temp.vector[2:nrow(DF.output)],0);
+    DF.output[,"discharge"] <- temp.vector;
+
+    DF.output <- DF.output[,c("date","hospitalized","admission","discharge")];
+
+    return( DF.output );
+
+    }
+
 getData.Ottawa_raw <- function(
     input.file  = NULL,
     output.file = NULL
