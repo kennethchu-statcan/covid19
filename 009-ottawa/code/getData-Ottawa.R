@@ -9,9 +9,6 @@ getData.Ottawa <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    require(dplyr);
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(RData.ottawa) ) {
 
         cat(paste0("\n# ",RData.ottawa," already exists; loading this file ...\n"));
@@ -37,9 +34,6 @@ getData.Ottawa <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- DF.ottawa;
-
-    cat("\nDF.output\n");
-    print( DF.output   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     base::saveRDS(

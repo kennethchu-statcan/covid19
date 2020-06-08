@@ -18,7 +18,9 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
-    "getData-Ottawa.R"
+    "getData-Ottawa.R",
+    "initializePlot.R",
+    "visualizeData-Ottawa.R"
     );
 
 for ( code.file in code.files ) {
@@ -42,6 +44,9 @@ DF.ottawa <- getData.Ottawa(
 print( str(DF.ottawa) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+visualizeData.Ottawa(
+    DF.input = DF.ottawa
+    );
 
 ##################################################
 print( warnings() );
