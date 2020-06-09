@@ -11,7 +11,15 @@ visualizeData.Ottawa <- function(
     require(ggplot2);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    visualizeData.Ottawa_by.date(
+    visualizeData.Ottawa_case(
+        DF.input = DF.input
+        );
+
+    visualizeData.Ottawa_death(
+        DF.input = DF.input
+        );
+
+    visualizeData.Ottawa_hospitalization(
         DF.input = DF.input
         );
 
@@ -23,7 +31,93 @@ visualizeData.Ottawa <- function(
     }
 
 ##################################################
-visualizeData.Ottawa_by.date <- function(
+visualizeData.Ottawa_case <- function(
+    DF.input = NULL
+    ) {
+
+    DF.plot <- DF.input;
+    DF.plot[,"cumsum_case"] <- base::cumsum(DF.plot[,"case"]);
+
+    my.ggplot <- initializePlot(
+        title    = NULL,
+        subtitle = 'Ottawa COVID-19 case data',
+        );
+
+    #my.ggplot <- my.ggplot + geom_line(
+    #    data    = DF.plot,
+    #    mapping = aes(x = date, y = cumsum_case),
+    #    alpha   = 0.80,
+    #    size    = 0.75,
+    #    colour  = "black"
+    #    );
+
+    my.ggplot <- my.ggplot + geom_col(
+        data    = DF.plot,
+        mapping = aes(x = date, y = case),
+        alpha   = 0.50,
+        size    = 0.75,
+        width   = 0.50,
+        colour  = "black"
+        );
+
+    PNG.output  <- paste0("plot-ottawa-case.png");
+    ggsave(
+        file   = PNG.output,
+        plot   = my.ggplot,
+        dpi    = 300,
+        height =   8,
+        width  =  16,
+        units  = 'in'
+        );
+
+    return( NULL );
+
+    }
+
+visualizeData.Ottawa_death <- function(
+    DF.input = NULL
+    ) {
+
+    DF.plot <- DF.input;
+    DF.plot[,"cumsum_death"] <- base::cumsum(DF.plot[,"death"]);
+
+    my.ggplot <- initializePlot(
+        title    = NULL,
+        subtitle = 'Ottawa COVID-19 death data',
+        );
+
+    #my.ggplot <- my.ggplot + geom_line(
+    #    data    = DF.plot,
+    #    mapping = aes(x = date, y = cumsum_death),
+    #    alpha   = 0.80,
+    #    size    = 0.75,
+    #    colour  = "black"
+    #    );
+
+    my.ggplot <- my.ggplot + geom_col(
+        data    = DF.plot,
+        mapping = aes(x = date, y = death),
+        alpha   = 0.50,
+        size    = 0.75,
+        width   = 0.50,
+        colour  = "black"
+        );
+
+    PNG.output  <- paste0("plot-ottawa-death.png");
+    ggsave(
+        file   = PNG.output,
+        plot   = my.ggplot,
+        dpi    = 300,
+        height =   8,
+        width  =  16,
+        units  = 'in'
+        );
+
+    return( NULL );
+
+    }
+
+visualizeData.Ottawa_hospitalization <- function(
     DF.input = NULL
     ) {
 
