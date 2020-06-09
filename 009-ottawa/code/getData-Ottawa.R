@@ -9,6 +9,8 @@ getData.Ottawa <- function(
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
+    require(dplyr);
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(RData.ottawa) ) {
 
@@ -76,7 +78,38 @@ getData.Ottawa <- function(
     print( str(DF.death)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.output <- DF.hospitalization;
+    my.dates <- seq(
+        from = min(min(DF.hospitalization[,"date"]),min(DF.case[,"date"]),min(DF.death[,"date"])),
+        to   = max(max(DF.hospitalization[,"date"]),max(DF.case[,"date"]),max(DF.death[,"date"])),
+        by   = "day"
+        );
+
+    DF.output <- data.frame(
+        date = my.dates
+        );
+
+    DF.output <- dplyr::left_join(
+        x  = DF.output,
+        y  = DF.case,
+        by = "date"
+        );
+
+    DF.output <- dplyr::left_join(
+        x  = DF.output,
+        y  = DF.death,
+        by = "date"
+        );
+
+    DF.output <- dplyr::left_join(
+        x  = DF.output,
+        y  = DF.hospitalization,
+        by = "date"
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    for ( temp.colname in setdiff(colnames(DF.output),"date") ) {
+        DF.output[is.na(DF.output[,temp.colname]),temp.colname] <- 0;
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     base::saveRDS(
