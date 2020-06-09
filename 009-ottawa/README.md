@@ -14,3 +14,7 @@ COVID-19 Hospitalization Data for Ottawa Residents
 
 <img src="./supplementary/plot-ottawa-hospitalization-with-cumsum-admission.png" width="1000">
 
+<img src="./supplementary/plot-ottawa-case.png" width="1000">
+
+<img src="./supplementary/plot-ottawa-death.png" width="1000">
+
