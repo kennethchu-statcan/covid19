@@ -35,15 +35,45 @@ getData.Ottawa <- function(
             output.file = "raw-ottawa-death.csv"
             )
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         DF.hospitalization <- getData.Ottawa_standardize(
-            DF.input = DF.hospitalization
+            DF.input = DF.hospitalization,
+            list.replace.colnames = list(
+                hospitalized = "hospitalized confirmed covid-19 patients \\(ottawa residents\\)",
+                admission    = "new admissions for covid-19 \\(ottawa residents\\)"
+                )
             );
 
         DF.hospitalization <- getData.Ottawa_add.discharge(
             DF.input = DF.hospitalization
             );
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.case <- getData.Ottawa_standardize(
+            DF.input = DF.case,
+            list.replace.colnames = list(
+                date = "earliest of onset, test or reported date",
+                case = "daily total"
+                )
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.death <- getData.Ottawa_standardize(
+            DF.input = DF.death,
+            list.replace.colnames = list(
+                date  = "date of death",
+                death = "daily total number of deaths"
+                )
+            );
+
         }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat("\nstr(DF.case)\n");
+    print( str(DF.case)   );
+
+    cat("\nstr(DF.death)\n");
+    print( str(DF.death)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- DF.hospitalization;
@@ -79,7 +109,6 @@ getData.Ottawa_add.discharge <- function(
     DF.output[,"temp"] <- c(NA,temp.vector[1:(nrow(DF.output)-1)]);
 
     temp.vector <- DF.output[,"temp"] - DF.output[,"hospitalized"];
-    #DF.output[,"discharge"] <- c(temp.vector[2:nrow(DF.output)],0);
     DF.output[,"discharge"] <- temp.vector;
 
     DF.output <- DF.output[,c("date","hospitalized","admission","discharge")];
@@ -105,6 +134,29 @@ getData.Ottawa_raw <- function(
     }
 
 getData.Ottawa_standardize <- function(
+    DF.input              = NULL,
+    list.replace.colnames = list(),
+    retained.colnames     = unique(tolower(c("date",names(list.replace.colnames))))
+    ) {
+
+    DF.output <- DF.input;
+    colnames(DF.output) <- tolower(colnames(DF.output));
+
+    for ( temp.replacement in names(list.replace.colnames) ) {
+        colnames(DF.output) <- gsub(
+            x = colnames(DF.output),
+            pattern     = list.replace.colnames[[temp.replacement]],
+            replacement = temp.replacement
+            );
+        }
+
+    DF.output <- DF.output[,retained.colnames];
+
+    return( DF.output );
+
+    }
+
+getData.Ottawa_standardize.DELETEME <- function(
     DF.input = NULL
     ) {
 
