@@ -1,7 +1,8 @@
 
 getData.Ottawa <- function(
-    xlsx.input   = NULL,
-    RData.ottawa = "ottawa.RData"
+    xlsx.input.hospitalization = NULL,
+    xlsx.input.case.and.death  = NULL,
+    RData.ottawa               = "ottawa.RData"
     ) {
 
     thisFunctionName <- "getData.Ottawa";
@@ -17,23 +18,35 @@ getData.Ottawa <- function(
 
     } else {
 
-        DF.ottawa <- getData.Ottawa_raw(
-            input.file  = xlsx.input,
-            output.file = "raw-ottawa.csv"
+        DF.hospitalization <- getData.Ottawa_raw(
+            input.file  = xlsx.input.hospitalization,
+            output.file = "raw-ottawa-hospitalization.csv"
             )
 
-        DF.ottawa <- getData.Ottawa_standardize(
-            DF.input = DF.ottawa
+        DF.case <- getData.Ottawa_raw(
+            input.file  = xlsx.input.case.and.death,
+            input.sheet = "DailyCOVID-19OttCases",
+            output.file = "raw-ottawa-case.csv"
+            )
+
+        DF.death <- getData.Ottawa_raw(
+            input.file  = xlsx.input.case.and.death,
+            input.sheet = "DailyCOVID-19OttDeaths",
+            output.file = "raw-ottawa-death.csv"
+            )
+
+        DF.hospitalization <- getData.Ottawa_standardize(
+            DF.input = DF.hospitalization
             );
 
-        DF.ottawa <- getData.Ottawa_add.discharge(
-            DF.input = DF.ottawa
+        DF.hospitalization <- getData.Ottawa_add.discharge(
+            DF.input = DF.hospitalization
             );
 
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.output <- DF.ottawa;
+    DF.output <- DF.hospitalization;
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     base::saveRDS(
@@ -77,10 +90,11 @@ getData.Ottawa_add.discharge <- function(
 
 getData.Ottawa_raw <- function(
     input.file  = NULL,
+    input.sheet = NULL,
     output.file = NULL
     ) {
     require(readxl);
-    DF.output <- readxl::read_excel(path = input.file);
+    DF.output <- readxl::read_excel(path = input.file, sheet = input.sheet);
     DF.output <- as.data.frame(DF.output);
     write.csv(
         x         = DF.output,
