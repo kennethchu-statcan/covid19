@@ -141,7 +141,6 @@ wrapper.stan_inner <- function(
     DF.covid19         = NULL,
     DF.fatality.rates  = NULL,
     DF.serial.interval = NULL,
-    DF.covariates      = NULL,
     RData.output       = NULL,
     DEBUG              = FALSE
     ) {
