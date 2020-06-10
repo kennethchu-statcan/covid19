@@ -15,9 +15,9 @@ wrapper.stan <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    require(lubridate);
-    require(readr);
-    require(rstan);
+    # require(readr);
+    # require(lubridate);
+    # require(rstan);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(RData.output) ) {
@@ -145,6 +145,9 @@ wrapper.stan_inner <- function(
     DEBUG              = FALSE
     ) {
 
+    require(EnvStats);
+    require(rstan);
+
     jurisdictions <- unique(DF.covid19[,'jurisdiction']);
     forecast      <- 0;
 
@@ -184,8 +187,8 @@ wrapper.stan_inner <- function(
         d1$t <- decimal_date(d1$date);
         d1   <- d1[order(d1$t),];
 
-        index  <- which(d1$cases>0)[1];
-        index1 <- which(cumsum(d1$deaths)>=10)[1]; # also 5
+        index  <- which(d1$case>0)[1];
+        index1 <- which(cumsum(d1$death)>=10)[1]; # also 5
         index2 <- index1 - 30;
 
         print(sprintf("First non-zero cases is on day %d, and 30 days before 5 days is day %d",index,index2));
@@ -194,7 +197,7 @@ wrapper.stan_inner <- function(
 
         dates[[jurisdiction]] = d1$date;
         # hazard estimation
-        N <- length(d1$cases);
+        N <- length(d1$case);
         print(sprintf("%s has %d days of data",jurisdiction,N));
         forecast <- N2 - N;
         if( forecast < 0 ) {
@@ -245,11 +248,11 @@ wrapper.stan_inner <- function(
             }
         f <- s * h;
 
-        y <- c(as.vector(as.numeric(d1$cases)),rep(-1,forecast));
-        reported_cases[[jurisdiction]] <- as.vector(as.numeric(d1$cases));
-        deaths <- c(as.vector(as.numeric(d1$deaths)),rep(-1,forecast));
-        cases  <- c(as.vector(as.numeric(d1$cases)), rep(-1,forecast));
-        deaths_by_jurisdiction[[jurisdiction]] <- as.vector(as.numeric(d1$deaths))
+        y <- c(as.vector(as.numeric(d1$case)),rep(-1,forecast));
+        reported_cases[[jurisdiction]] <- as.vector(as.numeric(d1$case));
+        deaths <- c(as.vector(as.numeric(d1$death)),rep(-1,forecast));
+        cases  <- c(as.vector(as.numeric(d1$case)), rep(-1,forecast));
+        deaths_by_jurisdiction[[jurisdiction]] <- as.vector(as.numeric(d1$death))
 
         # append data
         stan_data$N <- c(stan_data$N,N   );
@@ -272,6 +275,12 @@ wrapper.stan_inner <- function(
     options(mc.cores = parallel::detectCores())
     rstan_options(auto_write = TRUE)
     m <- rstan::stan_model(FILE.stan.model);
+
+    ##############################################
+    ##############################################
+    return( NULL );
+    ##############################################
+    ##############################################
 
     if( DEBUG ) {
         fit <- rstan::sampling(object = m, data = stan_data, iter = 40, warmup = 20, chains = 2);

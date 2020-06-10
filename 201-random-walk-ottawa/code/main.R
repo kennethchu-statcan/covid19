@@ -20,6 +20,7 @@ setwd( output.directory );
 code.files <- c(
     "getData-Ottawa.R",
     "getData-serial-interval.R",
+    "getData-wIFR.R",
     "initializePlot.R",
     "visualizeData-Ottawa.R",
     "wrapper-stan.R"
@@ -62,9 +63,25 @@ visualizeData.Ottawa(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.fatality.rates <- getData.wIFR(
+    csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
+    csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
+    );
+
+print( str(DF.fatality.rates) );
+
+print( summary(DF.fatality.rates) );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.serial.interval <- getData.serial.interval(
     csv.serial.interval = file.path(data.directory,"serial-interval.csv")
     );
+
+print( str(DF.serial.interval) );
+
+print( summary(DF.serial.interval) );
+
+print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 results.wrapper.stan <- wrapper.stan(
