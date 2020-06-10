@@ -260,7 +260,7 @@ wrapper.stan_inner <- function(
         # stan_data$x = cbind(stan_data$x,x)
         stan_data$f      <- cbind(stan_data$f,f);
         stan_data$deaths <- cbind(stan_data$deaths,deaths);
-        stan_data$cases  <- cbind(stan_data$cases,cases);
+        stan_data$cases  <- cbind(stan_data$cases, cases );
 
         stan_data$N2 <- N2;
         stan_data$x  <- 1:N2;
