@@ -85,7 +85,7 @@ print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.ontario <- DF.ottawa;
-DF.ontario[,"jurisdiction"] <- "Ontario";
+DF.ontario[,"jurisdiction"] <- "ON";
 
 DF.covid19 <- rbind(DF.ottawa,DF.ontario);
 
