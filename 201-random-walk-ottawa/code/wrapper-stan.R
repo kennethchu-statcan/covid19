@@ -15,11 +15,6 @@ wrapper.stan <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    # require(readr);
-    # require(lubridate);
-    # require(rstan);
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(RData.output) ) {
 
         cat(paste0("\n# ",RData.output," already exists; loading this file ...\n"));
