@@ -19,6 +19,7 @@ setwd( output.directory );
 # source supporting R code
 code.files <- c(
     "getData-Ottawa.R",
+    "getData-serial-interval.R",
     "initializePlot.R",
     "visualizeData-Ottawa.R",
     "wrapper-stan.R"
@@ -33,7 +34,18 @@ data.snapshot  <- "2020-06-09.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+StanModel <- 'random-walk';
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 options(mc.cores = parallel::detectCores());
+
+FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
+FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
+
+file.copy(
+    from = FILE.stan.model.0,
+    to   = FILE.stan.model
+    );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
@@ -50,15 +62,20 @@ visualizeData.Ottawa(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#results.wrapper.stan <- wrapper.stan(
-#    FILE.stan.model             = FILE.stan.model,
-#    DF.covid19                  = DF.covid19,
-#    DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
-#    DF.serial.interval          = DF.serial.interval,
-#    DF.covariates               = DF.covariates,
-#    forecast.window             = 14,
-#    DEBUG                       = FALSE # TRUE
-#    );
+DF.serial.interval <- getData.serial.interval(
+    csv.serial.interval = file.path(data.directory,"serial-interval.csv")
+    );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+results.wrapper.stan <- wrapper.stan(
+    StanModel          = StanModel,
+    FILE.stan.model    = FILE.stan.model,
+    DF.covid19         = DF.ottawa,
+    DF.fatality.rates  = DF.fatality.rates,
+    DF.serial.interval = DF.serial.interval,
+    forecast.window    = 14,
+    DEBUG              = TRUE
+    );
 
 ##################################################
 print( warnings() );

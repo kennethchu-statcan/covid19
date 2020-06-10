@@ -1,14 +1,13 @@
 
 wrapper.stan <- function(
-    StanModel                   = "base", 
-    FILE.stan.model             = NULL,
-    DF.covid19                  = NULL,
-    DF.weighted.fatality.ratios = NULL,
-    DF.serial.interval          = NULL,
-    DF.covariates               = NULL,
-    forecast.window             = 7,
-    RData.output                = paste0('stan-model-',StanModel,'.RData'),
-    DEBUG                       = FALSE
+    StanModel          = "random-walk", 
+    FILE.stan.model    = NULL,
+    DF.covid19         = NULL,
+    DF.fatality.rates  = NULL,
+    DF.serial.interval = NULL,
+    forecast.window    = 7,
+    RData.output       = paste0('stan-model-',StanModel,'.RData'),
+    DEBUG              = FALSE
     ) {
 
     thisFunctionName <- "wrapper.stan";
@@ -30,14 +29,13 @@ wrapper.stan <- function(
     } else {
 
         list.output <- wrapper.stan_inner(
-            StanModel                   = StanModel,
-            FILE.stan.model             = FILE.stan.model,
-            DF.covid19                  = DF.covid19,
-            DF.weighted.fatality.ratios = DF.weighted.fatality.ratios,
-            DF.serial.interval          = DF.serial.interval,
-            DF.covariates               = DF.covariates,
-            RData.output                = RData.output,
-            DEBUG                       = DEBUG
+            StanModel          = StanModel,
+            FILE.stan.model    = FILE.stan.model,
+            DF.covid19         = DF.covid19,
+            DF.fatality.rates  = DF.fatality.rates,
+            DF.serial.interval = DF.serial.interval,
+            RData.output       = RData.output,
+            DEBUG              = DEBUG
             );
 
         if (!is.null(RData.output)) {
@@ -138,17 +136,16 @@ wrapper.stan_visualize.results <- function(
     }
 
 wrapper.stan_inner <- function(
-    StanModel                   = NULL,
-    FILE.stan.model             = NULL,
-    DF.covid19                  = NULL,
-    DF.weighted.fatality.ratios = NULL,
-    DF.serial.interval          = NULL,
-    DF.covariates               = NULL,
-    RData.output                = NULL,
-    DEBUG                       = FALSE
+    StanModel          = NULL,
+    FILE.stan.model    = NULL,
+    DF.covid19         = NULL,
+    DF.fatality.rates  = NULL,
+    DF.serial.interval = NULL,
+    DF.covariates      = NULL,
+    RData.output       = NULL,
+    DEBUG              = FALSE
     ) {
 
-    n.covariates  <- ncol(DF.covariates) - 1;
     jurisdictions <- unique(DF.covid19[,'jurisdiction']);
     forecast      <- 0;
 
@@ -166,17 +163,9 @@ wrapper.stan_inner <- function(
     stan_data <- list(
         M             = length(jurisdictions),
         N             = NULL,
-        p             = n.covariates,
         x1            = poly(1:N2,2)[,1],
         x2            = poly(1:N2,2)[,2],
         y             = NULL,
-        covariate1    = NULL,
-        covariate2    = NULL,
-        covariate3    = NULL,
-        covariate4    = NULL,
-        covariate5    = NULL,
-        covariate6    = NULL,
-        covariate7    = NULL,
         deaths        = NULL,
         f             = NULL,
         N0            = 6, # N0 = 6 to make it consistent with Rayleigh
@@ -190,15 +179,11 @@ wrapper.stan_inner <- function(
 
     for( jurisdiction in jurisdictions ) {
 
-        CFR <- DF.weighted.fatality.ratios$weighted_fatality[DF.weighted.fatality.ratios$jurisdiction == jurisdiction];
+        CFR <- DF.fatality.rates$weighted_fatality[DF.fatality.rates$jurisdiction == jurisdiction];
 
-        date.colnames <- setdiff(colnames(DF.covariates),"jurisdiction");
-        covariates1   <- DF.covariates[DF.covariates$jurisdiction == jurisdiction,date.colnames];
-
-        d1      <- DF.covid19[DF.covid19$jurisdiction == jurisdiction,];
-        #d1$date <- d1$DateRep;
-        d1$t    <- decimal_date(d1$date);
-        d1      <- d1[order(d1$t),];
+        d1   <- DF.covid19[DF.covid19$jurisdiction == jurisdiction,];
+        d1$t <- decimal_date(d1$date);
+        d1   <- d1[order(d1$t),];
 
         index  <- which(d1$cases>0)[1];
         index1 <- which(cumsum(d1$deaths)>=10)[1]; # also 5
@@ -207,14 +192,6 @@ wrapper.stan_inner <- function(
         print(sprintf("First non-zero cases is on day %d, and 30 days before 5 days is day %d",index,index2));
         d1 <- d1[index2:nrow(d1),];
         stan_data$EpidemicStart <- c(stan_data$EpidemicStart,index1+1-index2);
-
-        for ( ii in 1:ncol(covariates1) ) {
-            covariate <- names(covariates1)[ii];
-            # should this be > or >=?
-            #d1[covariate] <- (as.Date(d1$DateRep,format='%d/%m/%Y') >= as.Date(covariates1[1,covariate])) * 1
-            #d1[covariate] <- (d1$DateRep >= as.Date(covariates1[1,covariate])) * 1
-            d1[covariate] <- (d1$date >= as.Date(covariates1[1,covariate])) * 1
-            }
 
         dates[[jurisdiction]] = d1$date;
         # hazard estimation
@@ -272,27 +249,16 @@ wrapper.stan_inner <- function(
         y <- c(as.vector(as.numeric(d1$cases)),rep(-1,forecast));
         reported_cases[[jurisdiction]] <- as.vector(as.numeric(d1$cases));
         deaths <- c(as.vector(as.numeric(d1$deaths)),rep(-1,forecast));
-        cases  <- c(as.vector(as.numeric(d1$cases)),rep(-1,forecast));
+        cases  <- c(as.vector(as.numeric(d1$cases)), rep(-1,forecast));
         deaths_by_jurisdiction[[jurisdiction]] <- as.vector(as.numeric(d1$deaths))
-        covariates2 <- as.data.frame(d1[, colnames(covariates1)]);
-
-        # x=1:(N+forecast)
-        covariates2[N:(N+forecast),] <- covariates2[N,];
 
         # append data
         stan_data$N <- c(stan_data$N,N   );
         stan_data$y <- c(stan_data$y,y[1]); # just the index case!
         # stan_data$x = cbind(stan_data$x,x)
-        stan_data$covariate1 <- cbind(stan_data$covariate1,covariates2[,1]);
-        stan_data$covariate2 <- cbind(stan_data$covariate2,covariates2[,2]);
-        stan_data$covariate3 <- cbind(stan_data$covariate3,covariates2[,3]);
-        stan_data$covariate4 <- cbind(stan_data$covariate4,covariates2[,4]);
-        stan_data$covariate5 <- cbind(stan_data$covariate5,covariates2[,5]);
-        stan_data$covariate6 <- cbind(stan_data$covariate6,covariates2[,6]);
-        stan_data$covariate7 <- cbind(stan_data$covariate7,covariates2[,7]);
-        stan_data$f          <- cbind(stan_data$f,f);
-        stan_data$deaths     <- cbind(stan_data$deaths,deaths);
-        stan_data$cases      <- cbind(stan_data$cases,cases);
+        stan_data$f      <- cbind(stan_data$f,f);
+        stan_data$deaths <- cbind(stan_data$deaths,deaths);
+        stan_data$cases  <- cbind(stan_data$cases,cases);
 
         stan_data$N2 <- N2;
         stan_data$x  <- 1:N2;
@@ -303,49 +269,12 @@ wrapper.stan_inner <- function(
         } # for( jurisdiction in jurisdictions )
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    stan_data$covariate2 <- 0 * stan_data$covariate2 # remove travel bans
-    stan_data$covariate4 <- 0 * stan_data$covariate5 # remove sport
-
-    #stan_data$covariate1 <- stan_data$covariate1 # school closure
-    stan_data$covariate2  <- stan_data$covariate7 # self-isolating if ill
-    #stan_data$covariate3 <- stan_data$covariate3 # public events
-
-    # create the `any intervention` covariate
-    stan_data$covariate4 <- 1 * as.data.frame((
-        stan_data$covariate1 + stan_data$covariate3 + stan_data$covariate5 +
-        stan_data$covariate6 + stan_data$covariate7
-        ) >= 1);
-
-    stan_data$covariate5 <- stan_data$covariate5 # lockdown
-    stan_data$covariate6 <- stan_data$covariate6 # social distancing encouraged
-    stan_data$covariate7 <- 0 # models should only take 6 covariates
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if( DEBUG ) {
-        for(i in 1:length(jurisdictions)) {
-            write.csv(
-                file = sprintf("check-dates-%s.csv",jurisdictions[i]),
-                x    = data.frame(
-                    date                               = dates[[i]],
-                    `school closure`                   = stan_data$covariate1[1:stan_data$N[i],i],
-                    `self isolating if ill`            = stan_data$covariate2[1:stan_data$N[i],i],
-                    `public events`                    = stan_data$covariate3[1:stan_data$N[i],i],
-                    `government makes any intervention`= stan_data$covariate4[1:stan_data$N[i],i],
-                    `lockdown`                         = stan_data$covariate5[1:stan_data$N[i],i],
-                    `social distancing encouraged`     = stan_data$covariate6[1:stan_data$N[i],i]
-                    ),
-                row.names = FALSE
-                );
-            }
-        }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     stan_data$y <- t(stan_data$y);
     options(mc.cores = parallel::detectCores())
     rstan_options(auto_write = TRUE)
     m <- rstan::stan_model(FILE.stan.model);
 
-    if(DEBUG) {
+    if( DEBUG ) {
         fit <- rstan::sampling(object = m, data = stan_data, iter = 40, warmup = 20, chains = 2);
     } else {
 
@@ -396,8 +325,7 @@ wrapper.stan_inner <- function(
         jurisdictions          = jurisdictions,
         estimated_deaths       = estimated.deaths,
         estimated_deaths_cf    = estimated.deaths.cf,
-        out                    = out,
-        covariates             = DF.covariates
+        out                    = out
         );
 
     return( list.output );
