@@ -30,3 +30,4 @@ stdout.*
 *.rds
 *.RData
 #000-data
+000-data/sensitivity.*
