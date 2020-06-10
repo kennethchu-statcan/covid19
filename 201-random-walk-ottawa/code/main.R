@@ -84,10 +84,16 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.ontario <- DF.ottawa;
+DF.ontario[,"jurisdiction"] <- "Ontario";
+
+DF.covid19 <- rbind(DF.ottawa,DF.ontario);
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 results.wrapper.stan <- wrapper.stan(
     StanModel          = StanModel,
     FILE.stan.model    = FILE.stan.model,
-    DF.covid19         = DF.ottawa,
+    DF.covid19         = DF.covid19,
     DF.fatality.rates  = DF.fatality.rates,
     DF.serial.interval = DF.serial.interval,
     forecast.window    = 14,
