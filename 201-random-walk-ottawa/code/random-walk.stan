@@ -79,13 +79,13 @@ model {
 
     for (m in 1:M) {
         for(i in 1:EpidemicStart[m]) {
-            alpha[i,m] ~ normal(0,1e-12);
+            alpha[i,m] ~ uniform(-1e-12,1e-12);
         }
         for(i in (EpidemicStart[m]+1):N[m]) {
             alpha[i,m] ~ uniform(-0.01,0.01);
         }
         for(i in (N[m]+1):N2) {
-            alpha[i,m] ~ normal(0,1e-12);
+            alpha[i,m] ~ uniform(-1e-12,1e-12);
         }
     }
 
