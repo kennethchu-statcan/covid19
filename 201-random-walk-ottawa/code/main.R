@@ -18,10 +18,12 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
+    "geom-stepribbon.R",
     "getData-Ottawa.R",
     "getData-serial-interval.R",
     "getData-wIFR.R",
     "initializePlot.R",
+    "plot-3-panel.R",
     "visualizeData-Ottawa.R",
     "wrapper-stan.R"
     );

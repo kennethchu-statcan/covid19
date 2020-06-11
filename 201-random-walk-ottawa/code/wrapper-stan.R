@@ -44,9 +44,9 @@ wrapper.stan <- function(
     #    list.input = list.output
     #    );
 
-    #plot.3.panel(
-    #    list.input = list.output
-    #    );
+    plot.3.panel(
+        list.input = list.output
+        );
 
     #plot.forecast(
     #    list.input      = list.output,
