@@ -281,7 +281,7 @@ plot.three.panel_make.plots <- function(
 #            labels = plot_labels,
 #            values = c(21, 22, 23, 24, 25, 12)
 #            ) + 
-        scale_colour_discrete(name = "Interventions", labels = plot_labels) + 
+#        scale_colour_discrete(name = "Interventions", labels = plot_labels) + 
         scale_x_date(
             date_breaks = "weeks",
             labels = date_format("%e %b"), 
