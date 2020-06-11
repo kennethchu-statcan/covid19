@@ -39,17 +39,6 @@ transformed parameters {
 
         prediction[1:N0,m] = rep_vector(y[m],N0); // learn the number of cases in the first N0 days
 
-        /*
-        Rt[,m] = mu[m] * exp(
-            covariate1[,m] * (-alpha[1]) +
-            covariate2[,m] * (-alpha[2]) +
-            covariate3[,m] * (-alpha[3]) +
-            covariate4[,m] * (-alpha[4]) +
-            covariate5[,m] * (-alpha[5]) + 
-            covariate6[,m] * (-alpha[6])
-            ); // + GP[i]); // to_vector(x) * time_effect
-        */
-
         Rt[1,m] = mu[m];
         for(i in 1:EpidemicStart[m]) {
             Rt[i,m] = mu[m];
@@ -93,7 +82,7 @@ model {
             alpha[i,m] ~ normal(0,1e-9);
         }
         for(i in (EpidemicStart[m]+1):N[m]) {
-            alpha[i,m] ~ normal(0,0.1);
+            alpha[i,m] ~ normal(0,0.01);
         }
         for(i in (N[m]+1):N2) {
             alpha[i,m] ~ normal(0,1e-9);
