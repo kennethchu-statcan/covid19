@@ -24,7 +24,6 @@ plot.3.panel <- function(
     prediction             <- list.input[["prediction"       ]];
     estimated.deaths       <- list.input[["estimated_deaths" ]];
     out                    <- list.input[["out"              ]];
-#   covariates             <- list.input[["covariates"       ]];
     reported_cases         <- list.input[["reported_cases"   ]];
     deaths_by_jurisdiction <- list.input[["deaths_by_jurisdiction"]];
 
@@ -53,29 +52,6 @@ plot.3.panel <- function(
         rt_li2 <- colQuantiles(out$Rt[,1:N,i],probs=.25 );
         rt_ui2 <- colQuantiles(out$Rt[,1:N,i],probs=.75 );
 
-        # delete these 2 lines
-        #covariates_jurisdiction <- covariates[which(covariates$jurisdiction == jurisdiction), 2:8]   
-
-        # Remove sport
-        #covariates_jurisdiction$sport = NULL 
-        #covariates_jurisdiction$travel_restrictions = NULL 
-        #covariates_jurisdiction_long <- gather(covariates_jurisdiction[], key = "key", 
-        #                              value = "value")
-        #covariates_jurisdiction_long$x <- rep(NULL, length(covariates_jurisdiction_long$key))
-        #un_dates <- unique(covariates_jurisdiction_long$value);
-
-        #for ( k in 1:length(un_dates) ) {
-        #    idxs <- which(covariates_jurisdiction_long$value == un_dates[k])
-        #    max_val <- round(max(rt_ui)) + 0.3
-        #    for (j in idxs){
-        #        covariates_jurisdiction_long$x[j] <- max_val
-        #        max_val <- max_val - 0.3
-        #        }
-        #    }
-
-        #covariates_jurisdiction_long$value        <- as_date(covariates_jurisdiction_long$value) 
-        #covariates_jurisdiction_long$jurisdiction <- rep(jurisdiction, length(covariates_jurisdiction_long$value))
-    
         data_jurisdiction <- data.frame(
             "time"               = as_date(as.character(dates[[i]])),
             "jurisdiction"       = rep(jurisdiction, length(dates[[i]])),
@@ -105,12 +81,11 @@ plot.3.panel <- function(
             "rt_min2"            = rt_li2,
             "rt_max2"            = rt_ui2
             );
-    
+
         plot.three.panel_make.plots(
-            data_jurisdiction            = data_jurisdiction, 
-#           covariates_jurisdiction_long = covariates_jurisdiction_long,
-            StanModel                    = StanModel,
-            jurisdiction                 = jurisdiction
+            data_jurisdiction = data_jurisdiction, 
+            StanModel         = StanModel,
+            jurisdiction      = jurisdiction
             );
     
         }
@@ -121,10 +96,9 @@ plot.3.panel <- function(
 
 ########################################
 plot.three.panel_make.plots <- function(
-    data_jurisdiction            = NULL,
-#   covariates_jurisdiction_long = NULL, 
-    StanModel                    = NULL,
-    jurisdiction                 = NULL
+    data_jurisdiction = NULL,
+    StanModel         = NULL,
+    jurisdiction      = NULL
     ) {
   
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -222,14 +196,6 @@ plot.three.panel_make.plots <- function(
         guides(fill=guide_legend(ncol=1));
  
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#    plot_labels <- c(
-#        "Complete lockdown", 
-#        "Public events banned",
-#        "School closure",
-#        "Self isolation",
-#        "Social distancing"
-#        );
-  
     # Plotting interventions
     data_rt_95 <- data.frame(
         data_jurisdiction$time, 
@@ -257,18 +223,6 @@ plot.three.panel_make.plots <- function(
             aes(x = time, ymin = rt_min, ymax = rt_max, group = key, fill = key)
             ) +
         geom_hline(yintercept = 1, color = 'black', size = 0.1) + 
-#        geom_segment(
-#            data = covariates_jurisdiction_long,
-#            aes(x = value, y = 0, xend = value, yend = max(x)), 
-#            linetype = "dashed",
-#            colour   = "grey",
-#            alpha    = 0.75
-#            ) +
-#        geom_point(
-#            data = covariates_jurisdiction_long,
-#            aes(x = value, y = x, group = key, shape = key, col = key),
-#            size = 2
-#            ) +
         xlab("") +
         ylab(expression(R[t])) +
         scale_fill_manual(
@@ -276,19 +230,14 @@ plot.three.panel_make.plots <- function(
             labels = c("50%","95%"),
             values = c(alpha("seagreen",0.75),alpha("seagreen",0.5))
             ) + 
-#        scale_shape_manual(
-#            name   = "Interventions",
-#            labels = plot_labels,
-#            values = c(21, 22, 23, 24, 25, 12)
-#            ) + 
-#        scale_colour_discrete(name = "Interventions", labels = plot_labels) + 
         scale_x_date(
             date_breaks = "weeks",
             labels = date_format("%e %b"), 
             limits = c(
                 data_jurisdiction$time[1],
-                data_jurisdiction$time[length(data_jurisdiction$time)])
-                ) + 
+                data_jurisdiction$time[length(data_jurisdiction$time)]
+                )
+            ) + 
         theme_pubr() + 
         theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
         theme(legend.position="right");
