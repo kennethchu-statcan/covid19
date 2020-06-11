@@ -82,7 +82,7 @@ model {
             alpha[i,m] ~ normal(0,1e-12);
         }
         for(i in (EpidemicStart[m]+1):N[m]) {
-            alpha[i,m] ~ normal(0,1e-5);
+            alpha[i,m] ~ uniform(-0.01,0.01);
         }
         for(i in (N[m]+1):N2) {
             alpha[i,m] ~ normal(0,1e-12);
