@@ -20,8 +20,9 @@ transformed data {
     }
 
 parameters {
-    real <lower=0> mu[M];       // intercept for Rt
-    real           alpha[N2,M];
+    real <lower=0> mu[M];        // intercept for Rt
+    matrix[N2,M]   alpha0;
+    matrix[N2,M]   beta0;
     real <lower=0> y[M];
     real <lower=0> kappa;
     real <lower=0> phi;
@@ -31,6 +32,7 @@ parameters {
 transformed parameters {
 
     real         convolution;
+    matrix[N2,M] alpha      = rep_matrix(0,N2,M);
     matrix[N2,M] prediction = rep_matrix(0,N2,M);
     matrix[N2,M] E_deaths   = rep_matrix(0,N2,M);
     matrix[N2,M] Rt         = rep_matrix(0,N2,M);
@@ -39,7 +41,16 @@ transformed parameters {
 
         prediction[1:N0,m] = rep_vector(y[m],N0); // learn the number of cases in the first N0 days
 
-        Rt[1,m] = mu[m];
+        for(i in 1:EpidemicStart[m]) {
+            alpha[i,m] = 0;
+        }
+        for(i in (EpidemicStart[m]+1):N[m]) {
+            alpha[i,m] = alpha0[i,m] * beta0[i,m];
+        }
+        for(i in (N[m]+1):N2) {
+            alpha[i,m] = 0;
+        }
+
         for(i in 1:EpidemicStart[m]) {
             Rt[i,m] = mu[m];
         }
@@ -78,15 +89,9 @@ model {
     mu    ~ normal(2.4,kappa); // citation needed 
 
     for (m in 1:M) {
-        for(i in 1:EpidemicStart[m]) {
-            alpha[i,m] ~ normal(0,1e-12);
-        }
         for(i in (EpidemicStart[m]+1):N[m]) {
-            // alpha[i,m] ~ uniform(-0.01,0.01);
-            alpha[i,m] ~ normal(0,1e-5);
-        }
-        for(i in (N[m]+1):N2) {
-            alpha[i,m] ~ normal(0,1e-12);
+            alpha0[i,m] ~ normal(0,1e-5);
+             beta0[i,m] ~ bernoulli(0.07142857); // 1/14 = 0.07142857
         }
     }
 
@@ -110,6 +115,7 @@ generated quantities {
     matrix[N2,M] E_deaths0   = rep_matrix(0,N2,M);
 
     for (m in 1:M) {
+
         prediction0[1:N0,m] = rep_vector(y[m],N0); // learn the number of cases in the first N0 days
         for (i in (N0+1):N2) {
             convolution0 = 0;
