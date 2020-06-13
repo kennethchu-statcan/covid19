@@ -180,7 +180,7 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 	\overset{T}{\underset{s=1}{\sum}}
 	\left(\,
 		\overset{T}{\underset{t=1}{\prod}}\;
-		P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 		\right)
 	\cdot
 	P\!\left(\,S=s \;\vert\,R_{e},R_{l}\,\right)
@@ -194,7 +194,7 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 	\overset{T}{\underset{s=1}{\sum}}
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\cdot
 		P\!\left(\,S=s\,\right)
@@ -209,25 +209,24 @@ Hence,
 	\log P\!\left(\,R_{l}\,\right)
 	\; + \;
 	\log\left(\;
-	{\color{red}
 	\overset{T}{\underset{s=1}{\sum}}
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\cdot
 		P\!\left(\,S=s\,\right)
-	}
 	\,\right)
 \end{eqnarray*}
 Now, the last summand above can be rewritten as:
 \begin{eqnarray*}
-&&
+\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)
+&=&
 	\log\left\{\;\,
 		\overset{T}{\underset{s=1}{\sum}}
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\cdot
 		P\!\left(\,S=s\,\right)
@@ -239,7 +238,7 @@ Now, the last summand above can be rewritten as:
 	\exp\,\circ\,\log\left[\,
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\cdot
 		P\!\left(\,S=s\,\right)
@@ -252,7 +251,7 @@ Now, the last summand above can be rewritten as:
 	\exp\left[\;
 		\log\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\, + \,
 		\log P\!\left(\,S=s\,\right)
@@ -265,7 +264,7 @@ Now, the last summand above can be rewritten as:
 	\exp\left[\;\log P\!\left(\,S=s\,\right)
 			\, + \,
 			\overset{T}{\underset{t=1}{\sum}}\,
-				\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+				\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 		\,\right]
 	\,\right\}
 \end{eqnarray*}
@@ -277,68 +276,68 @@ Next, observe that:
 \begin{eqnarray*}
 &&
 	\overset{T}{\underset{t=1}{\sum}}\;
-	\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 \;\; = \;\;
 	\overset{s-1}{\underset{t=1}{\sum}}\;
-	\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 	\; + \;
 	\overset{T}{\underset{t=s}{\sum}}\;
-	\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 \\
 &=&
 	\overset{s-1}{\underset{t=1}{\sum}}\;
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 	\; + \;
 	\overset{T}{\underset{t=s}{\sum}}
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &=&
 	{\color{white}+}\;\;\,
 	\overset{s-1}{\underset{t=1}{\sum}}\;\,
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 \\
 &&
 	+\;
 	\overset{T}{\underset{t=s}{\sum}}
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	{\color{blue}
 		\;+\;\,
 		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		\;-\;
 		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		}
 \\
 &=&
 	\overset{s-1}{\underset{t=1}{\sum}}\;
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 	\;+\;
 	\overset{T}{\underset{t=1}{\sum}}\;
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	{\color{blue}
 		\;-\;\,
 		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		}
 \\
 &=&
 	\overset{T}{\underset{t=1}{\sum}}\;
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	\;+\;
 	\overset{s-1}{\underset{t=1}{\sum}}\;
-	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 	{\color{blue}
 		\;-\;\,
 		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		}
 \end{eqnarray*}
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
 
 \noindent
-Hence
+Hence,
 \begin{eqnarray*}
 &&
 	\log\left\{\;\,
@@ -346,7 +345,7 @@ Hence
 	{\color{red}
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\cdot
 		P\!\left(\,S=s\,\right)
@@ -360,7 +359,7 @@ Hence
 			\log P\!\left(\,S=s\,\right)
 			\, + \,
 			\overset{T}{\underset{t=1}{\sum}}\,
-				\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+				\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 		}\,\right]
 	\,\right\}
 \\
