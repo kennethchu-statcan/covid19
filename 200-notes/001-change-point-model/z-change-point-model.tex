@@ -1,7 +1,7 @@
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
 
-\section{A change point model}
+\section{A single change-point model}
 \setcounter{theorem}{0}
 \setcounter{equation}{0}
 
@@ -15,7 +15,7 @@
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
 
-Consider the set \,\texttt{coal}\, available in the R package \,\texttt{boot}:
+Consider the data set \,\texttt{coal}\, available in the R package \,\texttt{boot}:
 \begin{center}
 \texttt{https://stat.ethz.ch/R-manual/R-devel/library/boot/html/coal.html}
 \end{center}
@@ -46,6 +46,30 @@ of the 191 explosions in coal mines in the United Kingdom which:
 
 \vskip 0.5cm
 \noindent
+\textbf{Modeling problem:}
+\begin{itemize}
+\item
+	Question:
+	\vskip 0.05cm
+	Was there a change in the underlying rate of occurrence of coal mine explosions
+	between March 15, 1851 and March 22 1962?
+
+\item
+	Approach:
+	\vskip 0.05cm
+	\begin{itemize}
+	\item
+		Transform raw data into a vector of annual counts of coal mine explosions.
+	\item
+		Fit a hierarchical single change-point model to the resulting transformed data.
+	\end{itemize}
+
+\end{itemize}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
 \textbf{Observed data:}
 \begin{itemize}
 \item
@@ -65,14 +89,14 @@ of the 191 explosions in coal mines in the United Kingdom which:
 \textbf{Model:}
 \begin{itemize}
 \item
-	User-prescribed hyperparameters:
+	User-prescribed (fixed) hyperparameters:
 	\begin{equation*}
 	r_{e}\,,\, r_{l} \; \in \; (1,\infty)\,,
 	\quad\quad
 	T \; \in \; \N
 	\end{equation*}
 \item
-	Parameters and their prior distributions:
+	Parameters (to be estimated) and their prior distributions:
 	\begin{equation*}
 	R_{e} \;\sim\; \textnormal{Exponential}(\,r_{e}\,)\,,
 	\quad\quad
@@ -80,6 +104,7 @@ of the 191 explosions in coal mines in the United Kingdom which:
 	\quad\quad
 	S \;\sim\; \textnormal{Uniform}\!\left(\,\{\overset{{\color{white}.}}{1},2,\ldots,T\}\,\right)
 	\end{equation*}
+	These three parameters are assumed to be independent of each other.
 \item
 	Conditional likelihood of observed data:
 	\begin{equation*}
@@ -99,7 +124,7 @@ of the 191 explosions in coal mines in the United Kingdom which:
 
 \vskip 0.5cm
 \noindent
-\textbf{Full joint probability:}
+\textbf{Full joint probability distribution:}
 \begin{eqnarray*}
 P\!\left(\,D,S,R_{e},R_{l}\,\right)
 & = &
@@ -130,21 +155,69 @@ P\!\left(\,D,S,R_{e},R_{l}\,\right)
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
 
-\vskip 0.5cm
+\vskip 1.0cm
 \noindent
-\textbf{Marginal joint probability (to be coded in \texttt{Stan}):}
+\begin{center}
+\textbf{\large Marginal conditional probability distribution to be coded in \texttt{Stan}}
+\end{center}
 \vskip 0.3cm
 \noindent
 Since \texttt{Stan} does NOT support categorical latent variables,
-the full joint probability cannot be implemented in \texttt{Stan}.
-In other to perform inference involving categorical latent variables,
-we implement instead the marginal probability,
-with all categorical latent variables having been marginalized out.
+the full joint probability distribution above cannot be implemented in \texttt{Stan}
+(due to the presence of the discrete parameter $S \sim \textnormal{Uniform}\!\left(\,\{1,2,\ldots,T\}\,\right)$).
+In other to perform inference with \texttt{Stan} involving categorical latent variables,
+we implement instead the {\color{red}marginal probability}
+\begin{equation*}
+P\!\left(\,D,R_{e},R_{l}\,\right)
+\;\; = \;\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	P\!\left(\,D,S=s,R_{e},R_{l}\,\right),
+\end{equation*}
+marginalizing out all categorical latent variables.
 
 \vskip 0.5cm
+\begin{proposition}
+\mbox{}
+\vskip 0.2cm
 \noindent
-In our present example, we marginalize out
-\,$S \;\sim\; \textnormal{Uniform}\!\left(\,\{\overset{{\color{white}.}}{1},2,\ldots,T\}\,\right)$:
+The natural logarithm of the marginal conditional probability
+\,$P\!\left(\,D\;\vert\,R_{e},R_{l}\,\right)$\,
+can expressed as follows:
+\begin{eqnarray*}
+&&
+	\underset{{\color{white}}}{\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\, + \,
+		\overset{T}{\underset{t=1}{\sum}}\,
+		\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
+	\,\right\}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+			\log P\!\left(\,S=s\,\right)
+			\,+\,
+			\overset{T}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+			\,+\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+			\,-\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+	\right\}
+\end{eqnarray*}
+\end{proposition}
+\proof
+First, note that the marginal probability \,$P(D,R_{e},R_{l})$\, can be factored as follows:
 \begin{eqnarray*}
 P\!\left(\,D,R_{e},R_{l}\,\right)
 &=&
@@ -171,19 +244,19 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 	P\!\left(\, D \;\left\vert\;S\overset{{\color{white}1}}{=}s,R_{e},R_{l} \right.\,\right)
 	\cdot
 	P\!\left(\,\left.S\overset{{\color{white}1}}{=}s\;\right\vert\,R_{e},R_{l}\,\right)
-\\
-& = &
-	P\!\left(\,R_{e}\,\right)
-	\cdot
-	P\!\left(\,R_{l}\,\right)
-	\,\times\,
-	\overset{T}{\underset{s=1}{\sum}}
-	\left(\,
-		\overset{T}{\underset{t=1}{\prod}}\;
-		P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-		\right)
-	\cdot
-	P\!\left(\,S=s \;\vert\,R_{e},R_{l}\,\right)
+%\\
+%& = &
+%	P\!\left(\,R_{e}\,\right)
+%	\cdot
+%	P\!\left(\,R_{l}\,\right)
+%	\,\times\,
+%	\overset{T}{\underset{s=1}{\sum}}
+%	\left(\,
+%		\overset{T}{\underset{t=1}{\prod}}\;
+%		P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+%		\right)
+%	\cdot
+%	P\!\left(\,S=s \;\vert\,R_{e},R_{l}\,\right)
 \\
 & = &
 	P\!\left(\,R_{e}\,\right)
@@ -200,25 +273,25 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 		P\!\left(\,S=s\,\right)
 	}
 \end{eqnarray*}
-Hence,
-\begin{eqnarray*}
-\log\,P\!\left(\,D,R_{e},R_{l}\,\right)
-& = &
-	\log P\!\left(\,R_{e}\,\right)
-	\; + \;
-	\log P\!\left(\,R_{l}\,\right)
-	\; + \;
-	\log\left(\;
-	\overset{T}{\underset{s=1}{\sum}}
-		\left(\,
-			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-			\right)
-		\cdot
-		P\!\left(\,S=s\,\right)
-	\,\right)
-\end{eqnarray*}
-Now, the last summand above can be rewritten as:
+%Hence,
+%\begin{eqnarray*}
+%\log\,P\!\left(\,D,R_{e},R_{l}\,\right)
+%& = &
+%	\log P\!\left(\,R_{e}\,\right)
+%	\; + \;
+%	\log P\!\left(\,R_{l}\,\right)
+%	\; + \;
+%	\log\left(\;
+%	\overset{T}{\underset{s=1}{\sum}}
+%		\left(\,
+%			\overset{T}{\underset{t=1}{\prod}}\;
+%			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+%			\right)
+%		\cdot
+%		P\!\left(\,S=s\,\right)
+%	\,\right)
+%\end{eqnarray*}
+In particular, we see that
 \begin{eqnarray*}
 \log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)
 &=&
@@ -244,19 +317,19 @@ Now, the last summand above can be rewritten as:
 		P\!\left(\,S=s\,\right)
 		\;\right]
 	\,\right\}
-\\
-& = &
-	\log\left\{\;\,
-	\overset{T}{\underset{s=1}{\sum}}\;
-	\exp\left[\;
-		\log\left(\,
-			\overset{T}{\underset{t=1}{\prod}}\;
-			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-			\right)
-		\, + \,
-		\log P\!\left(\,S=s\,\right)
-		\right]
-	\,\right\}
+%\\
+%& = &
+%	\log\left\{\;\,
+%	\overset{T}{\underset{s=1}{\sum}}\;
+%	\exp\left[\;
+%		\log\left(\,
+%			\overset{T}{\underset{t=1}{\prod}}\;
+%			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+%			\right)
+%		\, + \,
+%		\log P\!\left(\,S=s\,\right)
+%		\right]
+%	\,\right\}
 \\
 & = &
 	\log\left\{\;\,
@@ -268,10 +341,6 @@ Now, the last summand above can be rewritten as:
 		\,\right]
 	\,\right\}
 \end{eqnarray*}
-
-          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
-
-\noindent
 Next, observe that:
 \begin{eqnarray*}
 &&
@@ -292,34 +361,32 @@ Next, observe that:
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &=&
-	{\color{white}+}\;\;\,
-	\overset{s-1}{\underset{t=1}{\sum}}\;\,
+	{\color{white}+}\;\,
+	\overset{s-1}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+	\; + \;
+	\overset{T}{\underset{t=s}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &&
-	+\;
-	\overset{T}{\underset{t=s}{\sum}}
-	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	{\color{blue}
-		\;+\;\,
-		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-		\;-\;
-		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-		}
-\\
-&=&
+	+\;\,
 	\overset{s-1}{\underset{t=1}{\sum}}\;
-	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
-	\;+\;
-	\overset{T}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-	{\color{blue}
-		\;-\;\,
-		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-		}
+	\; - \;
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+	}
+%\\
+%&=&
+%	\overset{s-1}{\underset{t=1}{\sum}}\;
+%	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+%	\;+\;
+%	\overset{T}{\underset{t=1}{\sum}}\;
+%	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+%		\;-\;\,
+%		\overset{s-1}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &=&
 	\overset{T}{\underset{t=1}{\sum}}\;
@@ -327,40 +394,34 @@ Next, observe that:
 	\;+\;
 	\overset{s-1}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
-	{\color{blue}
 		\;-\;\,
 		\overset{s-1}{\underset{t=1}{\sum}}\;
 		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-		}
 \end{eqnarray*}
-
-          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
-
-\noindent
-Hence,
+Hence, we may now conclude:
 \begin{eqnarray*}
 &&
+	\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)
+\;\; = \;\;
 	\log\left\{\;\,
 	\overset{T}{\underset{s=1}{\sum}}\,
-	{\color{red}
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
 			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 			\right)
 		\cdot
 		P\!\left(\,S=s\,\right)
-	}
 	\,\right\}
 \\
 & = &
 	\log\left\{\;
 	\overset{T}{\underset{s=1}{\sum}}\;
-	\exp\left[\;{\color{red}
-			\log P\!\left(\,S=s\,\right)
-			\, + \,
-			\overset{T}{\underset{t=1}{\sum}}\,
-				\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-		}\,\right]
+	\exp\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\, + \,
+		\overset{T}{\underset{t=1}{\sum}}\,
+		\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
 	\,\right\}
 \\
 &=&
@@ -379,24 +440,77 @@ Hence,
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		\,\right]
 	\right\}
-\\
-&=&
-	\texttt{log\_sum\_exp}
-	\left[\;
-		\log P\!\left(\,S=s\,\right)
-		\,+\,
-		\overset{T}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-		\,+\,
-		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
-		\,-\,
-		\overset{s-1}{\underset{t=1}{\sum}}\;
-		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-		\,\right]
+%\\
+%&=&
+%	\texttt{log\_sum\_exp}
+%	\left[\;
+%		\log P\!\left(\,S=s\,\right)
+%		\,+\,
+%		\overset{T}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+%		\,+\,
+%		\overset{s-1}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+%		\,-\,
+%		\overset{s-1}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+%		\,\right]
 \end{eqnarray*}
+\qed
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
 
+\vskip 0.5cm
+\begin{remark}
+\mbox{}
+\vskip 0.2cm
+\noindent
+The ``straightforward'' implementation of \,$P\!\left(\,D\,\vert\,R_{e},R_{l}\,\right)$\,
+in \,$\textnormal{\texttt{Stan}}$\, based on the expression:
+\begin{eqnarray*}
+\underset{{\color{white}}}{\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)}
+\;\; = \;\;
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\, + \,
+		\overset{T}{\underset{t=1}{\sum}}\,
+		\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
+	\,\right\}
+\end{eqnarray*}
+involves a doubly nested loop, and hence has $O(T^{\,2})$ complexity.
+However, thanks to the availability of the function
+\,$\textnormal{\texttt{log\_exp\_sum}}$\, in \,$\textnormal{\texttt{Stan}}$,
+the equivalent expression
+\begin{eqnarray*}
+&&
+	\underset{{\color{white}}}{\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+			\log P\!\left(\,S=s\,\right)
+			\,+\,
+			\overset{T}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+			\,+\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+			\,-\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+	\right\}
+\end{eqnarray*}
+can be implemented with $O(T)$ complexity in \,$\textnormal{\texttt{Stan}}$,
+which will substantially more efficient in practice, especially when the number \,$T$\, of time points is large.
+For more details, see
+\begin{center}
+$\textnormal{\texttt{https://mc-stan.org/docs/2\_23/stan-users-guide/change-point-section.html}}$
+\end{center}
+\end{remark}
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
