@@ -1,0 +1,403 @@
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\section{A change point model}
+\setcounter{theorem}{0}
+\setcounter{equation}{0}
+
+%\cite{vanDerVaart1996}
+%\cite{Kosorok2008}
+
+%\renewcommand{\theenumi}{\alph{enumi}}
+%\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+Consider the set \,\texttt{coal}\, available in the R package \,\texttt{boot}:
+\begin{center}
+\texttt{https://stat.ethz.ch/R-manual/R-devel/library/boot/html/coal.html}
+\end{center}
+which was first published in:
+\begin{center}
+\begin{minipage}{5in}
+A Note on the Intervals Between Coal-Mining Disasters \\
+Author(s): R. G. Jarrett \\
+Source: Biometrika, Vol. 66, No. 1 (Apr., 1979), pp. 191-193 \\
+Published by: Oxford University Press on behalf of Biometrika Trust \\
+Stable URL: \texttt{https://www.jstor.org/stable/2335266}
+\end{minipage}
+\end{center}
+
+\vskip 0.5cm
+\noindent
+The \,\texttt{coal}\, data frame has 191 rows and a single numeric column (with column name ``date''),
+containing the dates of occurrence (in years, with dates represented as digits after the decimal point)
+of the 191 explosions in coal mines in the United Kingdom which:
+\begin{itemize}
+\item
+	occurred between March 15, 1851 and March 22 1962, and
+\item
+	resulted in 10 or more fatalities.
+\end{itemize}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Observed data:}
+\begin{itemize}
+\item
+	The observed data consist of a vector of counts:
+	\begin{equation*}
+	D \;\; = \;\; (D_{1}, D_{2}, \ldots , D_{T}) \;\; \in \;\; \left(\N\cup\{\,0\,\}\right)^{T}\,,
+	\end{equation*}
+	where
+	$D_{t}$ represents the number of coal mine explosions that occurred during the $t$-th year,
+	for $t = 1, 2, \ldots, T$.
+\end{itemize}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Model:}
+\begin{itemize}
+\item
+	User-prescribed hyperparameters:
+	\begin{equation*}
+	r_{e}\,,\, r_{l} \; \in \; (1,\infty)\,,
+	\quad\quad
+	T \; \in \; \N
+	\end{equation*}
+\item
+	Parameters and their prior distributions:
+	\begin{equation*}
+	R_{e} \;\sim\; \textnormal{Exponential}(\,r_{e}\,)\,,
+	\quad\quad
+	R_{l} \;\sim\; \textnormal{Exponential}(\,r_{l}\,)\,,
+	\quad\quad
+	S \;\sim\; \textnormal{Uniform}\!\left(\,\{\overset{{\color{white}.}}{1},2,\ldots,T\}\,\right)
+	\end{equation*}
+\item
+	Conditional likelihood of observed data:
+	\begin{equation*}
+	D_{t}
+	\;\; \sim \;\;
+		\left\{\begin{array}{ccc}
+		\textnormal{Poisson}(\,r_{e}\,)\,, & \textnormal{if \,$t < S$}
+		\\
+		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{l}\,)}\,, & \textnormal{if \,$t \geq S$}
+		\end{array}\right.,
+	\quad\;\;
+	t = 1, 2, \ldots, T
+	\end{equation*}
+\end{itemize}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Full joint probability:}
+\begin{eqnarray*}
+P\!\left(\,D,S,R_{e},R_{l}\,\right)
+& = &
+	P\!\left(\,D \;\vert\, S,R_{e},R_{l}\,\right)
+	\cdot
+	P\!\left(\,S,R_{e},R_{l}\,\right)
+\;\; = \;\;
+	P\!\left(\,D \;\vert\, S,R_{e},R_{l}\,\right)
+	\cdot
+	P\!\left(\,S\,\right)
+	\cdot
+	P\!\left(\,R_{e}\,\right)
+	\cdot
+	P\!\left(\,R_{l}\,\right)
+\\
+& = &
+	\left(\;
+		\overset{T}{\underset{t=1}{\prod}}\,
+		P\!\left(\,D_{t} \;\vert\, S,R_{e},R_{l}\,\right)
+		\right)
+	\times\,
+	P\!\left(\,S\,\right)
+	\cdot
+	P\!\left(\,R_{e}\,\right)
+	\cdot
+	P\!\left(\,R_{l}\,\right)
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Marginal joint probability (to be coded in \texttt{Stan}):}
+\vskip 0.3cm
+\noindent
+Since \texttt{Stan} does NOT support categorical latent variables,
+the full joint probability cannot be implemented in \texttt{Stan}.
+In other to perform inference involving categorical latent variables,
+we implement instead the marginal probability,
+with all categorical latent variables having been marginalized out.
+
+\vskip 0.5cm
+\noindent
+In our present example, we marginalize out
+\,$S \;\sim\; \textnormal{Uniform}\!\left(\,\{\overset{{\color{white}.}}{1},2,\ldots,T\}\,\right)$:
+\begin{eqnarray*}
+P\!\left(\,D,R_{e},R_{l}\,\right)
+&=&
+	{\color{red}P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)}
+	\cdot
+	P\!\left(\,R_{e},R_{l}\,\right)
+\;\; = \;\;
+%& = &
+%	\overset{T}{\underset{s=1}{\sum}}\;
+%	P\!\left(\,D,S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\,\right)
+%\;\; = \;\;
+	{\color{red}
+	\overset{T}{\underset{s=1}{\sum}}\;
+	P\!\left(\,\left.D,S\overset{{\color{white}1}}{=}s \;\right\vert R_{e},R_{l}\,\right)}
+	\cdot
+	P\!\left(\,R_{e},R_{l}\,\right)
+\\
+& = &
+	P\!\left(\,R_{e}\,\right)
+	\cdot
+	P\!\left(\,R_{l}\,\right)
+	\;\cdot\;
+	\overset{T}{\underset{s=1}{\sum}}\;\,
+	P\!\left(\, D \;\left\vert\;S\overset{{\color{white}1}}{=}s,R_{e},R_{l} \right.\,\right)
+	\cdot
+	P\!\left(\,\left.S\overset{{\color{white}1}}{=}s\;\right\vert\,R_{e},R_{l}\,\right)
+\\
+& = &
+	P\!\left(\,R_{e}\,\right)
+	\cdot
+	P\!\left(\,R_{l}\,\right)
+	\,\times\,
+	\overset{T}{\underset{s=1}{\sum}}
+	\left(\,
+		\overset{T}{\underset{t=1}{\prod}}\;
+		P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\right)
+	\cdot
+	P\!\left(\,S=s \;\vert\,R_{e},R_{l}\,\right)
+\\
+& = &
+	P\!\left(\,R_{e}\,\right)
+	\cdot
+	P\!\left(\,R_{l}\,\right)
+	\,\times\,
+	{\color{red}
+	\overset{T}{\underset{s=1}{\sum}}
+		\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\cdot
+		P\!\left(\,S=s\,\right)
+	}
+\end{eqnarray*}
+Hence,
+\begin{eqnarray*}
+\log\,P\!\left(\,D,R_{e},R_{l}\,\right)
+& = &
+	\log P\!\left(\,R_{e}\,\right)
+	\; + \;
+	\log P\!\left(\,R_{l}\,\right)
+	\; + \;
+	\log\left(\;
+	{\color{red}
+	\overset{T}{\underset{s=1}{\sum}}
+		\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\cdot
+		P\!\left(\,S=s\,\right)
+	}
+	\,\right)
+\end{eqnarray*}
+Now, the last summand above can be rewritten as:
+\begin{eqnarray*}
+&&
+	\log\left\{\;\,
+		\overset{T}{\underset{s=1}{\sum}}
+		\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\cdot
+		P\!\left(\,S=s\,\right)
+		\,\right\}
+\\
+& = &
+	\log\left\{\;\,
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\,\circ\,\log\left[\,
+		\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\cdot
+		P\!\left(\,S=s\,\right)
+		\;\right]
+	\,\right\}
+\\
+& = &
+	\log\left\{\;\,
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+		\log\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\, + \,
+		\log P\!\left(\,S=s\,\right)
+		\right]
+	\,\right\}
+\\
+& = &
+	\log\left\{\;\,
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;\log P\!\left(\,S=s\,\right)
+			\, + \,
+			\overset{T}{\underset{t=1}{\sum}}\,
+				\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
+	\,\right\}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\noindent
+Next, observe that:
+\begin{eqnarray*}
+&&
+	\overset{T}{\underset{t=1}{\sum}}\;
+	\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+\;\; = \;\;
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\; + \;
+	\overset{T}{\underset{t=s}{\sum}}\;
+	\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+\\
+&=&
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	\; + \;
+	\overset{T}{\underset{t=s}{\sum}}
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+\\
+&=&
+	{\color{white}+}\;\;\,
+	\overset{s-1}{\underset{t=1}{\sum}}\;\,
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+\\
+&&
+	+\;
+	\overset{T}{\underset{t=s}{\sum}}
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	{\color{blue}
+		\;+\;\,
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		\;-\;
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		}
+\\
+&=&
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	\;+\;
+	\overset{T}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	{\color{blue}
+		\;-\;\,
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		}
+\\
+&=&
+	\overset{T}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+	\;+\;
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{e}\right.\,\right)
+	{\color{blue}
+		\;-\;\,
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \;\left\vert\; R_{l}\right.\,\right)
+		}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\noindent
+Hence
+\begin{eqnarray*}
+&&
+	\log\left\{\;\,
+	\overset{T}{\underset{s=1}{\sum}}\,
+	{\color{red}
+		\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\cdot
+		P\!\left(\,S=s\,\right)
+	}
+	\,\right\}
+\\
+& = &
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;{\color{red}
+			\log P\!\left(\,S=s\,\right)
+			\, + \,
+			\overset{T}{\underset{t=1}{\sum}}\,
+				\log P\!\left(\,D_{t} \;\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		}\,\right]
+	\,\right\}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+			\log P\!\left(\,S=s\,\right)
+			\,+\,
+			\overset{T}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+			\,+\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+			\,-\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+	\right\}
+\\
+&=&
+	\texttt{log\_sum\_exp}
+	\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\,+\,
+		\overset{T}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,+\,
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+		\,-\,
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%

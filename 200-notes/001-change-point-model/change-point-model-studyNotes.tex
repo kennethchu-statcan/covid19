@@ -1,0 +1,178 @@
+
+\documentclass[10pt, letterpaper]{article}
+
+% package used to set margins, adjust parameters with caution
+\usepackage[left = 0.70in, right = 0.70in, top = 1.0in, bottom = 1.0in]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% package used to include special header and footer formatting
+\usepackage{fancyhdr}
+
+% package used to include special formatting for image and table captions
+\usepackage[small,bf,justification=raggedright,format=hang]{caption}
+
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{verbatim}
+%\usepackage{doublespace}
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\mbox{}\;\theenumi.$\;$}
+
+\renewcommand{\theenumii}{\alph{enumii}}
+\renewcommand{\labelenumii}{\mbox{}\;\;\,\theenumii)$\quad$}
+
+\renewcommand{\theenumiii}{\roman{enumiii}}
+\renewcommand{\labelenumiii}{\mbox{}\;\;\,\theenumiii)$\quad$}
+
+\renewcommand{\theequation}{\thesection .\arabic{equation}}
+
+\newcounter{theorem}
+
+\newtheorem{example}[theorem]{Example}
+\renewcommand{\theexample}{ \thesection .\arabic{example}}
+
+\newtheorem{definition}[theorem]{Definition}
+\renewcommand{\thedefinition}{\thesection .\arabic{definition}}
+
+\newtheorem{theorem}[theorem]{Theorem}
+\renewcommand{\thetheorem}{\thesection .\arabic{theorem}}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\renewcommand{\theproposition}{\thesection .\arabic{proposition}}
+
+\newtheorem{conjecture}[theorem]{Conjecture}
+\renewcommand{\theconjecture}{\thesection .\arabic{conjecture}}
+
+\newtheorem{lemma}[theorem]{Lemma}
+\renewcommand{\thelemma}{\thesection .\arabic{lemma}}
+
+\newtheorem{corollary}[theorem]{Corollary}
+\renewcommand{\thecorollary}{\thesection .\arabic{corollary}}
+
+\newtheorem{remark}[theorem]{Remark}
+\renewcommand{\theremark}{\thesection .\arabic{remark}}
+
+\newtheorem{notation}[theorem]{Notation}
+\renewcommand{\thenotation}{\thesection .\arabic{notation}}
+
+\renewcommand{\thetable} {\thesection .\arabic{table}}
+
+\renewcommand{\thefigure}{\thesection .\arabic{figure}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\proof}{\noindent {\small P{\scriptsize ROOF}} \quad}
+\newcommand*{\proofof}{\noindent {\small P{\scriptsize ROOF OF }}}
+\newcommand*{\proofoutline}{\noindent {\small O{\scriptsize UTLINE OF PROOF}} \quad}
+\newcommand*{\proofoutlineof}{\noindent {\small O{\scriptsize UTLINE OF PROOF OF }}}
+\newcommand*{\qed}{\hfill $\Box$}
+\newcommand*{\hdiamond}{\hfill $\Diamond$}
+
+\renewcommand*{\Re}{\mathbb{R}}
+\renewcommand*{\d}{\textnormal{d}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\varemptyset}{\varnothing}
+\renewcommand{\i}{\textnormal{\bf i}}
+
+\newcommand{\diag}{\textnormal{diag}}
+\newcommand{\proj}{\textnormal{proj}}
+\newcommand{\rot}{\textnormal{rot}}
+
+\newcommand{\ev}{\textnormal{ev}}
+\newcommand{\rank}{\textnormal{rank}}
+\renewcommand*{\span}{\textnormal{span}}
+\newcommand*{\domain}{\textnormal{domain}}
+\newcommand*{\codomain}{\textnormal{codomain}}
+\newcommand{\Col}{\textnormal{Col}}
+\newcommand{\image}{\textnormal{image}}
+\newcommand{\Var}{\textnormal{Var}}
+%\newcommand{\Hess}{\textnormal{Hess}}
+\newcommand{\Hess}{\nabla^{2}}
+\newcommand{\Cov}{\textnormal{Cov}}
+\newcommand{\MSE}{\textnormal{MSE}}
+\newcommand{\SVar}{\textnormal{SVar}}
+
+\newcommand*{\longhookrightarrow}{\ensuremath{\lhook\joinrel\relbar\joinrel\rightarrow}}
+
+%\newcommand{\Czo}{C([0,1],\Re)}
+\newcommand{\Czo}{C[0,1]}
+
+\newcommand{\logisticBetaX}{
+	\dfrac{\exp\!\left(\,\beta^{T} \cdot x \,\right)}{1 \,+\, \exp\!\left(\,\beta^{T} \cdot x \,\right)}
+}
+
+\newcommand{\oneMinusLogisticBetaX}{
+	\dfrac{1}{1 \,+\, \exp\!\left(\,\beta^{T} \cdot x \,\right)}
+}
+
+\newcommand{\argmin}{\textnormal{argmin}}
+\newcommand{\argmax}{\textnormal{argmax}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\setcounter{page}{1}
+
+\pagestyle{fancy}
+
+\rhead[Study Notes]{Kenneth Chu}
+\lhead[Kenneth Chu]{Study Notes}
+\chead[]{{\Large\bf A Change Point Model} \\
+\vskip 0.1cm \normalsize \today}
+\lfoot[]{}
+\cfoot[]{}
+\rfoot[]{\thepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\mbox{}\vskip 0.0cm
+
+\input{z-change-point-model}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+%\clearpage
+%\appendix
+%\input{z-exercises}
+%\input{z-technicalLemmas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\bibliographystyle{alpha}
+%\bibliographystyle{plain}
+%\bibliographystyle{amsplain}
+\bibliographystyle{acm}
+\bibliography{z-bibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
