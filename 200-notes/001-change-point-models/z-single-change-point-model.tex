@@ -123,6 +123,7 @@ of the 191 explosions in coal mines in the United Kingdom which:
 	\quad\;\;
 	t = 1, 2, \ldots, T
 	\end{equation*}
+	The variables \,$D_{1}, D_{2}, \ldots, D_{T}$\, are conditionally independent given \,$S,R_{e},R_{l}$.
 \end{itemize}
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
@@ -230,13 +231,11 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 	\cdot
 	P\!\left(\,R_{e},R_{l}\,\right)
 \;\; = \;\;
-%& = &
-%	\overset{T}{\underset{s=1}{\sum}}\;
-%	P\!\left(\,D,S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\,\right)
-%\;\; = \;\;
-	{\color{red}
-	\overset{T}{\underset{s=1}{\sum}}\;
-	P\!\left(\,\left.D,S\overset{{\color{white}1}}{=}s \;\right\vert R_{e},R_{l}\,\right)}
+	\left(\,
+		{\color{red}
+		\overset{T}{\underset{s=1}{\sum}}\;
+		P\!\left(\,\left.D,S\overset{{\color{white}1}}{=}s \;\right\vert R_{e},R_{l}\,\right)}
+		\right)
 	\cdot
 	P\!\left(\,R_{e},R_{l}\,\right)
 \\
@@ -249,19 +248,6 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 	P\!\left(\, D \;\left\vert\;S\overset{{\color{white}1}}{=}s,R_{e},R_{l} \right.\,\right)
 	\cdot
 	P\!\left(\,\left.S\overset{{\color{white}1}}{=}s\;\right\vert\,R_{e},R_{l}\,\right)
-%\\
-%& = &
-%	P\!\left(\,R_{e}\,\right)
-%	\cdot
-%	P\!\left(\,R_{l}\,\right)
-%	\,\times\,
-%	\overset{T}{\underset{s=1}{\sum}}
-%	\left(\,
-%		\overset{T}{\underset{t=1}{\prod}}\;
-%		P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-%		\right)
-%	\cdot
-%	P\!\left(\,S=s \;\vert\,R_{e},R_{l}\,\right)
 \\
 & = &
 	P\!\left(\,R_{e}\,\right)
@@ -278,24 +264,6 @@ P\!\left(\,D,R_{e},R_{l}\,\right)
 		P\!\left(\,S=s\,\right)
 	}
 \end{eqnarray*}
-%Hence,
-%\begin{eqnarray*}
-%\log\,P\!\left(\,D,R_{e},R_{l}\,\right)
-%& = &
-%	\log P\!\left(\,R_{e}\,\right)
-%	\; + \;
-%	\log P\!\left(\,R_{l}\,\right)
-%	\; + \;
-%	\log\left(\;
-%	\overset{T}{\underset{s=1}{\sum}}
-%		\left(\,
-%			\overset{T}{\underset{t=1}{\prod}}\;
-%			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-%			\right)
-%		\cdot
-%		P\!\left(\,S=s\,\right)
-%	\,\right)
-%\end{eqnarray*}
 In particular, we see that
 \begin{eqnarray*}
 \log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)
@@ -313,7 +281,7 @@ In particular, we see that
 & = &
 	\log\left\{\;\,
 	\overset{T}{\underset{s=1}{\sum}}\;
-	\exp\,\circ\,\log\left[\,
+	{\color{red}\exp\,\circ\,\log}\left[\,
 		\left(\,
 			\overset{T}{\underset{t=1}{\prod}}\;
 			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
@@ -322,19 +290,6 @@ In particular, we see that
 		P\!\left(\,S=s\,\right)
 		\;\right]
 	\,\right\}
-%\\
-%& = &
-%	\log\left\{\;\,
-%	\overset{T}{\underset{s=1}{\sum}}\;
-%	\exp\left[\;
-%		\log\left(\,
-%			\overset{T}{\underset{t=1}{\prod}}\;
-%			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-%			\right)
-%		\, + \,
-%		\log P\!\left(\,S=s\,\right)
-%		\right]
-%	\,\right\}
 \\
 & = &
 	\log\left\{\;\,
@@ -382,16 +337,6 @@ Next, observe that:
 	\overset{s-1}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	}
-%\\
-%&=&
-%	\overset{s-1}{\underset{t=1}{\sum}}\;
-%	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
-%	\;+\;
-%	\overset{T}{\underset{t=1}{\sum}}\;
-%	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-%		\;-\;\,
-%		\overset{s-1}{\underset{t=1}{\sum}}\;
-%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &=&
 	\overset{T}{\underset{t=1}{\sum}}\;
@@ -445,21 +390,6 @@ Hence, we may now conclude:
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		\,\right]
 	\right\}
-%\\
-%&=&
-%	\texttt{log\_sum\_exp}
-%	\left[\;
-%		\log P\!\left(\,S=s\,\right)
-%		\,+\,
-%		\overset{T}{\underset{t=1}{\sum}}\;
-%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-%		\,+\,
-%		\overset{s-1}{\underset{t=1}{\sum}}\;
-%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
-%		\,-\,
-%		\overset{s-1}{\underset{t=1}{\sum}}\;
-%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
-%		\,\right]
 \end{eqnarray*}
 \qed
 
