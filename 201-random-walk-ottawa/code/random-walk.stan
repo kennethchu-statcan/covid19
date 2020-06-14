@@ -20,19 +20,25 @@ transformed data {
     }
 
 parameters {
-    real <lower=0> mu[M];        // intercept for Rt
-    matrix[N2,M]   alpha0;
-    matrix[N2,M]   beta0;
-    real <lower=0> y[M];
+
     real <lower=0> kappa;
-    real <lower=0> phi;
+    real <lower=0> R0[M];  // intercept for Rt
+
     real <lower=0> tau;
+    real <lower=0> y[M];
+
+    real <lower=0,upper=N2+1> chgpt1[M];
+    real <lower=0,upper=N2+1> chgpt2[M];
+    real                      alpha1[M];
+    real                      alpha2[M];
+
+    real <lower=0> phi;
+
     }
 
 transformed parameters {
 
     real         convolution;
-    matrix[N2,M] alpha      = rep_matrix(0,N2,M);
     matrix[N2,M] prediction = rep_matrix(0,N2,M);
     matrix[N2,M] E_deaths   = rep_matrix(0,N2,M);
     matrix[N2,M] Rt         = rep_matrix(0,N2,M);
@@ -42,20 +48,10 @@ transformed parameters {
         prediction[1:N0,m] = rep_vector(y[m],N0); // learn the number of cases in the first N0 days
 
         for(i in 1:EpidemicStart[m]) {
-            alpha[i,m] = 0;
-        }
-        for(i in (EpidemicStart[m]+1):N[m]) {
-            alpha[i,m] = alpha0[i,m] * beta0[i,m];
-        }
-        for(i in (N[m]+1):N2) {
-            alpha[i,m] = 0;
-        }
-
-        for(i in 1:EpidemicStart[m]) {
-            Rt[i,m] = mu[m];
+            Rt[i,m] = R0[m];
         }
         for (i in (EpidemicStart[m]+1):N2) {
-            Rt[i,m] = Rt[i-1,m] * exp(alpha[i,m]);
+            Rt[i,m] = R0[m] * exp( alpha1[m] * int_step(i - chgpt1[m]) + alpha2[m] * int_step(i - chgpt2[m]));
         }
 
         for (i in (N0+1):N2) {
@@ -80,25 +76,22 @@ transformed parameters {
 
 model {
 
+    kappa ~ normal(0,0.5);
+    R0    ~ normal(2.4,kappa); // citation needed 
+
     tau ~ exponential(0.03);
     for (m in 1:M) {
-        y[m] ~ exponential(1.0/tau);
-    }
-
-    kappa ~ normal(0,0.5);
-    mu    ~ normal(2.4,kappa); // citation needed 
-
-    for (m in 1:M) {
-        for(i in (EpidemicStart[m]+1):N[m]) {
-            alpha0[i,m] ~ normal(0,1e-5);
-             beta0[i,m] ~ bernoulli(0.07142857); // 1/14 = 0.07142857
-        }
+        y[m]      ~ exponential(1.0/tau);
+        chgpt1[m] ~ uniform(EpidemicStart[m],N2+1);
+        chgpt2[m] ~ uniform(chgpt1[m]+1,     N2+1);
+        alpha1[m] ~ normal(0,0.5);
+        alpha2[m] ~ normal(0,0.5);
     }
 
     phi ~ normal(0,5);
     for (m in 1:M) {
         for(i in EpidemicStart[m]:N[m]) {
-            deaths[i,m] ~ neg_binomial_2(E_deaths[i,m],phi); 
+            deaths[i,m] ~ neg_binomial_2( E_deaths[i,m] , phi ); 
         }
     }
 
@@ -122,7 +115,7 @@ generated quantities {
             for(j in 1:(i-1)) {
                 convolution0 += prediction0[j,m] * SI[i-j]; // Correctd 22nd March
             }
-            prediction0[i,m] = mu[m] * convolution0;
+            prediction0[i,m] = R0[m] * convolution0;
         }
       
         E_deaths0[1,m]= 1e-9;
