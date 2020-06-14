@@ -96,16 +96,16 @@ of the 191 explosions in coal mines in the United Kingdom which:
 \item
 	User-prescribed (fixed) hyperparameters:
 	\begin{equation*}
-	r_{e}\,,\, r_{l} \; \in \; (1,\infty)\,,
+	\rho_{e}\,,\, \rho_{l} \; \in \; (1,\infty)\,,
 	\quad\quad
 	T \; \in \; \N
 	\end{equation*}
 \item
 	Parameters (to be estimated) and their prior distributions:
 	\begin{equation*}
-	R_{e} \;\sim\; \textnormal{Exponential}(\,r_{e}\,)\,,
+	R_{e} \;\sim\; \textnormal{Exponential}(\,\rho_{e}\,)\,,
 	\quad\quad
-	R_{l} \;\sim\; \textnormal{Exponential}(\,r_{l}\,)\,,
+	R_{l} \;\sim\; \textnormal{Exponential}(\,\rho_{l}\,)\,,
 	\quad\quad
 	S \;\sim\; \textnormal{Uniform}\!\left(\,\{\overset{{\color{white}.}}{1},2,\ldots,T\}\,\right)
 	\end{equation*}
@@ -115,15 +115,21 @@ of the 191 explosions in coal mines in the United Kingdom which:
 	\begin{equation*}
 	D_{t}
 	\;\; \sim \;\;
-		\left\{\begin{array}{ccc}
-		\textnormal{Poisson}(\,r_{e}\,)\,, & \textnormal{if \,$t < S$}
+		\left\{\begin{array}{cl}
+		\textnormal{Poisson}(\,R_{e}\,)\,, & \textnormal{if \,$t \leq S$}
 		\\
-		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{l}\,)}\,, & \textnormal{if \,$t \geq S$}
+		\overset{{\color{white}1}}{\textnormal{Poisson}(\,R_{l}\,)}\,, & \textnormal{if \,$t \geq S + 1$}
 		\end{array}\right.,
 	\quad\;\;
 	t = 1, 2, \ldots, T
 	\end{equation*}
 	The variables \,$D_{1}, D_{2}, \ldots, D_{T}$\, are conditionally independent given \,$S,R_{e},R_{l}$.
+	\vskip 0.1cm
+	Note that \,$S + 1$\, is the time point at which the ``change'' happens;
+	in the other words, \,$S + 1$\, is the first time point
+	for which \,$D_{t}$\, assumes the late phase occurrence rate $R_{l}$.\,
+	\vskip 0.1cm
+	In particular, \,$S = T$\, corresponds to the scenario that there is in fact no change point.
 \end{itemize}
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
@@ -213,10 +219,10 @@ can expressed as follows:
 			\overset{T}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 			\,+\,
-			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\overset{s}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 			\,-\,
-			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\overset{s}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		\,\right]
 	\right\}
@@ -307,34 +313,34 @@ Next, observe that:
 	\overset{T}{\underset{t=1}{\sum}}\;
 	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 \;\; = \;\;
-	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\overset{s}{\underset{t=1}{\sum}}\;
 	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 	\; + \;
-	\overset{T}{\underset{t=s}{\sum}}\;
+	\overset{T}{\underset{t=s+1}{\sum}}\;
 	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
 \\
 &=&
-	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\overset{s}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 	\; + \;
-	\overset{T}{\underset{t=s}{\sum}}
+	\overset{T}{\underset{t=s+1}{\sum}}
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &=&
 	{\color{white}+}\;\,
-	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\overset{s}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 	\; + \;
-	\overset{T}{\underset{t=s}{\sum}}\;
+	\overset{T}{\underset{t=s+1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \\
 &&
 	{\color{blue}
 	+\;\,
-	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\overset{s}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	\; - \;
-	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\overset{s}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	}
 \\
@@ -342,10 +348,10 @@ Next, observe that:
 	\overset{T}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 	\;+\;
-	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\overset{s}{\underset{t=1}{\sum}}\;
 	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 		\;-\;\,
-		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\overset{s}{\underset{t=1}{\sum}}\;
 		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 \end{eqnarray*}
 Hence, we may now conclude:
@@ -383,10 +389,10 @@ Hence, we may now conclude:
 			\overset{T}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 			\,+\,
-			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\overset{s}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 			\,-\,
-			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\overset{s}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		\,\right]
 	\right\}
@@ -432,10 +438,10 @@ the equivalent expression
 			\overset{T}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 			\,+\,
-			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\overset{s}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
 			\,-\,
-			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\overset{s}{\underset{t=1}{\sum}}\;
 			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
 		\,\right]
 	\right\}
