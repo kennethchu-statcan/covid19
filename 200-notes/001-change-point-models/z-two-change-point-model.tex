@@ -1,0 +1,498 @@
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\section{A two-change-point model}
+\setcounter{theorem}{0}
+\setcounter{equation}{0}
+
+%\cite{vanDerVaart1996}
+%\cite{Kosorok2008}
+
+%\renewcommand{\theenumi}{\alph{enumi}}
+%\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Observed data:}
+\begin{itemize}
+\item
+	The observed data consist of a vector of counts:
+	\begin{equation*}
+	D \;\; = \;\; (D_{1}, D_{2}, \ldots , D_{T}) \;\; \in \;\; \left(\N\cup\{\,0\,\}\right)^{T}\,,
+	\end{equation*}
+	where
+	$D_{t}$ represents the number of occurrences (of a certain type events of interest)
+	that occurred during the $t$-th time point, for $t = 1, 2, \ldots, T$.
+\end{itemize}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Model:}
+\begin{itemize}
+\item
+	User-prescribed (fixed) hyperparameters:
+	\begin{equation*}
+	r_{0}\,,\, r_{1}\,,\, r_{2} \; \in \; (1,\infty)\,,
+	\quad\quad
+	T \; \in \; \N
+	\end{equation*}
+\item
+	Parameters (to be estimated) and their prior distributions:
+	\begin{eqnarray*}
+	R_{i} & \sim & \textnormal{Exponential}(\,r_{i}\,)\,,\quad i = 0, 1, 2
+	\\
+	\overset{{\color{white}1}}{S_{1}} & \sim & \textnormal{Uniform}\!\left(\,\{1,2,\overset{{\color{white}1}}{\ldots}\,,T\}\,\right)
+	\\
+	\overset{{\color{white}1}}{S_{2}} & \sim & \textnormal{Uniform}\!\left(\,\{S_{1}+1,S_{1}+2,\overset{{\color{white}1}}{\ldots}\,,T\}\,\right)
+	\end{eqnarray*}
+	The parameters \,$R_{0},R_{1},R_{2},S_{1}$\, are assumed to be independent of each other, and
+	\,$S_{2}$\, is conditionally independent of \,$R_{0},R_{1},R_{2}$\, given \,$S_{1}$.
+\item
+	Conditional likelihood of observed data:
+	\begin{equation*}
+	D_{t}
+	\;\; \sim \;\;
+		\left\{\begin{array}{cl}
+		\textnormal{Poisson}(\,r_{0}\,)\,, & \textnormal{if \,$t < S_{1}$}
+		\\
+		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{1}\,)}\,, & \textnormal{if \,$S_{1} \leq t < S_{2}$}
+		\\
+		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{2}\,)}\,, & \textnormal{if \,$S_{2} < t$}
+		\end{array}\right.,
+	\quad\;\;
+	t = 1, 2, \ldots, T
+	\end{equation*}
+	The variables \,$D_{1}, D_{2}, \ldots, D_{T}$\, are conditionally independent given \,$S_{1},S_{2},R_{0},R_{1},R_{2}$.
+\end{itemize}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Full joint probability distribution:}
+\begin{eqnarray*}
+P\!\left(\,D,S_{1},S_{2},R_{0},R_{1},R_{2}\,\right)
+& = &
+	P\!\left(\left.\overset{{\color{white}.}}{D},S_{2} \;\right\vert\, S_{1},R_{0},R_{1},R_{2}\,\right)
+	\cdot
+	P\!\left(\,S_{1},R_{0},R_{1},R_{2}\,\right)
+\\
+& = &
+	P\!\left(\left.\overset{{\color{white}.}}{D} \;\right\vert\, S_{2},S_{1},R_{0},R_{1},R_{2}\,\right)
+	\cdot
+	P\!\left(\left.\overset{{\color{white}.}}{S_{2}} \;\right\vert\, S_{1},R_{0},R_{1},R_{2}\,\right)
+	\cdot
+	P\!\left(\,S_{1},R_{0},R_{1},R_{2}\,\right)
+\\
+& = &
+	P\!\left(\left.\overset{{\color{white}.}}{D} \;\right\vert\, S_{2},S_{1},R_{0},R_{1},R_{2}\,\right)
+	\cdot
+	P\!\left(\left.\overset{{\color{white}.}}{S_{2}} \;\right\vert\, S_{1}\,\right)
+	\cdot
+	P\!\left(\,S_{1}\,\right)
+	\cdot
+	P\!\left(\,R_{0}\,\right)
+	\cdot
+	P\!\left(\,R_{1}\,\right)
+	\cdot
+	P\!\left(\,R_{2}\,\right)
+\\
+& = &
+	\left(\;
+		\overset{T}{\underset{t=1}{\prod}}\,
+		P\!\left(\,D_{t} \;\vert\, S_{1},S_{2},R_{0},R_{1},R_{2}\,\right)
+		\right)
+	\times\,
+	P\!\left(\left.\overset{{\color{white}.}}{S_{2}} \;\right\vert\, S_{1}\,\right)
+	\cdot
+	P\!\left(\,S_{1}\,\right)
+	\cdot
+	P\!\left(\,R_{0}\,\right)
+	\cdot
+	P\!\left(\,R_{1}\,\right)
+	\cdot
+	P\!\left(\,R_{2}\,\right)
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 1.0cm
+\noindent
+\begin{center}
+\textbf{\large Marginal conditional probability distribution to be coded in \texttt{Stan}}
+\end{center}
+\vskip 0.3cm
+\noindent
+Since \texttt{Stan} does NOT support categorical latent variables,
+the full joint probability distribution above cannot be implemented in \texttt{Stan}
+(due to the presence of the discrete parameters $S_{1}$ and $S_{2}$).
+In other to perform inference with \texttt{Stan} involving categorical latent variables,
+we implement instead the {\color{red}marginal probability}
+\begin{equation*}
+P\!\left(\,D,R_{0},R_{1},R_{2}\,\right)
+\;\; = \;\;
+	\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+	\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\;
+	P\!\left(\,D,S_{1}=s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\,\right),
+\end{equation*}
+marginalizing out all categorical latent variables.
+
+\vskip 0.5cm
+\begin{proposition}
+\mbox{}
+\vskip 0.2cm
+\noindent
+The natural logarithm of the marginal conditional probability
+\,$P\!\left(\,D\;\vert\,R_{0},R_{1},R_{2}\,\right)$\,
+can expressed as follows:
+\begin{eqnarray*}
+&&
+	\underset{{\color{white}}}{\log P\!\left(\,D \;\vert\, R_{0},R_{1},R_{2}\,\right)}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\, + \,
+		\overset{T}{\underset{t=1}{\sum}}\,
+		\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
+	\,\right\}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+			\log P\!\left(\,S=s\,\right)
+			\,+\,
+			\overset{T}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+			\,+\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+			\,-\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+	\right\}
+\end{eqnarray*}
+\end{proposition}
+\proof
+First, note that the marginal probability \,$P(D,R_{0},R_{1},R_{2})$\, can be factored as follows:
+\begin{eqnarray*}
+&&
+	P\!\left(\,D,R_{0},R_{1},R_{2}\,\right)
+\;\; = \;\;
+	{\color{red}P\!\left(\,D \;\vert\,R_{0},R_{1},R_{2}\,\right)}
+	\cdot
+	P\!\left(\,R_{0},R_{1},R_{2}\,\right)
+\\
+& = &
+	\left(\,
+		{\color{red}
+		\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}
+		P\!\left(\,\left.D,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2} \;\right\vert R_{0},R_{1},R_{2}\,\right)
+		}
+		\right)
+	\cdot
+	P\!\left(\,R_{0},R_{1},R_{2}\,\right)
+\\
+& = &
+	P\!\left(\,R_{0}\,\right)
+	\cdot
+	P\!\left(\,R_{1}\,\right)
+	\cdot
+	P\!\left(\,R_{2}\,\right)
+	\;\cdot\;
+	\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+	\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}
+	P\!\left(\,D\,\left\vert\; S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+	\cdot
+	P\!\left(\,\left.S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2} \;\right\vert R_{0},R_{1},R_{2}\,\right)
+\\
+& = &
+	P\!\left(\,R_{0}\,\right)
+	\cdot
+	P\!\left(\,R_{1}\,\right)
+	\cdot
+	P\!\left(\,R_{2}\,\right)
+	\;\times
+\\
+&&
+	\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+	\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}
+	P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+	\cdot
+	P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1},R_{0},R_{1},R_{2}\,\right)
+	\cdot
+	P\!\left(\,\left.S_{1}\overset{{\color{white}1}}{=}s_{1} \;\right\vert R_{0},R_{1},R_{2}\,\right)
+\\
+& = &
+	P\!\left(\,R_{0}\,\right) P\!\left(\,R_{1}\,\right) P\!\left(\,R_{2}\,\right)
+	\,\cdot
+	{\color{red}
+		\overset{T}{\underset{s_{1}=1}{\sum}}\,
+		P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
+		\cdot
+		\left(\,
+			\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}
+			P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+			\cdot
+			P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
+			\right)
+		}
+\end{eqnarray*}
+In particular, we see that
+\begin{eqnarray*}
+&&
+	\log P\!\left(\,D \;\vert\, R_{0},R_{1},R_{2}\,\right)
+\\
+&=&
+	\log\left\{\,
+		\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\;
+			P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+			\cdot
+			P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
+			\cdot
+			P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
+		\,\right\}
+\\
+&=&
+	\log\left\{\,
+		\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\;
+		{\color{red}\exp\,\circ\,\log}
+		\left[\,
+			P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+			\cdot
+			P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
+			\cdot
+			P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
+			\right]
+		\,\right\}
+%\\
+%&=&
+%	\log\left\{\,
+%		\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+%		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\,
+%		\exp
+%		\left[\,
+%			\log P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+%			+
+%			\log P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
+%			+
+%			\log P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
+%			\right]
+%		\,\right\}
+\\
+&=&
+	\log\left\{\,
+		\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
+		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\,
+		\exp
+		\left[\;
+			\log P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
+			+
+			\log P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
+			+
+			\log P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+			\right]
+		\,\right\}
+\\
+&=&
+	\log\left\{\,
+		\overset{T}{\underset{s_{1}=1}{\sum}}\;
+		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\,
+		\exp
+		\left[\;
+			\log P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
+			+
+			\log P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
+			+
+			\overset{T}{\underset{t=1}{\sum}}\,
+			\log P\!\left(\,D_{t}\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
+			\right]
+		\right\}
+\end{eqnarray*}
+Next, observe that:
+\begin{eqnarray*}
+&&
+	\overset{T}{\underset{t=1}{\sum}}\;
+	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+\;\; = \;\;
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\; + \;
+	\overset{T}{\underset{t=s}{\sum}}\;
+	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+\\
+&=&
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+	\; + \;
+	\overset{T}{\underset{t=s}{\sum}}
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+\\
+&=&
+	{\color{white}+}\;\,
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+	\; + \;
+	\overset{T}{\underset{t=s}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+\\
+&&
+	{\color{blue}
+	+\;\,
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+	\; - \;
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+	}
+%\\
+%&=&
+%	\overset{s-1}{\underset{t=1}{\sum}}\;
+%	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+%	\;+\;
+%	\overset{T}{\underset{t=1}{\sum}}\;
+%	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+%		\;-\;\,
+%		\overset{s-1}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+\\
+&=&
+	\overset{T}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+	\;+\;
+	\overset{s-1}{\underset{t=1}{\sum}}\;
+	\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+		\;-\;\,
+		\overset{s-1}{\underset{t=1}{\sum}}\;
+		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+\end{eqnarray*}
+Hence, we may now conclude:
+\begin{eqnarray*}
+&&
+	\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)
+\;\; = \;\;
+	\log\left\{\;\,
+	\overset{T}{\underset{s=1}{\sum}}\,
+		\left(\,
+			\overset{T}{\underset{t=1}{\prod}}\;
+			P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+			\right)
+		\cdot
+		P\!\left(\,S=s\,\right)
+	\,\right\}
+\\
+& = &
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\, + \,
+		\overset{T}{\underset{t=1}{\sum}}\,
+		\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
+	\,\right\}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+			\log P\!\left(\,S=s\,\right)
+			\,+\,
+			\overset{T}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+			\,+\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+			\,-\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+	\right\}
+%\\
+%&=&
+%	\texttt{log\_sum\_exp}
+%	\left[\;
+%		\log P\!\left(\,S=s\,\right)
+%		\,+\,
+%		\overset{T}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+%		\,+\,
+%		\overset{s-1}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+%		\,-\,
+%		\overset{s-1}{\underset{t=1}{\sum}}\;
+%		\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+%		\,\right]
+\end{eqnarray*}
+\qed
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\begin{remark}
+\mbox{}
+\vskip 0.2cm
+\noindent
+The ``straightforward'' implementation of \,$P\!\left(\,D\,\vert\,R_{e},R_{l}\,\right)$\,
+in \,$\textnormal{\texttt{Stan}}$\, based on the expression:
+\begin{eqnarray*}
+\underset{{\color{white}}}{\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)}
+\;\; = \;\;
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+		\log P\!\left(\,S=s\,\right)
+		\, + \,
+		\overset{T}{\underset{t=1}{\sum}}\,
+		\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+		\,\right]
+	\,\right\}
+\end{eqnarray*}
+involves a doubly nested loop, and hence has $O(T^{\,2})$ complexity.
+However, thanks to the availability of the function
+\,$\textnormal{\texttt{log\_exp\_sum}}$\, in \,$\textnormal{\texttt{Stan}}$,
+the equivalent expression
+\begin{eqnarray*}
+&&
+	\underset{{\color{white}}}{\log P\!\left(\,D \;\vert\, R_{e},R_{l}\,\right)}
+\\
+&=&
+	\log\left\{\;
+	\overset{T}{\underset{s=1}{\sum}}\;
+	\exp\left[\;
+			\log P\!\left(\,S=s\,\right)
+			\,+\,
+			\overset{T}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+			\,+\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{e}\right.\,\right)
+			\,-\,
+			\overset{s-1}{\underset{t=1}{\sum}}\;
+			\log\textnormal{Poisson}\!\left(\,D_{t} \,\left\vert\; R_{l}\right.\,\right)
+		\,\right]
+	\right\}
+\end{eqnarray*}
+can be implemented with $O(T)$ complexity in \,$\textnormal{\texttt{Stan}}$,
+which will be substantially more efficient in practice, especially when the number \,$T$\, of time points is large.
+For more details, see
+\begin{center}
+$\textnormal{\texttt{https://mc-stan.org/docs/2\_23/stan-users-guide/change-point-section.html}}$
+\end{center}
+\end{remark}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
