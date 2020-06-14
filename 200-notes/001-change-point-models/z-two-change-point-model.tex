@@ -59,11 +59,11 @@
 	D_{t}
 	\;\; \sim \;\;
 		\left\{\begin{array}{cl}
-		\textnormal{Poisson}(\,r_{0}\,)\,, & \textnormal{if \,$t < S_{1}$}
+		\textnormal{Poisson}(\,r_{0}\,)\,, & \textnormal{if \,$t \leq S_{1}$}
 		\\
-		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{1}\,)}\,, & \textnormal{if \,$S_{1} \leq t < S_{2}$}
+		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{1}\,)}\,, & \textnormal{if \,$S_{1} + 1 \leq t \leq S_{2}$}
 		\\
-		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{2}\,)}\,, & \textnormal{if \,$S_{2} < t$}
+		\overset{{\color{white}1}}{\textnormal{Poisson}(\,r_{2}\,)}\,, & \textnormal{if \,$S_{2} + 1 \leq t$}
 		\end{array}\right.,
 	\quad\;\;
 	t = 1, 2, \ldots, T
@@ -321,68 +321,68 @@ Next, observe that:
 \\
 &=&
 	{\color{white}+} \;
-	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\overset{s_{1}}{\underset{t=1}{\sum}}\;
 	\log P\!\left(\,D_{t} \left\vert\,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
 	\; + \;
-	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}\;
 	\log P\!\left(\,D_{t} \left\vert\,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
 \\
 &&
 	+ \;
-	\overset{T}{\underset{t=s_{2}}{\sum}}\;
+	\overset{T}{\underset{t=s_{2}+1}{\sum}}\;
 	\log P\!\left(\,D_{t} \left\vert\,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
 \\
 &=&
-	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\overset{s_{1}}{\underset{t=1}{\sum}}\,
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
 	\; + \;
-	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{1}\right.\right)
 	\; + \;
-	\overset{T}{\underset{t=s_{2}}{\sum}}\;
+	\overset{T}{\underset{t=s_{2}+1}{\sum}}
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
 \\
 \\
 \\
 \\
 &=&
-	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\overset{s_{1}}{\underset{t=1}{\sum}}\,
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
 	\; + \;
-	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}\;
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{1}\right.\right)
 	\; + \;
-	\overset{T}{\underset{t=s_{2}}{\sum}}\;
+	\overset{T}{\underset{t=s_{2}+1}{\sum}}\;
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
 \\
 &&
 	{\color{white}
-		\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+		\overset{s_{1}}{\underset{t=1}{\sum}}\,
 		\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
 		}
 	{\color{blue}
 		\;\; - \;\,
-		\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+		\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}
 		\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
 		\; + \;
-		\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+		\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}
 		\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
 		}
 \\
 &=&
 	{\color{white}+} \,
-	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\overset{s_{1}}{\underset{t=1}{\sum}}\;
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
 \\
 &&
 	+ \;
-	\overset{T}{\underset{t=s_{1}}{\sum}}\;
+	\overset{T}{\underset{t=s_{1}+1}{\sum}}
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
 	\; + \;
-	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{1}\right.\right)
 	\; - \;
-	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\overset{s_{2}}{\underset{t=s_{1}+1}{\sum}}
 	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
 \\
 \\
