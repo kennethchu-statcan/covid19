@@ -283,20 +283,6 @@ In particular, we see that
 			P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
 			\right]
 		\,\right\}
-%\\
-%&=&
-%	\log\left\{\,
-%		\overset{T}{\underset{s_{1}=1}{\sum}}\;\,
-%		\overset{T}{\underset{s_{2}=s_{1}+1}{\sum}}\,
-%		\exp
-%		\left[\,
-%			\log P\!\left(\,D\,\left\vert\;S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\,\right)
-%			+
-%			\log P\!\left(\,\left.S_{2}\overset{{\color{white}1}}{=}s_{2}\;\right\vert S_{1}=s_{1}\,\right)
-%			+
-%			\log P\!\left(\,S_{1}\overset{{\color{white}1}}{=}s_{1}\,\right)
-%			\right]
-%		\,\right\}
 \\
 &=&
 	\log\left\{\,
@@ -331,13 +317,35 @@ Next, observe that:
 \begin{eqnarray*}
 &&
 	\overset{T}{\underset{t=1}{\sum}}\;
-	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
-\;\; = \;\;
-	\overset{s-1}{\underset{t=1}{\sum}}\;
-	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\log P\!\left(\,D_{t} \left\vert\,S\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
+\\
+&=&
+	{\color{white}+} \;
+	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\log P\!\left(\,D_{t} \left\vert\,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
 	\; + \;
-	\overset{T}{\underset{t=s}{\sum}}\;
-	\log P\!\left(\,D_{t} \,\left\vert\; S\overset{{\color{white}1}}{=}s,R_{e},R_{l}\right.\,\right)
+	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\log P\!\left(\,D_{t} \left\vert\,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
+\\
+&&
+	+ \;
+	\overset{T}{\underset{t=s_{2}}{\sum}}\;
+	\log P\!\left(\,D_{t} \left\vert\,S_{1}\overset{{\color{white}1}}{=}s_{1},S_{2}=s_{2},R_{0},R_{1},R_{2}\right.\right)
+\\
+&=&
+	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
+	\; + \;
+	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{1}\right.\right)
+	\; + \;
+	\overset{T}{\underset{t=s_{2}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
+\\
+\\
+\\
+\\
+\\
 \\
 &=&
 	\overset{s-1}{\underset{t=1}{\sum}}\;
