@@ -345,6 +345,47 @@ Next, observe that:
 \\
 \\
 \\
+&=&
+	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
+	\; + \;
+	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{1}\right.\right)
+	\; + \;
+	\overset{T}{\underset{t=s_{2}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
+\\
+&&
+	{\color{white}
+		\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+		\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
+		}
+	{\color{blue}
+		\;\; - \;\,
+		\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+		\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
+		\; + \;
+		\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+		\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
+		}
+\\
+&=&
+	{\color{white}+} \,
+	\overset{s_{1}-1}{\underset{t=1}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{0}\right.\right)
+\\
+&&
+	+ \;
+	\overset{T}{\underset{t=s_{1}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
+	\; + \;
+	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{1}\right.\right)
+	\; - \;
+	\overset{s_{2}-1}{\underset{t=s_{1}}{\sum}}\;
+	\log \textnormal{Poisson}\!\left(D_{t} \left\vert\,R_{2}\right.\right)
+\\
+\\
 \\
 \\
 &=&
