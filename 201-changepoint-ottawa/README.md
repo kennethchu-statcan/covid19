@@ -1,4 +1,4 @@
 
-Random walk model
-=================
+Change point model
+==================
 
