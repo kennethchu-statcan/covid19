@@ -37,7 +37,7 @@ data.snapshot  <- "2020-06-09.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-StanModel <- 'random-walk';
+StanModel <- 'change-point';
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 options(mc.cores = parallel::detectCores());

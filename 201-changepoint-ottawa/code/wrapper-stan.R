@@ -1,6 +1,6 @@
 
 wrapper.stan <- function(
-    StanModel          = "random-walk", 
+    StanModel          = "change-point", 
     FILE.stan.model    = NULL,
     DF.covid19         = NULL,
     DF.fatality.rates  = NULL,
