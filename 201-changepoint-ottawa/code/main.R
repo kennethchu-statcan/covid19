@@ -18,11 +18,17 @@ setwd( output.directory );
 ##################################################
 # source supporting R code
 code.files <- c(
+    "cross-check.R",
     "geom-stepribbon.R",
+    "getData-covid19.R",
+    "getData-ECDC.R",
+    "getData-GoCInfobase.R",
     "getData-Ottawa.R",
     "getData-serial-interval.R",
+    "getData-raw.R",
     "getData-wIFR.R",
     "initializePlot.R",
+    "patchData.R",
     "plot-3-panel.R",
     "visualizeData-Ottawa.R",
     "wrapper-stan.R"
@@ -33,10 +39,29 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot  <- "2020-06-09.01";
+#data.snapshot <- "2020-06-09.01";
+data.snapshot  <- "2020-06-15.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+jurisdictions <- c(
+    "Denmark",
+    "Italy",
+    "Germany",
+    "Spain",
+    "United_Kingdom",
+    "France",
+    "Norway",
+    "Belgium",
+    "Austria",
+    "Sweden",
+    "Switzerland",
+    "BC",
+    "AB",
+    "ON",
+    "QC"
+    );
+
 StanModel <- 'change-point';
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -51,19 +76,58 @@ file.copy(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+#set.seed(7654321);
+
+#DF.ottawa <- getData.Ottawa(
+#    xlsx.input.hospitalization = file.path(data.directory,"Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx"),
+#    xlsx.input.case.and.death  = file.path(data.directory,"COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx")
+#    );
+
+#print( str(DF.ottawa) );
+
+#visualizeData.Ottawa(
+#    DF.input = DF.ottawa
+#    );
+
+#DF.ontario <- DF.ottawa;
+#DF.ontario[,"jurisdiction"] <- "ON";
+
+#DF.covid19 <- rbind(DF.ottawa,DF.ontario);
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
-DF.ottawa <- getData.Ottawa(
-    xlsx.input.hospitalization = file.path(data.directory,"Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx"),
-    xlsx.input.case.and.death  = file.path(data.directory,"COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx")
+list.raw.data <- getData.raw(
+    csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
+    csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
+    csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
+    csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv')
     );
+print( names(list.raw.data) );
 
-print( str(DF.ottawa) );
-
-visualizeData.Ottawa(
-    DF.input = DF.ottawa
+list.patched.data <- patchData(
+    list.covid19.data = list.raw.data
     );
+print( names(list.patched.data) );
+print( str(list.patched.data[['GoCInfobase']]) );
 
+DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
+    list.covid19.data = list.patched.data,
+    csv.output        = "diagnostics-compare-JHU-GoCInfobase-patched.csv"
+    );
+print(str(DF.cross.check.JHU.GoCInfobase));
+
+DF.covid19 <- getData.covid19(
+    retained.jurisdictions = jurisdictions,
+    list.covid19.data      = list.patched.data
+    );
+print( str(DF.covid19) );
+print( summary(DF.covid19) );
+
+print( unique( DF.covid19[,"jurisdiction"] ) );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.fatality.rates <- getData.wIFR(
     csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
@@ -71,7 +135,6 @@ DF.fatality.rates <- getData.wIFR(
     );
 
 print( str(DF.fatality.rates) );
-
 print( summary(DF.fatality.rates) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -80,27 +143,19 @@ DF.serial.interval <- getData.serial.interval(
     );
 
 print( str(DF.serial.interval) );
-
 print( summary(DF.serial.interval) );
-
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.ontario <- DF.ottawa;
-DF.ontario[,"jurisdiction"] <- "ON";
-
-DF.covid19 <- rbind(DF.ottawa,DF.ontario);
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.wrapper.stan <- wrapper.stan(
-    StanModel          = StanModel,
-    FILE.stan.model    = FILE.stan.model,
-    DF.covid19         = DF.covid19,
-    DF.fatality.rates  = DF.fatality.rates,
-    DF.serial.interval = DF.serial.interval,
-    forecast.window    = 14,
-    DEBUG              = FALSE # TRUE
-    );
+#results.wrapper.stan <- wrapper.stan(
+#    StanModel          = StanModel,
+#    FILE.stan.model    = FILE.stan.model,
+#    DF.covid19         = DF.covid19,
+#    DF.fatality.rates  = DF.fatality.rates,
+#    DF.serial.interval = DF.serial.interval,
+#    forecast.window    = 14,
+#    DEBUG              = FALSE # TRUE
+#    );
 
 ##################################################
 print( warnings() );
