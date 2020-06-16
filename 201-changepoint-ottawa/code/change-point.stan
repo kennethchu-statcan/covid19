@@ -28,9 +28,14 @@ parameters {
     real <lower=0> y[M];
 
     real <lower=0,upper=N2+1> chgpt1[M];
-    real <lower=0,upper=N2+1> chgpt2[M];
-    real                      alpha1[M];
-    real                      alpha2[M];
+    real <lower=0,upper=N2+3> chgpt2[M];
+//  real <lower=0,upper=N2+5> chgpt3[M];
+//  real <lower=0,upper=N2+7> chgpt4[M];
+
+    real alpha1[M];
+    real alpha2[M];
+//  real alpha3[M];
+//  real alpha4[M];
 
     real <lower=0> phi;
 
@@ -51,7 +56,12 @@ transformed parameters {
             Rt[i,m] = R0[m];
         }
         for (i in (EpidemicStart[m]+1):N2) {
-            Rt[i,m] = R0[m] * exp( alpha1[m] * int_step(i - chgpt1[m]) + alpha2[m] * int_step(i - chgpt2[m]));
+            Rt[i,m] = R0[m] * exp(
+                  alpha1[m] * int_step(i - chgpt1[m])
+                + alpha2[m] * int_step(i - chgpt2[m])
+            //  + alpha3[m] * int_step(i - chgpt3[m])
+            //  + alpha4[m] * int_step(i - chgpt4[m])
+                );
         }
 
         for (i in (N0+1):N2) {
@@ -81,11 +91,22 @@ model {
 
     tau ~ exponential(0.03);
     for (m in 1:M) {
-        y[m]      ~ exponential(1.0/tau);
+        y[m] ~ exponential(1.0/tau);
+
         chgpt1[m] ~ uniform(EpidemicStart[m],N2+1);
-        chgpt2[m] ~ uniform(chgpt1[m]+1,     N2+1);
-        alpha1[m] ~ normal(0,0.5);
-        alpha2[m] ~ normal(0,0.5);
+        chgpt2[m] ~ uniform(chgpt1[m]+1,     N2+3);
+        // chgpt3[m] ~ uniform(chgpt2[m]+1,     N2+5);
+        // chgpt4[m] ~ uniform(chgpt3[m]+1,     N2+7);
+
+        alpha1[m] ~ normal(0,0.1);
+        alpha2[m] ~ normal(0,0.1);
+        // alpha3[m] ~ normal(0,0.1);
+        // alpha4[m] ~ normal(0,0.1);
+
+        // alpha1[m] ~ uniform(-1.386294,0       );
+        // alpha2[m] ~ uniform(-1.386294,1.386294);
+        // alpha3[m] ~ uniform(-1.386294,0       );
+        // alpha4[m] ~ uniform(-1.386294,1.386294);
     }
 
     phi ~ normal(0,5);

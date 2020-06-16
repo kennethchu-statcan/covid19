@@ -40,7 +40,9 @@ for ( code.file in code.files ) {
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #data.snapshot <- "2020-06-09.01";
-data.snapshot  <- "2020-06-15.01";
+#data.snapshot <- "2020-06-15.01";
+#data.snapshot <- "2020-05-10.01";
+data.snapshot  <- "2020-06-16.01.DELETEME";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -78,13 +80,13 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #set.seed(7654321);
+set.seed(1234567);
 
-#DF.ottawa <- getData.Ottawa(
-#    xlsx.input.hospitalization = file.path(data.directory,"Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx"),
-#    xlsx.input.case.and.death  = file.path(data.directory,"COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx")
-#    );
-
-#print( str(DF.ottawa) );
+DF.ottawa <- getData.Ottawa(
+    xlsx.input.hospitalization = file.path(data.directory,"Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx"),
+    xlsx.input.case.and.death  = file.path(data.directory,"COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx")
+    );
+print( str(DF.ottawa) );
 
 #visualizeData.Ottawa(
 #    DF.input = DF.ottawa
@@ -96,7 +98,9 @@ file.copy(
 #DF.covid19 <- rbind(DF.ottawa,DF.ontario);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-set.seed(7654321);
+#set.seed(7654321);
+#set.seed(1234567);
+set.seed(7777777);
 
 list.raw.data <- getData.raw(
     csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
@@ -147,15 +151,43 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#results.wrapper.stan <- wrapper.stan(
-#    StanModel          = StanModel,
-#    FILE.stan.model    = FILE.stan.model,
-#    DF.covid19         = DF.covid19,
-#    DF.fatality.rates  = DF.fatality.rates,
-#    DF.serial.interval = DF.serial.interval,
-#    forecast.window    = 14,
-#    DEBUG              = FALSE # TRUE
-#    );
+retained.jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC");
+DF.covid19             <- DF.covid19[DF.covid19[,"jurisdiction"] %in% retained.jurisdictions,];
+
+#print( str(DF.covid19) );
+#print( summary(DF.covid19) );
+#print( unique( DF.covid19[,"jurisdiction"] ) );
+
+retained.colnames <- c("date","jurisdiction","case","death");
+DF.covid19        <- DF.covid19[,retained.colnames];
+DF.ottawa         <- DF.ottawa[, retained.colnames];
+DF.covid19        <- rbind(DF.covid19,DF.ottawa);
+
+#print( str(DF.covid19) );
+#print( summary(DF.covid19) );
+#print( unique( DF.covid19[,"jurisdiction"] ) );
+
+DF.fatality.rates <- rbind(
+    DF.fatality.rates,
+    data.frame(
+        ID                = c(9999),
+        jurisdiction      = c("Ottawa"),
+        weighted_fatality = c(0.009262),
+        population        = c(NA),
+        stringsAsFactors  = FALSE
+        )
+    );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+results.wrapper.stan <- wrapper.stan(
+    StanModel          = StanModel,
+    FILE.stan.model    = FILE.stan.model,
+    DF.covid19         = DF.covid19,
+    DF.fatality.rates  = DF.fatality.rates,
+    DF.serial.interval = DF.serial.interval,
+    forecast.window    = 14,
+    DEBUG              = TRUE # FALSE # TRUE
+    );
 
 ##################################################
 print( warnings() );
