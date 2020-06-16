@@ -275,6 +275,7 @@ wrapper.stan_inner <- function(
     ##############################################
     cat("\nstr(stan_data)\n");
     print( str(stan_data)   );
+    saveRDS(object = stan_data, file = "stan-data.RData");
     # return( NULL );
     ##############################################
     ##############################################
