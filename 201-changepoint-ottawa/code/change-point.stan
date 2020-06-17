@@ -33,10 +33,10 @@ parameters {
 //  real <lower=0,upper=1> Uchg3[M];
 //  real <lower=0,upper=1> Uchg4[M];
 
-    real <lower=0,upper=1> step1[M];
-    real <lower=0,upper=1> step2[M];
-//  real <lower=0,upper=1> step3[M];
-//  real <lower=0,upper=1> step4[M];
+    real <lower = -log_max_step, upper = log_max_step> step1[M];
+    real <lower = -log_max_step, upper = log_max_step> step2[M];
+//  real <lower = -log_max_step, upper = log_max_step> step3[M];
+//  real <lower = -log_max_step, upper = log_max_step> step4[M];
 
     real <lower=0> phi;
 
