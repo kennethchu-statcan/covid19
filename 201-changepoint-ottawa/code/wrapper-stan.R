@@ -158,6 +158,7 @@ wrapper.stan_inner <- function(
     reported_cases <- list();
 
     stan_data <- list(
+        log_max_step  = log(4),
         M             = length(jurisdictions),
         N             = NULL,
         x1            = poly(1:N2,2)[,1],
@@ -279,6 +280,21 @@ wrapper.stan_inner <- function(
     # return( NULL );
     ##############################################
     ##############################################
+    list.init <- lapply(
+        X   = 1:getOption("mc.cores"),
+        FUN = function(x) {
+            list(
+                Uchg1 = runif(length(jurisdictions), min = 0, max = 1),
+                Uchg2 = runif(length(jurisdictions), min = 0, max = 1),
+                Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
+                Uchg4 = runif(length(jurisdictions), min = 0, max = 1),
+                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
+                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
+                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
+                )
+            }
+        )
 
     if( DEBUG ) {
         fit <- rstan::sampling(object = m, data = stan_data, iter = 40, warmup = 20, chains = 2);
@@ -291,6 +307,7 @@ wrapper.stan_inner <- function(
         #     warmup  = 2000,
         #     chains  = 8,
         #     thin    = 4,
+        #     init    = list.init,
         #     control = list(adapt_delta = 0.90, max_treedepth = 10)
         #     );
 
@@ -301,6 +318,7 @@ wrapper.stan_inner <- function(
             warmup  = 100,
             chains  = 4,
             thin    = 4,
+            init    = list.init,
             control = list(adapt_delta = 0.90, max_treedepth = 10)
             );
 
@@ -311,6 +329,7 @@ wrapper.stan_inner <- function(
         #    warmup  =  500,
         #    chains  = 4,
         #    thin    = 4,
+        #    init    = list.init,
         #    control = list(adapt_delta = 0.90, max_treedepth = 10)
         #    );
 

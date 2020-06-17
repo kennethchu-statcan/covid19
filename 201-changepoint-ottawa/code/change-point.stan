@@ -3,6 +3,7 @@ data {
     int  <lower=1> M;                // number of jurisdictions
     int  <lower=1> N0;               // number of days for which to impute infections
     int  <lower=1> N2;               // days of observed data + # of days to forecast
+    real <lower=0> log_max_step;     // natural logarithm of absolute value of maximum step size
 
     int            EpidemicStart[M];
     int  <lower=1> N[M];             // days of observed data for jurisdiction m. each entry must be <= N2
@@ -27,15 +28,15 @@ parameters {
     real <lower=0> tau;
     real <lower=0> y[M];
 
-    real <lower=0,upper=N2+1> chgpt1[M];
-    real <lower=0,upper=N2+3> chgpt2[M];
-//  real <lower=0,upper=N2+5> chgpt3[M];
-//  real <lower=0,upper=N2+7> chgpt4[M];
+    real <lower=0,upper=1> Uchg1[M];
+    real <lower=0,upper=1> Uchg2[M];
+    real <lower=0,upper=1> Uchg3[M];
+    real <lower=0,upper=1> Uchg4[M];
 
-    real alpha1[M];
-    real alpha2[M];
-//  real alpha3[M];
-//  real alpha4[M];
+    real <lower=0,upper=1> step1[M];
+    real <lower=0,upper=1> step2[M];
+    real <lower=0,upper=1> step3[M];
+    real <lower=0,upper=1> step4[M];
 
     real <lower=0> phi;
 
@@ -43,7 +44,13 @@ parameters {
 
 transformed parameters {
 
-    real         convolution;
+    real convolution;
+
+    real chgpt1[M];
+    real chgpt2[M];
+    real chgpt3[M];
+    real chgpt4[M];
+
     matrix[N2,M] prediction = rep_matrix(0,N2,M);
     matrix[N2,M] E_deaths   = rep_matrix(0,N2,M);
     matrix[N2,M] Rt         = rep_matrix(0,N2,M);
@@ -56,11 +63,22 @@ transformed parameters {
             Rt[i,m] = R0[m];
         }
         for (i in (EpidemicStart[m]+1):N2) {
+
+            // chgpt1[m] ~ uniform(EpidemicStart[m],N2);
+            // chgpt2[m] ~ uniform(chgpt1[m],       N2);
+            // chgpt3[m] ~ uniform(chgpt2[m],       N2);
+            // chgpt4[m] ~ uniform(chgpt3[m],       N2);
+
+            chgpt1[m] = EpidemicStart[m] + (N2 - EpidemicStart[m]) * Uchg1[m];
+            chgpt2[m] = chgpt1[m]        + (N2 - chgpt1[m]       ) * Uchg2[m];
+            chgpt3[m] = chgpt2[m]        + (N2 - chgpt2[m]       ) * Uchg3[m];
+            chgpt4[m] = chgpt3[m]        + (N2 - chgpt3[m]       ) * Uchg4[m];
+
             Rt[i,m] = R0[m] * exp(
-                  alpha1[m] * int_step(i - chgpt1[m])
-                + alpha2[m] * int_step(i - chgpt2[m])
-            //  + alpha3[m] * int_step(i - chgpt3[m])
-            //  + alpha4[m] * int_step(i - chgpt4[m])
+                  step1[m] * int_step(i - chgpt1[m]) 
+                + step2[m] * int_step(i - chgpt2[m])
+                + step3[m] * int_step(i - chgpt3[m])
+                + step4[m] * int_step(i - chgpt4[m])
                 );
         }
 
@@ -91,22 +109,15 @@ model {
 
     tau ~ exponential(0.03);
     for (m in 1:M) {
-        y[m] ~ exponential(1.0/tau);
-
-        chgpt1[m] ~ uniform(EpidemicStart[m],N2+1);
-        chgpt2[m] ~ uniform(chgpt1[m]+1,     N2+3);
-        // chgpt3[m] ~ uniform(chgpt2[m]+1,     N2+5);
-        // chgpt4[m] ~ uniform(chgpt3[m]+1,     N2+7);
-
-        alpha1[m] ~ normal(0,0.1);
-        alpha2[m] ~ normal(0,0.1);
-        // alpha3[m] ~ normal(0,0.1);
-        // alpha4[m] ~ normal(0,0.1);
-
-        // alpha1[m] ~ uniform(-1.386294,0       );
-        // alpha2[m] ~ uniform(-1.386294,1.386294);
-        // alpha3[m] ~ uniform(-1.386294,0       );
-        // alpha4[m] ~ uniform(-1.386294,1.386294);
+        y[m]     ~ exponential(1.0/tau);
+        Uchg1[m] ~ uniform(0,1);
+        Uchg2[m] ~ uniform(0,1);
+        Uchg3[m] ~ uniform(0,1);
+        Uchg4[m] ~ uniform(0,1);
+        step1[m] ~ uniform( -log_max_step , log_max_step );
+        step2[m] ~ uniform( -log_max_step , log_max_step );
+        step3[m] ~ uniform( -log_max_step , log_max_step );
+        step4[m] ~ uniform( -log_max_step , log_max_step );
     }
 
     phi ~ normal(0,5);
