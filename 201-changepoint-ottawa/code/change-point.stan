@@ -30,13 +30,13 @@ parameters {
 
     real <lower=0,upper=1> Uchg1[M];
     real <lower=0,upper=1> Uchg2[M];
-    real <lower=0,upper=1> Uchg3[M];
-    real <lower=0,upper=1> Uchg4[M];
+//  real <lower=0,upper=1> Uchg3[M];
+//  real <lower=0,upper=1> Uchg4[M];
 
     real <lower=0,upper=1> step1[M];
     real <lower=0,upper=1> step2[M];
-    real <lower=0,upper=1> step3[M];
-    real <lower=0,upper=1> step4[M];
+//  real <lower=0,upper=1> step3[M];
+//  real <lower=0,upper=1> step4[M];
 
     real <lower=0> phi;
 
@@ -48,8 +48,8 @@ transformed parameters {
 
     real chgpt1[M];
     real chgpt2[M];
-    real chgpt3[M];
-    real chgpt4[M];
+//  real chgpt3[M];
+//  real chgpt4[M];
 
     matrix[N2,M] prediction = rep_matrix(0,N2,M);
     matrix[N2,M] E_deaths   = rep_matrix(0,N2,M);
@@ -71,14 +71,14 @@ transformed parameters {
 
             chgpt1[m] = EpidemicStart[m] + (N2 - EpidemicStart[m]) * Uchg1[m];
             chgpt2[m] = chgpt1[m]        + (N2 - chgpt1[m]       ) * Uchg2[m];
-            chgpt3[m] = chgpt2[m]        + (N2 - chgpt2[m]       ) * Uchg3[m];
-            chgpt4[m] = chgpt3[m]        + (N2 - chgpt3[m]       ) * Uchg4[m];
+            // chgpt3[m] = chgpt2[m]        + (N2 - chgpt2[m]       ) * Uchg3[m];
+            // chgpt4[m] = chgpt3[m]        + (N2 - chgpt3[m]       ) * Uchg4[m];
 
             Rt[i,m] = R0[m] * exp(
                   step1[m] * int_step(i - chgpt1[m]) 
                 + step2[m] * int_step(i - chgpt2[m])
-                + step3[m] * int_step(i - chgpt3[m])
-                + step4[m] * int_step(i - chgpt4[m])
+            //  + step3[m] * int_step(i - chgpt3[m])
+            //  + step4[m] * int_step(i - chgpt4[m])
                 );
         }
 
@@ -112,12 +112,12 @@ model {
         y[m]     ~ exponential(1.0/tau);
         Uchg1[m] ~ uniform(0,1);
         Uchg2[m] ~ uniform(0,1);
-        Uchg3[m] ~ uniform(0,1);
-        Uchg4[m] ~ uniform(0,1);
+        // Uchg3[m] ~ uniform(0,1);
+        // Uchg4[m] ~ uniform(0,1);
         step1[m] ~ uniform( -log_max_step , log_max_step );
         step2[m] ~ uniform( -log_max_step , log_max_step );
-        step3[m] ~ uniform( -log_max_step , log_max_step );
-        step4[m] ~ uniform( -log_max_step , log_max_step );
+        // step3[m] ~ uniform( -log_max_step , log_max_step );
+        // step4[m] ~ uniform( -log_max_step , log_max_step );
     }
 
     phi ~ normal(0,5);
