@@ -75,25 +75,12 @@ wrapper.stan_visualize.results <- function(
 
     # to visualize results
 
-    print("A-1");
-
     StanModel     <- list.input[["StanModel"]];
-
-    print("A-2");
-
     jurisdictions <- list.input[["jurisdictions"]];
-
-    print("A-3");
 
     step1 <- as.matrix(list.input[["out"]][["step1"]]);
     colnames(step1) <- jurisdictions;
-
-    print("A-4");
-
-    g     <- bayesplot::mcmc_intervals(step1, prob = .9);
-
-    print("A-5");
-
+    g <- bayesplot::mcmc_intervals(step1, prob = .9);
     ggsave(
         filename = paste0("output-",StanModel,"-covars-step1.png"),
         plot     = g,
@@ -101,8 +88,6 @@ wrapper.stan_visualize.results <- function(
         width    = 4,
         height   = 6
         );
-
-    print("A-6");
 
     #g <- bayesplot::mcmc_intervals(alpha, prob = .9,transformations = function(x) exp(-x));
     #ggsave(
