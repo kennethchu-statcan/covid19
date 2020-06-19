@@ -248,7 +248,7 @@ plot.three.panel_make.plots <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     save_plot(
         filename    = paste0("output-",StanModel,"-3-panel-",jurisdiction,".png"),
-        plot        = plot_grid(p1, p2, p3, nrow = 3, rel_heights = c(2, 1, 1.25)),
+        plot        = plot_grid(p1, p2, p3, align = 'v', nrow = 3, rel_heights = c(2, 1, 1.25)),
         base_height = 7,
         base_width  = 7
         );
