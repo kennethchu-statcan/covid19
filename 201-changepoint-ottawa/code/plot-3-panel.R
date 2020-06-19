@@ -216,6 +216,8 @@ plot.three.panel_make.plots <- function(
     data_rt <- rbind(data_rt_95,data_rt_50);
     levels(data_rt$key) <- c("ninetyfive","fifth");
 
+    max.rt_max <- ceiling( 1.1 * max(data_rt[,"rt_max"]) );
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     p3 <- ggplot(data_jurisdiction) +
         geom_stepribbon(
@@ -238,16 +240,17 @@ plot.three.panel_make.plots <- function(
                 data_jurisdiction$time[length(data_jurisdiction$time)]
                 )
             ) + 
+        scale_y_continuous(limits = c(0,max.rt_max), breaks = seq(0,max.rt_max,2)) + 
         theme_pubr() + 
         theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-        theme(legend.position="right");
+        theme(legend.position = "none"); # theme(legend.position="bottom");
  
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    p <- plot_grid(p1, p2, p3, ncol = 3, rel_widths = c(1, 1, 2));
     save_plot(
-        filename = paste0("output-",StanModel,"-3-panel-",jurisdiction,".png"),
-        p,
-        base_width = 14
+        filename    = paste0("output-",StanModel,"-3-panel-",jurisdiction,".png"),
+        plot        = plot_grid(p1, p2, p3, nrow = 3, rel_heights = c(2, 1, 1.25)),
+        base_height = 7,
+        base_width  = 7
         );
 
     }

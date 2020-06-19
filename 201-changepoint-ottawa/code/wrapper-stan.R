@@ -40,9 +40,13 @@ wrapper.stan <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    #wrapper.stan_visualize.results(
-    #    list.input = list.output
-    #    );
+    cat("\nstr(list.output[['out']])\n");
+    print( str(list.output[['out']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    wrapper.stan_visualize.results(
+        list.input = list.output
+        );
 
     plot.3.panel(
         list.input = list.output
@@ -66,49 +70,53 @@ wrapper.stan_visualize.results <- function(
     list.input = NULL
     ) {
     
+    require(ggplot2);
     require(bayesplot);
 
     # to visualize results
 
+    print("A-1");
+
     StanModel     <- list.input[["StanModel"]];
+
+    print("A-2");
+
     jurisdictions <- list.input[["jurisdictions"]];
 
-    plot_labels <- c(
-        "School Closure",
-        "Self Isolation",
-        "Public Events",
-        "First Intervention",
-        "Lockdown",
-        'Social distancing'
-        );
+    print("A-3");
 
-    alpha <- as.matrix(list.input[["out"]][["alpha"]]);
+    step1 <- as.matrix(list.input[["out"]][["step1"]]);
+    colnames(step1) <- jurisdictions;
 
-    colnames(alpha) <- plot_labels;
+    print("A-4");
 
-    g <- bayesplot::mcmc_intervals(alpha, prob = .9);
+    g     <- bayesplot::mcmc_intervals(step1, prob = .9);
+
+    print("A-5");
+
     ggsave(
-        filename = paste0("output-",StanModel,"-covars-alpha-log.png"),
+        filename = paste0("output-",StanModel,"-covars-step1.png"),
         plot     = g,
         device   = "png",
         width    = 4,
         height   = 6
         );
 
-    g <- bayesplot::mcmc_intervals(alpha, prob = .9,transformations = function(x) exp(-x));
-    ggsave(
-        filename = paste0("output-",StanModel,"-covars-alpha.png"),
-        plot     = g,
-        width    = 4,
-        height   = 6
-        );
+    print("A-6");
 
-    mu <- as.matrix(list.input[["out"]][["mu"]]);
-    colnames(mu) = jurisdictions;
+    #g <- bayesplot::mcmc_intervals(alpha, prob = .9,transformations = function(x) exp(-x));
+    #ggsave(
+    #    filename = paste0("output-",StanModel,"-covars-alpha.png"),
+    #    plot     = g,
+    #    width    = 4,
+    #    height   = 6
+    #    );
 
-    g <- bayesplot::mcmc_intervals(mu,prob = .9);
+    R0 <- as.matrix(list.input[["out"]][["R0"]]);
+    colnames(R0) <- jurisdictions;
+    g <- bayesplot::mcmc_intervals(R0,prob = .9);
     ggsave(
-        filename = paste0("output-",StanModel,"-covars-mu.png"),
+        filename = paste0("output-",StanModel,"-covars-R0.png"),
         plot     = g,
         width    = 4,
         height   = 6
