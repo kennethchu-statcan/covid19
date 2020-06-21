@@ -175,8 +175,12 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
        is the (random, unobserved) log-linear change (''step size'')
        in reproduction number at the *k*-th change-point for jurisdiction *m*.
 
-   *   *I<sub>{t-&gamma_mk}</sub>* is the (observed) binary indicator variable for jurisdiction *m*,
-       intervention measure *k*, and day *t*.
+   *   *I(t-&gamma<sub>m,k</sub>)* is the (random, unobserved)
+       binary indicator variable, for jurisdiction *m*,
+       which indicates whether time *t* is
+       before (*I(t-&gamma<sub>m,k</sub>) = 0*) or
+       after (*I(t-&gamma<sub>m,k</sub>) = 1*)
+       the *k*-th change-point of jurisdiction *m*.
 
    *   *R<sub>m,0</sub>* is the jurisdiction-specific initial reproduction number,
        assumed to follow:
