@@ -371,64 +371,120 @@ Main output files
    ![three-panel plot](./supplementary/output-change-point-3-panel-AB.png)
 
    *  __output-change-point-stepsize-vs-chgpt-AB.png__
-   
+
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-AB.png)
 
    *  __output-change-point-3-panel-BC.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-BC.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-BC.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-BC.png)
+
    *  __output-change-point-3-panel-ON.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-ON.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-ON.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-ON.png)
 
    *  __output-change-point-3-panel-QC.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-QC.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-QC.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-QC.png)
+
    *  __output-change-point-3-panel-Austria.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Austria.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-Austria.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Austria.png)
 
    *  __output-change-point-3-panel-Belgium.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Belgium.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-Belgium.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Belgium.png)
+
    *  __output-change-point-3-panel-Denmark.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Denmark.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-Denmark.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Denmark.png)
 
    *  __output-change-point-3-panel-France.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-France.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-France.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-France.png)
+
    *  __output-change-point-3-panel-Germany.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Germany.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-Germany.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Germany.png)
 
    *  __output-change-point-3-panel-Italy.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Italy.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-Italy.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Italy.png)
+
    *  __output-change-point-3-panel-Norway.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Norway.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-Norway.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Norway.png)
 
    *  __output-change-point-3-panel-Spain.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Spain.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-Spain.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Spain.png)
+
    *  __output-change-point-3-panel-Sweden.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Sweden.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-Sweden.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Sweden.png)
 
    *  __output-change-point-3-panel-Switzerland.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Switzerland.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-Switzerland.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Switzerland.png)
+
    *  __output-change-point-3-panel-United_Kingdom.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-United_Kingdom.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-United_Kingdom.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-United_Kingdom.png)
 
    *  __output-change-point-forecast-AB.png__
 
