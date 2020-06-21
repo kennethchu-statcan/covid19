@@ -1,0 +1,1851 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> command.arguments <- commandArgs(trailingOnly = TRUE);
+> data.directory    <- normalizePath(command.arguments[1]);
+> code.directory    <- normalizePath(command.arguments[2]);
+> output.directory  <- normalizePath(command.arguments[3]);
+> 
+> # add custom library using .libPaths()
+> print( data.directory   );
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data"
+> print( code.directory   );
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/201-changepoint-ottawa/code"
+> print( output.directory );
+[1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/201-changepoint-ottawa/output"
+> print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+[1] "2020-06-21 08:19:32 EDT"
+> 
+> start.proc.time <- proc.time();
+> 
+> # set working directory to output directory
+> setwd( output.directory );
+> 
+> ##################################################
+> # source supporting R code
+> code.files <- c(
++     "cross-check.R",
++     "geom-stepribbon.R",
++     "getData-covid19.R",
++     "getData-ECDC.R",
++     "getData-GoCInfobase.R",
++     "getData-Ottawa.R",
++     "getData-serial-interval.R",
++     "getData-raw.R",
++     "getData-wIFR.R",
++     "initializePlot.R",
++     "patchData.R",
++     "plot-3-panel.R",
++     "plot-stepsize-vs-chgpt.R",
++     "visualizeData-Ottawa.R",
++     "wrapper-stan.R"
++     );
+> 
+> for ( code.file in code.files ) {
++     source(file.path(code.directory,code.file));
++     }
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> #data.snapshot <- "2020-06-09.01";
+> #data.snapshot <- "2020-06-15.01";
+> #data.snapshot <- "2020-05-10.01";
+> data.snapshot  <- "2020-06-16.01.DELETEME";
+> data.directory <- file.path(data.directory,data.snapshot);
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> jurisdictions <- c(
++     "Denmark",
++     "Italy",
++     "Germany",
++     "Spain",
++     "United_Kingdom",
++     "France",
++     "Norway",
++     "Belgium",
++     "Austria",
++     "Sweden",
++     "Switzerland",
++     "BC",
++     "AB",
++     "ON",
++     "QC",
++     "Ottawa"
++     );
+> 
+> jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
+> 
+> StanModel <- 'change-point';
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> options(mc.cores = parallel::detectCores());
+> 
+> FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
+> FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
+> 
+> file.copy(
++     from = FILE.stan.model.0,
++     to   = FILE.stan.model
++     );
+[1] TRUE
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> #set.seed(7654321);
+> #set.seed(1234567);
+> set.seed(7777777);
+> 
+> list.raw.data <- getData.raw(
++     csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
++     csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
++     csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
++     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv'),
++     xlsx.Ottawa.hospitalization = file.path(data.directory,"Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx"),
++     xlsx.Ottawa.case.and.death  = file.path(data.directory,"COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx")
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.raw() starts.
+
+
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-ECDC.csv already exists; loading this file ...
+
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-ECDC.csv.
+
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-JHU-cases.csv already exists; loading this file ...
+
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-JHU-cases.csv.
+
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-JHU-deaths.csv already exists; loading this file ...
+
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-JHU-deaths.csv.
+
+# Data file /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-GoCInfobase.csv already exists; loading this file ...
+
+# Loading complete: /Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/000-data/2020-06-16.01.DELETEME/raw-covid19-GoCInfobase.csv.
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.Ottawa() starts.
+
+
+str(DF.hospitalization)
+'data.frame':	114 obs. of  5 variables:
+ $ jurisdiction: chr  "Ottawa" "Ottawa" "Ottawa" "Ottawa" ...
+ $ date        : POSIXct, format: "2020-02-16" "2020-02-17" ...
+ $ hospitalized: num  1 1 1 0 0 0 0 0 0 0 ...
+ $ admission   : num  1 0 0 0 0 0 0 0 0 0 ...
+ $ discharge   : num  NA 0 0 1 0 0 0 0 0 0 ...
+NULL
+
+str(DF.case)
+'data.frame':	120 obs. of  3 variables:
+ $ jurisdiction: chr  "Ottawa" "Ottawa" "Ottawa" "Ottawa" ...
+ $ date        : POSIXct, format: "2020-02-10" "2020-02-11" ...
+ $ case        : num  1 0 0 0 0 0 0 0 0 0 ...
+NULL
+
+str(DF.death)
+'data.frame':	77 obs. of  3 variables:
+ $ jurisdiction: chr  "Ottawa" "Ottawa" "Ottawa" "Ottawa" ...
+ $ date        : POSIXct, format: "2020-03-24" "2020-03-25" ...
+ $ death       : num  1 0 0 0 1 0 1 0 0 2 ...
+NULL
+
+getData.Ottawa() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+
+getData.raw() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> print( names(list.raw.data) );
+[1] "ECDC"        "JHU.cases"   "JHU.deaths"  "GoCInfobase" "Ottawa"     
+> 
+> list.patched.data <- patchData(
++     list.covid19.data = list.raw.data
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+patchData() starts.
+
+
+patchData() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> print( names(list.patched.data) );
+[1] "ECDC"        "JHU.cases"   "JHU.deaths"  "GoCInfobase" "Ottawa"     
+> print( str(list.patched.data[['GoCInfobase']]) );
+'data.frame':	1980 obs. of  10 variables:
+ $ pruid     : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ prname    : chr  "Canada" "Canada" "Canada" "Canada" ...
+ $ prnameFR  : chr  "Canada" "Canada" "Canada" "Canada" ...
+ $ date      : chr  "31-12-2019" "01-01-2020" "02-01-2020" "03-01-2020" ...
+ $ numconf   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numprob   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numdeaths : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtotal  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtested : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numrecover: num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+> 
+> DF.cross.check.JHU.GoCInfobase <- cross.check.JHU.GoCInfobase(
++     list.covid19.data = list.patched.data,
++     csv.output        = "diagnostics-compare-JHU-GoCInfobase-patched.csv"
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+cross.check.JHU.GoCInfobase() starts.
+
+
+cross.check.JHU.GoCInfobase() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> print(str(DF.cross.check.JHU.GoCInfobase));
+'data.frame':	2307 obs. of  8 variables:
+ $ jurisdiction: chr  "Alberta" "Alberta" "Alberta" "Alberta" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ cases.JHU   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ deaths.JHU  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numconf     : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numprob     : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numdeaths   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ numtotal    : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+> 
+> DF.covid19 <- getData.covid19(
++     retained.jurisdictions = jurisdictions,
++     list.covid19.data      = list.patched.data
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.covid19() starts.
+
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.ECDC() starts.
+
+
+getData.ECDC() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+
+str(DF.ECDC)
+'data.frame':	659 obs. of  7 variables:
+ $ jurisdiction: chr  "France" "France" "France" "France" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ year        : int  2019 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
+ $ month       : int  12 1 1 1 1 1 1 1 1 1 ...
+ $ day         : int  31 1 2 3 4 5 6 7 8 9 ...
+ $ case        : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ death       : int  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+
+summary(DF.ECDC)
+ jurisdiction            date                 year          month       
+ Length:659         Min.   :2019-12-31   Min.   :2019   Min.   : 1.000  
+ Class :character   1st Qu.:2020-02-01   1st Qu.:2020   1st Qu.: 2.000  
+ Mode  :character   Median :2020-03-05   Median :2020   Median : 3.000  
+                    Mean   :2020-03-05   Mean   :2020   Mean   : 2.754  
+                    3rd Qu.:2020-04-07   3rd Qu.:2020   3rd Qu.: 4.000  
+                    Max.   :2020-05-10   Max.   :2020   Max.   :12.000  
+      day             case           death       
+ Min.   : 1.00   Min.   :-1430   Min.   :   0.0  
+ 1st Qu.: 7.00   1st Qu.:    0   1st Qu.:   0.0  
+ Median :15.00   Median :   67   Median :   1.0  
+ Mean   :14.99   Mean   : 1465   Mean   : 185.4  
+ 3rd Qu.:23.00   3rd Qu.: 2630   3rd Qu.: 288.0  
+ Max.   :31.00   Max.   : 9222   Max.   :2004.0  
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.GoCInfobase() starts.
+
+
+getData.GoCInfobase() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+
+str(DF.GoCInfobase)
+'data.frame':	528 obs. of  7 variables:
+ $ jurisdiction: chr  "AB" "AB" "AB" "AB" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ year        : int  2019 2020 2020 2020 2020 2020 2020 2020 2020 2020 ...
+ $ month       : int  12 1 1 1 1 1 1 1 1 1 ...
+ $ day         : int  31 1 2 3 4 5 6 7 8 9 ...
+ $ case        : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ death       : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+
+summary(DF.GoCInfobase)
+ jurisdiction            date                 year          month       
+ Length:528         Min.   :2019-12-31   Min.   :2019   Min.   : 1.000  
+ Class :character   1st Qu.:2020-02-01   1st Qu.:2020   1st Qu.: 2.000  
+ Mode  :character   Median :2020-03-05   Median :2020   Median : 3.000  
+                    Mean   :2020-03-05   Mean   :2020   Mean   : 2.758  
+                    3rd Qu.:2020-04-07   3rd Qu.:2020   3rd Qu.: 4.000  
+                    Max.   :2020-05-10   Max.   :2020   Max.   :12.000  
+      day             case             death        
+ Min.   : 1.00   Min.   :   0.00   Min.   :  0.000  
+ 1st Qu.: 7.00   1st Qu.:   0.00   1st Qu.:  0.000  
+ Median :14.50   Median :   0.00   Median :  0.000  
+ Mean   :14.98   Mean   : 126.03   Mean   :  9.106  
+ 3rd Qu.:23.00   3rd Qu.:  72.25   3rd Qu.:  2.000  
+ Max.   :31.00   Max.   :2209.00   Max.   :163.000  
+
+str(list.covid19.data[['Ottawa']])
+'data.frame':	161 obs. of  7 variables:
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ jurisdiction: chr  "Ottawa" "Ottawa" "Ottawa" "Ottawa" ...
+ $ case        : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ death       : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ hospitalized: num  0 0 0 0 0 0 0 0 0 0 ...
+ $ admission   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ discharge   : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+
+summary(list.covid19.data[['Ottawa']])
+      date            jurisdiction            case           death      
+ Min.   :2019-12-31   Length:161         Min.   : 0.00   Min.   : 0.00  
+ 1st Qu.:2020-02-09   Class :character   1st Qu.: 0.00   1st Qu.: 0.00  
+ Median :2020-03-20   Mode  :character   Median : 7.00   Median : 0.00  
+ Mean   :2020-03-20                      Mean   :12.48   Mean   : 1.59  
+ 3rd Qu.:2020-04-29                      3rd Qu.:21.00   3rd Qu.: 2.00  
+ Max.   :2020-06-08                      Max.   :97.00   Max.   :14.00  
+  hospitalized     admission      discharge    
+ Min.   : 0.00   Min.   :0.00   Min.   :0.000  
+ 1st Qu.: 0.00   1st Qu.:0.00   1st Qu.:0.000  
+ Median : 7.00   Median :0.00   Median :0.000  
+ Mean   :21.08   Mean   :1.54   Mean   :1.348  
+ 3rd Qu.:44.00   3rd Qu.:3.00   3rd Qu.:2.000  
+ Max.   :59.00   Max.   :8.00   Max.   :8.000  
+
+getData.covid19() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> print( str(DF.covid19) );
+'data.frame':	1348 obs. of  4 variables:
+ $ jurisdiction: chr  "France" "France" "France" "France" ...
+ $ date        : Date, format: "2019-12-31" "2020-01-01" ...
+ $ case        : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ death       : num  0 0 0 0 0 0 0 0 0 0 ...
+NULL
+> print( summary(DF.covid19) );
+ jurisdiction            date                 case             death        
+ Length:1348        Min.   :2019-12-31   Min.   :-1430.0   Min.   :   0.00  
+ Class :character   1st Qu.:2020-02-02   1st Qu.:    0.0   1st Qu.:   0.00  
+ Mode  :character   Median :2020-03-07   Median :    5.0   Median :   0.00  
+                    Mean   :2020-03-07   Mean   :  766.9   Mean   :  94.38  
+                    3rd Qu.:2020-04-10   3rd Qu.:  551.8   3rd Qu.:  27.00  
+                    Max.   :2020-06-08   Max.   : 9222.0   Max.   :2004.00  
+> 
+> print( unique( DF.covid19[,"jurisdiction"] ) );
+ [1] "France"         "Germany"        "Italy"          "Spain"         
+ [5] "United_Kingdom" "AB"             "BC"             "ON"            
+ [9] "QC"             "Ottawa"        
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> DF.fatality.rates <- getData.wIFR(
++     csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
++     csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.wIFR() starts.
+
+
+str(DF.wIFR.europe)
+'data.frame':	11 obs. of  4 variables:
+ $ ID               : int  3345 3450 3465 3480 3570 3675 3705 3720 3735 3750 ...
+ $ jurisdiction     : chr  "Denmark" "Norway" "Sweden" "United_Kingdom" ...
+ $ weighted_fatality: num  0.00879 0.00792 0.00886 0.00919 0.01089 ...
+ $ population       : num  5792 5421 10099 67886 60462 ...
+NULL
+
+str(DF.wIFR.canada)
+'data.frame':	14 obs. of  4 variables:
+ $ ID               : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ jurisdiction     : chr  "BC" "AB" "SK" "MB" ...
+ $ weighted_fatality: num  0.01089 0.00897 0.00919 0.00919 0.00919 ...
+ $ population       : int  NA NA NA NA NA NA NA NA NA NA ...
+NULL
+
+getData.wIFR() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.fatality.rates) );
+'data.frame':	25 obs. of  4 variables:
+ $ ID               : int  3345 3450 3465 3480 3570 3675 3705 3720 3735 3750 ...
+ $ jurisdiction     : chr  "Denmark" "Norway" "Sweden" "United_Kingdom" ...
+ $ weighted_fatality: num  0.00879 0.00792 0.00886 0.00919 0.01089 ...
+ $ population       : num  5792 5421 10099 67886 60462 ...
+NULL
+> print( summary(DF.fatality.rates) );
+       ID       jurisdiction       weighted_fatality    population   
+ Min.   :   1   Length:25          Min.   :0.007924   Min.   : 5421  
+ 1st Qu.:   7   Class :character   1st Qu.:0.008856   1st Qu.: 8831  
+ Median :  13   Mode  :character   Median :0.009185   Median :11590  
+ Mean   :1592                      Mean   :0.009506   Mean   :34066  
+ 3rd Qu.:3570                      3rd Qu.:0.009818   3rd Qu.:62868  
+ Max.   :3795                      Max.   :0.011526   Max.   :83784  
+                                                      NA's   :14     
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> DF.serial.interval <- getData.serial.interval(
++     csv.serial.interval = file.path(data.directory,"serial-interval.csv")
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+getData.serial.interval() starts.
+
+
+getData.serial.interval() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> print( str(DF.serial.interval) );
+'data.frame':	366 obs. of  2 variables:
+ $ X  : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ fit: num  0.0183 0.0666 0.1019 0.1177 0.1184 ...
+NULL
+> print( summary(DF.serial.interval) );
+       X               fit          
+ Min.   :  1.00   Min.   :0.000000  
+ 1st Qu.: 92.25   1st Qu.:0.000000  
+ Median :183.50   Median :0.000000  
+ Mean   :183.50   Mean   :0.002732  
+ 3rd Qu.:274.75   3rd Qu.:0.000000  
+ Max.   :366.00   Max.   :0.118386  
+> print( sum(DF.serial.interval[,"fit"]) );
+[1] 1
+> 
+> ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+> results.wrapper.stan <- wrapper.stan(
++     StanModel          = StanModel,
++     FILE.stan.model    = FILE.stan.model,
++     DF.covid19         = DF.covid19,
++     DF.fatality.rates  = DF.fatality.rates,
++     DF.serial.interval = DF.serial.interval,
++     forecast.window    = 14,
++     DEBUG              = FALSE # TRUE
++     );
+
+### ~~~~~~~~~~~~~~~~~~~~ ###
+wrapper.stan() starts.
+
+[1] "First non-zero cases is on day 26, and 30 days before 5 days is day 39"
+
+### ~~~~~~ #####
+
+jurisdiction: France
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 44
+
+decimal.date.minChgPt2: 45
+
+decimal.date.maxChgPt2: 65
+
+decimal.date.minChgPt3: 85
+
+d1
+     row.index jurisdiction       date case death        t
+5402         1       France 2020-02-07    0     0 2020.101
+5401         2       France 2020-02-08    5     0 2020.104
+5400         3       France 2020-02-09    0     0 2020.107
+5399         4       France 2020-02-10    0     0 2020.109
+5398         5       France 2020-02-11    0     0 2020.112
+5397         6       France 2020-02-12    0     0 2020.115
+5396         7       France 2020-02-13    0     0 2020.117
+5395         8       France 2020-02-14    0     0 2020.120
+5394         9       France 2020-02-15    0     1 2020.123
+5393        10       France 2020-02-16    0     0 2020.126
+5392        11       France 2020-02-17    1     0 2020.128
+5391        12       France 2020-02-18    0     0 2020.131
+5390        13       France 2020-02-19    0     0 2020.134
+5389        14       France 2020-02-20    0     0 2020.137
+5388        15       France 2020-02-21    0     0 2020.139
+5387        16       France 2020-02-22    0     0 2020.142
+5386        17       France 2020-02-23    0     0 2020.145
+5385        18       France 2020-02-24    0     0 2020.148
+5384        19       France 2020-02-25    0     0 2020.150
+5383        20       France 2020-02-26    2     0 2020.153
+5382        21       France 2020-02-27    3     1 2020.156
+5381        22       France 2020-02-28   21     0 2020.158
+5380        23       France 2020-02-29   19     0 2020.161
+5379        24       France 2020-03-01   43     0 2020.164
+5378        25       France 2020-03-02   30     0 2020.167
+5377        26       France 2020-03-03   48     1 2020.169
+5376        27       France 2020-03-04   34     1 2020.172
+5375        28       France 2020-03-05   73     0 2020.175
+5374        29       France 2020-03-06  138     3 2020.178
+5373        30       France 2020-03-07  190     2 2020.180
+5372        31       France 2020-03-08  103     1 2020.183
+5371        32       France 2020-03-09  410     9 2020.186
+5370        33       France 2020-03-10  286    11 2020.189
+5369        34       France 2020-03-11  372     3 2020.191
+5368        35       France 2020-03-12  497    15 2020.194
+5367        36       France 2020-03-13  595    13 2020.197
+5366        37       France 2020-03-14  785    18 2020.199
+5365        38       France 2020-03-15  838    12 2020.202
+5364        39       France 2020-03-16  924    36 2020.205
+5363        40       France 2020-03-17 1210    21 2020.208
+5362        41       France 2020-03-18 1097    27 2020.210
+5361        42       France 2020-03-19 1404    69 2020.213
+5360        43       France 2020-03-20 1861   128 2020.216
+5359        44       France 2020-03-21 1617    78 2020.219
+5358        45       France 2020-03-22 1847   112 2020.221
+5357        46       France 2020-03-23 1559   112 2020.224
+5356        47       France 2020-03-24 3838   186 2020.227
+5355        48       France 2020-03-25 2446   240 2020.230
+5354        49       France 2020-03-26 2931   231 2020.232
+5353        50       France 2020-03-27 3922   365 2020.235
+5352        51       France 2020-03-28 3809   299 2020.238
+5351        52       France 2020-03-29 4611   319 2020.240
+5350        53       France 2020-03-30 2599   292 2020.243
+5349        54       France 2020-03-31 4376   418 2020.246
+5348        55       France 2020-04-01 7578   499 2020.249
+5347        56       France 2020-04-02 4861   509 2020.251
+5346        57       France 2020-04-03 2116   471 2020.254
+5345        58       France 2020-04-04 5233  2004 2020.257
+5344        59       France 2020-04-05 4267  1053 2020.260
+5343        60       France 2020-04-06 1873   518 2020.262
+5342        61       France 2020-04-07 3912   833 2020.265
+5341        62       France 2020-04-08 3777  1417 2020.268
+5340        63       France 2020-04-09 3881   541 2020.270
+5339        64       France 2020-04-10 4286  1341 2020.273
+5338        65       France 2020-04-11 4342   987 2020.276
+5337        66       France 2020-04-12 3114   635 2020.279
+5336        67       France 2020-04-13 1613   561 2020.281
+5335        68       France 2020-04-14 2673   574 2020.284
+5334        69       France 2020-04-15 5497   762 2020.287
+5333        70       France 2020-04-16 2633  1438 2020.290
+5332        71       France 2020-04-17 2641   753 2020.292
+5331        72       France 2020-04-18  405   761 2020.295
+5330        73       France 2020-04-19 2569   642 2020.298
+5329        74       France 2020-04-20  785   395 2020.301
+5328        75       France 2020-04-21 2051   547 2020.303
+5327        76       France 2020-04-22 2667   531 2020.306
+5326        77       France 2020-04-23 1827   544 2020.309
+5325        78       France 2020-04-24 1653   516 2020.311
+5324        79       France 2020-04-25 1773   389 2020.314
+5323        80       France 2020-04-26 1537   369 2020.317
+5322        81       France 2020-04-27  461   242 2020.320
+5321        82       France 2020-04-28 1195   437 2020.322
+5320        83       France 2020-04-29 1065   367 2020.325
+5319        84       France 2020-04-30 1607   427 2020.328
+5318        85       France 2020-05-01 1139   289 2020.331
+5317        86       France 2020-05-02  604   218 2020.333
+5316        87       France 2020-05-03  794   166 2020.336
+5315        88       France 2020-05-04  308   135 2020.339
+5314        89       France 2020-05-05  576   306 2020.342
+5313        90       France 2020-05-06 1104   330 2020.344
+5312        91       France 2020-05-07 4183   278 2020.347
+5311        92       France 2020-05-08  629   178 2020.350
+5310        93       France 2020-05-09  642   243 2020.352
+5309        94       France 2020-05-10  433    80 2020.355
+
+### ~~~~~~ #####
+[1] "France has 94 days of data"
+[1] "First non-zero cases is on day 29, and 30 days before 5 days is day 47"
+
+### ~~~~~~ #####
+
+jurisdiction: Germany
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 36
+
+decimal.date.minChgPt2: 37
+
+decimal.date.maxChgPt2: 57
+
+decimal.date.minChgPt3: 77
+
+d1
+     row.index jurisdiction       date case death        t
+5820         1      Germany 2020-02-15    0     0 2020.123
+5819         2      Germany 2020-02-16    0     0 2020.126
+5818         3      Germany 2020-02-17    0     0 2020.128
+5817         4      Germany 2020-02-18    0     0 2020.131
+5816         5      Germany 2020-02-19    0     0 2020.134
+5815         6      Germany 2020-02-20    0     0 2020.137
+5814         7      Germany 2020-02-21    0     0 2020.139
+5813         8      Germany 2020-02-22    0     0 2020.142
+5812         9      Germany 2020-02-23    0     0 2020.145
+5811        10      Germany 2020-02-24    0     0 2020.148
+5810        11      Germany 2020-02-25    0     0 2020.150
+5809        12      Germany 2020-02-26    2     0 2020.153
+5808        13      Germany 2020-02-27    4     0 2020.156
+5807        14      Germany 2020-02-28   26     0 2020.158
+5806        15      Germany 2020-02-29   10     0 2020.161
+5805        16      Germany 2020-03-01   54     0 2020.164
+5804        17      Germany 2020-03-02   18     0 2020.167
+5803        18      Germany 2020-03-03   28     0 2020.169
+5802        19      Germany 2020-03-04   39     0 2020.172
+5801        20      Germany 2020-03-05   66     0 2020.175
+5800        21      Germany 2020-03-06  138     0 2020.178
+5799        22      Germany 2020-03-07  284     0 2020.180
+5798        23      Germany 2020-03-08  163     0 2020.183
+5797        24      Germany 2020-03-09   55     0 2020.186
+5796        25      Germany 2020-03-10  237     2 2020.189
+5795        26      Germany 2020-03-11  157     0 2020.191
+5794        27      Germany 2020-03-12  271     1 2020.194
+5793        28      Germany 2020-03-13  802     2 2020.197
+5792        29      Germany 2020-03-14  693     0 2020.199
+5791        30      Germany 2020-03-15  733     3 2020.202
+5790        31      Germany 2020-03-16 1043     4 2020.205
+5789        32      Germany 2020-03-17 1174     1 2020.208
+5788        33      Germany 2020-03-18 1144     0 2020.210
+5787        34      Germany 2020-03-19 1042     0 2020.213
+5786        35      Germany 2020-03-20 5940    30 2020.216
+5785        36      Germany 2020-03-21 4049     2 2020.219
+5784        37      Germany 2020-03-22 3276    22 2020.221
+5783        38      Germany 2020-03-23 3311    27 2020.224
+5782        39      Germany 2020-03-24 4438    32 2020.227
+5781        40      Germany 2020-03-25 2342    23 2020.230
+5780        41      Germany 2020-03-26 4954    49 2020.232
+5779        42      Germany 2020-03-27 5780    55 2020.235
+5778        43      Germany 2020-03-28 6294    72 2020.238
+5777        44      Germany 2020-03-29 3965    64 2020.240
+5776        45      Germany 2020-03-30 4751    66 2020.243
+5775        46      Germany 2020-03-31 4615   128 2020.246
+5774        47      Germany 2020-04-01 5453   149 2020.249
+5773        48      Germany 2020-04-02 6156   140 2020.251
+5772        49      Germany 2020-04-03 6174   145 2020.254
+5771        50      Germany 2020-04-04 6082   141 2020.257
+5770        51      Germany 2020-04-05 5936   184 2020.260
+5769        52      Germany 2020-04-06 3677    92 2020.262
+5768        53      Germany 2020-04-07 3834   173 2020.265
+5767        54      Germany 2020-04-08 4003   254 2020.268
+5766        55      Germany 2020-04-09 4974   246 2020.270
+5765        56      Germany 2020-04-10 5323   266 2020.273
+5764        57      Germany 2020-04-11 4133   171 2020.276
+5763        58      Germany 2020-04-12 2821   129 2020.279
+5762        59      Germany 2020-04-13 2537   126 2020.281
+5761        60      Germany 2020-04-14 2082   170 2020.284
+5760        61      Germany 2020-04-15 2486   285 2020.287
+5759        62      Germany 2020-04-16 2866   315 2020.290
+5758        63      Germany 2020-04-17 3380   299 2020.292
+5757        64      Germany 2020-04-18 3609   242 2020.295
+5756        65      Germany 2020-04-19 2458   184 2020.298
+5755        66      Germany 2020-04-20 1775   110 2020.301
+5754        67      Germany 2020-04-21 1785   194 2020.303
+5753        68      Germany 2020-04-22 2237   281 2020.306
+5752        69      Germany 2020-04-23 2352   215 2020.309
+5751        70      Germany 2020-04-24 2337   227 2020.311
+5750        71      Germany 2020-04-25 2055   179 2020.314
+5749        72      Germany 2020-04-26 1737   140 2020.317
+5748        73      Germany 2020-04-27 1018   110 2020.320
+5747        74      Germany 2020-04-28 1144   163 2020.322
+5746        75      Germany 2020-04-29 1304   202 2020.325
+5745        76      Germany 2020-04-30 1478   173 2020.328
+5744        77      Germany 2020-05-01    0     0 2020.331
+5743        78      Germany 2020-05-02 2584   287 2020.333
+5742        79      Germany 2020-05-03  793    74 2020.336
+5741        80      Germany 2020-05-04  679    43 2020.339
+5740        81      Germany 2020-05-05  685   139 2020.342
+5739        82      Germany 2020-05-06 1037   165 2020.344
+5738        83      Germany 2020-05-07 1194   123 2020.347
+5737        84      Germany 2020-05-08 1209   147 2020.350
+5736        85      Germany 2020-05-09 1251   103 2020.352
+5735        86      Germany 2020-05-10  667    26 2020.355
+
+### ~~~~~~ #####
+[1] "Germany has 86 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 28"
+
+### ~~~~~~ #####
+
+jurisdiction: Italy
+
+decimal.date.minChgPt1: 35
+
+decimal.date.maxChgPt1: 55
+
+decimal.date.minChgPt2: 56
+
+decimal.date.maxChgPt2: 76
+
+decimal.date.minChgPt3: 96
+
+d1
+     row.index jurisdiction       date case death        t
+7826         1        Italy 2020-01-27    0     0 2020.071
+7825         2        Italy 2020-01-28    0     0 2020.074
+7824         3        Italy 2020-01-29    0     0 2020.077
+7823         4        Italy 2020-01-30    0     0 2020.079
+7822         5        Italy 2020-01-31    3     0 2020.082
+7821         6        Italy 2020-02-01    0     0 2020.085
+7820         7        Italy 2020-02-02    0     0 2020.087
+7819         8        Italy 2020-02-03    0     0 2020.090
+7818         9        Italy 2020-02-04    0     0 2020.093
+7817        10        Italy 2020-02-05    0     0 2020.096
+7816        11        Italy 2020-02-06    0     0 2020.098
+7815        12        Italy 2020-02-07    0     0 2020.101
+7814        13        Italy 2020-02-08    0     0 2020.104
+7813        14        Italy 2020-02-09    0     0 2020.107
+7812        15        Italy 2020-02-10    0     0 2020.109
+7811        16        Italy 2020-02-11    0     0 2020.112
+7810        17        Italy 2020-02-12    0     0 2020.115
+7809        18        Italy 2020-02-13    0     0 2020.117
+7808        19        Italy 2020-02-14    0     0 2020.120
+7807        20        Italy 2020-02-15    0     0 2020.123
+7806        21        Italy 2020-02-16    0     0 2020.126
+7805        22        Italy 2020-02-17    0     0 2020.128
+7804        23        Italy 2020-02-18    0     0 2020.131
+7803        24        Italy 2020-02-19    0     0 2020.134
+7802        25        Italy 2020-02-20    0     0 2020.137
+7801        26        Italy 2020-02-21    0     0 2020.139
+7800        27        Italy 2020-02-22   14     0 2020.142
+7799        28        Italy 2020-02-23   62     2 2020.145
+7798        29        Italy 2020-02-24   53     0 2020.148
+7797        30        Italy 2020-02-25   97     4 2020.150
+7796        31        Italy 2020-02-26   93     5 2020.153
+7795        32        Italy 2020-02-27   78     1 2020.156
+7794        33        Italy 2020-02-28  250     5 2020.158
+7793        34        Italy 2020-02-29  238     4 2020.161
+7792        35        Italy 2020-03-01  240     8 2020.164
+7791        36        Italy 2020-03-02  561     6 2020.167
+7790        37        Italy 2020-03-03  347    17 2020.169
+7789        38        Italy 2020-03-04  466    28 2020.172
+7788        39        Italy 2020-03-05  587    27 2020.175
+7787        40        Italy 2020-03-06  769    41 2020.178
+7786        41        Italy 2020-03-07  778    49 2020.180
+7785        42        Italy 2020-03-08 1247    36 2020.183
+7784        43        Italy 2020-03-09 1492   133 2020.186
+7783        44        Italy 2020-03-10 1797    98 2020.189
+7782        45        Italy 2020-03-11  977   167 2020.191
+7781        46        Italy 2020-03-12 2313   196 2020.194
+7780        47        Italy 2020-03-13 2651   189 2020.197
+7779        48        Italy 2020-03-14 2547   252 2020.199
+7778        49        Italy 2020-03-15 3497   173 2020.202
+7777        50        Italy 2020-03-16 2823   370 2020.205
+7776        51        Italy 2020-03-17 4000   347 2020.208
+7775        52        Italy 2020-03-18 3526   347 2020.210
+7774        53        Italy 2020-03-19 4207   473 2020.213
+7773        54        Italy 2020-03-20 5322   429 2020.216
+7772        55        Italy 2020-03-21 5986   625 2020.219
+7771        56        Italy 2020-03-22 6557   795 2020.221
+7770        57        Italy 2020-03-23 5560   649 2020.224
+7769        58        Italy 2020-03-24 4789   601 2020.227
+7768        59        Italy 2020-03-25 5249   743 2020.230
+7767        60        Italy 2020-03-26 5210   685 2020.232
+7766        61        Italy 2020-03-27 6153   660 2020.235
+7765        62        Italy 2020-03-28 5959   971 2020.238
+7764        63        Italy 2020-03-29 5974   887 2020.240
+7763        64        Italy 2020-03-30 5217   758 2020.243
+7762        65        Italy 2020-03-31 4050   810 2020.246
+7761        66        Italy 2020-04-01 4053   839 2020.249
+7760        67        Italy 2020-04-02 4782   727 2020.251
+7759        68        Italy 2020-04-03 4668   760 2020.254
+7758        69        Italy 2020-04-04 4585   764 2020.257
+7757        70        Italy 2020-04-05 4805   681 2020.260
+7756        71        Italy 2020-04-06 4316   527 2020.262
+7755        72        Italy 2020-04-07 3599   636 2020.265
+7754        73        Italy 2020-04-08 3039   604 2020.268
+7753        74        Italy 2020-04-09 3836   540 2020.270
+7752        75        Italy 2020-04-10 4204   612 2020.273
+7751        76        Italy 2020-04-11 3951   570 2020.276
+7750        77        Italy 2020-04-12 4694   619 2020.279
+7749        78        Italy 2020-04-13 4092   431 2020.281
+7748        79        Italy 2020-04-14 3153   564 2020.284
+7747        80        Italy 2020-04-15 2972   604 2020.287
+7746        81        Italy 2020-04-16 2667   578 2020.290
+7745        82        Italy 2020-04-17 3786   525 2020.292
+7744        83        Italy 2020-04-18 3493   575 2020.295
+7743        84        Italy 2020-04-19 3491   480 2020.298
+7742        85        Italy 2020-04-20 3047   433 2020.301
+7741        86        Italy 2020-04-21 2256   454 2020.303
+7740        87        Italy 2020-04-22 2729   534 2020.306
+7739        88        Italy 2020-04-23 3370   437 2020.309
+7738        89        Italy 2020-04-24 2646   464 2020.311
+7737        90        Italy 2020-04-25 3021   420 2020.314
+7736        91        Italy 2020-04-26 2357   415 2020.317
+7735        92        Italy 2020-04-27 2324   260 2020.320
+7734        93        Italy 2020-04-28 1739   333 2020.322
+7733        94        Italy 2020-04-29 2091   382 2020.325
+7732        95        Italy 2020-04-30 2086   323 2020.328
+7731        96        Italy 2020-05-01 1872   285 2020.331
+7730        97        Italy 2020-05-02 1965   269 2020.333
+7729        98        Italy 2020-05-03 1900   474 2020.336
+7728        99        Italy 2020-05-04 1389   174 2020.339
+7727       100        Italy 2020-05-05 1221   195 2020.342
+7726       101        Italy 2020-05-06 1075   236 2020.344
+7725       102        Italy 2020-05-07 1444   369 2020.347
+7724       103        Italy 2020-05-08 1401   274 2020.350
+7723       104        Italy 2020-05-09 1327   243 2020.352
+7722       105        Italy 2020-05-10 1083   194 2020.355
+
+### ~~~~~~ #####
+[1] "Italy has 105 days of data"
+[1] "First non-zero cases is on day 33, and 30 days before 5 days is day 41"
+
+### ~~~~~~ #####
+
+jurisdiction: Spain
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 42
+
+decimal.date.minChgPt2: 43
+
+decimal.date.maxChgPt2: 63
+
+decimal.date.minChgPt3: 83
+
+d1
+      row.index jurisdiction       date  case death        t
+13880         1        Spain 2020-02-09     0     0 2020.107
+13879         2        Spain 2020-02-10     1     0 2020.109
+13878         3        Spain 2020-02-11     0     0 2020.112
+13877         4        Spain 2020-02-12     0     0 2020.115
+13876         5        Spain 2020-02-13     0     0 2020.117
+13875         6        Spain 2020-02-14     0     0 2020.120
+13874         7        Spain 2020-02-15     0     0 2020.123
+13873         8        Spain 2020-02-16     0     0 2020.126
+13872         9        Spain 2020-02-17     0     0 2020.128
+13871        10        Spain 2020-02-18     0     0 2020.131
+13870        11        Spain 2020-02-19     0     0 2020.134
+13869        12        Spain 2020-02-20     0     0 2020.137
+13868        13        Spain 2020-02-21     0     0 2020.139
+13867        14        Spain 2020-02-22     0     0 2020.142
+13866        15        Spain 2020-02-23     0     0 2020.145
+13865        16        Spain 2020-02-24     0     0 2020.148
+13864        17        Spain 2020-02-25     1     0 2020.150
+13863        18        Spain 2020-02-26     4     0 2020.153
+13862        19        Spain 2020-02-27     5     0 2020.156
+13861        20        Spain 2020-02-28    13     0 2020.158
+13860        21        Spain 2020-02-29     9     0 2020.161
+13859        22        Spain 2020-03-01    32     0 2020.164
+13858        23        Spain 2020-03-02    17     0 2020.167
+13857        24        Spain 2020-03-03    31     0 2020.169
+13856        25        Spain 2020-03-04    37     0 2020.172
+13855        26        Spain 2020-03-05    49     1 2020.175
+13854        27        Spain 2020-03-06    61     2 2020.178
+13853        28        Spain 2020-03-07   113     2 2020.180
+13852        29        Spain 2020-03-08    56     0 2020.183
+13851        30        Spain 2020-03-09   159     0 2020.186
+13850        31        Spain 2020-03-10   615    23 2020.189
+13849        32        Spain 2020-03-11   435     7 2020.191
+13848        33        Spain 2020-03-12   501    12 2020.194
+13847        34        Spain 2020-03-13   864    37 2020.197
+13846        35        Spain 2020-03-14  1227    37 2020.199
+13845        36        Spain 2020-03-15  1522    15 2020.202
+13844        37        Spain 2020-03-16  2000   152 2020.205
+13843        38        Spain 2020-03-17  1438    21 2020.208
+13842        39        Spain 2020-03-18  1987   182 2020.210
+13841        40        Spain 2020-03-19  2538   107 2020.213
+13840        41        Spain 2020-03-20  3431   169 2020.216
+13839        42        Spain 2020-03-21  2833   235 2020.219
+13838        43        Spain 2020-03-22  4946   324 2020.221
+13837        44        Spain 2020-03-23  3646   394 2020.224
+13836        45        Spain 2020-03-24  4517   462 2020.227
+13835        46        Spain 2020-03-25  6584   514 2020.230
+13834        47        Spain 2020-03-26  7937   738 2020.232
+13833        48        Spain 2020-03-27  8578   655 2020.235
+13832        49        Spain 2020-03-28  7871   769 2020.238
+13831        50        Spain 2020-03-29  8189   832 2020.240
+13830        51        Spain 2020-03-30  6549   838 2020.243
+13829        52        Spain 2020-03-31  6398   812 2020.246
+13828        53        Spain 2020-04-01  9222   849 2020.249
+13827        54        Spain 2020-04-02  7719   864 2020.251
+13826        55        Spain 2020-04-03  8102   950 2020.254
+13825        56        Spain 2020-04-04  7472   932 2020.257
+13824        57        Spain 2020-04-05  7026   809 2020.260
+13823        58        Spain 2020-04-06  6023   674 2020.262
+13822        59        Spain 2020-04-07  4273   637 2020.265
+13821        60        Spain 2020-04-08  5478   743 2020.268
+13820        61        Spain 2020-04-09  6180   757 2020.270
+13819        62        Spain 2020-04-10  5756   683 2020.273
+13818        63        Spain 2020-04-11  4576   605 2020.276
+13817        64        Spain 2020-04-12  4830   510 2020.279
+13816        65        Spain 2020-04-13  4167   619 2020.281
+13815        66        Spain 2020-04-14  3477   517 2020.284
+13814        67        Spain 2020-04-15  7968   787 2020.287
+13813        68        Spain 2020-04-16  4040   617 2020.290
+13812        69        Spain 2020-04-17  4400   585 2020.292
+13811        70        Spain 2020-04-18  4104   565 2020.295
+13810        71        Spain 2020-04-19 -1430   410 2020.298
+13809        72        Spain 2020-04-20  2585   399 2020.301
+13808        73        Spain 2020-04-21  3352   430 2020.303
+13807        74        Spain 2020-04-22  2627   435 2020.306
+13806        75        Spain 2020-04-23  3052   440 2020.309
+13805        76        Spain 2020-04-24  2767   367 2020.311
+13804        77        Spain 2020-04-25  2944   378 2020.314
+13803        78        Spain 2020-04-26  1729   288 2020.317
+13802        79        Spain 2020-04-27  1831     0 2020.320
+13801        80        Spain 2020-04-28  1308   632 2020.322
+13800        81        Spain 2020-04-29  2144   453 2020.325
+13799        82        Spain 2020-04-30   518   268 2020.328
+13798        83        Spain 2020-05-01  1781   281 2020.331
+13797        84        Spain 2020-05-02  1366   276 2020.333
+13796        85        Spain 2020-05-03   884   164 2020.336
+13795        86        Spain 2020-05-04   545   164 2020.339
+13794        87        Spain 2020-05-05  1318   185 2020.342
+13793        88        Spain 2020-05-06   996   244 2020.344
+13792        89        Spain 2020-05-07  1122   213 2020.347
+13791        90        Spain 2020-05-08  1410   181 2020.350
+13790        91        Spain 2020-05-09   721   227 2020.352
+
+### ~~~~~~ #####
+[1] "Spain has 91 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 45"
+
+### ~~~~~~ #####
+
+jurisdiction: United_Kingdom
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 38
+
+decimal.date.minChgPt2: 39
+
+decimal.date.maxChgPt2: 59
+
+decimal.date.minChgPt3: 79
+
+d1
+      row.index   jurisdiction       date case death        t
+15388         1 United_Kingdom 2020-02-13    1     0 2020.117
+15387         2 United_Kingdom 2020-02-14    0     0 2020.120
+15386         3 United_Kingdom 2020-02-15    0     0 2020.123
+15385         4 United_Kingdom 2020-02-16    0     0 2020.126
+15384         5 United_Kingdom 2020-02-17    0     0 2020.128
+15383         6 United_Kingdom 2020-02-18    0     0 2020.131
+15382         7 United_Kingdom 2020-02-19    0     0 2020.134
+15381         8 United_Kingdom 2020-02-20    0     0 2020.137
+15380         9 United_Kingdom 2020-02-21    0     0 2020.139
+15379        10 United_Kingdom 2020-02-22    0     0 2020.142
+15378        11 United_Kingdom 2020-02-23    0     0 2020.145
+15377        12 United_Kingdom 2020-02-24    4     0 2020.148
+15376        13 United_Kingdom 2020-02-25    0     0 2020.150
+15375        14 United_Kingdom 2020-02-26    0     0 2020.153
+15374        15 United_Kingdom 2020-02-27    0     0 2020.156
+15373        16 United_Kingdom 2020-02-28    3     0 2020.158
+15372        17 United_Kingdom 2020-02-29    2     0 2020.161
+15371        18 United_Kingdom 2020-03-01    5     0 2020.164
+15370        19 United_Kingdom 2020-03-02   13     0 2020.167
+15369        20 United_Kingdom 2020-03-03    4     0 2020.169
+15368        21 United_Kingdom 2020-03-04   11     0 2020.172
+15367        22 United_Kingdom 2020-03-05   34     0 2020.175
+15366        23 United_Kingdom 2020-03-06   30     0 2020.178
+15365        24 United_Kingdom 2020-03-07   48     1 2020.180
+15364        25 United_Kingdom 2020-03-08   43     1 2020.183
+15363        26 United_Kingdom 2020-03-09   67     0 2020.186
+15362        27 United_Kingdom 2020-03-10   48     1 2020.189
+15361        28 United_Kingdom 2020-03-11   52     4 2020.191
+15360        29 United_Kingdom 2020-03-12   83     0 2020.194
+15359        30 United_Kingdom 2020-03-13  134     2 2020.197
+15358        31 United_Kingdom 2020-03-14  117     1 2020.199
+15357        32 United_Kingdom 2020-03-15  433    18 2020.202
+15356        33 United_Kingdom 2020-03-16  251    15 2020.205
+15355        34 United_Kingdom 2020-03-17  152    22 2020.208
+15354        35 United_Kingdom 2020-03-18  407    16 2020.210
+15353        36 United_Kingdom 2020-03-19  680    34 2020.213
+15352        37 United_Kingdom 2020-03-20  647    43 2020.216
+15351        38 United_Kingdom 2020-03-21  706    36 2020.219
+15350        39 United_Kingdom 2020-03-22 1035    56 2020.221
+15349        40 United_Kingdom 2020-03-23  665    35 2020.224
+15348        41 United_Kingdom 2020-03-24  967    74 2020.227
+15347        42 United_Kingdom 2020-03-25 1427   149 2020.230
+15346        43 United_Kingdom 2020-03-26 1452   186 2020.232
+15345        44 United_Kingdom 2020-03-27 2129   183 2020.235
+15344        45 United_Kingdom 2020-03-28 2885   284 2020.238
+15343        46 United_Kingdom 2020-03-29 2546   294 2020.240
+15342        47 United_Kingdom 2020-03-30 2433   214 2020.243
+15341        48 United_Kingdom 2020-03-31 2619   374 2020.246
+15340        49 United_Kingdom 2020-04-01 3009   382 2020.249
+15339        50 United_Kingdom 2020-04-02 4324   670 2020.251
+15338        51 United_Kingdom 2020-04-03 4244   652 2020.254
+15337        52 United_Kingdom 2020-04-04 4450   714 2020.257
+15336        53 United_Kingdom 2020-04-05 3735   760 2020.260
+15335        54 United_Kingdom 2020-04-06 5903   644 2020.262
+15334        55 United_Kingdom 2020-04-07 3802   568 2020.265
+15333        56 United_Kingdom 2020-04-08 3634  1038 2020.268
+15332        57 United_Kingdom 2020-04-09 5491  1034 2020.270
+15331        58 United_Kingdom 2020-04-10 4344  1103 2020.273
+15330        59 United_Kingdom 2020-04-11 5195  1152 2020.276
+15329        60 United_Kingdom 2020-04-12 8719   839 2020.279
+15328        61 United_Kingdom 2020-04-13 5288   686 2020.281
+15327        62 United_Kingdom 2020-04-14 4342   744 2020.284
+15326        63 United_Kingdom 2020-04-15 5252  1044 2020.287
+15325        64 United_Kingdom 2020-04-16 4603   842 2020.290
+15324        65 United_Kingdom 2020-04-17 4617  1029 2020.292
+15323        66 United_Kingdom 2020-04-18 5599   935 2020.295
+15322        67 United_Kingdom 2020-04-19 5525  1115 2020.298
+15321        68 United_Kingdom 2020-04-20 5850   498 2020.301
+15320        69 United_Kingdom 2020-04-21 4676   559 2020.303
+15319        70 United_Kingdom 2020-04-22 4301  1172 2020.306
+15318        71 United_Kingdom 2020-04-23 4451   837 2020.309
+15317        72 United_Kingdom 2020-04-24 4583   727 2020.311
+15316        73 United_Kingdom 2020-04-25 5386  1005 2020.314
+15315        74 United_Kingdom 2020-04-26 4913   843 2020.317
+15314        75 United_Kingdom 2020-04-27 4463   420 2020.320
+15313        76 United_Kingdom 2020-04-28 4309   338 2020.322
+15312        77 United_Kingdom 2020-04-29 3996   909 2020.325
+15311        78 United_Kingdom 2020-04-30 4076   795 2020.328
+15310        79 United_Kingdom 2020-05-01 6032   674 2020.331
+15309        80 United_Kingdom 2020-05-02 6201   739 2020.333
+15308        81 United_Kingdom 2020-05-03 4806   621 2020.336
+15307        82 United_Kingdom 2020-05-04 4339   315 2020.339
+15306        83 United_Kingdom 2020-05-05 3985   288 2020.342
+15305        84 United_Kingdom 2020-05-06 4406   693 2020.344
+15304        85 United_Kingdom 2020-05-07 6211   649 2020.347
+15303        86 United_Kingdom 2020-05-08 5514   539 2020.350
+15302        87 United_Kingdom 2020-05-09 4649   626 2020.352
+15301        88 United_Kingdom 2020-05-10 3896   346 2020.355
+
+### ~~~~~~ #####
+[1] "United_Kingdom has 88 days of data"
+[1] "First non-zero cases is on day 69, and 30 days before 5 days is day 64"
+
+### ~~~~~~ #####
+
+jurisdiction: AB
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 31
+
+decimal.date.minChgPt2: 31
+
+decimal.date.maxChgPt2: 40
+
+decimal.date.minChgPt3: 60
+
+d1
+    row.index jurisdiction       date case death        t
+64          1           AB 2020-03-03    0     0 2020.169
+65          2           AB 2020-03-04    0     0 2020.172
+66          3           AB 2020-03-05    0     0 2020.175
+67          4           AB 2020-03-06    0     0 2020.178
+68          5           AB 2020-03-07    0     0 2020.180
+69          6           AB 2020-03-08    1     0 2020.183
+70          7           AB 2020-03-09    6     0 2020.186
+71          8           AB 2020-03-10    0     0 2020.189
+72          9           AB 2020-03-11    7     0 2020.191
+73         10           AB 2020-03-12    5     0 2020.194
+74         11           AB 2020-03-13    4     0 2020.197
+75         12           AB 2020-03-14    6     0 2020.199
+76         13           AB 2020-03-15   10     0 2020.202
+77         14           AB 2020-03-16   17     0 2020.205
+78         15           AB 2020-03-17   18     0 2020.208
+79         16           AB 2020-03-18   23     0 2020.210
+80         17           AB 2020-03-19   49     0 2020.213
+81         18           AB 2020-03-20   49     1 2020.216
+82         19           AB 2020-03-21   31     0 2020.219
+83         20           AB 2020-03-22   33     0 2020.221
+84         21           AB 2020-03-23   42     0 2020.224
+85         22           AB 2020-03-24   57     1 2020.227
+86         23           AB 2020-03-25   61     0 2020.230
+87         24           AB 2020-03-26   67     0 2020.232
+88         25           AB 2020-03-27   56     0 2020.235
+89         26           AB 2020-03-28    0     0 2020.238
+90         27           AB 2020-03-29   79     0 2020.240
+91         28           AB 2020-03-30   69     6 2020.243
+92         29           AB 2020-03-31   64     1 2020.246
+93         30           AB 2020-04-01    0     0 2020.249
+94         31           AB 2020-04-02  214     4 2020.251
+95         32           AB 2020-04-03  107     5 2020.254
+96         33           AB 2020-04-04    0     0 2020.257
+97         34           AB 2020-04-05  175     5 2020.260
+98         35           AB 2020-04-06   98     1 2020.262
+99         36           AB 2020-04-07   25     2 2020.265
+100        37           AB 2020-04-08   50     3 2020.268
+101        38           AB 2020-04-09   28     3 2020.270
+102        39           AB 2020-04-10   49     7 2020.273
+103        40           AB 2020-04-11   69     1 2020.276
+104        41           AB 2020-04-12   82     4 2020.279
+105        42           AB 2020-04-13   81     2 2020.281
+106        43           AB 2020-04-14  138     2 2020.284
+107        44           AB 2020-04-15  126     0 2020.287
+108        45           AB 2020-04-16  162     2 2020.290
+109        46           AB 2020-04-17  239     0 2020.292
+110        47           AB 2020-04-18  165     1 2020.295
+111        48           AB 2020-04-19    0     0 2020.298
+112        49           AB 2020-04-20  346     8 2020.301
+113        50           AB 2020-04-21  187     2 2020.303
+114        51           AB 2020-04-22  306     5 2020.306
+115        52           AB 2020-04-23  319     1 2020.309
+116        53           AB 2020-04-24  297     5 2020.311
+117        54           AB 2020-04-25  216     1 2020.314
+118        55           AB 2020-04-26  247     0 2020.317
+119        56           AB 2020-04-27  216     2 2020.320
+120        57           AB 2020-04-28  154     5 2020.322
+121        58           AB 2020-04-29  315     7 2020.325
+122        59           AB 2020-04-30  190     2 2020.328
+123        60           AB 2020-05-01  218     3 2020.331
+124        61           AB 2020-05-02   97     2 2020.333
+125        62           AB 2020-05-03   96     1 2020.336
+126        63           AB 2020-05-04   70     9 2020.339
+127        64           AB 2020-05-05   57     2 2020.342
+128        65           AB 2020-05-06   70     6 2020.344
+129        66           AB 2020-05-07   54     2 2020.347
+130        67           AB 2020-05-08   81     1 2020.350
+131        68           AB 2020-05-09   59     1 2020.352
+132        69           AB 2020-05-10   96     1 2020.355
+
+### ~~~~~~ #####
+[1] "AB has 69 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 52"
+
+### ~~~~~~ #####
+
+jurisdiction: BC
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 31
+
+decimal.date.minChgPt2: 32
+
+decimal.date.maxChgPt2: 52
+
+decimal.date.minChgPt3: 72
+
+d1
+    row.index jurisdiction       date case death        t
+184         1           BC 2020-02-20    0     0 2020.137
+185         2           BC 2020-02-21    1     0 2020.139
+186         3           BC 2020-02-22    0     0 2020.142
+187         4           BC 2020-02-23    0     0 2020.145
+188         5           BC 2020-02-24    0     0 2020.148
+189         6           BC 2020-02-25    1     0 2020.150
+190         7           BC 2020-02-26    0     0 2020.153
+191         8           BC 2020-02-27    0     0 2020.156
+192         9           BC 2020-02-28    0     0 2020.158
+193        10           BC 2020-02-29    0     0 2020.161
+194        11           BC 2020-03-01    1     0 2020.164
+195        12           BC 2020-03-02    0     0 2020.167
+196        13           BC 2020-03-03    4     0 2020.169
+197        14           BC 2020-03-04    0     0 2020.172
+198        15           BC 2020-03-05    9     0 2020.175
+199        16           BC 2020-03-06    0     0 2020.178
+200        17           BC 2020-03-07    6     0 2020.180
+201        18           BC 2020-03-08    0     0 2020.183
+202        19           BC 2020-03-09    5     0 2020.186
+203        20           BC 2020-03-10    0     0 2020.189
+204        21           BC 2020-03-11    7     0 2020.191
+205        22           BC 2020-03-12    7     0 2020.194
+206        23           BC 2020-03-13    7     0 2020.197
+207        24           BC 2020-03-14   11     0 2020.199
+208        25           BC 2020-03-15    9     0 2020.202
+209        26           BC 2020-03-16    0     0 2020.205
+210        27           BC 2020-03-17   30     0 2020.208
+211        28           BC 2020-03-18   83     0 2020.210
+212        29           BC 2020-03-19   85     0 2020.213
+213        30           BC 2020-03-20    0     8 2020.216
+214        31           BC 2020-03-21  153     2 2020.219
+215        32           BC 2020-03-22    0     0 2020.221
+216        33           BC 2020-03-23   48     3 2020.224
+217        34           BC 2020-03-24  145     0 2020.227
+218        35           BC 2020-03-25   42     1 2020.230
+219        36           BC 2020-03-26   66     0 2020.232
+220        37           BC 2020-03-27    0     0 2020.235
+221        38           BC 2020-03-28  159     2 2020.238
+222        39           BC 2020-03-29    0     1 2020.240
+223        40           BC 2020-03-30   76     2 2020.243
+224        41           BC 2020-03-31   10     0 2020.246
+225        42           BC 2020-04-01   96     6 2020.249
+226        43           BC 2020-04-02   55     6 2020.251
+227        44           BC 2020-04-03   53     4 2020.254
+228        45           BC 2020-04-04   29     3 2020.257
+229        46           BC 2020-04-05    0     0 2020.260
+230        47           BC 2020-04-06   63     1 2020.262
+231        48           BC 2020-04-07   25     4 2020.265
+232        49           BC 2020-04-08   45     5 2020.268
+233        50           BC 2020-04-09   34     2 2020.270
+234        51           BC 2020-04-10   40     5 2020.273
+235        52           BC 2020-04-11   35     3 2020.276
+236        53           BC 2020-04-12    0     0 2020.279
+237        54           BC 2020-04-13   45    11 2020.281
+238        55           BC 2020-04-14   27     3 2020.284
+239        56           BC 2020-04-15   44     3 2020.287
+240        57           BC 2020-04-16    0     0 2020.290
+241        58           BC 2020-04-17   14     2 2020.292
+242        59           BC 2020-04-18   43     1 2020.295
+243        60           BC 2020-04-19    0     0 2020.298
+244        61           BC 2020-04-20   81     8 2020.301
+245        62           BC 2020-04-21   25     1 2020.303
+246        63           BC 2020-04-22   71     3 2020.306
+247        64           BC 2020-04-23   29     4 2020.309
+248        65           BC 2020-04-24   29     4 2020.311
+249        66           BC 2020-04-25   95     2 2020.314
+250        67           BC 2020-04-26    0     0 2020.317
+251        68           BC 2020-04-27   50     3 2020.320
+252        69           BC 2020-04-28   55     2 2020.322
+253        70           BC 2020-04-29   34     4 2020.325
+254        71           BC 2020-04-30   25     2 2020.328
+255        72           BC 2020-05-01   33     1 2020.331
+256        73           BC 2020-05-02   26     2 2020.333
+257        74           BC 2020-05-03    0     0 2020.336
+258        75           BC 2020-05-04   53     3 2020.339
+259        76           BC 2020-05-05    8     4 2020.342
+260        77           BC 2020-05-06   23     3 2020.344
+261        78           BC 2020-05-07   33     2 2020.347
+262        79           BC 2020-05-08   27     1 2020.350
+263        80           BC 2020-05-09   15     2 2020.352
+264        81           BC 2020-05-10    0     0 2020.355
+
+### ~~~~~~ #####
+[1] "BC has 81 days of data"
+[1] "First non-zero cases is on day 32, and 30 days before 5 days is day 56"
+
+### ~~~~~~ #####
+
+jurisdiction: ON
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 31
+
+decimal.date.minChgPt2: 31
+
+decimal.date.maxChgPt2: 48
+
+decimal.date.minChgPt3: 68
+
+d1
+     row.index jurisdiction       date case death        t
+1244         1           ON 2020-02-24    1     0 2020.148
+1245         2           ON 2020-02-25    0     0 2020.150
+1246         3           ON 2020-02-26    1     0 2020.153
+1247         4           ON 2020-02-27    1     0 2020.156
+1248         5           ON 2020-02-28    0     0 2020.158
+1249         6           ON 2020-02-29    2     0 2020.161
+1250         7           ON 2020-03-01    7     0 2020.164
+1251         8           ON 2020-03-02    0     0 2020.167
+1252         9           ON 2020-03-03    5     0 2020.169
+1253        10           ON 2020-03-04    0     0 2020.172
+1254        11           ON 2020-03-05    2     0 2020.175
+1255        12           ON 2020-03-06    6     0 2020.178
+1256        13           ON 2020-03-07    0     0 2020.180
+1257        14           ON 2020-03-08    3     0 2020.183
+1258        15           ON 2020-03-09    3     0 2020.186
+1259        16           ON 2020-03-10    0     0 2020.189
+1260        17           ON 2020-03-11    8     0 2020.191
+1261        18           ON 2020-03-12   17     0 2020.194
+1262        19           ON 2020-03-13   20     0 2020.197
+1263        20           ON 2020-03-14    0     0 2020.199
+1264        21           ON 2020-03-15   24     0 2020.202
+1265        22           ON 2020-03-16   42     0 2020.205
+1266        23           ON 2020-03-17   32     0 2020.208
+1267        24           ON 2020-03-18   12     0 2020.210
+1268        25           ON 2020-03-19   69     0 2020.213
+1269        26           ON 2020-03-20   53     2 2020.216
+1270        27           ON 2020-03-21   66     1 2020.219
+1271        28           ON 2020-03-22   48     2 2020.221
+1272        29           ON 2020-03-23   78     1 2020.224
+1273        30           ON 2020-03-24   85     2 2020.227
+1274        31           ON 2020-03-25  100     5 2020.230
+1275        32           ON 2020-03-26  170     2 2020.232
+1276        33           ON 2020-03-27  135     3 2020.235
+1277        34           ON 2020-03-28    0     0 2020.238
+1278        35           ON 2020-03-29  362     1 2020.240
+1279        36           ON 2020-03-30  351    14 2020.243
+1280        37           ON 2020-03-31  260     0 2020.246
+1281        38           ON 2020-04-01  426     4 2020.249
+1282        39           ON 2020-04-02  401    16 2020.251
+1283        40           ON 2020-04-03  462    14 2020.254
+1284        41           ON 2020-04-04  375    27 2020.257
+1285        42           ON 2020-04-05  408    25 2020.260
+1286        43           ON 2020-04-06  309    13 2020.262
+1287        44           ON 2020-04-07  379    21 2020.265
+1288        45           ON 2020-04-08  550    21 2020.268
+1289        46           ON 2020-04-09  483    26 2020.270
+1290        47           ON 2020-04-10  478    22 2020.273
+1291        48           ON 2020-04-11  411    31 2020.276
+1292        49           ON 2020-04-12  401    21 2020.279
+1293        50           ON 2020-04-13  421    17 2020.281
+1294        51           ON 2020-04-14  483    43 2020.284
+1295        52           ON 2020-04-15  494    51 2020.287
+1296        53           ON 2020-04-16  514    38 2020.290
+1297        54           ON 2020-04-17  564    55 2020.292
+1298        55           ON 2020-04-18  485    36 2020.295
+1299        56           ON 2020-04-19  568    39 2020.298
+1300        57           ON 2020-04-20  606    31 2020.301
+1301        58           ON 2020-04-21  551    38 2020.303
+1302        59           ON 2020-04-22  510    37 2020.306
+1303        60           ON 2020-04-23  634    54 2020.309
+1304        61           ON 2020-04-24  640    50 2020.311
+1305        62           ON 2020-04-25  476    48 2020.314
+1306        63           ON 2020-04-26  437    24 2020.317
+1307        64           ON 2020-04-27  424    57 2020.320
+1308        65           ON 2020-04-28  525    59 2020.322
+1309        66           ON 2020-04-29  347    45 2020.325
+1310        67           ON 2020-04-30  459    86 2020.328
+1311        68           ON 2020-05-01  421    39 2020.331
+1312        69           ON 2020-05-02  511    55 2020.333
+1313        70           ON 2020-05-03  434    40 2020.336
+1314        71           ON 2020-05-04  370    84 2020.339
+1315        72           ON 2020-05-05  387    61 2020.342
+1316        73           ON 2020-05-06  412    68 2020.344
+1317        74           ON 2020-05-07  399    48 2020.347
+1318        75           ON 2020-05-08  477    63 2020.350
+1319        76           ON 2020-05-09  346    59 2020.352
+1320        77           ON 2020-05-10  294    35 2020.355
+
+### ~~~~~~ #####
+[1] "ON has 77 days of data"
+[1] "First non-zero cases is on day 62, and 30 days before 5 days is day 58"
+
+### ~~~~~~ #####
+
+jurisdiction: QC
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 31
+
+decimal.date.minChgPt2: 31
+
+decimal.date.maxChgPt2: 46
+
+decimal.date.minChgPt3: 66
+
+d1
+     row.index jurisdiction       date case death        t
+1510         1           QC 2020-02-26    0     0 2020.153
+1511         2           QC 2020-02-27    0     0 2020.156
+1512         3           QC 2020-02-28    0     0 2020.158
+1513         4           QC 2020-02-29    0     0 2020.161
+1514         5           QC 2020-03-01    1     0 2020.164
+1515         6           QC 2020-03-02    0     0 2020.167
+1516         7           QC 2020-03-03    0     0 2020.169
+1517         8           QC 2020-03-04    0     0 2020.172
+1518         9           QC 2020-03-05    1     0 2020.175
+1519        10           QC 2020-03-06    0     0 2020.178
+1520        11           QC 2020-03-07    0     0 2020.180
+1521        12           QC 2020-03-08    1     0 2020.183
+1522        13           QC 2020-03-09    1     0 2020.186
+1523        14           QC 2020-03-10    0     0 2020.189
+1524        15           QC 2020-03-11    3     0 2020.191
+1525        16           QC 2020-03-12    6     0 2020.194
+1526        17           QC 2020-03-13    4     0 2020.197
+1527        18           QC 2020-03-14    0     0 2020.199
+1528        19           QC 2020-03-15    7     0 2020.202
+1529        20           QC 2020-03-16   15     0 2020.205
+1530        21           QC 2020-03-17   11     0 2020.208
+1531        22           QC 2020-03-18   24     0 2020.210
+1532        23           QC 2020-03-19   47     0 2020.213
+1533        24           QC 2020-03-20   18     1 2020.216
+1534        25           QC 2020-03-21   63     3 2020.219
+1535        26           QC 2020-03-22   19     0 2020.221
+1536        27           QC 2020-03-23    0     0 2020.224
+1537        28           QC 2020-03-24    0     0 2020.227
+1538        29           QC 2020-03-25 1118     2 2020.230
+1539        30           QC 2020-03-26  290     2 2020.232
+1540        31           QC 2020-03-27  392    10 2020.235
+1541        32           QC 2020-03-28  477     4 2020.238
+1542        33           QC 2020-03-29  342     0 2020.240
+1543        34           QC 2020-03-30  590     3 2020.243
+1544        35           QC 2020-03-31  732     6 2020.246
+1545        36           QC 2020-04-01  449     2 2020.249
+1546        37           QC 2020-04-02  907     3 2020.251
+1547        38           QC 2020-04-03  583    25 2020.254
+1548        39           QC 2020-04-04  896    14 2020.257
+1549        40           QC 2020-04-05  947    19 2020.260
+1550        41           QC 2020-04-06  636    27 2020.262
+1551        42           QC 2020-04-07  760    29 2020.265
+1552        43           QC 2020-04-08  691    25 2020.268
+1553        44           QC 2020-04-09  881    41 2020.270
+1554        45           QC 2020-04-10  765    25 2020.273
+1555        46           QC 2020-04-11  615    48 2020.276
+1556        47           QC 2020-04-12  554    39 2020.279
+1557        48           QC 2020-04-13  711    32 2020.281
+1558        49           QC 2020-04-14  691    75 2020.284
+1559        50           QC 2020-04-15  612    52 2020.287
+1560        51           QC 2020-04-16  997   143 2020.290
+1561        52           QC 2020-04-17  941    58 2020.292
+1562        53           QC 2020-04-18  723   117 2020.295
+1563        54           QC 2020-04-19  836    72 2020.298
+1564        55           QC 2020-04-20  962    62 2020.301
+1565        56           QC 2020-04-21  807   102 2020.303
+1566        57           QC 2020-04-22  839    93 2020.306
+1567        58           QC 2020-04-23  873   109 2020.309
+1568        59           QC 2020-04-24  778    97 2020.311
+1569        60           QC 2020-04-25  651   106 2020.314
+1570        61           QC 2020-04-26  840    69 2020.317
+1571        62           QC 2020-04-27  875    84 2020.320
+1572        63           QC 2020-04-28  775    83 2020.322
+1573        64           QC 2020-04-29  837    79 2020.325
+1574        65           QC 2020-04-30  944    98 2020.328
+1575        66           QC 2020-05-01 1110   163 2020.331
+1576        67           QC 2020-05-02 1008   114 2020.333
+1577        68           QC 2020-05-03 2209    69 2020.336
+1578        69           QC 2020-05-04  758    75 2020.339
+1579        70           QC 2020-05-05  794   118 2020.342
+1580        71           QC 2020-05-06  910   112 2020.344
+1581        72           QC 2020-05-07  911   121 2020.347
+1582        73           QC 2020-05-08  912    94 2020.350
+1583        74           QC 2020-05-09  836    61 2020.352
+1584        75           QC 2020-05-10  735   142 2020.355
+
+### ~~~~~~ #####
+[1] "QC has 75 days of data"
+[1] "First non-zero cases is on day 42, and 30 days before 5 days is day 70"
+
+### ~~~~~~ #####
+
+jurisdiction: Ottawa
+
+decimal.date.minChgPt1: 31
+
+decimal.date.maxChgPt1: 31
+
+decimal.date.minChgPt2: 31
+
+decimal.date.maxChgPt2: 34
+
+decimal.date.minChgPt3: 54
+
+d1
+       row.index jurisdiction       date case death        t
+701            1       Ottawa 2020-03-09    8     0 2020.186
+711            2       Ottawa 2020-03-10    6     0 2020.189
+721            3       Ottawa 2020-03-11    9     0 2020.191
+731            4       Ottawa 2020-03-12   14     0 2020.194
+741            5       Ottawa 2020-03-13   22     0 2020.197
+751            6       Ottawa 2020-03-14   17     0 2020.199
+761            7       Ottawa 2020-03-15   27     0 2020.202
+771            8       Ottawa 2020-03-16   15     0 2020.205
+781            9       Ottawa 2020-03-17   21     0 2020.208
+791           10       Ottawa 2020-03-18   15     0 2020.210
+801           11       Ottawa 2020-03-19   25     0 2020.213
+811           12       Ottawa 2020-03-20   20     0 2020.216
+821           13       Ottawa 2020-03-21   21     0 2020.219
+831           14       Ottawa 2020-03-22   26     0 2020.221
+841           15       Ottawa 2020-03-23   21     0 2020.224
+851           16       Ottawa 2020-03-24   17     1 2020.227
+861           17       Ottawa 2020-03-25   23     0 2020.230
+871           18       Ottawa 2020-03-26   12     0 2020.232
+881           19       Ottawa 2020-03-27   18     0 2020.235
+891           20       Ottawa 2020-03-28   24     1 2020.238
+901           21       Ottawa 2020-03-29   16     0 2020.240
+911           22       Ottawa 2020-03-30   23     1 2020.243
+921           23       Ottawa 2020-03-31   16     0 2020.246
+931           24       Ottawa 2020-04-01   24     0 2020.249
+941           25       Ottawa 2020-04-02   18     2 2020.251
+951           26       Ottawa 2020-04-03   23     0 2020.254
+961           27       Ottawa 2020-04-04   18     1 2020.257
+971           28       Ottawa 2020-04-05   26     2 2020.260
+981           29       Ottawa 2020-04-06   19     1 2020.262
+991           30       Ottawa 2020-04-07   21     0 2020.265
+1001          31       Ottawa 2020-04-08   22     2 2020.268
+1011          32       Ottawa 2020-04-09   31     0 2020.270
+1021          33       Ottawa 2020-04-10   30     0 2020.273
+1031          34       Ottawa 2020-04-11   40     0 2020.276
+1041          35       Ottawa 2020-04-12   35     2 2020.279
+1051          36       Ottawa 2020-04-13   19     3 2020.281
+1061          37       Ottawa 2020-04-14   36     2 2020.284
+1071          38       Ottawa 2020-04-15   28     5 2020.287
+1081          39       Ottawa 2020-04-16   67     0 2020.290
+1091          40       Ottawa 2020-04-17   38     2 2020.292
+1101          41       Ottawa 2020-04-18   38     5 2020.295
+1111          42       Ottawa 2020-04-19   15     4 2020.298
+1121          43       Ottawa 2020-04-20   49     4 2020.301
+1131          44       Ottawa 2020-04-21   38     7 2020.303
+1141          45       Ottawa 2020-04-22   49     7 2020.306
+1151          46       Ottawa 2020-04-23   42     3 2020.309
+1161          47       Ottawa 2020-04-24   35     8 2020.311
+1171          48       Ottawa 2020-04-25   97    10 2020.314
+1181          49       Ottawa 2020-04-26   58     9 2020.317
+11910         50       Ottawa 2020-04-27   60     7 2020.320
+12010         51       Ottawa 2020-04-28   35     9 2020.322
+12110         52       Ottawa 2020-04-29   26     7 2020.325
+12210         53       Ottawa 2020-04-30   28     9 2020.328
+12310         54       Ottawa 2020-05-01   25    14 2020.331
+12410         55       Ottawa 2020-05-02   24     6 2020.333
+12510         56       Ottawa 2020-05-03   19     6 2020.336
+12610         57       Ottawa 2020-05-04   16     8 2020.339
+12710         58       Ottawa 2020-05-05   38     2 2020.342
+12810         59       Ottawa 2020-05-06   21     4 2020.344
+12910         60       Ottawa 2020-05-07   24    10 2020.347
+13010         61       Ottawa 2020-05-08   15     6 2020.350
+13110         62       Ottawa 2020-05-09   15     4 2020.352
+1322          63       Ottawa 2020-05-10    9     7 2020.355
+1331          64       Ottawa 2020-05-11   22     2 2020.358
+1341          65       Ottawa 2020-05-12   24     4 2020.361
+1351          66       Ottawa 2020-05-13   18     2 2020.363
+1361          67       Ottawa 2020-05-14   17     5 2020.366
+1371          68       Ottawa 2020-05-15   26     2 2020.369
+1381          69       Ottawa 2020-05-16   18     5 2020.372
+1391          70       Ottawa 2020-05-17   12     1 2020.374
+1401          71       Ottawa 2020-05-18   15     4 2020.377
+1411          72       Ottawa 2020-05-19   12     4 2020.380
+1421          73       Ottawa 2020-05-20   15     7 2020.383
+1431          74       Ottawa 2020-05-21    9     9 2020.385
+1441          75       Ottawa 2020-05-22    6     1 2020.388
+1451          76       Ottawa 2020-05-23    8     6 2020.391
+14610         77       Ottawa 2020-05-24    6     1 2020.393
+14710         78       Ottawa 2020-05-25   15     3 2020.396
+14810         79       Ottawa 2020-05-26    7     4 2020.399
+14910         80       Ottawa 2020-05-27    7     0 2020.402
+15010         81       Ottawa 2020-05-28    3     1 2020.404
+15110         82       Ottawa 2020-05-29    8     1 2020.407
+15210         83       Ottawa 2020-05-30    4     2 2020.410
+153100        84       Ottawa 2020-05-31    3     1 2020.413
+15433         85       Ottawa 2020-06-01   11     1 2020.415
+15510         86       Ottawa 2020-06-02    3     0 2020.418
+15610         87       Ottawa 2020-06-03   13     1 2020.421
+15710         88       Ottawa 2020-06-04    3     3 2020.423
+1586          89       Ottawa 2020-06-05    2     2 2020.426
+1591          90       Ottawa 2020-06-06    0     1 2020.429
+1601          91       Ottawa 2020-06-07    1     1 2020.432
+1611          92       Ottawa 2020-06-08    0     1 2020.434
+
+### ~~~~~~ #####
+[1] "Ottawa has 92 days of data"
+
+str(stan_data)
+List of 20
+ $ log_max_step : num 1.39
+ $ M            : int 10
+ $ N            : int [1:10] 94 86 105 91 88 69 81 77 75 92
+ $ x1           : num [1:200] -0.122 -0.121 -0.119 -0.118 -0.117 ...
+ $ x2           : num [1:200] 0.156 0.151 0.146 0.142 0.137 ...
+ $ y            : num [1, 1:10] 0 0 0 0 1 0 0 1 0 8
+ $ deaths       : num [1:200, 1:10] 0 0 0 0 0 0 0 0 1 0 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : NULL
+  .. ..$ : chr [1:10] "deaths" "deaths" "deaths" "deaths" ...
+ $ f            : num [1:200, 1:10] 2.07e-08 3.39e-07 2.09e-06 7.24e-06 1.81e-05 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : NULL
+  .. ..$ : chr [1:10] "f" "f" "f" "f" ...
+ $ N0           : num 6
+ $ cases        : num [1:200, 1:10] 0 5 0 0 0 0 0 0 0 0 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : NULL
+  .. ..$ : chr [1:10] "cases" "cases" "cases" "cases" ...
+ $ LENGTHSCALE  : num 7
+ $ SI           : num [1:200] 0.0183 0.0666 0.1019 0.1177 0.1184 ...
+ $ EpidemicStart: num [1:10] 31 31 31 31 31 31 31 31 31 31
+ $ minChgPt1    : num [1:10] 31 31 35 31 31 31 31 31 31 31
+ $ maxChgPt1    : num [1:10] 44 36 55 42 38 31 31 31 31 31
+ $ minChgPt2    : num [1:10] 45 37 56 43 39 31 32 31 31 31
+ $ maxChgPt2    : num [1:10] 65 57 76 63 59 40 52 48 46 34
+ $ minChgPt3    : num [1:10] 85 77 96 83 79 60 72 68 66 54
+ $ N2           : num 200
+ $ x            : int [1:200] 1 2 3 4 5 6 7 8 9 10 ...
+NULL
+
+SAMPLING FOR MODEL 'change-point' NOW (CHAIN 2).
+
+SAMPLING FOR MODEL 'change-point' NOW (CHAIN 4).
+
+
+SAMPLING FOR MODEL 'change-point' NOW (CHAIN 3).
+SAMPLING FOR MODEL 'change-point' NOW (CHAIN 1).
+Chain 2: 
+Chain 2: Gradient evaluation took 0.080503 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 805.03 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: WARNING: There aren't enough warmup iterations to fit the
+Chain 2:          three stages of adaptation as currently configured.
+Chain 2:          Reducing each adaptation stage to 15%/75%/10% of
+Chain 2:          the given number of warmup iterations:
+Chain 2:            init_buffer = 15
+Chain 2:            adapt_window = 75
+Chain 2:            term_buffer = 10
+Chain 2: 
+Chain 3: 
+Chain 3: Gradient evaluation took 0.08003 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 800.3 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: WARNING: There aren't enough warmup iterations to fit the
+Chain 4: 
+Chain 4: Gradient evaluation took 0.077625 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 776.25 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: WARNING: There aren't enough warmup iterations to fit the
+Chain 4:          three stages of adaptation as currently configured.
+Chain 4:          Reducing each adaptation stage to 15%/75%/10% of
+Chain 4:          the given number of warmup iterations:
+Chain 4:            init_buffer = 15
+Chain 4:            adapt_window = 75
+Chain 4:            term_buffer = 10
+Chain 4: 
+Chain 3:          three stages of adaptation as currently configured.
+Chain 3:          Reducing each adaptation stage to 15%/75%/10% of
+Chain 3:          the given number of warmup iterations:
+Chain 3:            init_buffer = 15
+Chain 3:            adapt_window = 75
+Chain 3:            term_buffer = 10
+Chain 3: 
+Chain 1: 
+Chain 1: Gradient evaluation took 0.084486 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 844.86 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: WARNING: There aren't enough warmup iterations to fit the
+Chain 1:          three stages of adaptation as currently configured.
+Chain 1:          Reducing each adaptation stage to 15%/75%/10% of
+Chain 1:          the given number of warmup iterations:
+Chain 1:            init_buffer = 15
+Chain 1:            adapt_window = 75
+Chain 1:            term_buffer = 10
+Chain 1: 
+Chain 3: Iteration:   1 / 200 [  0%]  (Warmup)
+Chain 1: Iteration:   1 / 200 [  0%]  (Warmup)
+Chain 4: Iteration:   1 / 200 [  0%]  (Warmup)
+Chain 2: Iteration:   1 / 200 [  0%]  (Warmup)
+Chain 4: Iteration:  20 / 200 [ 10%]  (Warmup)
+Chain 2: Iteration:  20 / 200 [ 10%]  (Warmup)
+Chain 1: Iteration:  20 / 200 [ 10%]  (Warmup)
+Chain 2: Iteration:  40 / 200 [ 20%]  (Warmup)
+Chain 1: Iteration:  40 / 200 [ 20%]  (Warmup)
+Chain 3: Iteration:  20 / 200 [ 10%]  (Warmup)
+Chain 2: Iteration:  60 / 200 [ 30%]  (Warmup)
+Chain 2: Iteration:  80 / 200 [ 40%]  (Warmup)
+Chain 3: Iteration:  40 / 200 [ 20%]  (Warmup)
+Chain 3: Iteration:  60 / 200 [ 30%]  (Warmup)
+Chain 2: Iteration: 100 / 200 [ 50%]  (Warmup)
+Chain 2: Iteration: 101 / 200 [ 50%]  (Sampling)
+Chain 1: Iteration:  60 / 200 [ 30%]  (Warmup)
+Chain 4: Iteration:  40 / 200 [ 20%]  (Warmup)
+Chain 3: Iteration:  80 / 200 [ 40%]  (Warmup)
+Chain 2: Iteration: 120 / 200 [ 60%]  (Sampling)
+Chain 1: Iteration:  80 / 200 [ 40%]  (Warmup)
+Chain 4: Iteration:  60 / 200 [ 30%]  (Warmup)
+Chain 3: Iteration: 100 / 200 [ 50%]  (Warmup)
+Chain 3: Iteration: 101 / 200 [ 50%]  (Sampling)
+Chain 2: Iteration: 140 / 200 [ 70%]  (Sampling)
+Chain 1: Iteration: 100 / 200 [ 50%]  (Warmup)
+Chain 1: Iteration: 101 / 200 [ 50%]  (Sampling)
+Chain 4: Iteration:  80 / 200 [ 40%]  (Warmup)
+Chain 3: Iteration: 120 / 200 [ 60%]  (Sampling)
+Chain 2: Iteration: 160 / 200 [ 80%]  (Sampling)
+Chain 1: Iteration: 120 / 200 [ 60%]  (Sampling)
+Chain 4: Iteration: 100 / 200 [ 50%]  (Warmup)
+Chain 4: Iteration: 101 / 200 [ 50%]  (Sampling)
+Chain 3: Iteration: 140 / 200 [ 70%]  (Sampling)
+Chain 2: Iteration: 180 / 200 [ 90%]  (Sampling)
+Chain 1: Iteration: 140 / 200 [ 70%]  (Sampling)
+Chain 4: Iteration: 120 / 200 [ 60%]  (Sampling)
+Chain 3: Iteration: 160 / 200 [ 80%]  (Sampling)
+Chain 2: Iteration: 200 / 200 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 665.726 seconds (Warm-up)
+Chain 2:                5083.01 seconds (Sampling)
+Chain 2:                5748.74 seconds (Total)
+Chain 2: 
+Chain 1: Iteration: 160 / 200 [ 80%]  (Sampling)
+Chain 4: Iteration: 140 / 200 [ 70%]  (Sampling)
+Chain 3: Iteration: 180 / 200 [ 90%]  (Sampling)
+Chain 1: Iteration: 180 / 200 [ 90%]  (Sampling)
+Chain 4: Iteration: 160 / 200 [ 80%]  (Sampling)
+Chain 3: Iteration: 200 / 200 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 2675.51 seconds (Warm-up)
+Chain 3:                4748.38 seconds (Sampling)
+Chain 3:                7423.89 seconds (Total)
+Chain 3: 
+Chain 1: Iteration: 200 / 200 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 3056.02 seconds (Warm-up)
+Chain 1:                4635.92 seconds (Sampling)
+Chain 1:                7691.94 seconds (Total)
+Chain 1: 
+Chain 4: Iteration: 180 / 200 [ 90%]  (Sampling)
+Chain 4: Iteration: 200 / 200 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 4148.99 seconds (Warm-up)
+Chain 4:                4130.03 seconds (Sampling)
+Chain 4:                8279.02 seconds (Total)
+Chain 4: 
+
+str(list.output[['out']])
+List of 24
+ $ kappa       : num [1:100(1d)] 2.04 2.06 2.17 2.43 2 ...
+  ..- attr(*, "dimnames")=List of 1
+  .. ..$ iterations: NULL
+ $ R0          : num [1:100, 1:10] 6.79 5.93 6.66 6.02 5.98 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ tau         : num [1:100(1d)] 3.33 2.98 2.64 2.98 2.86 ...
+  ..- attr(*, "dimnames")=List of 1
+  .. ..$ iterations: NULL
+ $ y           : num [1:100, 1:10] 4.25 9.49 4.13 7.7 11.03 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ Uchg1       : num [1:100, 1:10] 0.743 0.703 0.767 0.745 0.699 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ Uchg2       : num [1:100, 1:10] 0.976 0.976 0.977 0.971 0.965 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ Uchg3       : num [1:100, 1:10] 0.844 0.825 0.801 0.837 0.812 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ step1       : num [1:100, 1:10] -0.891 -0.846 -0.868 -0.784 -1.014 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ step2       : num [1:100, 1:10] -1.124 -0.963 -1.076 -1.023 -0.941 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ step3       : num [1:100, 1:10] 0.85 0.859 0.757 0.713 0.857 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ phi         : num [1:100(1d)] 4.36 4.1 4.36 3.98 4.44 ...
+  ..- attr(*, "dimnames")=List of 1
+  .. ..$ iterations: NULL
+ $ convolution : num [1:100(1d)] 1.66e-06 3.57e-07 1.83e-06 7.16e-07 4.98e-07 ...
+  ..- attr(*, "dimnames")=List of 1
+  .. ..$ iterations: NULL
+ $ chgpt1      : num [1:100, 1:10] 31 31 31 31 31 31 31 31 31 31 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ chgpt2      : num [1:100, 1:10] 33.9 33.9 33.9 33.9 33.9 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ chgpt3      : num [1:100, 1:10] 87.8 87 86.1 87.5 86.5 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+ $ prediction  : num [1:100, 1:200, 1:10] 4.25 9.49 4.13 7.7 11.03 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ E_deaths    : num [1:100, 1:200, 1:10] 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ Rt          : num [1:100, 1:200, 1:10] 6.79 5.93 6.66 6.02 5.98 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ lp0         : num [1:100, 1:200, 1:10] -1e-09 -1e-09 -1e-09 -1e-09 -1e-09 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ lp1         : num [1:100, 1:200, 1:10] -1e-09 -1e-09 -1e-09 -1e-09 -1e-09 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ convolution0: num [1:100(1d)] 1.61e+23 5.20e+21 5.21e+22 4.56e+22 3.05e+20 ...
+  ..- attr(*, "dimnames")=List of 1
+  .. ..$ iterations: NULL
+ $ prediction0 : num [1:100, 1:200, 1:10] 4.25 9.49 4.13 7.7 11.03 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ E_deaths0   : num [1:100, 1:200, 1:10] 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 ...
+  ..- attr(*, "dimnames")=List of 3
+  .. ..$ iterations: NULL
+  .. ..$           : NULL
+  .. ..$           : NULL
+ $ lp__        : num [1:100(1d)] 663160 663151 663156 663147 663145 ...
+  ..- attr(*, "dimnames")=List of 1
+  .. ..$ iterations: NULL
+NULL
+
+wrapper.stan() quits.
+### ~~~~~~~~~~~~~~~~~~~~ ###
+> 
+> ##################################################
+> print( warnings() );
+Warning messages:
+1: There were 100 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
+http://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded
+2: Examine the pairs() plot to diagnose sampling problems
+
+3: The largest R-hat is NA, indicating chains have not mixed.
+Running the chains for more iterations may help. See
+http://mc-stan.org/misc/warnings.html#r-hat
+4: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+http://mc-stan.org/misc/warnings.html#bulk-ess
+5: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+http://mc-stan.org/misc/warnings.html#tail-ess
+> 
+> print( getOption('repos') );
+    CRAN 
+"@CRAN@" 
+> 
+> print( .libPaths() );
+[1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library"                                                 
+[2] "/Users/woodenbeauty/Work/github/kennethchu-statcan/buildRLib/ARCHIVE/output.2020-04-04.01/library/3.6.2/library"
+> 
+> print( sessionInfo() );
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS High Sierra 10.13.6
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_CA.UTF-8/en_CA.UTF-8/en_CA.UTF-8/C/en_CA.UTF-8/en_CA.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] cowplot_1.0.0        ggpubr_0.2.5         magrittr_1.5        
+ [4] gridExtra_2.3        scales_1.1.0         matrixStats_0.56.0  
+ [7] gdata_2.18.0         data.table_1.12.8    bayesplot_1.7.1     
+[10] rstan_2.19.3         ggplot2_3.3.0        StanHeaders_2.21.0-1
+[13] EnvStats_2.3.1       tidyr_1.0.2          readxl_1.3.1        
+[16] dplyr_0.8.5          readr_1.3.1          lubridate_1.7.4     
+
+loaded via a namespace (and not attached):
+ [1] gtools_3.8.2      tidyselect_1.0.0  purrr_0.3.3       reshape2_1.4.3   
+ [5] colorspace_1.4-1  vctrs_0.2.4       stats4_3.6.2      loo_2.2.0        
+ [9] rlang_0.4.5       pkgbuild_1.0.6    pillar_1.4.3      glue_1.4.0       
+[13] withr_2.1.2       lifecycle_0.2.0   plyr_1.8.6        stringr_1.4.0    
+[17] ggsignif_0.6.0    munsell_0.5.0     gtable_0.3.0      cellranger_1.1.0 
+[21] codetools_0.2-16  labeling_0.3      inline_0.3.15     callr_3.4.3      
+[25] ps_1.3.2          parallel_3.6.2    fansi_0.4.1       Rcpp_1.0.4       
+[29] farver_2.0.3      hms_0.5.3         digest_0.6.25     stringi_1.4.6    
+[33] processx_3.4.2    grid_3.6.2        cli_2.0.2         tools_3.6.2      
+[37] tibble_3.0.0      crayon_1.3.4      pkgconfig_2.0.3   ellipsis_0.3.0   
+[41] prettyunits_1.1.1 ggridges_0.5.2    assertthat_0.2.1  R6_2.4.1         
+[45] compiler_3.6.2   
+> 
+> print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+[1] "2020-06-21 11:16:54 EDT"
+> 
+> stop.proc.time <- proc.time();
+> print( stop.proc.time - start.proc.time );
+     user    system   elapsed 
+29108.622   221.684 10642.417 
+> 
+> 
