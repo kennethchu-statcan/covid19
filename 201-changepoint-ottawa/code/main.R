@@ -43,7 +43,8 @@ for ( code.file in code.files ) {
 #data.snapshot <- "2020-06-09.01";
 #data.snapshot <- "2020-06-15.01";
 #data.snapshot <- "2020-05-10.01";
-data.snapshot  <- "2020-06-16.01.DELETEME";
+#data.snapshot <- "2020-06-16.01.DELETEME";
+data.snapshot  <- "2020-06-21.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -88,7 +89,7 @@ file.copy(
 set.seed(7777777);
 
 list.raw.data <- getData.raw(
-    csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
+    xlsx.ECDC       = file.path(data.directory,'raw-covid19-ECDC.xlsx'),
     csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
     csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv'),
@@ -138,15 +139,15 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.wrapper.stan <- wrapper.stan(
-    StanModel          = StanModel,
-    FILE.stan.model    = FILE.stan.model,
-    DF.covid19         = DF.covid19,
-    DF.fatality.rates  = DF.fatality.rates,
-    DF.serial.interval = DF.serial.interval,
-    forecast.window    = 14,
-    DEBUG              = FALSE # TRUE
-    );
+#results.wrapper.stan <- wrapper.stan(
+#    StanModel          = StanModel,
+#    FILE.stan.model    = FILE.stan.model,
+#    DF.covid19         = DF.covid19,
+#    DF.fatality.rates  = DF.fatality.rates,
+#    DF.serial.interval = DF.serial.interval,
+#    forecast.window    = 14,
+#    DEBUG              = FALSE # TRUE
+#    );
 
 ##################################################
 print( warnings() );
