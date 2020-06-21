@@ -1,6 +1,6 @@
 
 getData.raw <- function(
-    csv.ECDC         = 'raw-covid19-ECDC.csv', 
+    xlsx.ECDC        = 'raw-covid19-ECDC.xlsx', 
     csv.JHU.cases    = 'raw-covid19-JHU-cases.csv', 
     csv.JHU.deaths   = 'raw-covid19-JHU-deaths.csv', 
     csv.GoCInfobase  = 'raw-covid19-GoCInfobase.csv', 
@@ -21,10 +21,17 @@ getData.raw <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+    print("A-1");
+    cat("\nxlsx.ECDC\n");
+    print( xlsx.ECDC   );
+
     DF.ECDC <- getData.raw_load.or.download(
-        target.url = url.ECDC,
-        csv.file   = csv.ECDC
+        target.url  = url.ECDC,
+        xlsx.file   = xlsx.ECDC
         );
+
+    print("A-1");
 
     DF.JHU.cases <- getData.raw_load.or.download(
         target.url = url.JHU.cases,
@@ -64,15 +71,25 @@ getData.raw <- function(
 
 ##################################################
 getData.raw_load.or.download <- function(
-    target.url = NULL,
-    csv.file   = NULL
+    target.url  = NULL,
+    csv.file    = NULL,
+    xlsx.file   = NULL,
+    input.sheet = NULL
     ) {
 
-    if ( file.exists(csv.file) ) {
+    if ( ifelse(is.null(csv.file),FALSE,file.exists(csv.file)) ) {
 
         cat(paste0("\n# Data file ",csv.file," already exists; loading this file ...\n"));
         DF.output <- read.csv(file = csv.file, stringsAsFactors = FALSE, na.strings = c("NA","N/A"));
         cat(paste0("\n# Loading complete: ",csv.file,".\n"));
+    
+    } else if ( ifelse(is.null(xlsx.file),FALSE,file.exists(xlsx.file)) ) {
+
+        cat(paste0("\n# Data file ",xlsx.file," already exists; loading this file ...\n"));
+        require(readxl);
+        DF.output <- readxl::read_excel(path = xlsx.file, sheet = input.sheet);
+        DF.output <- as.data.frame(DF.output);
+        cat(paste0("\n# Loading complete: ",xlsx.file,".\n"));
     
     } else {
 
