@@ -167,8 +167,9 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    where
 
-   *   *&gamma;<sub>m,k</sub>* is the time of occurrence of
-       the (random, unobserved) *k*-th change-point in the COVID-19
+   *   *&gamma;<sub>m,k</sub>* is
+       the (random, unobserved) time of occurrence of
+       the *k*-th change-point in the COVID-19
        time-varying reproduction number for jurisdiction *m*.
 
    *   *&alpha;<sub>m,k</sub>*
