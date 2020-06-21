@@ -43,7 +43,8 @@ for ( code.file in code.files ) {
 #data.snapshot <- "2020-06-09.01";
 #data.snapshot <- "2020-06-15.01";
 #data.snapshot <- "2020-05-10.01";
-data.snapshot  <- "2020-06-16.01.DELETEME";
+#data.snapshot <- "2020-06-16.01.DELETEME";
+data.snapshot  <- "2020-06-21.01";
 data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -66,7 +67,7 @@ jurisdictions <- c(
     "Ottawa"
     );
 
-jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
+# jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
 
 StanModel <- 'change-point';
 
@@ -88,7 +89,7 @@ file.copy(
 set.seed(7777777);
 
 list.raw.data <- getData.raw(
-    csv.ECDC        = file.path(data.directory,'raw-covid19-ECDC.csv'),
+    xlsx.ECDC       = file.path(data.directory,'raw-covid19-ECDC.xlsx'),
     csv.JHU.cases   = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
     csv.JHU.deaths  = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
     csv.GoCInfobase = file.path(data.directory,'raw-covid19-GoCInfobase.csv'),
@@ -119,12 +120,10 @@ print( summary(DF.covid19) );
 print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.fatality.rates <- getData.wIFR(
     csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
     csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
     );
-
 print( str(DF.fatality.rates) );
 print( summary(DF.fatality.rates) );
 
@@ -145,7 +144,7 @@ results.wrapper.stan <- wrapper.stan(
     DF.fatality.rates  = DF.fatality.rates,
     DF.serial.interval = DF.serial.interval,
     forecast.window    = 14,
-    DEBUG              = FALSE # TRUE
+    DEBUG              = TRUE # FALSE # TRUE
     );
 
 ##################################################
