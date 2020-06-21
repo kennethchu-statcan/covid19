@@ -121,6 +121,10 @@ plot.stepsize.vs.chgpt_make.plots <- function(
        axis.text.x = element_text(angle = 45, hjust = 1)
        );
 
+    my.ggplot <- my.ggplot + guides(
+        colour = guide_legend(override.aes = list(alpha =  0.5, size = 5))
+        );
+
     PNG.output <- paste0("output-",StanModel,"-stepsize-vs-chgpt-",jurisdiction,".png");
     ggsave(
         file   = PNG.output,
