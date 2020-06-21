@@ -29,8 +29,6 @@ plot.3.panel <- function(
 
     for( i in 1:length(jurisdictions) ){
 
-        print(i)
-
         N            <- length(dates[[i]]);
         jurisdiction <- jurisdictions[[i]];
 

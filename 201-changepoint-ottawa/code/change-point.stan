@@ -5,12 +5,19 @@ data {
     int  <lower=1> N2;               // days of observed data + # of days to forecast
     real <lower=0> log_max_step;     // natural logarithm of absolute value of maximum step size
 
+    int minChgPt1[M];
+    int maxChgPt1[M];
+    int minChgPt2[M];
+    int maxChgPt2[M];
+    int minChgPt3[M];
+
     int            EpidemicStart[M];
     int  <lower=1> N[M];             // days of observed data for jurisdiction m. each entry must be <= N2
     real <lower=0> x[N2];            // index of days (starting at 1)
 
-    int            cases[ N2,M];     // reported cases
-    int            deaths[N2,M];     // reported deaths -- the rows with i > N contain -1 and should be ignored
+    int cases[ N2,M];     // reported cases
+    int deaths[N2,M];     // reported deaths -- the rows with i > N contain -1 and should be ignored
+
     matrix[N2,M]   f;                // h * s
     real           SI[N2];           // fixed pre-calculated SI using emprical data from Neil
 
@@ -30,12 +37,12 @@ parameters {
 
     real <lower=0,upper=1> Uchg1[M];
     real <lower=0,upper=1> Uchg2[M];
-//  real <lower=0,upper=1> Uchg3[M];
+    real <lower=0,upper=1> Uchg3[M];
 //  real <lower=0,upper=1> Uchg4[M];
 
     real <lower = -log_max_step, upper = log_max_step> step1[M];
     real <lower = -log_max_step, upper = log_max_step> step2[M];
-//  real <lower = -log_max_step, upper = log_max_step> step3[M];
+    real <lower = -log_max_step, upper = log_max_step> step3[M];
 //  real <lower = -log_max_step, upper = log_max_step> step4[M];
 
     real <lower=0> phi;
@@ -48,7 +55,7 @@ transformed parameters {
 
     real chgpt1[M];
     real chgpt2[M];
-//  real chgpt3[M];
+    real chgpt3[M];
 //  real chgpt4[M];
 
     matrix[N2,M] prediction = rep_matrix(0,N2,M);
@@ -69,15 +76,15 @@ transformed parameters {
             // chgpt3[m] ~ uniform(chgpt2[m],       N2);
             // chgpt4[m] ~ uniform(chgpt3[m],       N2);
 
-            chgpt1[m] = EpidemicStart[m] + (N2 - EpidemicStart[m]) * Uchg1[m];
-            chgpt2[m] = chgpt1[m]        + (N2 - chgpt1[m]       ) * Uchg2[m];
-            // chgpt3[m] = chgpt2[m]        + (N2 - chgpt2[m]       ) * Uchg3[m];
-            // chgpt4[m] = chgpt3[m]        + (N2 - chgpt3[m]       ) * Uchg4[m];
+            chgpt1[m] = minChgPt1[M] + (maxChgPt1[M] - minChgPt1[M]) * Uchg1[m];
+            chgpt2[m] = minChgPt2[M] + (maxChgPt2[M] - minChgPt2[M]) * Uchg2[m];
+            chgpt3[m] = minChgPt3[M] + (N[m]         - minChgPt3[M]) * Uchg3[m];
+            // chgpt4[m] = minChgPt4[M] + (N[m]         - minChgPt4[M]) * Uchg4[m];
 
             Rt[i,m] = R0[m] * exp(
                   step1[m] * int_step(i - chgpt1[m]) 
                 + step2[m] * int_step(i - chgpt2[m])
-            //  + step3[m] * int_step(i - chgpt3[m])
+                + step3[m] * int_step(i - chgpt3[m])
             //  + step4[m] * int_step(i - chgpt4[m])
                 );
         }

@@ -34,9 +34,17 @@ plot.stepsize.vs.chgpt <- function(
             which.step         = "step2"
             );
  
+        DF.chgpt2 <- plot.stepsize.vs.chgpt_getData(
+            list.input         = list.input,
+            jurisdiction.index = i,
+            which.chgpt        = "chgpt3",
+            which.step         = "step3"
+            );
+ 
         DF.jurisdiction <- rbind(
             DF.chgpt1,
-            DF.chgpt2
+            DF.chgpt2,
+            DF.chgpt3
             );
 
         plot.stepsize.vs.chgpt_make.plots(

@@ -188,6 +188,14 @@ wrapper.stan_inner <- function(
         d1 <- d1[index2:nrow(d1),];
         stan_data$EpidemicStart <- c(stan_data$EpidemicStart,index1+1-index2);
 
+        stan_data$minChgpt1 <- c(stan_data$minChgPt1,which(d1$date==as.Date("2020-03-01"))[1]);
+        stan_data$maxChgpt1 <- c(stan_data$maxChgPt1,which(d1$date==as.Date("2020-03-21"))[1]);
+
+        stan_data$minChgpt2 <- c(stan_data$minChgPt2,which(d1$date==as.Date("2020-03-22"))[1]);
+        stan_data$maxChgpt2 <- c(stan_data$maxChgPt2,which(d1$date==as.Date("2020-04-11"))[1]);
+
+        stan_data$minChgpt3 <- c(stan_data$minChgPt3,which(d1$date==as.Date("2020-05-01"))[1]);
+
         dates[[jurisdiction]] = d1$date;
         # hazard estimation
         N <- length(d1$case);
