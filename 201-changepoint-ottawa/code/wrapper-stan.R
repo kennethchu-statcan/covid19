@@ -208,8 +208,11 @@ wrapper.stan_inner <- function(
         cat(paste0("\ndecimal.date.minChgPt2: ",decimal.date.minChgPt2,"\n"));
         cat(paste0("\ndecimal.date.maxChgPt2: ",decimal.date.maxChgPt2,"\n"));
         cat(paste0("\ndecimal.date.minChgPt3: ",decimal.date.minChgPt3,"\n"));
+        temp.d1 <- d1;
+        temp.d1[,"row.index"] <- seq(1,nrow(temp.d1),1);
+        temp.d1 <- temp.d1[,c("row.index",setdiff(colnames(d1),"row.index"))];
         cat("\nd1\n");
-        print( d1   );
+        print( temp.d1   );
         cat("\n### ~~~~~~ #####\n")
 
         stan_data$minChgPt1 <- c(stan_data$minChgPt1,decimal.date.minChgPt1);
