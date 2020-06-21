@@ -16,6 +16,17 @@ patchData <- function(
     list.output <- list.covid19.data;
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.output[["ECDC"]] <- patchData_ECDC(
+        DF.input = list.output[["ECDC"]]
+        );
+
+    write.csv(
+        x         = list.output[["ECDC"]],
+        file      = 'tmp-covid19-ECDC-patched.csv',
+        row.names = FALSE
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output[["GoCInfobase"]] <- patchData_GoCInfobase(
         DF.input = list.output[["GoCInfobase"]],
         min.Date = min.Date
@@ -47,6 +58,54 @@ patchData <- function(
     }
 
 ###################################################
+patchData_ECDC <- function(
+    DF.input = NULL
+    ) {
+
+    require(dplyr);
+    require(tidyr);
+    require(lubridate);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.output <- DF.input;
+
+    cat("\nstr(DF.input)\n");
+    print( str(DF.input)   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    offending.jurisdiction    <- "France";
+    is.offending.jurisdiction <- (DF.output[,"countriesAndTerritories"] == offending.jurisdiction);
+
+    offending.year  <- 2020;
+    offending.month <- 6;
+    offending.day   <- 3;
+
+    is.offending.year  <- (DF.output[,"year"]  == offending.year);
+    is.offending.month <- (DF.output[,"month"] == offending.month);
+    is.offending.day   <- (DF.output[,"day"]   == offending.day);
+
+    is.offending.row <- ( is.offending.jurisdiction & is.offending.year & is.offending.month & is.offending.day );
+    if ( 1 == sum(is.offending.row) ) {
+        temp.value <- DF.output[is.offending.row,"cases"];
+        print( temp.value   );
+        if ( temp.value < 0 ) {
+            cat("\n### patchData_ECDC(): offending row:\n");
+            print( DF.output[is.offending.row,] );
+            cat(paste0("\n# ~~~ replacing offending value ",temp.value," with 76\n"));
+            DF.output[is.offending.row,"cases"] <- 76;
+            cat("\n# ~~~ patched row:\n");
+            print( DF.output[is.offending.row,] );
+            }
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.output[,"cases"] <- abs( DF.output[,"cases"] );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    return( DF.output );
+
+    }
+
 patchData_Ottawa <- function(
     DF.input = NULL,
     min.Date = NULL
@@ -99,20 +158,6 @@ patchData_Ottawa <- function(
         temp.vector[is.na(temp.vector)] <- 0;
         DF.output[,temp.colname] <- temp.vector;
         }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#    for ( temp.jurisdiction in unique(DF.output[,"jurisdiction"]) ) {
-#        DF.temp <- DF.output[DF.output[,"jurisdiction"] == temp.jurisdiction,];
-#        for ( temp.index in 2:nrow(DF.temp) ) {
-#            temp.vector.zero   <- DF.temp[temp.index,  colnames.numeric];
-#            temp.vector.minus1 <- DF.temp[temp.index-1,colnames.numeric];
-#            is.a.drop <- (temp.vector.zero < temp.vector.minus1);
-#            temp.vector.two            <- temp.vector.zero;
-#            temp.vector.two[is.a.drop] <- temp.vector.minus1[is.a.drop];
-#            DF.temp[temp.index,colnames.numeric] <- temp.vector.two;
-#            }
-#        DF.output[DF.output[,"jurisdiction"] == temp.jurisdiction,] <- DF.temp;
-#        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     return( DF.output );
