@@ -370,6 +370,10 @@ Main output files
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-AB.png)
 
+   *  __output-change-point-stepsize-vs-chgpt-AB.png__
+   
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-AB.png)
+
    *  __output-change-point-3-panel-BC.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-BC.png)
