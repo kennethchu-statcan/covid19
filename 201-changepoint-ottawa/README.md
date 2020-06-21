@@ -304,36 +304,23 @@ All required input data and metadata files are located in
 Main output files
 -----------------
 
-*  __output-base-covars-alpha.png__
+*  __output-change-point-covars-R0.png__
 
-   <img src="./supplementary/output-base-covars-alpha.png" width="500">
-
-   Posterior means and 90% credible intervals of the (jurisdiction-independent)
-   effect size parameters:
-
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\exp\!\left(\,-\,\alpha_{k}\,\right)"/>
-
-   Note that the above plot suggests that lockdown has the strongest
-   reduction effect on the reproduction number among the intervention
-   measures considered.
-
-*  __output-base-covars-mu.png__
-
-   <img src="./supplementary/output-base-covars-mu.png" width="500">
+   <img src="./supplementary/output-change-point-covars-R0.png" width="500">
 
    Posterior means and 90% credible intervals of the
    jurisdiction-specific initial COVID-19 reproduction numbers.
 
-*  __output-base-covars-final-rt.png__
+*  __output-change-point-covars-final-rt.png__
 
-   <img src="./supplementary/output-base-covars-final-rt.png" width="500">
+   <img src="./supplementary/output-change-point-covars-final-rt.png" width="500">
 
    Posterior means and 90% credible intervals of the
    jurisdiction-specific final COVID-19 reproduction numbers.
 
-*  __output-base-3-panel-Italy.png__
+*  __output-change-point-3-panel-Italy.png__
 
-   ![three-panel plot, Italy](./supplementary/output-base-3-panel-Italy.png)
+   ![three-panel plot, Italy](./supplementary/output-change-point-3-panel-Italy.png)
 
    The left-most panel shows the number of new confirmed COVID-19 infections by day,
    as well as the 50% and 95% credible intervals across time
@@ -350,9 +337,9 @@ Main output files
 
    <img src="./supplementary/output-change-point-stepsize-vs-chgpt-Italy.png" width="750">
 
-*  __output-base-forecast-Italy.png__
+*  __output-change-point-forecast-Italy.png__
 
-   <img src="./supplementary/output-base-forecast-Italy.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Italy.png" width="750">
 
    Histogram, for Italy, of
    the (log-transformed) number of COVID-19 deaths by day,
