@@ -201,16 +201,16 @@ wrapper.stan_inner <- function(
         decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-11"))[1],na.rm=TRUE);
         decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-05-01"))[1],na.rm=TRUE);
 
-        if ( is.na(decimal.date.minChgPt1) ) {
-            cat("\n### ~~~~~~ #####\n")
-            cat(paste0("\njurisdiction: ",jurisdiction,"\n"));
-            cat(paste0("\ndecimal.date.minChgPt1: ",decimal.date.minChgPt1,"\n"));
-            cat("\nwhich(d1$date==as.Date('2020-03-01'))\n");
-            print( which(d1$date==as.Date('2020-03-01'))   );
-            cat("\nd1\n");
-            print( d1   );
-            cat("\n### ~~~~~~ #####\n")
-            }
+        cat("\n### ~~~~~~ #####\n")
+        cat(paste0("\njurisdiction: ",jurisdiction,"\n"));
+        cat(paste0("\ndecimal.date.minChgPt1: ",decimal.date.minChgPt1,"\n"));
+        cat(paste0("\ndecimal.date.maxChgPt1: ",decimal.date.maxChgPt1,"\n"));
+        cat(paste0("\ndecimal.date.minChgPt2: ",decimal.date.minChgPt2,"\n"));
+        cat(paste0("\ndecimal.date.maxChgPt2: ",decimal.date.maxChgPt2,"\n"));
+        cat(paste0("\ndecimal.date.minChgPt3: ",decimal.date.minChgPt3,"\n"));
+        cat("\nd1\n");
+        print( d1   );
+        cat("\n### ~~~~~~ #####\n")
 
         stan_data$minChgPt1 <- c(stan_data$minChgPt1,decimal.date.minChgPt1);
         stan_data$maxChgPt1 <- c(stan_data$maxChgPt1,decimal.date.maxChgPt1);
@@ -313,12 +313,10 @@ wrapper.stan_inner <- function(
             list(
                 Uchg1 = runif(length(jurisdictions), min = 0, max = 1),
                 Uchg2 = runif(length(jurisdictions), min = 0, max = 1),
-                #Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
-                #Uchg4 = runif(length(jurisdictions), min = 0, max = 1),
+                Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
                 step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
-                #,step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                #step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
+                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
                 )
             }
         )
