@@ -1,13 +1,15 @@
 
 getData.raw <- function(
-    csv.ECDC        = 'raw-covid19-ECDC.csv', 
-    csv.JHU.cases   = 'raw-covid19-JHU-cases.csv', 
-    csv.JHU.deaths  = 'raw-covid19-JHU-deaths.csv', 
-    csv.GoCInfobase = 'raw-covid19-GoCInfobase.csv', 
-    url.ECDC        = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
-    url.JHU.cases   = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    url.JHU.deaths  = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    url.GoCInfobase = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+    csv.ECDC         = 'raw-covid19-ECDC.csv', 
+    csv.JHU.cases    = 'raw-covid19-JHU-cases.csv', 
+    csv.JHU.deaths   = 'raw-covid19-JHU-deaths.csv', 
+    csv.GoCInfobase  = 'raw-covid19-GoCInfobase.csv', 
+    xlsx.Ottawa.hospitalization = NULL,
+    xlsx.Ottawa.case.and.death  = NULL,
+    url.ECDC         = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv",
+    url.JHU.cases    = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+    url.JHU.deaths   = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+    url.GoCInfobase  = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
     ) {
 
     thisFunctionName <- "getData.raw";
@@ -39,12 +41,18 @@ getData.raw <- function(
         csv.file   = csv.GoCInfobase
         );
 
+    DF.ottawa <- getData.Ottawa(
+        xlsx.input.hospitalization = xlsx.Ottawa.hospitalization,
+        xlsx.input.case.and.death  = xlsx.Ottawa.case.and.death
+        );
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output <- list(
         ECDC        = DF.ECDC,
         JHU.cases   = DF.JHU.cases,
         JHU.deaths  = DF.JHU.deaths,
-        GoCInfobase = DF.GoCInfobase
+        GoCInfobase = DF.GoCInfobase,
+        Ottawa      = DF.ottawa
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###

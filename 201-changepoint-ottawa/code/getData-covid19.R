@@ -21,7 +21,7 @@ getData.covid19 <- function(
         csv.ECDC          = csv.ECDC
         );
 
-    is.retained.jurisdictions <- ( DF.ECDC[,"jurisdiction"] %in% retained.jurisdictions);
+    is.retained.jurisdictions <- (DF.ECDC[,"jurisdiction"] %in% retained.jurisdictions);
     DF.ECDC <- DF.ECDC[is.retained.jurisdictions,];
 
     retained.columns <- setdiff(colnames(DF.ECDC),c("geoId","countryterritoryCode","popData2018","t"));
@@ -39,7 +39,7 @@ getData.covid19 <- function(
         csv.GoCInfobase   = csv.GoCInfobase
         );
 
-    is.retained.jurisdictions <- ( DF.GoCInfobase[,"jurisdiction"] %in% retained.jurisdictions);
+    is.retained.jurisdictions <- (DF.GoCInfobase[,"jurisdiction"] %in% retained.jurisdictions);
     DF.GoCInfobase <- DF.GoCInfobase[is.retained.jurisdictions,];
 
     cat("\nstr(DF.GoCInfobase)\n");
@@ -49,7 +49,19 @@ getData.covid19 <- function(
     print( summary(DF.GoCInfobase)   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.output <- rbind(DF.ECDC,DF.GoCInfobase);
+    cat("\nstr(list.covid19.data[['Ottawa']])\n");
+    print( str(list.covid19.data[['Ottawa']])   );
+
+    cat("\nsummary(list.covid19.data[['Ottawa']])\n");
+    print( summary(list.covid19.data[['Ottawa']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    retained.colnames <- c("jurisdiction","date","case","death");
+    DF.output <- rbind(
+        DF.ECDC[,       retained.colnames],
+        DF.GoCInfobase[,retained.colnames],
+        list.covid19.data[["Ottawa"]][,retained.colnames]
+        );
 
     write.csv(
         x         = DF.output,
