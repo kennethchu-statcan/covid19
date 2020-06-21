@@ -133,7 +133,7 @@ plot.three.panel_make.plots <- function(
             aes(x = time, ymin = cases_min, ymax = cases_max, fill = key)
             ) +
         xlab("") +
-        ylab("Daily number of infections") +
+        ylab("infections") +
         scale_x_date(date_breaks = "weeks", labels = date_format("%e %b")) + 
         scale_fill_manual(
             name   = "",

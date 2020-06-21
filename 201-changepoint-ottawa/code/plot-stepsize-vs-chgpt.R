@@ -107,14 +107,27 @@ plot.stepsize.vs.chgpt_make.plots <- function(
         alpha   = 0.3
         ); 
 
+    my.ggplot <- my.ggplot + geom_hline(
+        yintercept = 0,
+        linetype   = "solid",
+        color      = "gray", # "gray80", #"gray",
+        size       = 1.3,
+        alpha      = 0.3
+        );
+
     #my.ggplot <- my.ggplot + scale_x_date(
     #    limits = c(  min.date,max.date),
     #    breaks = seq(min.date,max.date,7)
     #    );
 
     my.ggplot <- my.ggplot + scale_x_date(
-        limits = c(  as.Date("2020-01-05"),as.Date("2020-12-27")),
-        breaks = seq(as.Date("2020-01-05"),as.Date("2020-12-27"),14)
+        limits = c(  as.Date("2020-01-05"),as.Date("2020-07-04")),
+        breaks = seq(as.Date("2020-01-05"),as.Date("2020-07-04"),14)
+        );
+
+    my.ggplot <- my.ggplot + scale_y_continuous(
+        limits = c(  -2,2),
+        breaks = seq(-2,2,0.5)
         );
 
     my.ggplot <- my.ggplot + theme(
