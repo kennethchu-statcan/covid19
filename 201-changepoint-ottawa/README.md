@@ -335,7 +335,7 @@ Main output files
 
 *  __output-change-point-stepsize-vs-chgpt-Italy.png__
 
-   <img src="./supplementary/output-change-point-stepsize-vs-chgpt-Italy.png" width="750">
+   <img src="./supplementary/output-change-point-stepsize-vs-chgpt-Italy.png" width="900">
 
 *  __output-change-point-forecast-Italy.png__
 
