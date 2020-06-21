@@ -160,7 +160,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    gives the probability that an infected individual will infect someone else
    on the *t*-th day after his/her original infection.
 
-*  Lastly, Flaxman et al. assumed that the COVID-19 reproduction number
+*  Lastly, our change-point model assumes that the COVID-19 reproduction number
    *R<sub>m,t</sub>* has the following form:
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,t}\;=\;R_{m,0}\cdot\exp\!\left(\;\sum^{3}_{k=1}\alpha_{m,k}\cdot{I}_{\{t\,-\,\gamma_{m,k}\}}\,\right)"/>
