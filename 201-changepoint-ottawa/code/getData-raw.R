@@ -21,17 +21,10 @@ getData.raw <- function(
     require(readr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-
-    print("A-1");
-    cat("\nxlsx.ECDC\n");
-    print( xlsx.ECDC   );
-
     DF.ECDC <- getData.raw_load.or.download(
         target.url  = url.ECDC,
         xlsx.file   = xlsx.ECDC
         );
-
-    print("A-1");
 
     DF.JHU.cases <- getData.raw_load.or.download(
         target.url = url.JHU.cases,
