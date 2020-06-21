@@ -173,9 +173,9 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
        time-varying reproduction number for jurisdiction *m*,
        with the following priors:
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{m,1}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/01\,,\,2020/03/21\,]),\;\textnormal{\small{for\;each}}\;\,m"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{m,1}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/01\,,2020/03/21\,]),\;\textnormal{\small{for\;each}}\;\,m"/>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{m,2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,\,2020/04/11\,]),\;\textnormal{\small{for\;each}}\;\,m"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{m,2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,]),\;\textnormal{\small{for\;each}}\;\,m"/>
 
    *   *&alpha;<sub>m,k</sub>*
        is the (random, unobserved) log-linear change (''step size'')
