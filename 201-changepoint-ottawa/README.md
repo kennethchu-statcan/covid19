@@ -175,6 +175,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
        is the (random, unobserved) log-linear change (''step size'')
        in reproduction number at the *k*-th change-point for jurisdiction *m*.
 
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,1},\alpha_{m,2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)]),\;\textnormal{\small{for each}}\;m"/>
+
    *   *I(t-&gamma;<sub>m,k</sub>)* is the binary indicator variable,
        for jurisdiction *m*,
        which indicates whether time *t* is
