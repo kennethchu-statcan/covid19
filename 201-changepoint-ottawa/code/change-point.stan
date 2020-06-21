@@ -109,10 +109,10 @@ model {
         y[m]     ~ exponential(1.0/tau);
         Uchg1[m] ~ uniform(0,1);
         Uchg2[m] ~ uniform(0,1);
-        Uchg3[m] ~ uniform(0,1);
+        // Uchg3[m] ~ uniform(0,1);
         step1[m] ~ uniform( -log_max_step , 0            );
         step2[m] ~ uniform( -log_max_step , 0            );
-        step3[m] ~ uniform( -log_max_step , log_max_step );
+        // step3[m] ~ uniform( -log_max_step , log_max_step );
     }
 
     phi ~ normal(0,5);
