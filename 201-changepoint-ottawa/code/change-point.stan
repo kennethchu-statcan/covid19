@@ -68,10 +68,6 @@ transformed parameters {
         }
         for (i in (EpidemicStart[m]+1):N2) {
 
-            // chgpt1[m] ~ uniform(EpidemicStart[m],N2);
-            // chgpt2[m] ~ uniform(chgpt1[m],       N2);
-            // chgpt3[m] ~ uniform(chgpt2[m],       N2);
-
             chgpt1[m] = minChgPt1[M] + (maxChgPt1[M] - minChgPt1[M]) * Uchg1[m];
             chgpt2[m] = minChgPt2[M] + (maxChgPt2[M] - minChgPt2[M]) * Uchg2[m];
             chgpt3[m] = minChgPt3[M] + (N[m]         - minChgPt3[M]) * Uchg3[m];

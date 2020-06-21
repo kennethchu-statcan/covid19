@@ -316,10 +316,10 @@ wrapper.stan_inner <- function(
             list(
                 Uchg1 = runif(length(jurisdictions), min = 0, max = 1),
                 Uchg2 = runif(length(jurisdictions), min = 0, max = 1),
-                #,Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
-                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
-                #,step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
+                Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
+                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = 0),
+                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = 0),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
                 )
             }
         )
