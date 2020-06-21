@@ -167,13 +167,16 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
    where
 
-   *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for jurisdiction *m*,
-       intervention measure *k*, and day *t*.
+   *   *&gamma;<sub>m,k</sub>* is the time of occurrence of
+       the (random, unobserved) *k*-th change-point in the COVID-19
+       time-varying reproduction number for jurisdiction *m*.
 
-   *   *&alpha;<sub>k</sub>*
-       -- assumed to have been sampled from *&Gamma;(0.5,1)* --
-       is the (random, unobserved) jurisdiction-independent
-       log-linear effect size parameter due to intervention measure *k*,
+   *   *&alpha;<sub>m,k</sub>*
+       is the (random, unobserved) log-linear change (''step size'')
+       in reproduction number at the *k*-th change-point for jurisdiction *m*.
+
+   *   *I<sub>{t-&gamma_mk}</sub>* is the (observed) binary indicator variable for jurisdiction *m*,
+       intervention measure *k*, and day *t*.
 
    *   *R<sub>m,0</sub>* is the jurisdiction-specific initial reproduction number,
        assumed to follow:
