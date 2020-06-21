@@ -102,6 +102,9 @@ patchData_ECDC <- function(
     DF.output[,"cases"] <- abs( DF.output[,"cases"] );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.output[is.na(DF.output[,"deaths"]),"deaths"] <- 0;
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     return( DF.output );
 
     }

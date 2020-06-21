@@ -67,7 +67,7 @@ jurisdictions <- c(
     "Ottawa"
     );
 
-jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
+# jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
 
 StanModel <- 'change-point';
 
@@ -120,12 +120,10 @@ print( summary(DF.covid19) );
 print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.fatality.rates <- getData.wIFR(
     csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
     csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
     );
-
 print( str(DF.fatality.rates) );
 print( summary(DF.fatality.rates) );
 
@@ -139,15 +137,15 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#results.wrapper.stan <- wrapper.stan(
-#    StanModel          = StanModel,
-#    FILE.stan.model    = FILE.stan.model,
-#    DF.covid19         = DF.covid19,
-#    DF.fatality.rates  = DF.fatality.rates,
-#    DF.serial.interval = DF.serial.interval,
-#    forecast.window    = 14,
-#    DEBUG              = FALSE # TRUE
-#    );
+results.wrapper.stan <- wrapper.stan(
+    StanModel          = StanModel,
+    FILE.stan.model    = FILE.stan.model,
+    DF.covid19         = DF.covid19,
+    DF.fatality.rates  = DF.fatality.rates,
+    DF.serial.interval = DF.serial.interval,
+    forecast.window    = 14,
+    DEBUG              = TRUE # FALSE # TRUE
+    );
 
 ##################################################
 print( warnings() );
