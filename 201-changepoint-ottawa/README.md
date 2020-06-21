@@ -16,7 +16,7 @@ The authors:
    intervention measures on the jurisdiction-specific time-varying
    reproduction number *R<sub>m,t</sub>*,
    for jurisdiction *m*, as a function of time *t* (in days),
-   
+
 *  proceeded by fitting a hierarchical Bayesian model to the COVID-19 death count
    time series from the following eleven European jurisdictions:
    Austria,
@@ -51,7 +51,7 @@ Recall that one of the key objectives of the original Flaxman et al. model was t
 the effects of social distancing measures on COVID-19 transmissibility (more precisely,
 time-varying reproduction number).
 In their model, for ech given jurisdiction, its time-varying reproduction number results
-from the multiplicative effects of the different types of social distancing measures 
+from the multiplicative effects of the different types of social distancing measures
 on the initial reproduction number, as these measures are imposed in time.
 Note in particular that the Flaxman et al. model assumes that the time-varying reproduction
 number is piecewise constant in time.
@@ -74,7 +74,7 @@ General assumed structure of hierarchical models
 *  These parameters are themselves considered **unobserved** random quantities, which had been
    sampled from their own respective pobability distributions,
    which in turn have their own (hyper)parameters.
-*  This may go on for several "layers", hence the nomenclature *hierarchical models*. 
+*  This may go on for several "layers", hence the nomenclature *hierarchical models*.
 *  (Bayesian) inference in this context refers to estimating posterior distributions
    (or sometimes, more easily computable derived quantities)
    for the (hyper)parameters based on observed data, and prior probabilistic assumptions.
@@ -107,7 +107,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    *  *&pi;<sub>m,&tau;</sub>* is the probability, for jurisdiction *m*,
       that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
 
-*  Flaxman et al. assumed that each jurisdiction *m* has its own 
+*  Flaxman et al. assumed that each jurisdiction *m* has its own
    (weighted) *infection fatality ratio* IFR<sub>*m*</sub> (probability of COVID-19 death given COVID-19 infection).
    Conversely, in jurisdiction *m*, a COVID-19 infected individual has a probability of 1 - IFR<sub>*m*</sub>
    that he/she will not die from the disease, i.e. will recover.
@@ -166,7 +166,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,t}\;=\;R_{m,0}\cdot\exp\!\left(\,-\,\sum^{K}_{k=1}\alpha_{k}\cdot{I}_{m,k,t}\,\right)"/>
 
    where
-   
+
    *   *I<sub>m,k,t</sub>* is the (observed) binary indicator variable for jurisdiction *m*,
        intervention measure *k*, and day *t*.
 
@@ -243,10 +243,10 @@ All required input data and metadata files are located in
 
 *   __interventions-europe.csv__
 
-    This CSV file contains the COVID-19 intervention histories 
+    This CSV file contains the COVID-19 intervention histories
     (social distancing measures and the dates they were instituted)
     of the eleven European jurisdictions.
-    
+
     It is a simplified version of the original one supplied
     by Flaxman et al, in the sense that data not directly used
     by the model have been removed.
@@ -348,123 +348,122 @@ Main output files
 
 *  Similarly for the rest of the jurisdictions:
 
-   *  __output-base-3-panel-AB.png__
+   *  __output-change-point-3-panel-AB.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-AB.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-AB.png)
 
-   *  __output-base-3-panel-BC.png__
+   *  __output-change-point-3-panel-BC.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-BC.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-BC.png)
 
-   *  __output-base-3-panel-ON.png__
+   *  __output-change-point-3-panel-ON.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-ON.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-ON.png)
 
-   *  __output-base-3-panel-QC.png__
+   *  __output-change-point-3-panel-QC.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-QC.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-QC.png)
 
-   *  __output-base-3-panel-Austria.png__
+   *  __output-change-point-3-panel-Austria.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Austria.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Austria.png)
 
-   *  __output-base-3-panel-Belgium.png__
+   *  __output-change-point-3-panel-Belgium.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Belgium.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Belgium.png)
 
-   *  __output-base-3-panel-Denmark.png__
+   *  __output-change-point-3-panel-Denmark.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Denmark.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Denmark.png)
 
-   *  __output-base-3-panel-France.png__
+   *  __output-change-point-3-panel-France.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-France.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-France.png)
 
-   *  __output-base-3-panel-Germany.png__
+   *  __output-change-point-3-panel-Germany.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Germany.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Germany.png)
 
-   *  __output-base-3-panel-Italy.png__
+   *  __output-change-point-3-panel-Italy.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Italy.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Italy.png)
 
-   *  __output-base-3-panel-Norway.png__
+   *  __output-change-point-3-panel-Norway.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Norway.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Norway.png)
 
-   *  __output-base-3-panel-Spain.png__
+   *  __output-change-point-3-panel-Spain.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Spain.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Spain.png)
 
-   *  __output-base-3-panel-Sweden.png__
+   *  __output-change-point-3-panel-Sweden.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Sweden.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Sweden.png)
 
-   *  __output-base-3-panel-Switzerland.png__
+   *  __output-change-point-3-panel-Switzerland.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-Switzerland.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Switzerland.png)
 
-   *  __output-base-3-panel-United_Kingdom.png__
+   *  __output-change-point-3-panel-United_Kingdom.png__
 
-   ![three-panel plot](./supplementary/output-base-3-panel-United_Kingdom.png)
+   ![three-panel plot](./supplementary/output-change-point-3-panel-United_Kingdom.png)
 
-   *  __output-base-forecast-AB.png__
+   *  __output-change-point-forecast-AB.png__
 
-   <img src="./supplementary/output-base-forecast-AB.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-AB.png" width="750">
 
-   *  __output-base-forecast-BC.png__
+   *  __output-change-point-forecast-BC.png__
 
-   <img src="./supplementary/output-base-forecast-BC.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-BC.png" width="750">
 
-   *  __output-base-forecast-ON.png__
+   *  __output-change-point-forecast-ON.png__
 
-   <img src="./supplementary/output-base-forecast-ON.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-ON.png" width="750">
 
-   *  __output-base-forecast-QC.png__
+   *  __output-change-point-forecast-QC.png__
 
-   <img src="./supplementary/output-base-forecast-QC.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-QC.png" width="750">
 
-   *  __output-base-forecast-Austria.png__
+   *  __output-change-point-forecast-Austria.png__
 
-   <img src="./supplementary/output-base-forecast-Austria.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Austria.png" width="750">
 
-   *  __output-base-forecast-Belgium.png__
+   *  __output-change-point-forecast-Belgium.png__
 
-   <img src="./supplementary/output-base-forecast-Belgium.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Belgium.png" width="750">
 
-   *  __output-base-forecast-Denmark.png__
+   *  __output-change-point-forecast-Denmark.png__
 
-   <img src="./supplementary/output-base-forecast-Denmark.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Denmark.png" width="750">
 
-   *  __output-base-forecast-France.png__
+   *  __output-change-point-forecast-France.png__
 
-   <img src="./supplementary/output-base-forecast-France.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-France.png" width="750">
 
-   *  __output-base-forecast-Germany.png__
+   *  __output-change-point-forecast-Germany.png__
 
-   <img src="./supplementary/output-base-forecast-Germany.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Germany.png" width="750">
 
-   *  __output-base-forecast-Italy.png__
+   *  __output-change-point-forecast-Italy.png__
 
-   <img src="./supplementary/output-base-forecast-Italy.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Italy.png" width="750">
 
-   *  __output-base-forecast-Norway.png__
+   *  __output-change-point-forecast-Norway.png__
 
-   <img src="./supplementary/output-base-forecast-Norway.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Norway.png" width="750">
 
-   *  __output-base-forecast-Spain.png__
+   *  __output-change-point-forecast-Spain.png__
 
-   <img src="./supplementary/output-base-forecast-Spain.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Spain.png" width="750">
 
-   *  __output-base-forecast-Sweden.png__
+   *  __output-change-point-forecast-Sweden.png__
 
-   <img src="./supplementary/output-base-forecast-Sweden.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Sweden.png" width="750">
 
-   *  __output-base-forecast-Switzerland.png__
+   *  __output-change-point-forecast-Switzerland.png__
 
-   <img src="./supplementary/output-base-forecast-Switzerland.png" width="750">
+   <img src="./supplementary/output-change-point-forecast-Switzerland.png" width="750">
 
-   *  __output-base-forecast-United_Kingdom.png__
+   *  __output-change-point-forecast-United_Kingdom.png__
 
-   <img src="./supplementary/output-base-forecast-United_Kingdom.png" width="750">
-
+   <img src="./supplementary/output-change-point-forecast-United_Kingdom.png" width="750">
