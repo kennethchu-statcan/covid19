@@ -36,3 +36,6 @@ chmod ugo-w raw-covid19-Ottawa-cases-deaths.csv
 cp ../2020-06-09.01/COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx .
 chmod ugo-w COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx
 
+cp ../2020-06-09.01/Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx .
+chmod ugo-w Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx
+
