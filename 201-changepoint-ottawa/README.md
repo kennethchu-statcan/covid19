@@ -366,6 +366,14 @@ Main output files
 
 *  Similarly for the rest of the jurisdictions:
 
+   *  __output-change-point-3-panel-Ottawa.png__
+
+   ![three-panel plot](./supplementary/output-change-point-3-panel-Ottawa.png)
+
+   *  __output-change-point-stepsize-vs-chgpt-Ottawa.png__
+
+   ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Ottawa.png)
+
    *  __output-change-point-3-panel-AB.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-AB.png)
