@@ -339,27 +339,27 @@ wrapper.stan_inner <- function(
         #     control = list(adapt_delta = 0.90, max_treedepth = 10)
         #     );
 
-        fit <- rstan::sampling(
-            object  = m,
-            data    = stan_data,
-            iter    = 200,
-            warmup  = 100,
-            chains  = 4,
-            thin    = 4,
-            init    = list.init,
-            control = list(adapt_delta = 0.90, max_treedepth = 10)
-            );
-
-        #fit = rstan::sampling(
+        #fit <- rstan::sampling(
         #    object  = m,
         #    data    = stan_data,
-        #    iter    = 1000,
-        #    warmup  =  500,
+        #    iter    = 200,
+        #    warmup  = 100,
         #    chains  = 4,
         #    thin    = 4,
         #    init    = list.init,
         #    control = list(adapt_delta = 0.90, max_treedepth = 10)
         #    );
+
+        fit = rstan::sampling(
+            object  = m,
+            data    = stan_data,
+            iter    = 1000,
+            warmup  =  500,
+            chains  = 4,
+            thin    = 4,
+            init    = list.init,
+            control = list(adapt_delta = 0.90, max_treedepth = 10)
+            );
 
         }
 
