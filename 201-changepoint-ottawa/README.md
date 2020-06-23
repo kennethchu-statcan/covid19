@@ -374,6 +374,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Ottawa.png)
 
+   *  __output-change-point-forecast-Ottawa.png__
+
+   <img src="./supplementary/output-change-point-forecast-Ottawa.png" width="750">
+
    *  __output-change-point-3-panel-AB.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-AB.png)
