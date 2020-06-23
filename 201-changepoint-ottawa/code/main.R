@@ -30,6 +30,7 @@ code.files <- c(
     "initializePlot.R",
     "patchData.R",
     "plot-3-panel.R",
+    "plot-forecast.R",
     "plot-stepsize-vs-chgpt.R",
     "visualizeData-Ottawa.R",
     "wrapper-stan.R"

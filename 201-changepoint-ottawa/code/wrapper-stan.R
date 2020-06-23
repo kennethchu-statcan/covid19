@@ -56,10 +56,10 @@ wrapper.stan <- function(
         list.input = list.output
         );
 
-    #plot.forecast(
-    #    list.input      = list.output,
-    #    forecast.window = forecast.window
-    #    );
+    plot.forecast(
+        list.input      = list.output,
+        forecast.window = forecast.window
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
