@@ -386,6 +386,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-AB.png)
 
+   *  __output-change-point-forecast-AB.png__
+
+   <img src="./supplementary/output-change-point-forecast-AB.png" width="750">
+
    *  __output-change-point-3-panel-BC.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-BC.png)
@@ -393,6 +397,10 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-BC.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-BC.png)
+
+   *  __output-change-point-forecast-BC.png__
+
+   <img src="./supplementary/output-change-point-forecast-BC.png" width="750">
 
    *  __output-change-point-3-panel-ON.png__
 
@@ -402,6 +410,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-ON.png)
 
+   *  __output-change-point-forecast-ON.png__
+
+   <img src="./supplementary/output-change-point-forecast-ON.png" width="750">
+
    *  __output-change-point-3-panel-QC.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-QC.png)
@@ -409,6 +421,10 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-QC.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-QC.png)
+
+   *  __output-change-point-forecast-QC.png__
+
+   <img src="./supplementary/output-change-point-forecast-QC.png" width="750">
 
    *  __output-change-point-3-panel-Austria.png__
 
@@ -418,6 +434,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Austria.png)
 
+   *  __output-change-point-forecast-Austria.png__
+
+   <img src="./supplementary/output-change-point-forecast-Austria.png" width="750">
+
    *  __output-change-point-3-panel-Belgium.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Belgium.png)
@@ -425,6 +445,10 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-Belgium.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Belgium.png)
+
+   *  __output-change-point-forecast-Belgium.png__
+
+   <img src="./supplementary/output-change-point-forecast-Belgium.png" width="750">
 
    *  __output-change-point-3-panel-Denmark.png__
 
@@ -434,6 +458,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Denmark.png)
 
+   *  __output-change-point-forecast-Denmark.png__
+
+   <img src="./supplementary/output-change-point-forecast-Denmark.png" width="750">
+
    *  __output-change-point-3-panel-France.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-France.png)
@@ -441,6 +469,10 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-France.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-France.png)
+
+   *  __output-change-point-forecast-France.png__
+
+   <img src="./supplementary/output-change-point-forecast-France.png" width="750">
 
    *  __output-change-point-3-panel-Germany.png__
 
@@ -450,6 +482,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Germany.png)
 
+   *  __output-change-point-forecast-Germany.png__
+
+   <img src="./supplementary/output-change-point-forecast-Germany.png" width="750">
+
    *  __output-change-point-3-panel-Italy.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Italy.png)
@@ -457,6 +493,10 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-Italy.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Italy.png)
+
+   *  __output-change-point-forecast-Italy.png__
+
+   <img src="./supplementary/output-change-point-forecast-Italy.png" width="750">
 
    *  __output-change-point-3-panel-Norway.png__
 
@@ -466,6 +506,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Norway.png)
 
+   *  __output-change-point-forecast-Norway.png__
+
+   <img src="./supplementary/output-change-point-forecast-Norway.png" width="750">
+
    *  __output-change-point-3-panel-Spain.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Spain.png)
@@ -473,6 +517,10 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-Spain.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Spain.png)
+
+   *  __output-change-point-forecast-Spain.png__
+
+   <img src="./supplementary/output-change-point-forecast-Spain.png" width="750">
 
    *  __output-change-point-3-panel-Sweden.png__
 
@@ -482,6 +530,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Sweden.png)
 
+   *  __output-change-point-forecast-Sweden.png__
+
+   <img src="./supplementary/output-change-point-forecast-Sweden.png" width="750">
+
    *  __output-change-point-3-panel-Switzerland.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-Switzerland.png)
@@ -490,6 +542,10 @@ Main output files
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-Switzerland.png)
 
+   *  __output-change-point-forecast-Switzerland.png__
+
+   <img src="./supplementary/output-change-point-forecast-Switzerland.png" width="750">
+
    *  __output-change-point-3-panel-United_Kingdom.png__
 
    ![three-panel plot](./supplementary/output-change-point-3-panel-United_Kingdom.png)
@@ -497,62 +553,6 @@ Main output files
    *  __output-change-point-stepsize-vs-chgpt-United_Kingdom.png__
 
    ![stepsize-vs-changepoint plot](./supplementary/output-change-point-stepsize-vs-chgpt-United_Kingdom.png)
-
-   *  __output-change-point-forecast-AB.png__
-
-   <img src="./supplementary/output-change-point-forecast-AB.png" width="750">
-
-   *  __output-change-point-forecast-BC.png__
-
-   <img src="./supplementary/output-change-point-forecast-BC.png" width="750">
-
-   *  __output-change-point-forecast-ON.png__
-
-   <img src="./supplementary/output-change-point-forecast-ON.png" width="750">
-
-   *  __output-change-point-forecast-QC.png__
-
-   <img src="./supplementary/output-change-point-forecast-QC.png" width="750">
-
-   *  __output-change-point-forecast-Austria.png__
-
-   <img src="./supplementary/output-change-point-forecast-Austria.png" width="750">
-
-   *  __output-change-point-forecast-Belgium.png__
-
-   <img src="./supplementary/output-change-point-forecast-Belgium.png" width="750">
-
-   *  __output-change-point-forecast-Denmark.png__
-
-   <img src="./supplementary/output-change-point-forecast-Denmark.png" width="750">
-
-   *  __output-change-point-forecast-France.png__
-
-   <img src="./supplementary/output-change-point-forecast-France.png" width="750">
-
-   *  __output-change-point-forecast-Germany.png__
-
-   <img src="./supplementary/output-change-point-forecast-Germany.png" width="750">
-
-   *  __output-change-point-forecast-Italy.png__
-
-   <img src="./supplementary/output-change-point-forecast-Italy.png" width="750">
-
-   *  __output-change-point-forecast-Norway.png__
-
-   <img src="./supplementary/output-change-point-forecast-Norway.png" width="750">
-
-   *  __output-change-point-forecast-Spain.png__
-
-   <img src="./supplementary/output-change-point-forecast-Spain.png" width="750">
-
-   *  __output-change-point-forecast-Sweden.png__
-
-   <img src="./supplementary/output-change-point-forecast-Sweden.png" width="750">
-
-   *  __output-change-point-forecast-Switzerland.png__
-
-   <img src="./supplementary/output-change-point-forecast-Switzerland.png" width="750">
 
    *  __output-change-point-forecast-United_Kingdom.png__
 
