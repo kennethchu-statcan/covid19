@@ -31,7 +31,7 @@ Type 'q()' to quit R.
 > print( output.directory );
 [1] "/Users/woodenbeauty/Work/github/kennethchu-statcan/covid19/201-changepoint-ottawa/output"
 > print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-[1] "2020-06-21 14:19:40 EDT"
+[1] "2020-06-21 20:23:56 EDT"
 > 
 > start.proc.time <- proc.time();
 > 
@@ -464,7 +464,7 @@ NULL
 +     DF.fatality.rates  = DF.fatality.rates,
 +     DF.serial.interval = DF.serial.interval,
 +     forecast.window    = 14,
-+     DEBUG              = TRUE # FALSE # TRUE
++     DEBUG              = FALSE # TRUE
 +     );
 
 ### ~~~~~~~~~~~~~~~~~~~~ ###
@@ -2792,7 +2792,7 @@ List of 20
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : NULL
   .. ..$ : chr [1:16] "deaths" "deaths" "deaths" "deaths" ...
- $ f            : num [1:200, 1:16] 9.07e-08 2.15e-06 1.11e-05 3.14e-05 6.43e-05 ...
+ $ f            : num [1:200, 1:16] 1.61e-08 2.64e-07 1.63e-06 5.63e-06 1.41e-05 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : NULL
   .. ..$ : chr [1:16] "f" "f" "f" "f" ...
@@ -2813,169 +2813,203 @@ List of 20
  $ x            : int [1:200] 1 2 3 4 5 6 7 8 9 10 ...
 NULL
 
+SAMPLING FOR MODEL 'change-point' NOW (CHAIN 4).
+
 SAMPLING FOR MODEL 'change-point' NOW (CHAIN 2).
 
+SAMPLING FOR MODEL 'change-point' NOW (CHAIN 3).
+
 SAMPLING FOR MODEL 'change-point' NOW (CHAIN 1).
+Chain 3: 
+Chain 3: Chain Gradient evaluation took 0.135795 secondsChain 24: Chain 
+1: Chain : 3: 
+
+1000 transitions using 10 leapfrog steps per transition would take 1357.95 seconds.
+Chain 3: Chain Chain 1Adjust your expectations accordingly!
+: 2Gradient evaluation took 0.13742 seconds: 
+
+Chain Chain Chain Gradient evaluation took 0.140284 seconds3
+: 4Chain : 2Gradient evaluation took 0.140379 seconds: 
+1000 transitions using 10 leapfrog steps per transition would take 1402.84 seconds.1
+: Chain 1000 transitions using 10 leapfrog steps per transition would take 1374.2 seconds.
+2Chain Chain : 3Adjust your expectations accordingly!4: : 
+1000 transitions using 10 leapfrog steps per transition would take 1403.79 seconds.Chain 
+2
+: Chain 
+
+4Chain : Chain Adjust your expectations accordingly!2
+: 1
+Chain : 4Adjust your expectations accordingly!: 
+
+Chain Chain 4: 1
+: 
 Chain 1: 
-Chain 1: Gradient evaluation took 0.092444 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 924.44 seconds.
-Chain 1: Adjust your expectations accordingly!
+Chain 3: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 1: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 2: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 4: Iteration:   1 / 1000 [  0%]  (Warmup)
+Chain 1: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 4: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 3: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 2: Iteration: 100 / 1000 [ 10%]  (Warmup)
+Chain 1: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 4: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 3: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 2: Iteration: 200 / 1000 [ 20%]  (Warmup)
+Chain 1: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 4: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 3: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 2: Iteration: 300 / 1000 [ 30%]  (Warmup)
+Chain 1: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 4: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 3: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 2: Iteration: 400 / 1000 [ 40%]  (Warmup)
+Chain 1: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 1: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 4: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 4: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 3: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 3: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 2: Iteration: 500 / 1000 [ 50%]  (Warmup)
+Chain 2: Iteration: 501 / 1000 [ 50%]  (Sampling)
+Chain 1: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 4: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 3: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 2: Iteration: 600 / 1000 [ 60%]  (Sampling)
+Chain 1: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 4: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 3: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 2: Iteration: 700 / 1000 [ 70%]  (Sampling)
+Chain 1: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 4: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 3: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 2: Iteration: 800 / 1000 [ 80%]  (Sampling)
+Chain 1: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 4: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 3: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 2: Iteration: 900 / 1000 [ 90%]  (Sampling)
+Chain 1: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 1: 
+Chain 1:  Elapsed Time: 37878.7 seconds (Warm-up)
+Chain 1:                41869.9 seconds (Sampling)
+Chain 1:                79748.6 seconds (Total)
 Chain 1: 
-Chain 1: WARNING: There aren't enough warmup iterations to fit the
-Chain 1:          three stages of adaptation as currently configured.
-Chain 1:          Reducing each adaptation stage to 15%/75%/10% of
-Chain 1:          the given number of warmup iterations:
-Chain 1:            init_buffer = 3
-Chain 1:            adapt_window = 15
-Chain 1:            term_buffer = 2
-Chain 1: 
+Chain 4: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 38254.4 seconds (Warm-up)
+Chain 4:                41662.6 seconds (Sampling)
+Chain 4:                79917 seconds (Total)
+Chain 4: 
+Chain 3: Iteration: 1000 / 1000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 40335.4 seconds (Warm-up)
+Chain 3:                40665.6 seconds (Sampling)
+Chain 3:                81001 seconds (Total)
+Chain 3: 
+Chain 2: Iteration: 1000 / 1000 [100%]  (Sampling)
 Chain 2: 
-Chain 2: Gradient evaluation took 0.095208 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 952.08 seconds.
-Chain 2: Adjust your expectations accordingly!
-Chain 2: 
-Chain 2: 
-Chain 2: WARNING: There aren't enough warmup iterations to fit the
-Chain 2:          three stages of adaptation as currently configured.
-Chain 2:          Reducing each adaptation stage to 15%/75%/10% of
-Chain 2:          the given number of warmup iterations:
-Chain 2:            init_buffer = 3
-Chain 2:            adapt_window = 15
-Chain 2:            term_buffer = 2
-Chain 2: 
-Chain 1: Iteration:  1 / 40 [  2%]  (Warmup)
-Chain 2: Iteration:  1 / 40 [  2%]  (Warmup)
-Chain 2: Iteration:  4 / 40 [ 10%]  (Warmup)
-Chain 1: Iteration:  4 / 40 [ 10%]  (Warmup)
-Chain 2: Iteration:  8 / 40 [ 20%]  (Warmup)
-Chain 1: Iteration:  8 / 40 [ 20%]  (Warmup)
-Chain 1: Iteration: 12 / 40 [ 30%]  (Warmup)
-Chain 1: Iteration: 16 / 40 [ 40%]  (Warmup)
-Chain 2: Iteration: 12 / 40 [ 30%]  (Warmup)
-Chain 1: Iteration: 20 / 40 [ 50%]  (Warmup)
-Chain 1: Iteration: 21 / 40 [ 52%]  (Sampling)
-Chain 2: Iteration: 16 / 40 [ 40%]  (Warmup)
-Chain 1: Iteration: 24 / 40 [ 60%]  (Sampling)
-Chain 2: Iteration: 20 / 40 [ 50%]  (Warmup)
-Chain 1: Iteration: 28 / 40 [ 70%]  (Sampling)
-Chain 1: Iteration: 32 / 40 [ 80%]  (Sampling)
-Chain 1: Iteration: 36 / 40 [ 90%]  (Sampling)
-Chain 2: Iteration: 21 / 40 [ 52%]  (Sampling)
-Chain 1: Iteration: 40 / 40 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 7.55832 seconds (Warm-up)
-Chain 1:                62.3996 seconds (Sampling)
-Chain 1:                69.9579 seconds (Total)
-Chain 1: 
-Chain 2: Iteration: 24 / 40 [ 60%]  (Sampling)
-Chain 2: Iteration: 28 / 40 [ 70%]  (Sampling)
-Chain 2: Iteration: 32 / 40 [ 80%]  (Sampling)
-Chain 2: Iteration: 36 / 40 [ 90%]  (Sampling)
-Chain 2: Iteration: 40 / 40 [100%]  (Sampling)
-Chain 2: 
-Chain 2:  Elapsed Time: 62.6605 seconds (Warm-up)
-Chain 2:                875.672 seconds (Sampling)
-Chain 2:                938.333 seconds (Total)
+Chain 2:  Elapsed Time: 41786.8 seconds (Warm-up)
+Chain 2:                39830.1 seconds (Sampling)
+Chain 2:                81616.9 seconds (Total)
 Chain 2: 
 
 str(list.output[['out']])
 List of 24
- $ kappa       : num [1:40(1d)] 2.01 2.28 2.13 1.73 2.28 ...
+ $ kappa       : num [1:500(1d)] 2.54 2.66 2.69 2.53 2.68 ...
   ..- attr(*, "dimnames")=List of 1
   .. ..$ iterations: NULL
- $ R0          : num [1:40, 1:16] 4.04 3.86 3.88 4.12 4.01 ...
+ $ R0          : num [1:500, 1:16] 5.87 5.54 5.65 5.96 5.74 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ tau         : num [1:40(1d)] 5.4 4.45 4.89 5.72 4.79 ...
+ $ tau         : num [1:500(1d)] 15.6 14.6 18 14.9 14.8 ...
   ..- attr(*, "dimnames")=List of 1
   .. ..$ iterations: NULL
- $ y           : num [1:40, 1:16] 7.96 8.67 8.3 6.87 8.32 ...
+ $ y           : num [1:500, 1:16] 1.52 1.96 2.08 1.65 1.79 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ Uchg1       : num [1:40, 1:16] 0.187 0.195 0.184 0.194 0.195 ...
+ $ Uchg1       : num [1:500, 1:16] 0.109 0.122 0.129 0.117 0.12 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ Uchg2       : num [1:40, 1:16] 0.529 0.548 0.563 0.531 0.552 ...
+ $ Uchg2       : num [1:500, 1:16] 0.242 0.245 0.273 0.214 0.157 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ Uchg3       : num [1:40, 1:16] 0.645 0.667 0.692 0.654 0.687 ...
+ $ Uchg3       : num [1:500, 1:16] 0.491 0.426 0.454 0.489 0.477 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ step1       : num [1:40, 1:16] -0.911 -0.749 -0.851 -0.906 -0.814 ...
+ $ step1       : num [1:500, 1:16] -1.04 -1.12 -1.1 -1.09 -1.07 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ step2       : num [1:40, 1:16] -0.925 -1.019 -0.934 -0.954 -0.999 ...
+ $ step2       : num [1:500, 1:16] -1.34 -1.34 -1.33 -1.34 -1.34 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ step3       : num [1:40, 1:16] 0.662 0.602 0.677 0.716 0.651 ...
+ $ step3       : num [1:500, 1:16] 0.799 0.799 0.794 0.798 0.789 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ phi         : num [1:40(1d)] 1.85 1.84 1.71 1.78 1.92 ...
+ $ phi         : num [1:500(1d)] 2.08 2.21 2.19 2.01 2.11 ...
   ..- attr(*, "dimnames")=List of 1
   .. ..$ iterations: NULL
- $ convolution : num [1:40(1d)] 3.05e-07 1.88e-07 7.45e-08 4.29e-08 1.93e-07 ...
+ $ convolution : num [1:500(1d)] 0.001362 0.000422 0.000348 0.000447 0.004785 ...
   ..- attr(*, "dimnames")=List of 1
   .. ..$ iterations: NULL
- $ chgpt1      : num [1:40, 1:16] 31 31 31 31 31 31 31 31 31 31 ...
+ $ chgpt1      : num [1:500, 1:16] 31 31 31 31 31 31 31 31 31 31 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ chgpt2      : num [1:40, 1:16] 32.6 32.6 32.7 32.6 32.7 ...
+ $ chgpt2      : num [1:500, 1:16] 31.7 31.7 31.8 31.6 31.5 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ chgpt3      : num [1:40, 1:16] 97.2 98.7 100.4 97.8 100 ...
+ $ chgpt3      : num [1:500, 1:16] 86.9 82.5 84.4 86.8 86 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ iterations: NULL
   .. ..$           : NULL
- $ prediction  : num [1:40, 1:200, 1:16] 7.96 8.67 8.3 6.87 8.32 ...
+ $ prediction  : num [1:500, 1:200, 1:16] 1.52 1.96 2.08 1.65 1.79 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ E_deaths    : num [1:40, 1:200, 1:16] 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 ...
+ $ E_deaths    : num [1:500, 1:200, 1:16] 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ Rt          : num [1:40, 1:200, 1:16] 4.04 3.86 3.88 4.12 4.01 ...
+ $ Rt          : num [1:500, 1:200, 1:16] 5.87 5.54 5.65 5.96 5.74 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ lp0         : num [1:40, 1:200, 1:16] -1e-09 -1e-09 -1e-09 -1e-09 -1e-09 ...
+ $ lp0         : num [1:500, 1:200, 1:16] -1e-09 -1e-09 -1e-09 -1e-09 -1e-09 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ lp1         : num [1:40, 1:200, 1:16] -1e-09 -1e-09 -1e-09 -1e-09 -1e-09 ...
+ $ lp1         : num [1:500, 1:200, 1:16] -1e-09 -1e-09 -1e-09 -1e-09 -1e-09 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ convolution0: num [1:40(1d)] 2.15e+16 2.14e+16 2.62e+16 2.63e+16 1.63e+16 ...
+ $ convolution0: num [1:500(1d)] 1.77e+22 4.60e+21 7.26e+21 2.58e+22 7.07e+21 ...
   ..- attr(*, "dimnames")=List of 1
   .. ..$ iterations: NULL
- $ prediction0 : num [1:40, 1:200, 1:16] 7.96 8.67 8.3 6.87 8.32 ...
+ $ prediction0 : num [1:500, 1:200, 1:16] 1.52 1.96 2.08 1.65 1.79 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ E_deaths0   : num [1:40, 1:200, 1:16] 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 ...
+ $ E_deaths0   : num [1:500, 1:200, 1:16] 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 1e-09 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ iterations: NULL
   .. ..$           : NULL
   .. ..$           : NULL
- $ lp__        : num [1:40(1d)] 837604 837605 837596 837603 837604 ...
+ $ lp__        : num [1:500(1d)] 837657 837668 837663 837656 837661 ...
   ..- attr(*, "dimnames")=List of 1
   .. ..$ iterations: NULL
 NULL
@@ -2986,21 +3020,17 @@ wrapper.stan() quits.
 > ##################################################
 > print( warnings() );
 Warning messages:
-1: There were 21 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See
-http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-2: There were 19 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
+1: There were 500 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
 http://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded
-3: There were 2 chains where the estimated Bayesian Fraction of Missing Information was low. See
-http://mc-stan.org/misc/warnings.html#bfmi-low
-4: Examine the pairs() plot to diagnose sampling problems
+2: Examine the pairs() plot to diagnose sampling problems
 
-5: The largest R-hat is NA, indicating chains have not mixed.
+3: The largest R-hat is NA, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#r-hat
-6: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+4: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#bulk-ess
-7: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+5: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#tail-ess
 > 
@@ -3050,11 +3080,11 @@ loaded via a namespace (and not attached):
 [45] compiler_3.6.2   
 > 
 > print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-[1] "2020-06-21 14:39:29 EDT"
+[1] "2020-06-23 01:24:18 EDT"
 > 
 > stop.proc.time <- proc.time();
 > print( stop.proc.time - start.proc.time );
-    user   system  elapsed 
-1171.038   18.442 1189.136 
+      user     system    elapsed 
+320257.678   2339.404 104421.293 
 > 
 > 

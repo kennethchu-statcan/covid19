@@ -173,20 +173,16 @@ The following object is masked from ‘package:lubridate’:
     stamp
 
 Warning messages:
-1: There were 21 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See
-http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup 
-2: There were 19 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
+1: There were 500 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See
 http://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded 
-3: There were 2 chains where the estimated Bayesian Fraction of Missing Information was low. See
-http://mc-stan.org/misc/warnings.html#bfmi-low 
-4: Examine the pairs() plot to diagnose sampling problems
+2: Examine the pairs() plot to diagnose sampling problems
  
-5: The largest R-hat is NA, indicating chains have not mixed.
+3: The largest R-hat is NA, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#r-hat 
-6: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+4: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#bulk-ess 
-7: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+5: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 http://mc-stan.org/misc/warnings.html#tail-ess 
