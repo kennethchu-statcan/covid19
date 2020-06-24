@@ -26,5 +26,6 @@ xcopy /E /I /Y %codeDIR% %outROOT%\code
 
 :: ########################################################
 :: R command
+set PATH=C:\Program Files\R\R-3.6.3\bin;%PATH%
 Rscript %codeDIR%\main.R %dataDIR% %codeDIR% %outROOT% 1> %outROOT%\stdout.R.main 2> %outROOT%\stderr.R.main
 
