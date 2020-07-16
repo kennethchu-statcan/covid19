@@ -30,8 +30,8 @@ mv    qu*   raw-covid19-Ottawa-cases-deaths.json
 chmod ugo-w raw-covid19-Ottawa-cases-deaths.json
 
 wget https://opendata.arcgis.com/datasets/02c99319ef44488e85cd4f96f5061f20_0.csv
-mv 02c99319ef44488e85cd4f96f5061f20_0.csv raw-covid19-Ottawa-hospitalizatioans.csv
-chmod ugo-w raw-covid19-Ottawa-hospitalizatioans.csv
+mv 02c99319ef44488e85cd4f96f5061f20_0.csv raw-covid19-Ottawa-hospitalizations.csv
+chmod ugo-w raw-covid19-Ottawa-hospitalizations.csv
 
 wget https://opendata.arcgis.com/datasets/cf9abb0165b34220be8f26790576a5e7_0.csv
 mv cf9abb0165b34220be8f26790576a5e7_0.csv raw-covid19-Ottawa-cases-deaths.csv
