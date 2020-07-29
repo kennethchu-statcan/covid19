@@ -184,6 +184,7 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,1},\,\alpha_{m,2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)]),\;\textnormal{\small{for\;each}}\;\,m"/>
 
+       and
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,3}\;\sim\;\textnormal{\small{Uniform}}([-2,2]),\;\textnormal{\small{for\;each}}\;\,m"/>
 
