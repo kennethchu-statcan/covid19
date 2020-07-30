@@ -177,6 +177,8 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{m,2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,]),\;\textnormal{\small{for\;each}}\;\,m"/>
 
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{m,3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/05/01\,,\textnormal{Present}\,]),\;\textnormal{\small{for\;each}}\;\,m"/>
+
    *   *&alpha;<sub>m,k</sub>*
        is the (random, unobserved) log-linear change (''step size'')
        in reproduction number at the *k*-th change-point for jurisdiction *m*,
