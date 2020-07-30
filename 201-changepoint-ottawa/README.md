@@ -190,11 +190,11 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,3}\;\sim\;\textnormal{\small{Uniform}}([-2,2]),\;\textnormal{\small{for\;each}}\;\,m"/>
 
-   *   *I(t-&gamma;<sub>m,k</sub>)* is the binary indicator variable,
+   *   *I(t>&gamma;<sub>m,k</sub>)* is the binary indicator variable,
        for jurisdiction *m*,
        which indicates whether time *t* is
-       before (*I(t-&gamma;<sub>m,k</sub>) = 0*) or
-       after (*I(t-&gamma;<sub>m,k</sub>) = 1*)
+       before (*I(t>&gamma;<sub>m,k</sub>) = 0*) or
+       after (*I(t>&gamma;<sub>m,k</sub>) = 1*)
        the *k*-th change-point of jurisdiction *m*.
 
    *   *R<sub>m,0</sub>* is the jurisdiction-specific initial reproduction number,
