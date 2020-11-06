@@ -1,0 +1,159 @@
+---
+title: "ggplotly geoms"
+author: "Kenneth Chu"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    theme: cosmo
+#   source_code: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(plyr)
+# library(plotly)
+
+# Make some noisily increasing data
+set.seed(955)
+dat <- data.frame(cond = rep(c("A", "B"), each=10),
+                  xvar = 1:20 + rnorm(20,sd=3),
+                  yvar = 1:20 + rnorm(20,sd=3))
+```
+
+geom_point
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Scatter Chart with geom_point
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_case(
+    DF.input = DF.ottawa
+    );
+```
+
+
+### geom_smooth Linear Regression
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_death(
+    DF.input = DF.ottawa
+    );
+```
+
+Row
+-----------------------------------------------------------------------
+
+### geom_smooth with Loess Smoothed Fit
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_hospital.admission(
+    DF.input = DF.ottawa
+    );
+```
+
+### Constraining Slope with stat_smooth
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_occupancy.hospital(
+    DF.input = DF.ottawa
+    );
+```
+
+geom_density
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### stat_density Example
+
+```{r, fig.width = 16}
+dfGamma = data.frame(nu75 = rgamma(100, 0.75),
+           nu1 = rgamma(100, 1),
+           nu2 = rgamma(100, 2))
+
+dfGamma = stack(dfGamma)
+
+p <- ggplot(dfGamma, aes(x = values)) +
+            stat_density(aes(group = ind, color = ind),position="identity",geom="line")
+# ggplotly(p)
+p
+```
+
+### Add Conditional Density Curves to Plot
+
+```{r, fig.width = 16}
+dim1 <- c(rnorm(100, mean=1), rnorm(100, mean=4))
+dim2 <- rnorm(200, mean=1)
+cat <- factor(c(rep("a", 100), rep("b", 100)))
+mydf <- data.frame(cbind(dim2, dim1, cat))
+p <- ggplot(data=mydf, aes(x=dim1, y=dim2, colour=as.factor(cat))) +
+  geom_point() +
+  stat_density(aes(x=dim1, y=(-2+(..scaled..))),
+               position="identity", geom="line")
+
+# stuff <- ggplot_build(p)
+# xrange <- stuff[[2]]$ranges[[1]]$x.range  # extract the x range to make the
+#                                           # new densities align with y-axis
+#
+# ## Get densities of dim2
+# ds <- do.call(rbind, lapply(unique(mydf$cat), function(lev) {
+#     dens <- with(mydf, density(dim2[cat==lev]))
+#     data.frame(x=dens$y+xrange[1], y=dens$x, cat=lev)
+# }))
+#
+# p <- p + geom_path(data=ds, aes(x=x, y=y, color=factor(cat)))
+
+# ggplotly(p)
+p
+```
+
+Row
+-----------------------------------------------------------------------
+
+### geom_density and facet_wrap Together
+
+```{r, fig.width = 16}
+dd<-data.frame(matrix(rnorm(144, mean=2, sd=2),72,2),c(rep("A",24),rep("B",24),rep("C",24)))
+colnames(dd) <- c("x_value", "Predicted_value",  "State_CD")
+
+dd <- data.frame(
+  predicted = rnorm(72, mean = 2, sd = 2),
+  state = rep(c("A", "B", "C"), each = 24)
+)
+
+grid <- with(dd, seq(min(predicted), max(predicted), length = 100))
+normaldens <- ddply(dd, "state", function(df) {
+  data.frame(
+    predicted = grid,
+    density = dnorm(grid, mean(df$predicted), sd(df$predicted))
+  )
+})
+
+p <- ggplot(dd, aes(predicted))  +
+            geom_density() +
+            geom_line(aes(y = density), data = normaldens, colour = "red") +
+            facet_wrap(~ state)
+# ggplotly(p)
+p
+```
+
+### Density and Scatterplot Overlay Using geom_density
+
+```{r, fig.width = 16}
+df <- data.frame(x <- rchisq(1000, 10, 10),
+                 y <- rnorm(1000))
+
+p <- ggplot(df, aes(x, y)) +
+     geom_point(alpha = 0.5) +
+     geom_density_2d() +
+     theme(panel.background = element_rect(fill = '#ffffff'))
+
+# ggplotly(p)
+p
+```
