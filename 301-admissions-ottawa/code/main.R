@@ -24,6 +24,7 @@ code.files <- c(
     "getData-ECDC.R",
     "getData-GoCInfobase.R",
     "getData-Ottawa.R",
+    "getData-Ottawa-cases-deaths.R",
     "getData-serial-interval.R",
     "getData-raw.R",
     "getData-wIFR.R",
@@ -39,10 +40,6 @@ code.files <- c(
 for ( code.file in code.files ) {
     source(file.path(code.directory,code.file));
     }
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot  <- "2020-11-04.01";
-data.directory <- file.path(data.directory,data.snapshot);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 jurisdictions <- c(
@@ -82,8 +79,9 @@ file.copy(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(7654321);
 
+data.snapshot <- "2020-11-04.01";
 DF.ottawa <- getData.Ottawa(
-    csv.input = file.path(data.directory,"raw-covid19-Ottawa.csv")
+    csv.input = file.path(data.directory,data.snapshot,"raw-covid19-Ottawa.csv")
     );
 
 print( str(DF.ottawa) );
@@ -122,35 +120,15 @@ for ( vignette.file in vignette.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-
-print( warnings() );
-
-print( getOption('repos') );
-
-print( .libPaths() );
-
-print( sessionInfo() );
-
-print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-
-stop.proc.time <- proc.time();
-print( stop.proc.time - start.proc.time );
-
-quit(save="no");
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+data.snapshot <- "2020-06-21.01";
 
 list.raw.data <- getData.raw(
-    xlsx.ECDC                  = file.path(data.directory,'raw-covid19-ECDC.xlsx'),
-    csv.JHU.cases              = file.path(data.directory,'raw-covid19-JHU-cases.csv'),
-    csv.JHU.deaths             = file.path(data.directory,'raw-covid19-JHU-deaths.csv'),
-    csv.GoCInfobase            = file.path(data.directory,'raw-covid19-GoCInfobase.csv'),
-    csv.Ottawa.hospitalization = file.path(data.directory,"raw-covid19-Ottawa-hospitalizations.csv"),
-    jsn.Ottawa.case.and.death  = file.path(data.directory,"raw-covid19-Ottawa-cases-deaths.json")
+    xlsx.ECDC                   = file.path(data.directory,data.snapshot,'raw-covid19-ECDC.xlsx'),
+    csv.JHU.cases               = file.path(data.directory,data.snapshot,'raw-covid19-JHU-cases.csv'),
+    csv.JHU.deaths              = file.path(data.directory,data.snapshot,'raw-covid19-JHU-deaths.csv'),
+    csv.GoCInfobase             = file.path(data.directory,data.snapshot,'raw-covid19-GoCInfobase.csv'),
+    xlsx.Ottawa.hospitalization = file.path(data.directory,data.snapshot,"Covid19_CODOttawaResidentHospitalAdmissionsByDay_EN.xlsx"),
+    xlsx.Ottawa.case.and.death  = file.path(data.directory,data.snapshot,"COVID-19_Ottawa_case_death_daily_count_data_EN.xlsx")
     );
 print( names(list.raw.data) );
 
@@ -177,15 +155,15 @@ print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.fatality.rates <- getData.wIFR(
-    csv.wIFR.europe = file.path(data.directory,"weighted-fatality-europe.csv"),
-    csv.wIFR.canada = file.path(data.directory,"weighted-fatality-canada.csv")
+    csv.wIFR.europe = file.path(data.directory,data.snapshot,"weighted-fatality-europe.csv"),
+    csv.wIFR.canada = file.path(data.directory,data.snapshot,"weighted-fatality-canada.csv")
     );
 print( str(DF.fatality.rates) );
 print( summary(DF.fatality.rates) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.serial.interval <- getData.serial.interval(
-    csv.serial.interval = file.path(data.directory,"serial-interval.csv")
+    csv.serial.interval = file.path(data.directory,data.snapshot,"serial-interval.csv")
     );
 
 print( str(DF.serial.interval) );
@@ -193,15 +171,15 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.wrapper.stan <- wrapper.stan(
-    StanModel          = StanModel,
-    FILE.stan.model    = FILE.stan.model,
-    DF.covid19         = DF.covid19,
-    DF.fatality.rates  = DF.fatality.rates,
-    DF.serial.interval = DF.serial.interval,
-    forecast.window    = 14,
-    DEBUG              = FALSE # TRUE
-    );
+# results.wrapper.stan <- wrapper.stan(
+#     StanModel          = StanModel,
+#     FILE.stan.model    = FILE.stan.model,
+#     DF.covid19         = DF.covid19,
+#     DF.fatality.rates  = DF.fatality.rates,
+#     DF.serial.interval = DF.serial.interval,
+#     forecast.window    = 14,
+#     DEBUG              = FALSE # TRUE
+#     );
 
 ##################################################
 print( warnings() );
