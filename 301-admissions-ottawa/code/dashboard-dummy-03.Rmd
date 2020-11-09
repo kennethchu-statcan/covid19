@@ -1,0 +1,89 @@
+---
+title: "COVID-19 Ottawa"
+author: "DScD StatCan"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    theme: cosmo
+#   source_code: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(plyr)
+# library(plotly)
+```
+
+Cases & Deaths
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Daily new case counts
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_case(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+### Cumulative death counts
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_death(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+Hospital
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Daily new hospital admissions
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_hospital.admission(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+### Daily hospital occupancy
+
+```{r, fig.width = 16}
+visualizeData.Ottawa_occupancy.hospital(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+Estimates
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Daily new infections, hopsital admission, R_t
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"output-change-point-3-panel-Ottawa.png")
+    )
+```
+
+Forecast
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Hospital Admission Forecast
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"output-change-point-forecast-Ottawa.png")
+    )
+```
