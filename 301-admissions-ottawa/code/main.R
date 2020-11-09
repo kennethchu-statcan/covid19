@@ -86,6 +86,8 @@ DF.ottawa <- getData.Ottawa(
 print( str(DF.ottawa) );
 print( summary(DF.ottawa) );
 
+DF.ottawa.plot <- DF.ottawa;
+
 # visualizeData.Ottawa(
 #     DF.input = DF.ottawa
 #     );
@@ -193,15 +195,30 @@ DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
 DF.dummy <- rbind(DF.ottawa,DF.ontario);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.wrapper.stan <- wrapper.stan(
-    StanModel          = StanModel,
-    FILE.stan.model    = FILE.stan.model,
-    DF.covid19         = DF.dummy, # DF.ottawa, # DF.covid19,
-    DF.fatality.rates  = DF.fatality.rates,
-    DF.serial.interval = DF.serial.interval,
-    forecast.window    = 14,
-    DEBUG              = TRUE # FALSE
+# results.wrapper.stan <- wrapper.stan(
+#     StanModel          = StanModel,
+#     FILE.stan.model    = FILE.stan.model,
+#     DF.covid19         = DF.dummy, # DF.ottawa, # DF.covid19,
+#     DF.fatality.rates  = DF.fatality.rates,
+#     DF.serial.interval = DF.serial.interval,
+#     forecast.window    = 14,
+#     DEBUG              = TRUE # FALSE
+#     );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+dashboard.files <- c(
+#   "dashboard-dummy-01",
+#   "dashboard-dummy-02"
+    "dashboard-dummy-03"
     );
+
+for ( dashboard.file in dashboard.files ) {
+    rmarkdown::render(
+        input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+        output_format = flexdashboard::flex_dashboard(),
+        output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+        );
+    }
 
 ##################################################
 print( warnings() );
