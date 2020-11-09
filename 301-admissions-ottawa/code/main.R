@@ -83,9 +83,7 @@ data.snapshot <- "2020-11-04.01";
 DF.ottawa <- getData.Ottawa(
     csv.input = file.path(data.directory,data.snapshot,"raw-covid19-Ottawa.csv")
     );
-
 print( str(DF.ottawa) );
-
 print( summary(DF.ottawa) );
 
 # visualizeData.Ottawa(
@@ -122,6 +120,21 @@ for ( vignette.file in vignette.files ) {
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 data.snapshot <- "2020-06-21.01";
 
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.fatality.rates <- getData.wIFR(
+    csv.wIFR.europe = file.path(data.directory,data.snapshot,"weighted-fatality-europe.csv"),
+    csv.wIFR.canada = file.path(data.directory,data.snapshot,"weighted-fatality-canada.csv")
+    );
+print( str(DF.fatality.rates) );
+print( summary(DF.fatality.rates) );
+
+DF.serial.interval <- getData.serial.interval(
+    csv.serial.interval = file.path(data.directory,data.snapshot,"serial-interval.csv")
+    );
+print( str(DF.serial.interval) );
+print( summary(DF.serial.interval) );
+print( sum(DF.serial.interval[,"fit"]) );
+
 list.raw.data <- getData.raw(
     xlsx.ECDC                   = file.path(data.directory,data.snapshot,'raw-covid19-ECDC.xlsx'),
     csv.JHU.cases               = file.path(data.directory,data.snapshot,'raw-covid19-JHU-cases.csv'),
@@ -154,32 +167,41 @@ print( summary(DF.covid19) );
 print( unique( DF.covid19[,"jurisdiction"] ) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.fatality.rates <- getData.wIFR(
-    csv.wIFR.europe = file.path(data.directory,data.snapshot,"weighted-fatality-europe.csv"),
-    csv.wIFR.canada = file.path(data.directory,data.snapshot,"weighted-fatality-canada.csv")
-    );
-print( str(DF.fatality.rates) );
-print( summary(DF.fatality.rates) );
+print( str(DF.ottawa) );
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.serial.interval <- getData.serial.interval(
-    csv.serial.interval = file.path(data.directory,data.snapshot,"serial-interval.csv")
+colnames(DF.ottawa) <-gsub(
+    x           = colnames(DF.ottawa),
+    pattern     = "new.cases",
+    replacement = "case"
     );
 
-print( str(DF.serial.interval) );
-print( summary(DF.serial.interval) );
-print( sum(DF.serial.interval[,"fit"]) );
+colnames(DF.ottawa) <-gsub(
+    x           = colnames(DF.ottawa),
+    pattern     = "new.hospital.admissions",
+    replacement = "death"
+    );
+
+DF.ottawa[,'jurisdiction'] <- rep('Ottawa',nrow(DF.ottawa));
+DF.ottawa <- DF.ottawa[,c("jurisdiction","date","case","death")];
+
+print( str(DF.ottawa) );
+print( summary(DF.ottawa) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# results.wrapper.stan <- wrapper.stan(
-#     StanModel          = StanModel,
-#     FILE.stan.model    = FILE.stan.model,
-#     DF.covid19         = DF.covid19,
-#     DF.fatality.rates  = DF.fatality.rates,
-#     DF.serial.interval = DF.serial.interval,
-#     forecast.window    = 14,
-#     DEBUG              = FALSE # TRUE
-#     );
+DF.ontario <- DF.ottawa;
+DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
+DF.dummy <- rbind(DF.ottawa,DF.ontario);
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+results.wrapper.stan <- wrapper.stan(
+    StanModel          = StanModel,
+    FILE.stan.model    = FILE.stan.model,
+    DF.covid19         = DF.dummy, # DF.ottawa, # DF.covid19,
+    DF.fatality.rates  = DF.fatality.rates,
+    DF.serial.interval = DF.serial.interval,
+    forecast.window    = 14,
+    DEBUG              = TRUE # FALSE
+    );
 
 ##################################################
 print( warnings() );

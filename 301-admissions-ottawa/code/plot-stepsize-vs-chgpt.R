@@ -2,7 +2,7 @@
 plot.stepsize.vs.chgpt <- function(
     list.input = NULL
     ) {
-  
+
     require(ggplot2);
     require(tidyr)
     require(dplyr)
@@ -17,7 +17,14 @@ plot.stepsize.vs.chgpt <- function(
     require(ggpubr)
     require(bayesplot)
     require(cowplot)
- 
+
+
+    cat("\n# plot.stepsize.vs.chgpt(): jurisdictions\n");
+    print( jurisdictions );
+
+    cat("\n# plot.stepsize.vs.chgpt(): list.input[['jurisdictions']]\n");
+    print( list.input[['jurisdictions']] );
+
     for( i in 1:length(jurisdictions) ){
 
         DF.chgpt1 <- plot.stepsize.vs.chgpt_getData(
@@ -26,21 +33,21 @@ plot.stepsize.vs.chgpt <- function(
             which.chgpt        = "chgpt1",
             which.step         = "step1"
             );
- 
+
         DF.chgpt2 <- plot.stepsize.vs.chgpt_getData(
             list.input         = list.input,
             jurisdiction.index = i,
             which.chgpt        = "chgpt2",
             which.step         = "step2"
             );
- 
+
         DF.chgpt3 <- plot.stepsize.vs.chgpt_getData(
             list.input         = list.input,
             jurisdiction.index = i,
             which.chgpt        = "chgpt3",
             which.step         = "step3"
             );
- 
+
         DF.jurisdiction <- rbind(
             DF.chgpt1,
             DF.chgpt2,
@@ -48,13 +55,13 @@ plot.stepsize.vs.chgpt <- function(
             );
 
         plot.stepsize.vs.chgpt_make.plots(
-            DF.jurisdiction = DF.jurisdiction, 
+            DF.jurisdiction = DF.jurisdiction,
             StanModel       = list.input[["StanModel"]],
             jurisdiction    = list.input[["jurisdictions"]][[i]],
             min.date        = min(list.input[["dates"]][[i]]),
             max.date        = max(list.input[["dates"]][[i]])
             );
-    
+
         }
 
     return( NULL );
@@ -92,7 +99,7 @@ plot.stepsize.vs.chgpt_make.plots <- function(
     min.date        = NULL,
     max.date        = NULL
     ) {
-  
+
     require(ggplot2);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -105,7 +112,7 @@ plot.stepsize.vs.chgpt_make.plots <- function(
         data    = DF.jurisdiction,
         mapping = aes(x = date, y = stepsize, colour = chgpt),
         alpha   = 0.3
-        ); 
+        );
 
     my.ggplot <- my.ggplot + geom_hline(
         yintercept = 0,
@@ -153,4 +160,3 @@ plot.stepsize.vs.chgpt_make.plots <- function(
     return( NULL );
 
     }
-

@@ -1,6 +1,6 @@
 
 wrapper.stan <- function(
-    StanModel          = "change-point", 
+    StanModel          = "change-point",
     FILE.stan.model    = NULL,
     DF.covid19         = NULL,
     DF.fatality.rates  = NULL,
@@ -52,9 +52,9 @@ wrapper.stan <- function(
         list.input = list.output
         );
 
-    plot.stepsize.vs.chgpt(
-        list.input = list.output
-        );
+    # plot.stepsize.vs.chgpt(
+    #     list.input = list.output
+    #     );
 
     plot.forecast(
         list.input      = list.output,
@@ -73,7 +73,7 @@ wrapper.stan <- function(
 wrapper.stan_visualize.results <- function(
     list.input = NULL
     ) {
-    
+
     require(ggplot2);
     require(bayesplot);
 
@@ -144,11 +144,11 @@ wrapper.stan_inner <- function(
     forecast      <- 0;
 
     if( DEBUG == FALSE ) {
-        N2 = 200 # Increase this for a further forecast
+        N2 = 300 # Increase this for a further forecast
     }  else  {
         ### For faster runs:
         # jurisdictions <- c("Austria","Belgium") #,Spain")
-        N2 = 200
+        N2 = 300
         }
 
     dates          <- list();
@@ -386,4 +386,3 @@ wrapper.stan_inner <- function(
     }
 
 ##################################################
-

@@ -2,7 +2,7 @@
 plot.3.panel <- function(
     list.input = NULL
     ) {
-  
+
     require(ggplot2);
     require(tidyr)
     require(dplyr)
@@ -17,7 +17,7 @@ plot.3.panel <- function(
     require(ggpubr)
     require(bayesplot)
     require(cowplot)
- 
+
     StanModel              <- list.input[["StanModel"        ]];
     dates                  <- list.input[["dates"            ]];
     jurisdictions          <- list.input[["jurisdictions"    ]];
@@ -53,8 +53,8 @@ plot.3.panel <- function(
         data_jurisdiction <- data.frame(
             "time"               = as_date(as.character(dates[[i]])),
             "jurisdiction"       = rep(jurisdiction, length(dates[[i]])),
-            "reported_cases"     = reported_cases[[i]], 
-            "reported_cases_c"   = cumsum(reported_cases[[i]]), 
+            "reported_cases"     = reported_cases[[i]],
+            "reported_cases_c"   = cumsum(reported_cases[[i]]),
             "predicted_cases_c"  = cumsum(predicted_cases),
             "predicted_min_c"    = cumsum(predicted_cases_li),
             "predicted_max_c"    = cumsum(predicted_cases_ui),
@@ -81,11 +81,11 @@ plot.3.panel <- function(
             );
 
         plot.three.panel_make.plots(
-            data_jurisdiction = data_jurisdiction, 
+            data_jurisdiction = data_jurisdiction,
             StanModel         = StanModel,
             jurisdiction      = jurisdiction
             );
-    
+
         }
 
     return( NULL );
@@ -98,11 +98,11 @@ plot.three.panel_make.plots <- function(
     StanModel         = NULL,
     jurisdiction      = NULL
     ) {
-  
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     data_cases_95 <- data.frame(
         data_jurisdiction$time,
-        data_jurisdiction$predicted_min, 
+        data_jurisdiction$predicted_min,
         data_jurisdiction$predicted_max
         );
     names(data_cases_95) <- c("time","cases_min","cases_max");
@@ -110,7 +110,7 @@ plot.three.panel_make.plots <- function(
 
     data_cases_50 <- data.frame(
         data_jurisdiction$time,
-        data_jurisdiction$predicted_min2, 
+        data_jurisdiction$predicted_min2,
         data_jurisdiction$predicted_max2
         );
     names(data_cases_50) <- c("time","cases_min","cases_max");
@@ -118,39 +118,42 @@ plot.three.panel_make.plots <- function(
 
     data_cases <- rbind(data_cases_95, data_cases_50);
     levels(data_cases$key) <- c("ninetyfive","fifty");
-  
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     p1 <- ggplot(data_jurisdiction) +
         geom_bar(
             data  = data_jurisdiction,
-            aes(x = time, y = reported_cases), 
+            aes(x = time, y = reported_cases),
             fill  = "coral4",
             stat  = 'identity',
             alpha = 0.5
             ) +
         geom_ribbon(
-            data = data_cases, 
+            data = data_cases,
             aes(x = time, ymin = cases_min, ymax = cases_max, fill = key)
             ) +
         xlab("") +
         ylab("infections") +
-        scale_x_date(date_breaks = "weeks", labels = date_format("%e %b")) + 
+        scale_x_date(
+            date_breaks = "weeks",
+            labels      = date_format("%Y-%m-%d"), # date_format("%e %b")
+            ) +
         scale_fill_manual(
             name   = "",
             labels = c("50%","95%"),
             values = c(alpha("deepskyblue4",0.55),alpha("deepskyblue4",0.45))
-            ) + 
-        theme_pubr() + 
+            ) +
+        theme_pubr() +
         theme(
-            axis.text.x     = element_text(angle = 45, hjust = 1), 
+            axis.text.x     = element_text(angle = 45, hjust = 1),
             legend.position = "None"
-            ) + 
+            ) +
         guides(fill=guide_legend(ncol=1));
-  
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     data_deaths_95 <- data.frame(
         data_jurisdiction$time,
-        data_jurisdiction$death_min, 
+        data_jurisdiction$death_min,
         data_jurisdiction$death_max
         );
     names(data_deaths_95) <- c("time","death_min","death_max");
@@ -158,7 +161,7 @@ plot.three.panel_make.plots <- function(
 
     data_deaths_50 <- data.frame(
         data_jurisdiction$time,
-        data_jurisdiction$death_min2, 
+        data_jurisdiction$death_min2,
         data_jurisdiction$death_max2
         );
     names(data_deaths_50) <- c("time","death_min","death_max");
@@ -180,23 +183,27 @@ plot.three.panel_make.plots <- function(
             data = data_deaths,
             aes(ymin = death_min, ymax = death_max, fill = key)
             ) +
-        scale_x_date(date_breaks = "weeks", labels = date_format("%e %b")) +
+        xlab("") +
+        scale_x_date(
+            date_breaks = "weeks",
+            labels      = date_format("%Y-%m-%d"), # date_format("%e %b")
+            ) +
         scale_fill_manual(
             name = "",
             labels = c("50%", "95%"),
             values = c(alpha("deepskyblue4",0.55),alpha("deepskyblue4",0.45))
-            ) + 
-        theme_pubr() + 
+            ) +
+        theme_pubr() +
         theme(
             axis.text.x     = element_text(angle = 45, hjust = 1),
             legend.position = "None"
-            ) + 
+            ) +
         guides(fill=guide_legend(ncol=1));
- 
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     # Plotting interventions
     data_rt_95 <- data.frame(
-        data_jurisdiction$time, 
+        data_jurisdiction$time,
         data_jurisdiction$rt_min,
         data_jurisdiction$rt_max
         );
@@ -205,7 +212,7 @@ plot.three.panel_make.plots <- function(
 
     data_rt_50 <- data.frame(
         data_jurisdiction$time,
-        data_jurisdiction$rt_min2, 
+        data_jurisdiction$rt_min2,
         data_jurisdiction$rt_max2
         );
     names(data_rt_50) <- c("time","rt_min","rt_max");
@@ -222,34 +229,33 @@ plot.three.panel_make.plots <- function(
             data = data_rt,
             aes(x = time, ymin = rt_min, ymax = rt_max, group = key, fill = key)
             ) +
-        geom_hline(yintercept = 1, color = 'black', size = 0.1) + 
+        geom_hline(yintercept = 1, color = 'black', size = 0.1) +
         xlab("") +
         ylab(expression(R[t])) +
         scale_fill_manual(
             name   = "",
             labels = c("50%","95%"),
             values = c(alpha("seagreen",0.75),alpha("seagreen",0.5))
-            ) + 
+            ) +
         scale_x_date(
             date_breaks = "weeks",
-            labels = date_format("%e %b"), 
+            labels = date_format("%Y-%m-%d"), # date_format("%e %b"),
             limits = c(
                 data_jurisdiction$time[1],
                 data_jurisdiction$time[length(data_jurisdiction$time)]
                 )
-            ) + 
-        scale_y_continuous(limits = c(0,max.rt_max), breaks = seq(0,max.rt_max,2)) + 
-        theme_pubr() + 
+            ) +
+        scale_y_continuous(limits = c(0,max.rt_max), breaks = seq(0,max.rt_max,2)) +
+        theme_pubr() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
         theme(legend.position = "none"); # theme(legend.position="bottom");
- 
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     save_plot(
         filename    = paste0("output-",StanModel,"-3-panel-",jurisdiction,".png"),
         plot        = plot_grid(p1, p2, p3, align = 'v', nrow = 3, rel_heights = c(1,1,1)),
-        base_height = 7,
-        base_width  = 7
+        base_height =  7,
+        base_width  = 14
         );
 
     }
-
