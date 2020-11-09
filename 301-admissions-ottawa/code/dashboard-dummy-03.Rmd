@@ -3,10 +3,9 @@ title: "COVID-19 Ottawa"
 author: "DScD StatCan"
 output:
   flexdashboard::flex_dashboard:
-    orientation: rows
+    theme: journal
     social: menu
-    theme: cosmo
-#   source_code: embed
+    orientation: rows
 ---
 
 ```{r setup, include=FALSE}
