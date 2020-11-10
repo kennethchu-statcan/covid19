@@ -257,6 +257,8 @@ wrapper.stan_inner <- function(
             ## assume that CFR is probability of dying given infection
             x1 <- rgammaAlt(5e6,mean1,cv1) # infection-to-onset ----> do all people who are infected get to onset?
             x2 <- rgammaAlt(5e6,mean2,cv2) # onset-to-death
+            x2 <- x2 / 2                   # onset-to-hospitalization = (onset-to-death) / 2
+
             f  <- ecdf(x1+x2);
             convolution <- function(u) { CFR * f(u) }
 

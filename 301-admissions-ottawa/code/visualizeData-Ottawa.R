@@ -40,17 +40,17 @@ visualizeData.Ottawa_case <- function(
 
     my.ggplot <- initializePlot(
         title    = NULL,
-        subtitle = 'Ottawa COVID-19 case count'
+        subtitle = 'Ottawa COVID-19 daily new confirmed case counts'
         );
 
     my.ggplot <- my.ggplot + geom_col(
-       data    = DF.plot,
-       mapping = aes(x = date, y = new.cases),
-       alpha   = 0.50,
-       size    = 0.75,
-       fill    = "black",
-       colour  = NA
-       );
+        data    = DF.plot,
+        mapping = aes(x = date, y = new.cases),
+        alpha   = 0.50,
+        size    = 0.75,
+        fill    = "black",
+        colour  = NA
+        );
 
     # my.ggplot <- my.ggplot + geom_col(
     #     data    = DF.plot,
@@ -60,6 +60,8 @@ visualizeData.Ottawa_case <- function(
     #     width   = 0.50,
     #     colour  = "black"
     #     );
+
+    my.ggplot <- my.ggplot + ylab("");
 
     # PNG.output  <- paste0("plot-ottawa-case.png");
     # ggsave(
@@ -84,7 +86,7 @@ visualizeData.Ottawa_death <- function(
 
     my.ggplot <- initializePlot(
         title    = NULL,
-        subtitle = 'Ottawa COVID-19 death count'
+        subtitle = 'Ottawa COVID-19 daily cumulative death counts'
         );
 
     #my.ggplot <- my.ggplot + geom_line(
@@ -100,9 +102,12 @@ visualizeData.Ottawa_death <- function(
         mapping = aes(x = date, y = cumulative.deaths),
         alpha   = 0.50,
         size    = 0.75,
-        width   = 0.50,
-        colour  = "black"
+#       width   = 0.50,
+        fill    = "black",
+        colour  = NA
         );
+
+    my.ggplot <- my.ggplot + ylab("");
 
     # PNG.output  <- paste0("plot-ottawa-death.png");
     # ggsave(
@@ -127,7 +132,7 @@ visualizeData.Ottawa_hospital.admission <- function(
 
     my.ggplot <- initializePlot(
         title    = NULL,
-        subtitle = 'Ottawa COVID-19 hospital admission'
+        subtitle = 'Ottawa COVID-19 daily new hospital admission counts'
         );
 
     # my.ggplot <- my.ggplot + geom_line(
@@ -183,6 +188,13 @@ visualizeData.Ottawa_hospital.admission <- function(
         colour  = NA
         );
 
+    my.ggplot <- my.ggplot + scale_y_continuous(
+        limits = NULL,
+        breaks = seq(0,100,2)
+        );
+
+    my.ggplot <- my.ggplot + ylab("");
+
     # PNG.output  <- paste0("plot-ottawa-hospital-admission.png");
     # ggsave(
     #     file   = PNG.output,
@@ -205,7 +217,7 @@ visualizeData.Ottawa_occupancy.hospital <- function(
 
     my.ggplot <- initializePlot(
         title    = NULL,
-        subtitle = 'Ottawa COVID-19 hospital occupancy'
+        subtitle = 'Ottawa COVID-19 daily hospital midnight census counts'
         );
 
     my.ggplot <- my.ggplot + geom_col(
@@ -216,6 +228,8 @@ visualizeData.Ottawa_occupancy.hospital <- function(
         fill    = "black",
         colour  = NA
         );
+
+    my.ggplot <- my.ggplot + ylab("");
 
     # PNG.output  <- paste0("plot-ottawa-hospital-occupancy.png");
     # ggsave(
@@ -239,7 +253,7 @@ visualizeData.Ottawa_occupancy.icu <- function(
 
     my.ggplot <- initializePlot(
         title    = NULL,
-        subtitle = 'Ottawa COVID-19 ICU occupancy'
+        subtitle = 'Ottawa COVID-19 daily ICU midnight census counts'
         );
 
     my.ggplot <- my.ggplot + geom_col(
@@ -250,6 +264,8 @@ visualizeData.Ottawa_occupancy.icu <- function(
         fill    = "black",
         colour  = NA
         );
+
+    my.ggplot <- my.ggplot + ylab("");
 
     # PNG.output  <- paste0("plot-ottawa-hospital-occupancy.png");
     # ggsave(

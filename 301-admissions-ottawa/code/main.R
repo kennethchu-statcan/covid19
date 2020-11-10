@@ -143,9 +143,7 @@ results.wrapper.stan <- wrapper.stan(
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 dashboard.files <- c(
-#   "dashboard-dummy-01",
-#   "dashboard-dummy-02"
-    "dashboard-dummy-03"
+    "dashboard-hospitalization"
     );
 
 for ( dashboard.file in dashboard.files ) {
@@ -155,6 +153,8 @@ for ( dashboard.file in dashboard.files ) {
         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
         );
     }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
 ##################################################
 print( warnings() );

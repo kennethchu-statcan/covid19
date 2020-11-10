@@ -21,7 +21,7 @@ Cases & Deaths
 Row
 -----------------------------------------------------------------------
 
-### Daily new case counts
+###
 
 ```{r, fig.width = 16}
 visualizeData.Ottawa_case(
@@ -29,7 +29,7 @@ visualizeData.Ottawa_case(
     );
 ```
 
-### Cumulative death counts
+###
 
 ```{r, fig.width = 16}
 visualizeData.Ottawa_death(
@@ -43,20 +43,72 @@ Hospital
 Row
 -----------------------------------------------------------------------
 
-### Daily new hospital admissions
+###
 
-```{r, fig.width = 16}
+```{r, fig.width = 24}
 visualizeData.Ottawa_hospital.admission(
     DF.input = DF.ottawa.plot
     );
 ```
 
-### Daily hospital occupancy
+###
 
-```{r, fig.width = 16}
+```{r, fig.width = 24}
 visualizeData.Ottawa_occupancy.hospital(
     DF.input = DF.ottawa.plot
     );
+```
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_occupancy.icu(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+Gamma
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Symptom-onset-to-death time lag distrubtion vs Symptom-onset-to-hospitalization time lag distrubtion
+
+```{r, fig.width = 16}
+my.mean       <- 18.80;
+my.cv         <-  0.45;
+samples.gamma <- EnvStats::rgammaAlt(5e6,mean = my.mean,cv = my.cv);
+
+DF.temp <- data.frame(
+    sample1 = samples.gamma,
+    sample2 = samples.gamma / 2
+    );
+
+my.ggplot <- initializePlot(
+    title    = NULL,
+    subtitle = 'Gamma(mean = 18.8, cv = 0.45) vs Gamma(mean = 18.8, cv = 0.45) / 2'
+    );
+
+my.ggplot <- my.ggplot + ggplot2::geom_density(
+    data    = DF.temp,
+    mapping = ggplot2::aes(x = sample1),
+    alpha   = 0.50,
+    size    = 0.75,
+    colour  = "black"
+    );
+
+my.ggplot <- my.ggplot + ggplot2::geom_density(
+    data    = DF.temp,
+    mapping = ggplot2::aes(x = sample2),
+    alpha   = 0.50,
+    size    = 0.75,
+    colour  = "red"
+    );
+
+my.ggplot <- my.ggplot + ggplot2::xlab('number of days');
+
+my.ggplot;
 ```
 
 Estimates
