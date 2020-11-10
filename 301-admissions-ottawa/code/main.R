@@ -138,7 +138,7 @@ results.wrapper.stan <- wrapper.stan(
     DF.fatality.rates  = DF.fatality.rates,
     DF.serial.interval = DF.serial.interval,
     forecast.window    = 14,
-    DEBUG              = TRUE # FALSE
+    DEBUG              = FALSE # TRUE
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
