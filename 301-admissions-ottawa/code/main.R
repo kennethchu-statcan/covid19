@@ -149,7 +149,7 @@ dashboard.files <- c(
 for ( dashboard.file in dashboard.files ) {
     rmarkdown::render(
         input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-        output_format = flexdashboard::flex_dashboard(),
+        output_format = flexdashboard::flex_dashboard(theme = "darkly"),
         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
         );
     }
