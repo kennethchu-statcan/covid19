@@ -77,7 +77,7 @@ file.copy(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-set.seed(7654321);
+set.seed(1234567);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 data.snapshot <- "2020-06-21.01";
@@ -149,7 +149,7 @@ dashboard.files <- c(
 for ( dashboard.file in dashboard.files ) {
     rmarkdown::render(
         input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-        output_format = flexdashboard::flex_dashboard(theme = "darkly"),
+        output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
         );
     }
