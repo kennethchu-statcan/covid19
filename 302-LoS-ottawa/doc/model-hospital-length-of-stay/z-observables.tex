@@ -62,21 +62,60 @@ D_{t}
 
 \vskip 0.5cm
 \noindent
-\textbf{COVID-19 hospital length of stay distribution: Weibull}
+\textbf{Likelihood assumption \#1: Daily death/discharge count \,$\sim$\, Negative Binomial}
 \begin{equation*}
 D_{t}
 \;\; \sim \;\;
 	\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+\dfrac{d_{t}^{2}}{\psi}\,\right)
 \end{equation*}
 
-\begin{equation*}
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Likelihood assumption \#2: Decomposition of \,$d_{t}$\, by day of admission}
+\begin{eqnarray*}
 d_{t}
-\;\; = \;\;
-	\overset{t-1}{\underset{\tau=0}{\sum}} \; A_{\tau}\cdot\pi_{t-\tau}
-\end{equation*}
+& := &
+	\begin{array}{c}
+	\textnormal{expected number of deaths/discharges on day $t$}
+	\end{array}
+\\
+& = &
+	\overset{t-1}{\underset{\tau=0}{\sum}}
+	\left(\begin{array}{c}
+	\textnormal{expected number of deaths/discharges on day $t$}
+	\\
+	\textnormal{among COVID-19 patients admitted on day $0 \leq \tau < t$}
+	\end{array}\right)
+\\
+& = &
+	\overset{t-1}{\underset{\tau=0}{\sum}} \;
+	\left(\!\begin{array}{c}
+		\textnormal{number of}
+		\\
+		\textnormal{admissions}
+		\\
+		\textnormal{on day $\tau$}
+		\end{array}\!\right)
+	\cdot
+	\left(\begin{array}{c}
+		\textnormal{proportion of}
+		\\
+		\textnormal{death/discharge}
+		\\
+		\textnormal{after $t - \tau$ days}
+		\end{array}\!\right)
+\\
+& = &
+	\overset{t-1}{\underset{\tau=0}{\sum}} \;\, A_{\tau}\cdot\pi_{t-\tau}
+\end{eqnarray*}
 
           %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
 
+\vskip 0.5cm
+\noindent
+\textbf{Likelihood assumption \#3: Random admission-to-discharge delay (i.e. length of stay) \,$\sim$\, Weibull}
 \begin{eqnarray*}
 \pi_{\tau}
 & := &
@@ -108,7 +147,10 @@ d_{t}
 		\end{array}\right.
 \end{eqnarray*}
 
-\vskip 0.5cm
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+%\vskip 1.0cm
+\clearpage
 \noindent
 {\color{red}
 \textbf{Impose prior distribution on, and compute/estimate posterior distribution for:}
