@@ -36,6 +36,7 @@ code.files <- c(
     "plot-forecast.R",
     "plot-stepsize-vs-chgpt.R",
     "visualizeData-Ottawa.R",
+    "wrapper-stan-length-of-stay.R",
     "wrapper-stan.R"
     );
 
@@ -65,18 +66,18 @@ jurisdictions <- c(
 
 # jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
 
-StanModel <- 'change-point';
-
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 options(mc.cores = parallel::detectCores());
 
-FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
-FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
-
-file.copy(
-    from = FILE.stan.model.0,
-    to   = FILE.stan.model
-    );
+# StanModel <- 'length-of-stay';
+#
+# FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
+# FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
+#
+# file.copy(
+#     from = FILE.stan.model.0,
+#     to   = FILE.stan.model
+#     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(1234567);
@@ -118,18 +119,18 @@ print( summary(DF.ottawa) );
 
 colnames(DF.ottawa) <-gsub(
     x           = colnames(DF.ottawa),
-    pattern     = "new.cases",
-    replacement = "case"
+    pattern     = "new.hospital.admissions",
+    replacement = "admissions"
     );
 
 colnames(DF.ottawa) <-gsub(
     x           = colnames(DF.ottawa),
-    pattern     = "new.hospital.admissions",
-    replacement = "death"
+    pattern     = "daily.discharges",
+    replacement = "discharges"
     );
 
 DF.ottawa[,'jurisdiction'] <- rep('Ottawa',nrow(DF.ottawa));
-DF.ottawa <- DF.ottawa[,c("jurisdiction","date","case","death")];
+DF.ottawa <- DF.ottawa[,c("jurisdiction","date","admissions","discharges")];
 
 print( str(DF.ottawa) );
 print( summary(DF.ottawa) );
@@ -140,8 +141,8 @@ DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
 DF.dummy <- rbind(DF.ottawa,DF.ontario);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# results.wrapper.stan <- wrapper.stan(
-#     StanModel          = StanModel,
+# results.stan.changepoint <- wrapper.stan(
+#     StanModel          = 'change-point',
 #     FILE.stan.model    = FILE.stan.model,
 #     DF.covid19         = DF.dummy, # DF.ottawa, # DF.covid19,
 #     DF.fatality.rates  = DF.fatality.rates,
@@ -151,17 +152,25 @@ DF.dummy <- rbind(DF.ottawa,DF.ontario);
 #     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-dashboard.files <- c(
-    "dashboard-length-of-stay"
+results.stan.LoS <- wrapper.stan.length.of.stay(
+    StanModel       = 'length-of-stay',
+    FILE.stan.model = file.path(code.directory,'length-of-stay.stan'),
+    DF.input        = DF.dummy,
+    DEBUG           = TRUE # FALSE
     );
 
-for ( dashboard.file in dashboard.files ) {
-    rmarkdown::render(
-        input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-        output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-        output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
-        );
-    }
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# dashboard.files <- c(
+#     "dashboard-length-of-stay"
+#     );
+#
+# for ( dashboard.file in dashboard.files ) {
+#     rmarkdown::render(
+#         input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+#         output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+#         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+#         );
+#     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
