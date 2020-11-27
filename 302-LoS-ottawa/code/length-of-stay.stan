@@ -64,8 +64,8 @@ model {
         // sigma0[j] ~ normal(10,0.1);
 
         for(t in 1:n_days) {
-            // discharges[t,j] ~ neg_binomial_2( E_discharges[t,j] , phi );
-            discharges[t,j] ~ normal( E_discharges[t,j] , 1 );
+            discharges[t,j] ~ neg_binomial_2( E_discharges[t,j] , phi );
+            // discharges[t,j] ~ normal( E_discharges[t,j] , 1 );
         }
 
     }
