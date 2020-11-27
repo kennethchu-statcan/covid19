@@ -26,8 +26,8 @@ transformed parameters {
 
     for (j in 1:n_jurisdictions) {
 
-        alpha[j] = 1 + 4 * uniform_alpha[j];
-        sigma[j] = 1 + 4 * uniform_sigma[j];
+        alpha[j] = 1.0 + 4.0 * uniform_alpha[j];
+        sigma[j] = 1.0 + 4.0 * uniform_sigma[j];
 
         P_discharge[1,j] = weibull_cdf(1.5, alpha[j], sigma[j]);
         for(t in 2:n_days) {
