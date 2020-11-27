@@ -182,8 +182,8 @@ wrapper.stan.length.of.stay_inner <- function(
         X   = 1:getOption("mc.cores"),
         FUN = function(x) {
             list(
-                alpha0 = runif(n.jurisdictions, min = 0, max = 1),
-                sigma0 = runif(n.jurisdictions, min = 0, max = 1)
+                uniform_alpha = runif(n.jurisdictions, min = 0, max = 1),
+                uniform_sigma = runif(n.jurisdictions, min = 0, max = 1)
                 )
             }
         );
@@ -193,7 +193,7 @@ wrapper.stan.length.of.stay_inner <- function(
         results.rstan.sampling <- rstan::sampling(
             object = my.stan.model,
             data   = stan_data,
-            # init = list.init,
+            init   = list.init,
             iter   = 40,
             warmup = 20,
             chains =  2
