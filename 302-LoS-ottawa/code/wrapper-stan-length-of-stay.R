@@ -320,7 +320,7 @@ wrapper.stan.length.of.stay_inner <- function(
             init    = list.init,
             iter    = 1000,
             warmup  =  500,
-            chains  =    4,
+            chains  =    8,
             thin    =    4,
             control = list(adapt_delta = 0.90, max_treedepth = 10)
             );
