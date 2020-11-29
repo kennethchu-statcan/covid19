@@ -39,6 +39,10 @@ wrapper.stan.length.of.stay <- function(
     print( str(list.output[['extracted.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    plot.density.mu.cv(
+        list.input = list.output
+        );
+
     # wrapper.stan_visualize.results(
     #     list.input = list.output
     #     );
@@ -64,6 +68,93 @@ wrapper.stan.length.of.stay <- function(
     }
 
 ##################################################
+plot.density.mu.cv <- function(
+    list.input = NULL
+    ) {
+
+    require(ggplot2);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+
+        DF.plot <- data.frame(
+            mu = temp.alpha / temp.beta,
+            cv = 1 / sqrt(temp.alpha)
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_density(
+            data    = DF.plot,
+            mapping = aes(x = mu),
+            alpha   = 0.85,
+            size    = 1.30
+            );
+
+        my.ggplot <- my.ggplot + xlab('mean(length of stay)');
+        my.ggplot <- my.ggplot + ylab('density');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(0,50),
+            breaks = seq(0,50,10)
+            );
+
+        ggsave(
+            file   = paste0("plot-density-LoS-mu-",jurisdiction,".png"),
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_density(
+            data    = DF.plot,
+            mapping = aes(x = cv),
+            alpha   = 0.85,
+            size    = 1.30
+            );
+
+        my.ggplot <- my.ggplot + xlab('CV(length of stay)');
+        my.ggplot <- my.ggplot + ylab('density');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(0,1),
+            breaks = seq(0,1,0.2)
+            );
+
+        ggsave(
+            file   = paste0("plot-density-LoS-cv-",jurisdiction,".png"),
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+        }
+
+    return( NULL );
+
+    }
+
 wrapper.stan.length.of.stay_visualize.results <- function(
     list.input = NULL
     ) {
