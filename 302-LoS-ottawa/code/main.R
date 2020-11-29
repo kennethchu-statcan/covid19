@@ -132,14 +132,6 @@ DF.ontario <- DF.ottawa;
 DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
 DF.dummy <- rbind(DF.ottawa,DF.ontario);
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-dashboard.file <- "dashboard-length-of-stay";
-rmarkdown::render(
-    input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-    output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-    output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
-    );
-
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # results.stan.changepoint <- wrapper.stan(
 #     StanModel          = 'change-point',
@@ -159,18 +151,13 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
     DEBUG           = TRUE # FALSE
     );
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# dashboard.files <- c(
-#     "dashboard-length-of-stay"
-#     );
-#
-# for ( dashboard.file in dashboard.files ) {
-#     rmarkdown::render(
-#         input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-#         output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-#         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
-#         );
-#     }
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+dashboard.file <- "dashboard-length-of-stay";
+rmarkdown::render(
+    input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+    output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+    output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+    );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
