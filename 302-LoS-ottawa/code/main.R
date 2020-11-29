@@ -92,7 +92,7 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot <- "2020-11-24.01";
+data.snapshot <- "2020-11-29.01";
 
 DF.ottawa <- getData.Ottawa(
     csv.input = file.path(data.directory,data.snapshot,"raw-covid19-Ottawa.csv")
@@ -133,9 +133,6 @@ DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
 DF.dummy <- rbind(DF.ottawa,DF.ontario);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-examine.Weibull();
-examine.Gamma();
-
 dashboard.file <- "dashboard-length-of-stay";
 rmarkdown::render(
     input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
@@ -143,26 +140,6 @@ rmarkdown::render(
     output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
     );
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-##################################################
-print( warnings() );
-
-print( getOption('repos') );
-
-print( .libPaths() );
-
-print( sessionInfo() );
-
-print( format(Sys.time(),"%Y-%m-%d %T %Z") );
-
-stop.proc.time <- proc.time();
-print( stop.proc.time - start.proc.time );
-
-quit(save = 'no')
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # results.stan.changepoint <- wrapper.stan(
 #     StanModel          = 'change-point',
