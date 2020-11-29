@@ -244,3 +244,25 @@ my.ggplot <- examine.Gamma_plot.mu.cv(
     );
 my.ggplot;
 ```
+
+Parameters
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 24}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-density-LoS-mu-Ottawa.png")
+    )
+```
+
+###
+
+```{r, fig.width = 24}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-density-LoS-cv-Ottawa.png")
+    )
+```
