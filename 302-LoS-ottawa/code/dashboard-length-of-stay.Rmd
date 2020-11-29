@@ -111,7 +111,7 @@ visualizeData.Ottawa_occupancy.icu(
     );
 ```
 
-Gamma
+Gamma 0
 =======================================================================
 
 Row
@@ -152,5 +152,95 @@ my.ggplot <- my.ggplot + ggplot2::geom_density(
 
 my.ggplot <- my.ggplot + ggplot2::xlab('number of days');
 
+my.ggplot;
+```
+
+Gamma 1
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 2;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 10;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 20;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+Gamma 2
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 30;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 40;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 50;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
 my.ggplot;
 ```

@@ -20,6 +20,8 @@ setwd( output.directory );
 code.files <- c(
     "addDerivedData-Ottawa.R",
     "cross-check.R",
+    "examine-Weibull.R",
+    "examine-Gamma.R",
     "geom-stepribbon.R",
     "getData-covid19.R",
     "getData-ECDC.R",
@@ -68,16 +70,6 @@ jurisdictions <- c(
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 options(mc.cores = parallel::detectCores());
-
-# StanModel <- 'length-of-stay';
-#
-# FILE.stan.model.0 <- file.path(  code.directory,paste0(StanModel,'.stan'));
-# FILE.stan.model   <- file.path(output.directory,paste0(StanModel,'.stan'));
-#
-# file.copy(
-#     from = FILE.stan.model.0,
-#     to   = FILE.stan.model
-#     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(1234567);
@@ -140,6 +132,37 @@ DF.ontario <- DF.ottawa;
 DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
 DF.dummy <- rbind(DF.ottawa,DF.ontario);
 
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+examine.Weibull();
+examine.Gamma();
+
+dashboard.file <- "dashboard-length-of-stay";
+rmarkdown::render(
+    input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+    output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+    output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+    );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+##################################################
+print( warnings() );
+
+print( getOption('repos') );
+
+print( .libPaths() );
+
+print( sessionInfo() );
+
+print( format(Sys.time(),"%Y-%m-%d %T %Z") );
+
+stop.proc.time <- proc.time();
+print( stop.proc.time - start.proc.time );
+
+quit(save = 'no')
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # results.stan.changepoint <- wrapper.stan(
 #     StanModel          = 'change-point',
