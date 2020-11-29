@@ -292,7 +292,7 @@ wrapper.stan.length.of.stay_inner <- function(
 
     } else {
 
-        # fit = rstan::sampling(
+        # results.rstan.sampling = rstan::sampling(
         #     object  = my.stan.model,
         #     data    = stan_data,
         #     iter    = 4000,
@@ -303,7 +303,7 @@ wrapper.stan.length.of.stay_inner <- function(
         #     control = list(adapt_delta = 0.90, max_treedepth = 10)
         #     );
 
-        #fit <- rstan::sampling(
+        # results.rstan.sampling <- rstan::sampling(
         #    object  = my.stan.model,
         #    data    = stan_data,
         #    iter    = 200,
@@ -314,14 +314,25 @@ wrapper.stan.length.of.stay_inner <- function(
         #    control = list(adapt_delta = 0.90, max_treedepth = 10)
         #    );
 
+        # results.rstan.sampling <- rstan::sampling(
+        #     object  = my.stan.model,
+        #     data    = stan_data,
+        #     init    = list.init,
+        #     iter    = 1000,
+        #     warmup  =  500,
+        #     chains  =    8,
+        #     thin    =    4,
+        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
+        #     );
+
         results.rstan.sampling <- rstan::sampling(
             object  = my.stan.model,
             data    = stan_data,
             init    = list.init,
-            iter    = 1000,
-            warmup  =  500,
-            chains  =    8,
-            thin    =    4,
+            iter    = 200,
+            warmup  = 100,
+            chains  =   4,
+            thin    =   4,
             control = list(adapt_delta = 0.90, max_treedepth = 10)
             );
 
