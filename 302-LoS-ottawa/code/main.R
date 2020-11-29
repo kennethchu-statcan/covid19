@@ -148,7 +148,7 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
     StanModel       = 'length-of-stay',
     FILE.stan.model = file.path(code.directory,'length-of-stay.stan'),
     DF.input        = DF.dummy,
-    DEBUG           = TRUE # FALSE
+    DEBUG           = FALSE # TRUE # FALSE
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
