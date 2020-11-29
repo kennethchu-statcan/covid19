@@ -182,8 +182,8 @@ wrapper.stan.length.of.stay_inner <- function(
         X   = 1:getOption("mc.cores"),
         FUN = function(x) {
             list(
-                uniform_alpha = runif(n.jurisdictions, min = 0, max = 1),
-                uniform_sigma = runif(n.jurisdictions, min = 0, max = 1)
+                uniform_mu = runif(n.jurisdictions, min = 0, max = 1),
+                uniform_cv = runif(n.jurisdictions, min = 0, max = 1)
                 )
             }
         );
