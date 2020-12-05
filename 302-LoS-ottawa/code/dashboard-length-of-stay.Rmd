@@ -296,3 +296,17 @@ knitr::include_graphics(
     path = file.path(output.directory,"plot-scatter-LoS-mu-cv-Ottawa.png")
     )
 ```
+
+Expected
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-expected-cowplot-Ottawa.png")
+    )
+```

@@ -60,30 +60,23 @@ wrapper.stan.length.of.stay <- function(
         list.input = list.output
         );
 
-    plot.expected.discharges(
+    list.plot.admissions <- plot.admissions(
         list.input = list.output
         );
 
-    plot.expected.occupancy(
+    list.plot.discharges <- plot.expected.discharges(
         list.input = list.output
         );
 
-    # wrapper.stan_visualize.results(
-    #     list.input = list.output
-    #     );
-    #
-    # plot.3.panel(
-    #     list.input = list.output
-    #     );
-    #
-    # # plot.stepsize.vs.chgpt(
-    # #     list.input = list.output
-    # #     );
-    #
-    # plot.forecast(
-    #     list.input      = list.output,
-    #     forecast.window = forecast.window
-    #     );
+    list.plot.occupancy <- plot.expected.occupancy(
+        list.input = list.output
+        );
+
+    plot.cowplot.discharges.occupancy(
+        list.plot.admissions = list.plot.admissions,
+        list.plot.discharges = list.plot.discharges,
+        list.plot.occupancy  = list.plot.occupancy
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
@@ -93,6 +86,127 @@ wrapper.stan.length.of.stay <- function(
     }
 
 ##################################################
+plot.admissions <- function(
+    list.input    = NULL,
+    textsize.axis = 20
+    ) {
+
+    thisFunctionName <- "plot.admissions";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    require(matrixStats);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat("\nstr(list.input[['observed.data']])\n");
+    print( str(list.input[['observed.data']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.plots    <- list();
+    jurisdictions <- list.input[["jurisdictions"]];
+
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- list.input[['observed.data']][[jurisdiction]];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,' COVID-19 daily hospital admissions')
+            );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.plot,
+            mapping = aes(x = date, y = admissions),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "black",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+        my.ggplot <- my.ggplot + theme(
+            axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+            );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = NULL,
+            breaks = seq(0,100,2)
+            );
+
+        my.ggplot <- my.ggplot + xlab("");
+        my.ggplot <- my.ggplot + ylab("");
+
+        list.plots[[jurisdiction]] <- my.ggplot;
+
+        PNG.output  <- paste0("plot-admissions-",jurisdiction,".png");
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( list.plots );
+
+    }
+
+plot.cowplot.discharges.occupancy <- function(
+    list.plot.admissions = NULL,
+    list.plot.discharges = NULL,
+    list.plot.occupancy  = NULL
+    ) {
+
+    require(ggplot2);
+    require(cowplot);
+
+    jurisdictions <- base::names(list.plot.discharges);
+    for ( jurisdiction in jurisdictions ) {
+
+        plot.admissions <- list.plot.admissions[[jurisdiction]];
+        plot.admissions <- plot.admissions + theme(axis.text.x = element_blank());
+
+        plot.discharges <- list.plot.discharges[[jurisdiction]];
+        plot.discharges <- plot.discharges + theme(axis.text.x = element_blank());
+
+        plot.occupancy  <- list.plot.occupancy[[ jurisdiction]];
+
+        my.cowplot <- cowplot::plot_grid(
+            plot.admissions,
+            plot.discharges,
+            plot.occupancy,
+            ncol        = 1,
+            align       = "v",
+            rel_heights = c(1,1,1.5)
+            );
+
+        PNG.output  <- paste0("plot-expected-cowplot-",jurisdiction,".png");
+        cowplot::ggsave2(
+            file   = PNG.output,
+            plot   = my.cowplot,
+            dpi    = 300,
+            height =  3 + 3 + 5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    return( NULL );
+
+    }
+
 plot.expected.occupancy <- function(
     list.input    = NULL,
     textsize.axis = 20
@@ -113,7 +227,9 @@ plot.expected.occupancy <- function(
     print( str(list.input[['extracted.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.plots    <- list();
     jurisdictions <- list.input[["jurisdictions"]];
+
     for ( temp.index in 1:length(jurisdictions) ) {
 
         jurisdiction <- jurisdictions[temp.index];
@@ -201,6 +317,8 @@ plot.expected.occupancy <- function(
         my.ggplot <- my.ggplot + xlab("");
         my.ggplot <- my.ggplot + ylab("");
 
+        list.plots[[jurisdiction]] <- my.ggplot;
+
         PNG.output  <- paste0("plot-expected-occupancy-",jurisdiction,".png");
         ggsave(
             file   = PNG.output,
@@ -216,7 +334,7 @@ plot.expected.occupancy <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
-    return( NULL );
+    return( list.plots );
 
     }
 
@@ -240,7 +358,9 @@ plot.expected.discharges <- function(
     print( str(list.input[['extracted.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.plots    <- list();
     jurisdictions <- list.input[["jurisdictions"]];
+
     for ( temp.index in 1:length(jurisdictions) ) {
 
         jurisdiction <- jurisdictions[temp.index];
@@ -317,6 +437,8 @@ plot.expected.discharges <- function(
         my.ggplot <- my.ggplot + xlab("");
         my.ggplot <- my.ggplot + ylab("");
 
+        list.plots[[jurisdiction]] <- my.ggplot;
+
         PNG.output  <- paste0("plot-expected-discharges-",jurisdiction,".png");
         ggsave(
             file   = PNG.output,
@@ -332,7 +454,7 @@ plot.expected.discharges <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
-    return( NULL );
+    return( list.plots );
 
     }
 
