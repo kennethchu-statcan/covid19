@@ -35,11 +35,32 @@ wrapper.stan.length.of.stay <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.output <- wrapper.stan.length.of.stay_patch(
+        list.input = list.output,
+        DF.input   = DF.input
+        );
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat("\nstr(list.output[['extracted.samples']])\n");
     print( str(list.output[['extracted.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     plot.density.mu.cv(
+        list.input = list.output
+        );
+
+    plot.scatter.mu.cv(
+        list.input = list.output
+        );
+
+    plot.trace.mu.cv(
+        list.input = list.output
+        );
+
+    plot.estimated.discharges(
         list.input = list.output
         );
 
@@ -68,6 +89,313 @@ wrapper.stan.length.of.stay <- function(
     }
 
 ##################################################
+plot.estimated.discharges <- function(
+    list.input    = NULL,
+    textsize.axis = 20
+    ) {
+
+    thisFunctionName <- "plot.estimated.discharges";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    require(matrixStats);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat("\nstr(list.input[['observed.data']])\n");
+    print( str(list.input[['observed.data']])   );
+
+    cat("\nstr(list.input[['extracted.samples']])\n");
+    print( str(list.input[['extracted.samples']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- list.input[['observed.data']][[jurisdiction]];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.quantiles <- matrixStats::colQuantiles(
+            x     = DF.expected.discharges,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        colnames(DF.quantiles) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- cbind(DF.plot,DF.quantiles);
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,' COVID-19 daily hospital discharges')
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.plot,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.75,
+            fill    = "cyan",
+            colour  = NA
+            );
+
+        # my.ggplot <- my.ggplot + geom_ribbon(
+        #     data    = DF.plot,
+        #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+        #     alpha   = 0.75,
+        #     fill    = "red", #"darkcyan",
+        #     colour  = NA
+        #     );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.plot,
+            mapping = aes(x = date, y = discharges),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "orange",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_line(
+            data    = DF.plot,
+            mapping = aes(x = date, y = percentile.50.0),
+            alpha   = 0.85,
+            size    = 1.00,
+            colour  = "darkblue"
+            );
+
+        my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+        my.ggplot <- my.ggplot + theme(
+            axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+            );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = NULL,
+            breaks = seq(0,100,2)
+            );
+
+        my.ggplot <- my.ggplot + xlab("");
+        my.ggplot <- my.ggplot + ylab("");
+
+        PNG.output  <- paste0("plot-estimated-discharges-",jurisdiction,".png");
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( NULL );
+
+    }
+
+wrapper.stan.length.of.stay_patch <- function(
+    list.input = NULL,
+    DF.input   = NULL
+    ) {
+
+    list.output <- list.input;
+
+    if ( !('observed.data' %in% names(list.input)) ) {
+
+        jurisdictions   <- unique(DF.input[,'jurisdiction']);
+        n.jurisdictions <- length(jurisdictions);
+
+        observed.data <- list();
+        for( jurisdiction in jurisdictions ) {
+
+            DF.jurisdiction   <- DF.input[DF.input$jurisdiction == jurisdiction,];
+            DF.jurisdiction$t <- lubridate::decimal_date(DF.jurisdiction$date);
+            DF.jurisdiction   <- DF.jurisdiction[order(DF.jurisdiction$t),];
+
+            observed.data[[jurisdiction]] <- DF.jurisdiction;
+
+            } # for( jurisdiction in jurisdictions )
+
+        list.output[['observed.data']] <- observed.data;
+
+        }
+
+    return( list.output );
+
+    }
+
+plot.trace.mu.cv <- function(
+    list.input = NULL
+    ) {
+
+    require(ggplot2);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+
+        DF.plot <- data.frame(
+            index = seq(1,length(temp.alpha),1),
+            alpha = temp.alpha,
+            beta  = temp.beta,
+            mu    = temp.alpha / temp.beta,
+            cv    = 1 / sqrt(temp.alpha)
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_point(
+            data    = DF.plot,
+            mapping = aes(x = index, y = mu),
+            alpha   = 0.5,
+            size    = 0.5
+            );
+
+        my.ggplot <- my.ggplot + xlab('iteration');
+        my.ggplot <- my.ggplot + ylab('mean( length of stay )');
+
+        # my.ggplot <- my.ggplot + scale_x_continuous(
+        #     limits = c(0,50),
+        #     breaks = seq(0,50,10)
+        #     );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = c(0,50),
+            breaks = seq(0,50,10)
+            );
+
+        ggsave(
+            file   = paste0("plot-trace-LoS-mu-",jurisdiction,".png"),
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_point(
+            data    = DF.plot,
+            mapping = aes(x = index, y = cv),
+            alpha   = 0.5,
+            size    = 0.5
+            );
+
+        my.ggplot <- my.ggplot + xlab('iteration');
+        my.ggplot <- my.ggplot + ylab('CV( length of stay )');
+
+        # my.ggplot <- my.ggplot + scale_x_continuous(
+        #     limits = c(0,50),
+        #     breaks = seq(0,50,10)
+        #     );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = c(0,2),
+            breaks = seq(0,2,0.2)
+            );
+
+        ggsave(
+            file   = paste0("plot-trace-LoS-cv-",jurisdiction,".png"),
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+        }
+
+    return( NULL );
+
+    }
+
+plot.scatter.mu.cv <- function(
+    list.input = NULL
+    ) {
+
+    require(ggplot2);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+
+        DF.plot <- data.frame(
+            mu = temp.alpha / temp.beta,
+            cv = 1 / sqrt(temp.alpha)
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_point(
+            data    = DF.plot,
+            mapping = aes(x = mu, y = cv),
+            alpha   = 0.50,
+            size    = 0.50
+            );
+
+        my.ggplot <- my.ggplot + xlab('mean( length of stay )');
+        my.ggplot <- my.ggplot + ylab('CV( length of stay )');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(0,50),
+            breaks = seq(0,50,5)
+            );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = c(0,2),
+            breaks = seq(0,2,0.2)
+            );
+
+        ggsave(
+            file   = paste0("plot-scatter-LoS-mu-cv-",jurisdiction,".png"),
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        }
+
+    return( NULL );
+
+    }
+
 plot.density.mu.cv <- function(
     list.input = NULL
     ) {
@@ -100,7 +428,7 @@ plot.density.mu.cv <- function(
             size    = 1.30
             );
 
-        my.ggplot <- my.ggplot + xlab('mean(length of stay)');
+        my.ggplot <- my.ggplot + xlab('mean( length of stay )');
         my.ggplot <- my.ggplot + ylab('density');
 
         my.ggplot <- my.ggplot + scale_x_continuous(
@@ -130,12 +458,12 @@ plot.density.mu.cv <- function(
             size    = 1.30
             );
 
-        my.ggplot <- my.ggplot + xlab('CV(length of stay)');
+        my.ggplot <- my.ggplot + xlab('CV( length of stay )');
         my.ggplot <- my.ggplot + ylab('density');
 
         my.ggplot <- my.ggplot + scale_x_continuous(
-            limits = c(0,1),
-            breaks = seq(0,1,0.2)
+            limits = c(0,2),
+            breaks = seq(0,2,0.2)
             );
 
         ggsave(
@@ -241,14 +569,14 @@ wrapper.stan.length.of.stay_inner <- function(
         LENGTHSCALE     = 7
         );
 
-    dates <- list();
+    observed.data <- list();
     for( jurisdiction in jurisdictions ) {
 
         DF.jurisdiction   <- DF.input[DF.input$jurisdiction == jurisdiction,];
         DF.jurisdiction$t <- lubridate::decimal_date(DF.jurisdiction$date);
         DF.jurisdiction   <- DF.jurisdiction[order(DF.jurisdiction$t),];
 
-        dates[[jurisdiction]] <- DF.jurisdiction$date;
+        observed.data[[jurisdiction]] <- DF.jurisdiction;
 
         # append data
         stan_data$admissions <- cbind(stan_data$admissions,as.vector(as.numeric(DF.jurisdiction$admissions)));
@@ -329,10 +657,10 @@ wrapper.stan.length.of.stay_inner <- function(
             object  = my.stan.model,
             data    = stan_data,
             init    = list.init,
-            iter    = 200,
-            warmup  = 100,
-            chains  =   4,
-            thin    =   4,
+            iter    = 2500,
+            warmup  =  500,
+            chains  =    2,
+            thin    =    4,
             control = list(adapt_delta = 0.90, max_treedepth = 10)
             );
 
@@ -343,6 +671,7 @@ wrapper.stan.length.of.stay_inner <- function(
     list.output <- list(
         StanModel              = StanModel,
         jurisdictions          = jurisdictions,
+        observed.data          = observed.data,
         results.rstan.sampling = results.rstan.sampling,
         extracted.samples      = extracted.samples
         );

@@ -245,7 +245,7 @@ my.ggplot <- examine.Gamma_plot.mu.cv(
 my.ggplot;
 ```
 
-Parameters
+Density & Trace
 =======================================================================
 
 Row
@@ -253,7 +253,7 @@ Row
 
 ###
 
-```{r, fig.width = 24}
+```{r, fig.width = 16}
 knitr::include_graphics(
     path = file.path(output.directory,"plot-density-LoS-mu-Ottawa.png")
     )
@@ -261,8 +261,38 @@ knitr::include_graphics(
 
 ###
 
-```{r, fig.width = 24}
+```{r, fig.width = 16}
 knitr::include_graphics(
     path = file.path(output.directory,"plot-density-LoS-cv-Ottawa.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-trace-LoS-mu-Ottawa.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-trace-LoS-cv-Ottawa.png")
+    )
+```
+
+Scatter
+=======================================================================
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-scatter-LoS-mu-cv-Ottawa.png")
     )
 ```
