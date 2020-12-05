@@ -121,8 +121,20 @@ colnames(DF.ottawa) <-gsub(
     replacement = "discharges"
     );
 
+colnames(DF.ottawa) <-gsub(
+    x           = colnames(DF.ottawa),
+    pattern     = "cumulative.hospital.admissions",
+    replacement = "cumulative.admissions"
+    );
+
+colnames(DF.ottawa) <-gsub(
+    x           = colnames(DF.ottawa),
+    pattern     = "occupancy.hospital",
+    replacement = "occupancy"
+    );
+
 DF.ottawa[,'jurisdiction'] <- rep('Ottawa',nrow(DF.ottawa));
-DF.ottawa <- DF.ottawa[,c("jurisdiction","date","admissions","discharges")];
+DF.ottawa <- DF.ottawa[,c("jurisdiction","date","admissions","discharges","cumulative.admissions","occupancy")];
 
 print( str(DF.ottawa) );
 print( summary(DF.ottawa) );

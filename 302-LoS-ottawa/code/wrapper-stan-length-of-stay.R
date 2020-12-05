@@ -64,6 +64,10 @@ wrapper.stan.length.of.stay <- function(
         list.input = list.output
         );
 
+    plot.expected.occupancy(
+        list.input = list.output
+        );
+
     # wrapper.stan_visualize.results(
     #     list.input = list.output
     #     );
@@ -89,6 +93,133 @@ wrapper.stan.length.of.stay <- function(
     }
 
 ##################################################
+plot.expected.occupancy <- function(
+    list.input    = NULL,
+    textsize.axis = 20
+    ) {
+
+    thisFunctionName <- "plot.expected.occupancy";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    require(matrixStats);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat("\nstr(list.input[['observed.data']])\n");
+    print( str(list.input[['observed.data']])   );
+
+    cat("\nstr(list.input[['extracted.samples']])\n");
+    print( str(list.input[['extracted.samples']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- list.input[['observed.data']][[jurisdiction]];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.cumulative.discharges <- matrixStats::rowCumsums(x = DF.expected.discharges);
+
+        DF.cumulative.admissions <- base::matrix(
+            data  = rep(x = DF.plot[,'cumulative.admissions'], times = nrow(DF.expected.cumulative.discharges)),
+            nrow  = nrow(DF.expected.cumulative.discharges),
+            byrow = TRUE
+            );
+
+        DF.expected.occupancy <- DF.cumulative.admissions - DF.expected.cumulative.discharges;
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.quantiles <- matrixStats::colQuantiles(
+            x     = DF.expected.occupancy,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        colnames(DF.quantiles) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- cbind(DF.plot,DF.quantiles);
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,' COVID-19 daily hospital midnight census counts')
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.plot,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.75,
+            fill    = "cyan",
+            colour  = NA
+            );
+
+        # my.ggplot <- my.ggplot + geom_ribbon(
+        #     data    = DF.plot,
+        #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+        #     alpha   = 0.75,
+        #     fill    = "darkcyan",
+        #     colour  = NA
+        #     );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.plot,
+            mapping = aes(x = date, y = occupancy),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "black",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_line(
+            data    = DF.plot,
+            mapping = aes(x = date, y = percentile.50.0),
+            alpha   = 0.85,
+            size    = 1.00,
+            colour  = "red"
+            );
+
+        my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+        my.ggplot <- my.ggplot + theme(
+            axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+            );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = NULL,
+            breaks = seq(0,100,20)
+            );
+
+        my.ggplot <- my.ggplot + xlab("");
+        my.ggplot <- my.ggplot + ylab("");
+
+        PNG.output  <- paste0("plot-expected-occupancy-",jurisdiction,".png");
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( NULL );
+
+    }
+
 plot.expected.discharges <- function(
     list.input    = NULL,
     textsize.axis = 20
@@ -152,7 +283,7 @@ plot.expected.discharges <- function(
         #     data    = DF.plot,
         #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
         #     alpha   = 0.75,
-        #     fill    = "red", #"darkcyan",
+        #     fill    = "darkcyan",
         #     colour  = NA
         #     );
 
@@ -161,7 +292,7 @@ plot.expected.discharges <- function(
             mapping = aes(x = date, y = discharges),
             alpha   = 0.50,
             size    = 0.75,
-            fill    = "orange",
+            fill    = "black",
             colour  = NA
             );
 
@@ -170,7 +301,7 @@ plot.expected.discharges <- function(
             mapping = aes(x = date, y = percentile.50.0),
             alpha   = 0.85,
             size    = 1.00,
-            colour  = "darkblue"
+            colour  = "red"
             );
 
         my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
