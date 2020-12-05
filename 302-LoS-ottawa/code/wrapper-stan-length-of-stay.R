@@ -60,7 +60,7 @@ wrapper.stan.length.of.stay <- function(
         list.input = list.output
         );
 
-    plot.estimated.discharges(
+    plot.expected.discharges(
         list.input = list.output
         );
 
@@ -89,12 +89,12 @@ wrapper.stan.length.of.stay <- function(
     }
 
 ##################################################
-plot.estimated.discharges <- function(
+plot.expected.discharges <- function(
     list.input    = NULL,
     textsize.axis = 20
     ) {
 
-    thisFunctionName <- "plot.estimated.discharges";
+    thisFunctionName <- "plot.expected.discharges";
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
@@ -186,7 +186,7 @@ plot.estimated.discharges <- function(
         my.ggplot <- my.ggplot + xlab("");
         my.ggplot <- my.ggplot + ylab("");
 
-        PNG.output  <- paste0("plot-estimated-discharges-",jurisdiction,".png");
+        PNG.output  <- paste0("plot-expected-discharges-",jurisdiction,".png");
         ggsave(
             file   = PNG.output,
             plot   = my.ggplot,
