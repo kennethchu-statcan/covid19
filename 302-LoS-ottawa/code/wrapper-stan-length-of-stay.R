@@ -49,14 +49,28 @@ wrapper.stan.length.of.stay <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     plot.density.mu.cv(
-        list.input = list.output
-        );
-
-    plot.scatter.mu.cv(
-        list.input = list.output
+        list.input          = list.output,
+        remove.stuck.chains = FALSE
         );
 
     plot.trace.mu.cv(
+        list.input          = list.output,
+        remove.stuck.chains = FALSE
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    plot.density.mu.cv(
+        list.input          = list.output,
+        remove.stuck.chains = TRUE
+        );
+
+    plot.trace.mu.cv(
+        list.input          = list.output,
+        remove.stuck.chains = TRUE
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    plot.scatter.mu.cv(
         list.input = list.output
         );
 
@@ -502,7 +516,8 @@ wrapper.stan.length.of.stay_patch <- function(
     }
 
 plot.trace.mu.cv <- function(
-    list.input = NULL
+    list.input          = NULL,
+    remove.stuck.chains = FALSE
     ) {
 
     require(ggplot2);
@@ -512,9 +527,16 @@ plot.trace.mu.cv <- function(
 
         jurisdiction <- jurisdictions[temp.index];
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
         temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
 
+        if ( remove.stuck.chains ) {
+            temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
+            temp.beta  <- temp.beta[ list.input[["is.not.stuck"]][[jurisdiction]]];
+            }
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         DF.plot <- data.frame(
             index = seq(1,length(temp.alpha),1),
             alpha = temp.alpha,
@@ -549,8 +571,14 @@ plot.trace.mu.cv <- function(
             breaks = seq(0,50,10)
             );
 
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-trace-LoS-mu-",jurisdiction,"-stuck-chains-removed.png"),
+            no   = paste0("plot-trace-LoS-mu-",jurisdiction,".png")
+            );
+
         ggsave(
-            file   = paste0("plot-trace-LoS-mu-",jurisdiction,".png"),
+            file   = PNG.output,
             plot   = my.ggplot,
             dpi    = 300,
             height =   8,
@@ -584,8 +612,121 @@ plot.trace.mu.cv <- function(
             breaks = seq(0,2,0.2)
             );
 
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-trace-LoS-cv-",jurisdiction,"-stuck-chains-removed.png"),
+            no   = paste0("plot-trace-LoS-cv-",jurisdiction,".png")
+            );
+
         ggsave(
-            file   = paste0("plot-trace-LoS-cv-",jurisdiction,".png"),
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+        }
+
+    return( NULL );
+
+    }
+
+plot.density.mu.cv <- function(
+    list.input          = NULL,
+    remove.stuck.chains = FALSE
+    ) {
+
+    require(ggplot2);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+
+        if ( remove.stuck.chains ) {
+            temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
+            temp.beta  <- temp.beta[ list.input[["is.not.stuck"]][[jurisdiction]]];
+            }
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- data.frame(
+            mu = temp.alpha / temp.beta,
+            cv = 1 / sqrt(temp.alpha)
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_density(
+            data    = DF.plot,
+            mapping = aes(x = mu),
+            alpha   = 0.85,
+            size    = 1.30
+            );
+
+        my.ggplot <- my.ggplot + xlab('mean( length of stay )');
+        my.ggplot <- my.ggplot + ylab('density');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(0,50),
+            breaks = seq(0,50,10)
+            );
+
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-density-LoS-mu-",jurisdiction,"-stuck-chains-removed.png"),
+            no   = paste0("plot-density-LoS-mu-",jurisdiction,".png")
+            );
+
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = jurisdiction
+            );
+
+        my.ggplot <- my.ggplot + geom_density(
+            data    = DF.plot,
+            mapping = aes(x = cv),
+            alpha   = 0.85,
+            size    = 1.30
+            );
+
+        my.ggplot <- my.ggplot + xlab('CV( length of stay )');
+        my.ggplot <- my.ggplot + ylab('density');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(0,2),
+            breaks = seq(0,2,0.2)
+            );
+
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-density-LoS-cv-",jurisdiction,"-stuck-chains-removed.png"),
+            no   = paste0("plot-density-LoS-cv-",jurisdiction,".png")
+            );
+
+        ggsave(
+            file   = PNG.output,
             plot   = my.ggplot,
             dpi    = 300,
             height =   8,
@@ -654,93 +795,6 @@ plot.scatter.mu.cv <- function(
             width  =  16,
             units  = 'in'
             );
-
-        }
-
-    return( NULL );
-
-    }
-
-plot.density.mu.cv <- function(
-    list.input = NULL
-    ) {
-
-    require(ggplot2);
-
-    jurisdictions <- list.input[["jurisdictions"]];
-    for ( temp.index in 1:length(jurisdictions) ) {
-
-        jurisdiction <- jurisdictions[temp.index];
-
-        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
-        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
-
-        DF.plot <- data.frame(
-            mu = temp.alpha / temp.beta,
-            cv = 1 / sqrt(temp.alpha)
-            );
-
-        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        my.ggplot <- initializePlot(
-            title    = NULL,
-            subtitle = jurisdiction
-            );
-
-        my.ggplot <- my.ggplot + geom_density(
-            data    = DF.plot,
-            mapping = aes(x = mu),
-            alpha   = 0.85,
-            size    = 1.30
-            );
-
-        my.ggplot <- my.ggplot + xlab('mean( length of stay )');
-        my.ggplot <- my.ggplot + ylab('density');
-
-        my.ggplot <- my.ggplot + scale_x_continuous(
-            limits = c(0,50),
-            breaks = seq(0,50,10)
-            );
-
-        ggsave(
-            file   = paste0("plot-density-LoS-mu-",jurisdiction,".png"),
-            plot   = my.ggplot,
-            dpi    = 300,
-            height =   8,
-            width  =  16,
-            units  = 'in'
-            );
-
-        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        my.ggplot <- initializePlot(
-            title    = NULL,
-            subtitle = jurisdiction
-            );
-
-        my.ggplot <- my.ggplot + geom_density(
-            data    = DF.plot,
-            mapping = aes(x = cv),
-            alpha   = 0.85,
-            size    = 1.30
-            );
-
-        my.ggplot <- my.ggplot + xlab('CV( length of stay )');
-        my.ggplot <- my.ggplot + ylab('density');
-
-        my.ggplot <- my.ggplot + scale_x_continuous(
-            limits = c(0,2),
-            breaks = seq(0,2,0.2)
-            );
-
-        ggsave(
-            file   = paste0("plot-density-LoS-cv-",jurisdiction,".png"),
-            plot   = my.ggplot,
-            dpi    = 300,
-            height =   8,
-            width  =  16,
-            units  = 'in'
-            );
-
-        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
         }
 

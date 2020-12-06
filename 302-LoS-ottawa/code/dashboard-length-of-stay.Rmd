@@ -286,6 +286,47 @@ knitr::include_graphics(
     )
 ```
 
+No Stucks
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-density-LoS-mu-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-density-LoS-cv-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-trace-LoS-mu-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-trace-LoS-cv-Ottawa-stuck-chains-removed.png")
+    )
+```
+
 Scatter
 =======================================================================
 
