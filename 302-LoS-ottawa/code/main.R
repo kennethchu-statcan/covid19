@@ -66,10 +66,14 @@ jurisdictions <- c(
     "Ottawa"
     );
 
-# jurisdictions <- c("Italy","Germany","Spain","United_Kingdom","France","BC","AB","ON","QC","Ottawa");
-
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 options(mc.cores = parallel::detectCores());
+
+n.chains <- ifelse(
+    test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),
+    yes  = 4,
+    no   = getOption("mc.cores")
+    );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(1234567);
@@ -160,7 +164,8 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
     StanModel       = 'length-of-stay',
     FILE.stan.model = file.path(code.directory,'length-of-stay.stan'),
     DF.input        = DF.dummy,
-    DEBUG           = FALSE # TRUE # FALSE
+    n.chains        = n.chains,
+    DEBUG           = TRUE # FALSE
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###

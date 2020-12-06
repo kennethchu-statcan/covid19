@@ -4,6 +4,7 @@ wrapper.stan.length.of.stay <- function(
     FILE.stan.model = NULL,
     DF.input        = NULL,
     RData.output    = paste0('stan-model-',StanModel,'.RData'),
+    n.chains        = 4,
     DEBUG           = FALSE
     ) {
 
@@ -25,6 +26,7 @@ wrapper.stan.length.of.stay <- function(
             FILE.stan.model = FILE.stan.model,
             DF.input        = DF.input,
             RData.output    = RData.output,
+            n.chains        = n.chains,
             DEBUG           = DEBUG
             );
 
@@ -36,10 +38,10 @@ wrapper.stan.length.of.stay <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    list.output <- wrapper.stan.length.of.stay_patch(
-        list.input = list.output,
-        DF.input   = DF.input
-        );
+    # list.output <- wrapper.stan.length.of.stay_patch(
+    #     list.input = list.output,
+    #     DF.input   = DF.input
+    #     );
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
@@ -864,6 +866,7 @@ wrapper.stan.length.of.stay_inner <- function(
     FILE.stan.model = NULL,
     DF.input        = NULL,
     RData.output    = NULL,
+    n.chains        = NULL,
     DEBUG           = FALSE
     ) {
 
@@ -904,7 +907,7 @@ wrapper.stan.length.of.stay_inner <- function(
         } # for( jurisdiction in jurisdictions )
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    options(mc.cores = parallel::detectCores())
+    # options(mc.cores = parallel::detectCores())
     rstan_options(auto_write = TRUE)
     my.stan.model <- rstan::stan_model(FILE.stan.model);
 
@@ -917,7 +920,7 @@ wrapper.stan.length.of.stay_inner <- function(
     ##############################################
     ##############################################
     list.init <- lapply(
-        X   = 1:getOption("mc.cores"),
+        X   = 1:n.chains, # 1:getOption("mc.cores"),
         FUN = function(x) {
             list(
                 uniform_mu = runif(n.jurisdictions, min = 0, max = 1),
@@ -932,8 +935,8 @@ wrapper.stan.length.of.stay_inner <- function(
             object = my.stan.model,
             data   = stan_data,
             init   = list.init,
-            iter   = 40,
-            warmup = 20,
+            iter   = 20,
+            warmup = 10,
             chains =  2
             );
 
@@ -976,10 +979,10 @@ wrapper.stan.length.of.stay_inner <- function(
             object  = my.stan.model,
             data    = stan_data,
             init    = list.init,
-            iter    = 2500,
-            warmup  =  500,
-            chains  =    2,
-            thin    =    4,
+            iter    = 2000,
+            warmup  = 1000,
+            chains  = n.chains,
+            thin    = 4,
             control = list(adapt_delta = 0.90, max_treedepth = 10)
             );
 
