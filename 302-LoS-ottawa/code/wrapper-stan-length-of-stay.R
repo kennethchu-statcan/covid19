@@ -239,6 +239,8 @@ plot.expected.occupancy <- function(
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
+
         DF.expected.cumulative.discharges <- matrixStats::rowCumsums(x = DF.expected.discharges);
 
         DF.cumulative.admissions <- base::matrix(
@@ -370,6 +372,8 @@ plot.expected.discharges <- function(
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
+
         DF.quantiles <- matrixStats::colQuantiles(
             x     = DF.expected.discharges,
             probs = c(0.025,0.25,0.5,0.75,0.975)
@@ -466,23 +470,31 @@ wrapper.stan.length.of.stay_patch <- function(
     list.output <- list.input;
 
     if ( !('observed.data' %in% names(list.input)) ) {
-
-        jurisdictions   <- unique(DF.input[,'jurisdiction']);
-        n.jurisdictions <- length(jurisdictions);
-
+        jurisdictions <- unique(DF.input[,'jurisdiction']);
         observed.data <- list();
         for( jurisdiction in jurisdictions ) {
-
             DF.jurisdiction   <- DF.input[DF.input$jurisdiction == jurisdiction,];
             DF.jurisdiction$t <- lubridate::decimal_date(DF.jurisdiction$date);
             DF.jurisdiction   <- DF.jurisdiction[order(DF.jurisdiction$t),];
-
             observed.data[[jurisdiction]] <- DF.jurisdiction;
-
             } # for( jurisdiction in jurisdictions )
-
         list.output[['observed.data']] <- observed.data;
+        }
 
+    if ( !('is.not.stuck' %in% names(list.input)) ) {
+        jurisdictions   <- unique(DF.input[,'jurisdiction']);
+        n.jurisdictions <- length(jurisdictions);
+        is.not.stuck    <- list();
+        for( temp.index in 1:n.jurisdictions ) {
+            jurisdiction  <- jurisdictions[temp.index];
+            temp.0 <- list.input[['extracted.samples']][['alpha']][,temp.index];
+            temp.1 <- abs(temp.0 - c(NA,temp.0[seq(1,length(temp.0)-1)]));
+            temp.2 <- abs(temp.0 - c(temp.0[seq(2,length(temp.0))],NA));
+            temp.3 <- (temp.1 < 1e-6) | (temp.2 < 1e-6);
+            temp.3[c(1,length(temp.3))] <- FALSE;
+            is.not.stuck[[jurisdiction]] <- !temp.3;
+            } # for( jurisdiction in jurisdictions )
+        list.output[['is.not.stuck']] <- is.not.stuck;
         }
 
     return( list.output );
@@ -921,12 +933,26 @@ wrapper.stan.length.of.stay_inner <- function(
 
     extracted.samples <- rstan::extract(results.rstan.sampling);
 
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    is.not.stuck <- list();
+    for( temp.index in 1:n.jurisdictions ) {
+        jurisdiction  <- jurisdictions[temp.index];
+        temp.0 <- extracted.samples[['alpha']][,temp.index];
+        temp.1 <- abs(temp.0 - c(NA,temp.0[seq(1,length(temp.0)-1)]));
+        temp.2 <- abs(temp.0 - c(temp.0[seq(2,length(temp.0))],NA));
+        temp.3 <- (temp.1 < 1e-6) | (temp.2 < 1e-6);
+        temp.3[c(1,length(temp.3))] <- FALSE;
+        is.not.stuck[[jurisdiction]] <- !temp.3;
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output <- list(
         StanModel              = StanModel,
         jurisdictions          = jurisdictions,
         observed.data          = observed.data,
         results.rstan.sampling = results.rstan.sampling,
-        extracted.samples      = extracted.samples
+        extracted.samples      = extracted.samples,
+        is.not.stuck           = is.not.stuck
         );
 
     return( list.output );
