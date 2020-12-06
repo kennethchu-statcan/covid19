@@ -75,6 +75,8 @@ n.chains <- ifelse(
     no   = getOption("mc.cores")
     );
 
+print( n.chains );
+
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(1234567);
 
