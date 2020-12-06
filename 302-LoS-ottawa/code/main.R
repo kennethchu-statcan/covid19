@@ -96,7 +96,7 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot <- "2020-11-29.01";
+data.snapshot <- "2020-12-06.01";
 
 DF.ottawa <- getData.Ottawa(
     csv.input = file.path(data.directory,data.snapshot,"raw-covid19-Ottawa.csv")
