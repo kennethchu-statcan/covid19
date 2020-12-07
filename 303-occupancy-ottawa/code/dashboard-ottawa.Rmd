@@ -1,0 +1,46 @@
+---
+title: "Ottawa COVID-19 data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rwFV-xgboost}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+require(ggplot2);
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+    )
+```
+
+```{r, fig.width = 16, echo=FALSE}
+visualizeData.Ottawa_case(
+    DF.input = DF.ottawa
+    );
+```
+
+```{r, fig.width = 16, echo=FALSE}
+visualizeData.Ottawa_death(
+    DF.input = DF.ottawa
+    );
+```
+
+```{r, fig.width = 16, echo=FALSE}
+visualizeData.Ottawa_hospital.admission(
+    DF.input = DF.ottawa
+    );
+```
+
+```{r, fig.width = 16, echo=FALSE}
+visualizeData.Ottawa_occupancy.hospital(
+    DF.input = DF.ottawa
+    );
+```
+
+```{r, fig.width = 16, echo=FALSE}
+visualizeData.Ottawa_occupancy.icu(
+    DF.input = DF.ottawa
+    );
+```

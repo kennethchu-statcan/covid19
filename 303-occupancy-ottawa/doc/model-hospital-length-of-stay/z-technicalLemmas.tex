@@ -1,0 +1,568 @@
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\section{Technical lemmas}
+\setcounter{theorem}{0}
+\setcounter{equation}{0}
+
+%\cite{vanDerVaart1996}
+%\cite{Kosorok2008}
+
+%\renewcommand{\theenumi}{\alph{enumi}}
+%\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\begin{lemma}\label{lemma:MonotoneFunctionsAreMeasurable}
+\mbox{}\vskip 0.1cm
+\noindent
+Suppose $B \subset \Re$ be a Borel measurable subset of \,$\Re$, and
+$f : B \longrightarrow \Re$ is an $\Re$-valued function defined on $B$.
+If $f$ is monotone, then $f$ is Borel measurable.
+\end{lemma}
+\proof
+Suppose that $(\Omega,\mathcal{A})$ is a measurable space and
+$f : \Omega \longrightarrow \Re$ is an $\Re$-valued function defined on $\Omega$.
+Let $\mathcal{O}$ denote the Borel $\sigma$-algebra of $\Re$.
+Recall that $f$ is said to be $(\mathcal{A},\mathcal{O})$-measurable if
+$f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right) \in \mathcal{A}$,
+for each $y \in \Re$.
+
+\vskip 0.3cm
+\noindent
+Now we specialize to the scenario of the present Lemma, namely that
+$(\Omega,\mathcal{A}) = (\Re,\mathcal{O})$.
+
+\vskip 0.3cm
+\noindent
+We give the proof only for the case where $f$ is nondecreasing.
+The proof for the case where $f$ is nonincreasing in similar.
+Now, for nondecreasing $f$, the present Lemma follows immediately
+from Claim 1 below, since \,$\varemptyset$, \,$B = B \cap (-\infty,\infty)$,
+\,$B \cap (-\infty,x\,)$,\, and \,$B \cap (-\infty,x\,]$\, are measurable, for every $x\in\Re$.
+
+%\vskip 0.5cm
+%\noindent
+%\textbf{Claim 1:}\quad
+%For any $x \in B$,\;
+%$x \,\in\, f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$\,
+%\,$\Longrightarrow$\;
+%$B \cap (-\infty,x\,] \,\subset\, f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$
+%\vskip 0.1cm
+%\noindent
+%Proof of Claim 1:\;\;
+%First, note that $x \,\in\, f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$
+%\;$\Longleftrightarrow$\; $f(x) \leq y$.
+%Now, since $f$ is nondecreasing, we see that
+%$\xi \in B \cap (-\infty,x\,]$ \;$\Longrightarrow$\; $f(\xi) \leq f(x) \leq y$
+%\;$\Longrightarrow$\; $\xi \,\in\, f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$.
+%This shows that indeed \,$B \cap (-\infty,x\,] \,\subset\, f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$,\,
+%and completes the proof of Claim 1.
+
+\vskip 0.5cm
+\noindent
+\textbf{Claim 1:}\quad
+$f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$\,
+is either \,$\varemptyset$, \,$B \cap (-\infty,\infty)$, \,$B \cap (-\infty,x\,)$,\, or \,$B \cap (-\infty,x\,]$,\, for some $x\in\Re$.
+\vskip 0.1cm
+\noindent
+Proof of Claim 1:\;\;
+First, note that
+\begin{eqnarray*}
+y \,\geq\, \underset{\xi \in B}{\sup}\left\{\;\overset{{\color{white}.}}{f}(\xi)\;\right\} \,\in\, \Re\cup\{\,+\infty\,\}
+& \Longrightarrow &
+	f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right) \,=\, B \cap (-\infty,\infty) \,=\, B\,,
+	\quad
+	\textnormal{and}
+\\
+y \,<\, \underset{\xi \in B}{\inf}\left\{\;\overset{{\color{white}.}}{f}(\xi)\;\right\} \,\in\, \Re\cup\{\,-\infty\,\}
+& \Longrightarrow &
+	f^{-1}\!\left(\,(\,-\infty,\overset{{\color{white}-}}{y}\,]\,\right) \,=\, \varemptyset\,.
+\end{eqnarray*}
+Next, we consider the case where
+\;$-\infty \,\leq\, \underset{\xi \in B}{\inf}\left\{\;\overset{{\color{white}.}}{f}(\xi)\;\right\}
+\;\leq\; y \,<\, \underset{\xi \in B}{\sup}\left\{\;\overset{{\color{white}.}}{f}(\xi)\;\right\} \,\leq\, +\infty$.
+Let
+\begin{equation*}
+x \;\; := \;\; \sup\,f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right) \;\; \in \;\; \Re\cup\{\,+\infty\,\}.
+\end{equation*}
+Then, we claim have
+\begin{equation*}
+B \cap (-\infty,x\,)
+\;\;\subset\;\;
+	f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right)
+\;\;\subset\;\;
+	B \cap (-\infty,x\,].
+\end{equation*}
+Indeed, note that
+$x \,:=\, \sup\,f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$
+trivially implies that
+$f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right) \subset\,B \cap (-\infty,x\,]$.
+On the other hand, by definition of the supremum, there exists a sequence
+$\{\,\xi_{n}\,\}_{n\in\N} \,\subset\, f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$
+such that $\xi_{n} \uparrow x$.
+Since $f$ is nondecreasing, we see that $f(\xi_{n})$ is also nondecreasing.
+Thus, the limit $\underset{n\rightarrow\infty}{\lim}f(\xi_{n})$ exists and $\underset{n\rightarrow\infty}{\lim}f(\xi_{n}) \,\leq\, y$.
+Therefore,
+\begin{eqnarray*}
+\xi \in B \cap (-\infty,x\,)
+&\Longrightarrow&
+	\xi \,<\, x
+\;\;\Longrightarrow\;\;
+	\exists \;\; m\,\in\,\N \;\;\textnormal{such that}\;\; \xi \,\leq\, \xi_{m} \,\leq\, x
+\\
+&\Longrightarrow&
+	f(\xi) \,\leq\, f(\xi_{m}) \,\leq\, \underset{n\rightarrow\infty}{\lim}f(\xi_{n}) \,\leq\, y
+\;\;\Longrightarrow\;\;
+	\xi \in f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right),
+\end{eqnarray*}
+which proves that \,$B \cap (-\infty,x\,) \,\subset\, f^{-1}\!\left(\,(-\infty,\overset{{\color{white}-}}{y}\,]\,\right)$.
+This completes the proof of Claim 1, as well as that of the present Lemma.
+\qed
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\begin{lemma}\label{lemma:nondecreasingLeftContinuous}
+\mbox{}\vskip 0.1cm
+\noindent
+Suppose:
+\begin{itemize}
+\item
+	$(\,a,b\,], (\,c,d\,] \subset \Re$ are intervals in \,$\Re$.
+\item
+	$\phi : (\,a,b\,] \longrightarrow (\,c,d\,]$ is a nondecreasing and left-continuous
+	$\Re$-valued function mapping from $(\,a,b\,]$ {\color{red}onto} $(\,c,d\,]$.
+	Note that, since $\phi$ is nondecreasing and left-continuous, we have:
+	\begin{equation*}
+	c \; = \; \underset{\xi\,\rightarrow\,a^{+}}{\lim}\phi(\xi) \; \in \; \Re\cup\{\,-\infty\,\}
+	\quad\textnormal{and}\quad
+	d \; = \; \underset{\xi\,\rightarrow\,b^{-}}{\lim}\phi(\xi) \; = \; \phi(b) \; \in \; \Re
+	\end{equation*}
+\end{itemize}
+Define \;$\psi : (\,c,d\,] \longrightarrow (\,a,b\,]$\; as follows:
+\begin{equation*}
+\psi(y)
+\;\; := \;\;
+	\sup\left\{\;
+		x \in (\,a,b\,]
+	\,\;\left\vert\;\,
+		\overset{{\color{white}.}}{\phi}(x) \leq y
+	\right.
+	\;\right\}.
+\end{equation*}
+Then,
+\begin{enumerate}
+\item
+	$\psi$ is nondecreasing and measurable.
+\item
+	$\phi$ and $\psi$ satisfy:\quad
+	$\phi(x) \,\leq\, y \;\; \Longleftrightarrow \;\; x \,\leq\, \psi(y)$,\;\;
+	for each \;$x \in (\,a,b\,]$\; and \;$y \in (\,c,d\,]$.
+\end{enumerate}
+\end{lemma}
+\proof
+\begin{enumerate}
+\item
+	We first show that $\psi$ is nondecreasing.
+	Suppose $y_{1} \leq y_{2}$. Then, for each $x \in (\,a,b\,]$, we have
+	$\phi(x) \leq y_{1}$ $\Longrightarrow$ $\phi(x) \leq y_{2}$.
+	Hence
+	\begin{equation*}
+	\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \leq y_{1}
+		\right.
+		\;\right\}
+	\;\; \subset \;\;
+	\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \leq y_{2}
+		\right.
+		\;\right\},
+	\end{equation*}
+	which implies
+	\begin{equation*}
+	\psi(y_{1}) \; := \;
+	\sup\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{2}
+		\right.
+		\;\right\}
+	\;\; \leq \;\;
+	\sup\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{1}
+		\right.
+		\;\right\}
+	\; =: \; \psi(y_{2})
+	\end{equation*}
+	Thus $\psi$ is indeed nondecreasing.
+	Measurability of $\psi$ then follows at once from Lemma \ref{lemma:MonotoneFunctionsAreMeasurable}.
+\item
+	\textbf{\underline{(\,$\Longrightarrow$\,)}}\quad
+	$\phi(x) \leq y
+	\;\;\Longrightarrow\;\;
+		x \in \left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\}
+	\;\; \Longrightarrow \;\;
+		x \leq \sup\left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\} =: \psi(y)$.
+
+	\vskip 0.2cm
+	\noindent
+	\textbf{\underline{(\,$\Longleftarrow$\,)}}\quad
+	Suppose \;$a \,<\, x \,\leq\, \psi(y) \,\leq\, b$.\;
+	Let \;$\delta \,:=\, \psi(y) \,-\, x \,\geq\, 0$. Then,
+	\begin{equation*}
+	x + \delta \;\;=\;\; \psi(y) \;\;:=\;\; \sup\left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\}.
+	\end{equation*}
+	Hence, there exists a nondecreasing sequence
+	$\xi_{n} \in \left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\}$
+	such that $\xi_{n} \uparrow (x+\delta)$.
+	Since $\phi$ is {\color{red}nondecreasing and left-continuous}, we see that $\phi(\xi_{n}) \uparrow \phi(x+\delta)$.
+	Since $\phi$ is nondecreasing and $\delta \geq 0$, we therefore have
+	\begin{equation*}
+	\phi(x) \;\;\leq\;\; \phi(x+\delta) \;\;=\;\; \underset{n\rightarrow\infty}{\lim}\,\phi(\xi_{n}) \;\;\leq\;\; y.
+	\end{equation*}
+\end{enumerate}
+\qed
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\begin{lemma}\label{lemma:nondecreasingRightContinuous}
+\mbox{}\vskip 0.1cm
+\noindent
+Suppose:
+\begin{itemize}
+\item
+	$[\,a,b\,), [\,c,d\,) \subset \Re$ are intervals in \,$\Re$.
+\item
+	$\phi : [\,a,b\,) \longrightarrow [\,c,d\,)$ is a nondecreasing and right-continuous
+	$\Re$-valued function mapping from $[\,a,b\,)$ {\color{red}onto} $[\,c,d\,)$.
+	Note that, since $\phi$ is nondecreasing and right-continuous, we have:
+	\begin{equation*}
+	c \; = \; \underset{\xi\,\rightarrow\,a^{+}}{\lim}\phi(\xi) \; = \; \phi(a) \; \in \; \Re
+	\quad\textnormal{and}\quad
+	d \; = \; \underset{\xi\,\rightarrow\,b^{-}}{\lim}\phi(\xi) \; \in \; \Re\cup\{\,+\infty\,\}
+	\end{equation*}
+\end{itemize}
+Define \;$\psi : [\,c,d\,) \longrightarrow [\,a,b\,)$\; as follows:
+\begin{equation*}
+\psi(y)
+\;\; := \;\;
+	\inf\left\{\;
+		x \in [\,a,b\,)
+	\,\;\left\vert\;\,
+		\overset{{\color{white}.}}{\phi}(x) \geq y
+	\right.
+	\;\right\}.
+\end{equation*}
+Then,
+\begin{enumerate}
+\item
+	$\psi$ is nondecreasing and measurable.
+\item
+	$\phi$ and $\psi$ satisfy:\quad
+	$\phi(x) \,\geq\, y \;\; \Longleftrightarrow \;\; x \,\geq\, \psi(y)$,\;\;
+	for each \;$x \in [\,a,b\,)$\; and \;$y \in [\,c,d\,)$.
+\end{enumerate}
+\end{lemma}
+\proof
+\begin{enumerate}
+\item
+	We first show that $\psi$ is nondecreasing.
+	Suppose $y_{1} \leq y_{2}$. Then, for each $x \in [\,a,b\,)$, we have
+	$\phi(x) \geq y_{2}$ $\Longrightarrow$ $\phi(x) \geq y_{1}$.
+	Hence
+	\begin{equation*}
+	\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{1}
+		\right.
+		\;\right\}
+	\;\; \supset \;\;
+	\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{2}
+		\right.
+		\;\right\},
+	\end{equation*}
+	which implies
+	\begin{equation*}
+	\psi(y_{1}) \; := \;
+	\inf\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{1}
+		\right.
+		\;\right\}
+	\;\; \leq \;\;
+	\inf\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{2}
+		\right.
+		\;\right\}
+	\; =: \; \psi(y_{2})
+	\end{equation*}
+	Thus $\psi$ is indeed nondecreasing.
+	Measurability of $\psi$ then follows at once from Lemma \ref{lemma:MonotoneFunctionsAreMeasurable}.
+\item
+	\textbf{\underline{(\,$\Longrightarrow$\,)}}\quad
+	$\phi(x) \geq y
+	\;\;\Longrightarrow\;\;
+		x \in \left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\}
+	\;\; \Longrightarrow \;\;
+		x \geq \inf\left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\} =: \psi(y)$.
+
+	\vskip 0.2cm
+	\noindent
+	\textbf{\underline{(\,$\Longleftarrow$\,)}}\quad
+	Suppose \;$a \,\leq\, \psi(y) \,\leq\, x \,<\, b$.\;
+	Let \;$\delta \,:=\, x \,-\, \psi(y) \,\geq\, 0$. Then,
+	\begin{equation*}
+	x - \delta \;\;=\;\; \psi(y) \;\;:=\;\; \inf\left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\}.
+	\end{equation*}
+	Hence, there exists a nonincreasing sequence
+	$\xi_{n} \in \left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\}$
+	such that $\xi_{n} \downarrow (x-\delta)$.
+	Since $\phi$ is {\color{red}nondecreasing and right-continuous}, we see that $\phi(\xi_{n}) \downarrow \phi(x-\delta)$.
+	Since $\phi$ is nondecreasing and $\delta \geq 0$, we therefore have
+	\begin{equation*}
+	\phi(x) \;\;\geq\;\; \phi(x-\delta) \;\;=\;\; \underset{n\rightarrow\infty}{\lim}\,\phi(\xi_{n}) \;\;\geq\;\; y.
+	\end{equation*}
+\end{enumerate}
+\qed
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\begin{lemma}\label{lemma:nonincreasingLeftContinuous}
+\mbox{}\vskip 0.1cm
+\noindent
+Suppose:
+\begin{itemize}
+\item
+	$(\,a,b\,], (\,c,d\,] \subset \Re$ are intervals in \,$\Re$.
+\item
+	$\phi : (\,a,b\,] \longrightarrow (\,c,d\,]$ is a nonincreasing and left-continuous
+	$\Re$-valued function mapping from $(\,a,b\,]$ {\color{red}onto} $(\,c,d\,]$.
+	Note that, since $\phi$ is nonincreasing and left-continuous, we have:
+	\begin{equation*}
+	c \; = \; \underset{\xi\,\rightarrow\,a^{+}}{\lim}\phi(\xi) \; \in \; \Re\cup\{\,-\infty\,\}
+	\quad\textnormal{and}\quad
+	d \; = \; \underset{\xi\,\rightarrow\,b^{-}}{\lim}\phi(\xi) \; = \; \phi(b) \; \in \; \Re
+	\end{equation*}
+\end{itemize}
+Define \;$\psi : (\,c,d\,] \longrightarrow (\,a,b\,]$\; as follows:
+\begin{equation*}
+\psi(y)
+\;\; := \;\;
+	\sup\left\{\;
+		x \in (\,a,b\,]
+	\,\;\left\vert\;\,
+		\overset{{\color{white}.}}{\phi}(x) \geq y
+	\right.
+	\;\right\}.
+\end{equation*}
+Then,
+\begin{enumerate}
+\item
+	$\psi$ is nonincreasing and measurable.
+\item
+	$\phi$ and $\psi$ satisfy:\quad
+	$\phi(x) \,\geq\, y \;\; \Longleftrightarrow \;\; x \,\leq\, \psi(y)$,\;\;
+	for each \;$x \in (\,a,b\,]$\; and \;$y \in (\,c,d\,]$.
+\end{enumerate}
+\end{lemma}
+\proof
+\begin{enumerate}
+\item
+	We first show that $\psi$ is nonincreasing.
+	Suppose $y_{1} \leq y_{2}$. Then, for each $x \in (\,a,b\,]$, we have
+	$\phi(x) \geq y_{2}$ $\Longrightarrow$ $\phi(x) \geq y_{1}$.
+	Hence
+	\begin{equation*}
+	\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{1}
+		\right.
+		\;\right\}
+	\;\; \supset \;\;
+	\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{2}
+		\right.
+		\;\right\},
+	\end{equation*}
+	which implies
+	\begin{equation*}
+	\psi(y_{1}) \; := \;
+	\sup\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{2}
+		\right.
+		\;\right\}
+	\;\; \geq \;\;
+	\sup\left\{\;
+		x \in (\,a,b\,]
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \geq y_{1}
+		\right.
+		\;\right\}
+	\; =: \; \psi(y_{2})
+	\end{equation*}
+	Thus $\psi$ is indeed nonincreasing.
+	Measurability of $\psi$ then follows at once from Lemma \ref{lemma:MonotoneFunctionsAreMeasurable}.
+\item
+	\textbf{\underline{(\,$\Longrightarrow$\,)}}\quad
+	$\phi(x) \geq y
+	\;\;\Longrightarrow\;\;
+		x \in \left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\}
+	\;\; \Longrightarrow \;\;
+		x \leq \sup\left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\} =: \psi(y)$.
+
+	\vskip 0.2cm
+	\noindent
+	\textbf{\underline{(\,$\Longleftarrow$\,)}}\quad
+	Suppose \;$a \,<\, x \,\leq\, \psi(y) \,\leq\, b$.\;
+	Let \;$\delta \,:=\, \psi(y) \,-\, x \,\geq\, 0$. Then,
+	\begin{equation*}
+	x + \delta \;\;=\;\; \psi(y) \;\;:=\;\; \sup\left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\}.
+	\end{equation*}
+	Hence, there exists a nondecreasing sequence
+	$\xi_{n} \in \left\{\,\xi\in(\,a,b\,] \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\geq} y\right.\,\right\}$
+	such that $\xi_{n} \uparrow (x+\delta)$.
+	Since $\phi$ is {\color{red}nonincreasing and left-continuous}, we see that $\phi(\xi_{n}) \downarrow \phi(x+\delta)$.
+	Since $\phi$ is nonincreasing and $\delta \geq 0$, we therefore have
+	\begin{equation*}
+	\phi(x) \;\;\geq\;\; \phi(x+\delta) \;\;=\;\; \underset{n\rightarrow\infty}{\lim}\,\phi(\xi_{n}) \;\;\geq\;\; y.
+	\end{equation*}
+\end{enumerate}
+\qed
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\begin{lemma}\label{lemma:nonincreasingRightContinuous}
+\mbox{}\vskip 0.1cm
+\noindent
+Suppose:
+\begin{itemize}
+\item
+	$[\,a,b\,), [\,c,d\,) \subset \Re$ are intervals in \,$\Re$.
+\item
+	$\phi : [\,a,b\,) \longrightarrow [\,c,d\,)$ is a nonincreasing and right-continuous
+	$\Re$-valued function mapping from $[\,a,b\,)$ {\color{red}onto} $[\,c,d\,)$.
+	Note that, since $\phi$ is nonincreasing and right-continuous, we have:
+	\begin{equation*}
+	c \; = \; \underset{\xi\,\rightarrow\,a^{+}}{\lim}\phi(\xi) \; = \; \phi(a) \; \in \; \Re
+	\quad\textnormal{and}\quad
+	d \; = \; \underset{\xi\,\rightarrow\,b^{-}}{\lim}\phi(\xi) \; \in \; \Re\cup\{\,+\infty\,\}
+	\end{equation*}
+\end{itemize}
+Define \;$\psi : [\,c,d\,) \longrightarrow [\,a,b\,)$\; as follows:
+\begin{equation*}
+\psi(y)
+\;\; := \;\;
+	\inf\left\{\;
+		x \in [\,a,b\,)
+	\,\;\left\vert\;\,
+		\overset{{\color{white}.}}{\phi}(x) \leq y
+	\right.
+	\;\right\}.
+\end{equation*}
+Then,
+\begin{enumerate}
+\item
+	$\psi$ is nonincreasing and measurable.
+\item
+	$\phi$ and $\psi$ satisfy:\quad
+	$\phi(x) \,\leq\, y \;\; \Longleftrightarrow \;\; x \,\geq\, \psi(y)$,\;\;
+	for each \;$x \in [\,a,b\,)$\; and \;$y \in [\,c,d\,)$.
+\end{enumerate}
+\end{lemma}
+\proof
+\begin{enumerate}
+\item
+	We first show that $\psi$ is nonincreasing.
+	Suppose $y_{1} \leq y_{2}$. Then, for each $x \in [\,a,b\,)$, we have
+	$\phi(x) \leq y_{1}$ $\Longrightarrow$ $\phi(x) \leq y_{2}$.
+	Hence
+	\begin{equation*}
+	\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \leq y_{1}
+		\right.
+		\;\right\}
+	\;\; \subset \;\;
+	\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \leq y_{2}
+		\right.
+		\;\right\},
+	\end{equation*}
+	which implies
+	\begin{equation*}
+	\psi(y_{1}) \; := \;
+	\inf\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \leq y_{1}
+		\right.
+		\;\right\}
+	\;\; \geq \;\;
+	\inf\left\{\;
+		x \in [\,a,b\,)
+		\,\;\left\vert\;\,
+			\overset{{\color{white}.}}{\phi}(x) \leq y_{2}
+		\right.
+		\;\right\}
+	\; =: \; \psi(y_{2})
+	\end{equation*}
+	Thus $\psi$ is indeed nonincreasing.
+	Measurability of $\psi$ then follows at once from Lemma \ref{lemma:MonotoneFunctionsAreMeasurable}.
+\item
+	\textbf{\underline{(\,$\Longrightarrow$\,)}}\quad
+	$\phi(x) \leq y
+	\;\;\Longrightarrow\;\;
+		x \in \left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\}
+	\;\; \Longrightarrow \;\;
+		x \geq \inf\left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\} =: \psi(y)$.
+
+	\vskip 0.2cm
+	\noindent
+	\textbf{\underline{(\,$\Longleftarrow$\,)}}\quad
+	Suppose \;$a \,\leq\, \psi(y) \,\leq\, x \,<\, b$.\;
+	Let \;$\delta \,:=\, x \,-\, \psi(y) \,\geq\, 0$. Then,
+	\begin{equation*}
+	x - \delta \;\;=\;\; \psi(y) \;\;:=\;\; \inf\left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\}.
+	\end{equation*}
+	Hence, there exists a nonincreasing sequence
+	$\xi_{n} \in \left\{\,\xi\in[\,a,b\,) \;\left\vert\; \phi(\xi) \overset{{\color{white}.}}{\leq} y\right.\,\right\}$
+	such that $\xi_{n} \downarrow (x-\delta)$.
+	Since $\phi$ is {\color{red}nonincreasing and right-continuous}, we see that $\phi(\xi_{n}) \uparrow \phi(x-\delta)$.
+	Since $\phi$ is nonincreasing and $\delta \geq 0$, we therefore have
+	\begin{equation*}
+	\phi(x) \;\;\leq\;\; \phi(x-\delta) \;\;=\;\; \underset{n\rightarrow\infty}{\lim}\,\phi(\xi_{n}) \;\;\leq\;\; y.
+	\end{equation*}
+\end{enumerate}
+\qed
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+%\renewcommand{\theenumi}{\alph{enumi}}
+%\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%

@@ -1,0 +1,287 @@
+---
+title: "COVID-19 Ottawa"
+author: "DScD StatCan"
+output:
+  flexdashboard::flex_dashboard:
+    theme: darkly
+    social: menu
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(plyr)
+# library(plotly)
+```
+
+Daily
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_hospital.admission(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_daily.discharges(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_occupancy.hospital(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+Cumulative
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_cumulative.hospital.admissions(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_cumulative.discharges(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_occupancy.hospital(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+ICU
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 24}
+visualizeData.Ottawa_occupancy.icu(
+    DF.input = DF.ottawa.plot
+    );
+```
+
+Gamma 1
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 2;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 10;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 20;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+Gamma 2
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 30;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 40;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+###
+
+```{r, fig.width = 16}
+temp.mu  <- 50;
+temp.cvs <- seq(0.1,0.9,0.2);
+DF.mu.cv <- expand.grid(mu = temp.mu, cv = temp.cvs);
+my.ggplot <- examine.Gamma_plot.mu.cv(
+    DF.mu.cv = DF.mu.cv,
+    subtitle = paste0("Gamma distribution, mean = ",temp.mu,", cv = ",paste(temp.cvs,collapse=", "))
+    );
+my.ggplot;
+```
+
+Density & Trace
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-mu-Ottawa.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-cv-Ottawa.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-mu-Ottawa.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-cv-Ottawa.png")
+    )
+```
+
+No Stucks
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-mu-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-cv-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-mu-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-cv-Ottawa-stuck-chains-removed.png")
+    )
+```
+
+Scatter
+=======================================================================
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-scatter-mu-cv-Ottawa.png")
+    )
+```
+
+Expected
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-expected-cowplot-Ottawa.png")
+    )
+```

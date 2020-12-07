@@ -1,0 +1,256 @@
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\section{Observed and unobserved variables}
+\setcounter{theorem}{0}
+\setcounter{equation}{0}
+
+%\cite{vanDerVaart1996}
+%\cite{Kosorok2008}
+
+%\renewcommand{\theenumi}{\alph{enumi}}
+%\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\textnormal{(\theenumi)}$\;\;$}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\noindent
+\textbf{Observed variables}
+\begin{eqnarray*}
+A_{t}
+& := &
+	\textnormal{number of COVID-19 hospital admissions on day $t$} 
+\\
+C_{t}
+& := &
+	\textnormal{COVID-19 hospital midnight census count on day $t$} 
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Unobserved (but unambiguously deducible) variables}
+\begin{eqnarray*}
+D_{t}
+& := &
+	\textnormal{number of COVID-19 hospital discharges on day $t$} 
+\\
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.3cm
+\noindent
+\textbf{Relations}
+\begin{eqnarray*}
+C_{t}
+& = &
+	\overset{t}{\underset{\tau=0}{\sum}} \; A_{\tau}
+	\;\; - \;\;
+	\overset{t}{\underset{\tau=0}{\sum}} \; D_{\tau}
+\\
+D_{t}
+& = &
+	\overset{t}{\underset{\tau=0}{\sum}} \; D_{\tau}
+	\;\; - \;\;
+	\overset{t-1}{\underset{\tau=0}{\sum}} \; D_{\tau}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Likelihood assumption \#1: Daily death/discharge count \,$\sim$\, Negative Binomial}
+\begin{equation*}
+D_{t}
+\;\; \sim \;\;
+	\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+\dfrac{d_{t}^{2}}{\psi}\,\right)
+\end{equation*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Likelihood assumption \#2: Decomposition of \,$d_{t}$\, by day of admission}
+\begin{eqnarray*}
+d_{t}
+& := &
+	\begin{array}{c}
+	\textnormal{expected number of deaths/discharges on day $t$}
+	\end{array}
+\\
+& = &
+	\overset{t-1}{\underset{\tau=0}{\sum}}
+	\left(\begin{array}{c}
+	\textnormal{expected number of deaths/discharges on day $t$}
+	\\
+	\textnormal{among COVID-19 patients admitted on day $0 \leq \tau < t$}
+	\end{array}\right)
+\\
+& = &
+	\overset{t-1}{\underset{\tau=0}{\sum}} \;
+	\left(\!\begin{array}{c}
+		\textnormal{number of}
+		\\
+		\textnormal{admissions}
+		\\
+		\textnormal{on day $\tau$}
+		\end{array}\!\right)
+	\cdot
+	\left(\begin{array}{c}
+		\textnormal{proportion of}
+		\\
+		\textnormal{death/discharge}
+		\\
+		\textnormal{after $t - \tau$ days}
+		\end{array}\!\right)
+\\
+& = &
+	\overset{t-1}{\underset{\tau=0}{\sum}} \;\, A_{\tau}\cdot\pi_{t-\tau}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Likelihood assumption \#3: Random admission-to-discharge delay (i.e. length of stay) \,$\sim$\, Weibull}
+\begin{eqnarray*}
+\pi_{\tau}
+& := &
+	P\!\left(
+		\begin{array}{c}
+			\textnormal{die or discharged}
+			\\
+			\textnormal{on the $\tau^{\textnormal{th}}$ day}
+			\\
+			\textnormal{after admission}
+			\end{array}
+		\left\vert
+		\begin{array}{c}
+			\textnormal{COVID-19}
+			\\
+			\textnormal{hospital}
+			\\
+			\textnormal{admission}
+			\end{array}
+			\right.
+		\right)
+\;\; = \;\;
+	\left\{\begin{array}{ll}
+		{\color{white}..}\displaystyle\int_{0}^{3/2}\,{\color{white}..}f_{\textnormal{Wb}}(\,s\,;\alpha,\sigma) \;\d s,
+		& \textnormal{for \,$\tau = 1$},
+		\\
+		\overset{{\color{white}1}}{\displaystyle\int_{\tau-1/2}^{\tau+1/2}\; f_{\textnormal{Wb}}(\,s\,;\alpha,\sigma) \;\d s},
+		& \textnormal{for \,$\tau = 2,3,\ldots$}
+		\end{array}\right.
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+%\vskip 1.0cm
+\clearpage
+\noindent
+{\color{red}
+\textbf{Impose prior distribution on, and compute/estimate posterior distribution for:}
+\begin{center}
+$(\alpha, \sigma, \psi) \;\in\; (0,\infty) \times (0,\infty) \times (0,\infty)$.
+\end{center}
+}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\vskip 0.5cm
+\noindent
+\textbf{Derivations}
+\begin{eqnarray*}
+f_{\textnormal{Wb}}(\,s\,;\alpha,\sigma)
+& = &
+	\left(\begin{array}{c}
+		\textnormal{probability density function of the Weibull distribution}
+		\\
+		\textnormal{with shape parameter $\alpha > 0$, scale parameter $\sigma > 0$}
+	\end{array}\right)
+\\
+& = &
+	\dfrac{\alpha}{\sigma}\cdot\left(\dfrac{s}{\sigma}\right)^{\alpha-1}\cdot\exp\!\left(\left(-\dfrac{s}{\sigma}\right)^{\alpha}\right),
+	\quad
+	\textnormal{for \,$s \geq 0$}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+\begin{eqnarray*}
+F_{\textnormal{Wb}}(\,s\,;\alpha,\sigma)
+& = &
+	\left(\begin{array}{c}
+		\textnormal{cumulative distribution function of the Weibull distribution}
+		\\
+		\textnormal{with shape parameter $\alpha > 0$, scale parameter $\sigma > 0$}
+	\end{array}\right)
+\\
+& = &
+	1 - \exp\!\left(\,-(\overset{{\color{white}1}}{s}/\sigma)^{\alpha}\,\right),
+	\quad
+	\textnormal{for \,$s \geq 0$}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
+
+Hence,
+\begin{eqnarray*}
+\pi_{\tau}
+& := &
+	P\!\left(
+		\begin{array}{c}
+			\textnormal{die or discharged}
+			\\
+			\textnormal{on the $\tau^{\textnormal{th}}$ day}
+			\\
+			\textnormal{after admission}
+			\end{array}
+		\left\vert
+		\begin{array}{c}
+			\textnormal{COVID-19}
+			\\
+			\textnormal{hospital}
+			\\
+			\textnormal{admission}
+			\end{array}
+			\right.
+		\right)
+\;\; = \;\;
+	\left\{\begin{array}{ll}
+		%\displaystyle\int_{0}^{3/2}\; f_{\textnormal{Wb}}(\,s\,;\alpha,\sigma) \;\d s,
+		{\color{white}..}\displaystyle\int_{0}^{3/2}\,{\color{white}..}f_{\textnormal{Wb}}(\,s\,;\alpha,\sigma) \;\d s,
+		& \textnormal{for \,$\tau = 1$},
+		\\
+		\overset{{\color{white}1}}{\displaystyle\int_{\tau-1/2}^{\tau+1/2}\; f_{\textnormal{Wb}}(\,s\,;\alpha,\sigma) \;\d s},
+		& \textnormal{for \,$\tau = 2,3,\ldots$}
+		\end{array}\right.
+\\
+& = &
+	\overset{{\color{white}1}}{\left\{\begin{array}{ll}
+		F_{\textnormal{Wb}}\!\left(\,\dfrac{3}{2}\;;\,\alpha,\sigma\right),
+		& \textnormal{for \,$\tau = 1$},
+		\\ \\
+		F_{\textnormal{Wb}}\!\left(\,\tau+\dfrac{1}{2}\;;\,\alpha,\sigma\right)
+		\; - \;
+		F_{\textnormal{Wb}}\!\left(\,\tau-\dfrac{1}{2}\;;\,\alpha,\sigma\right),
+		& \textnormal{for \,$\tau = 2,3,\ldots$}
+		\end{array}\right.}
+\\
+& = &
+	\overset{{\color{white}1}}{\left\{\begin{array}{ll}
+		1 \; - \; \exp\!\left(\,-\left(\dfrac{3/2}{\sigma}\right)^{\!\alpha}\,\right),
+		& \textnormal{for \,$\tau = 1$},
+		\\ \\
+		\exp\!\left(\,-\left(\dfrac{\tau-1/2}{\sigma}\right)^{\!\alpha}\,\right)
+		\; - \;
+		\exp\!\left(\,-\left(\dfrac{\tau+1/2}{\sigma}\right)^{\!\alpha}\,\right),
+		& \textnormal{for \,$\tau = 2,3,\ldots$}
+		\end{array}\right.}
+\end{eqnarray*}
+
+          %%%%% ~~~~~~~~~~~~~~~~~~~~ %%%%%
