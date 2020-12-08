@@ -26,11 +26,12 @@ code.files <- c(
     "getData-covid19.R",
     "getData-ECDC.R",
     "getData-GoCInfobase.R",
+    "getData-IHR.R",
     "getData-Ottawa.R",
     "getData-Ottawa-cases-deaths.R",
     "getData-serial-interval.R",
     "getData-raw.R",
-    "getData-wIFR.R",
+    #"getData-wIFR.R",
     "getForecast-occupancy.R",
     "initializePlot.R",
     "patchData-Ottawa.R",
@@ -81,15 +82,14 @@ print( n.chains );
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 set.seed(1234567);
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot <- "2020-06-21.01";
+data.snapshot <- "2020-12-08.01";
 
-DF.fatality.rates <- getData.wIFR(
-    csv.wIFR.europe = file.path(data.directory,data.snapshot,"weighted-fatality-europe.csv"),
-    csv.wIFR.canada = file.path(data.directory,data.snapshot,"weighted-fatality-canada.csv")
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.IHR <- getData.IHR(
+    csv.IHR = file.path(data.directory,data.snapshot,"infection-hospitalization-rate.csv")
     );
-print( str(DF.fatality.rates) );
-print( summary(DF.fatality.rates) );
+print( str(DF.IHR) );
+print( summary(DF.IHR) );
 
 DF.serial.interval <- getData.serial.interval(
     csv.serial.interval = file.path(data.directory,data.snapshot,"serial-interval.csv")
@@ -99,8 +99,6 @@ print( summary(DF.serial.interval) );
 print( sum(DF.serial.interval[,"fit"]) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot <- "2020-12-06.01";
-
 DF.ottawa <- getData.Ottawa(
     csv.input = file.path(data.directory,data.snapshot,"raw-covid19-Ottawa.csv")
     );
@@ -162,7 +160,7 @@ results.stan.change.point <- wrapper.stan.change.point(
     StanModel          = 'change-point',
     FILE.stan.model    = file.path(code.directory,'change-point.stan'),
     DF.input           = DF.dummy,
-    DF.fatality.rates  = DF.fatality.rates,
+    DF.IHR             = DF.IHR,
     DF.serial.interval = DF.serial.interval,
     forecast.window    = 14,
     n.chains           = n.chains,

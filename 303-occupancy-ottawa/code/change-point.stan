@@ -12,8 +12,6 @@ data {
     int minChgPt3[M];
     int maxChgPt3[M];
     int minChgPt4[M];
-    int maxChgPt4[M];
-    int minChgPt5[M];
 
     int            EpidemicStart[M];
     int  <lower=1> N[M];    // days of observed data for jurisdiction m. each entry must be <= N2
@@ -43,13 +41,11 @@ parameters {
     real <lower=0,upper=1> Uchg2[M];
     real <lower=0,upper=1> Uchg3[M];
     real <lower=0,upper=1> Uchg4[M];
-    real <lower=0,upper=1> Uchg5[M];
 
     real <lower = -log_max_step, upper = log_max_step> step1[M];
     real <lower = -log_max_step, upper = log_max_step> step2[M];
     real <lower = -log_max_step, upper = log_max_step> step3[M];
     real <lower = -log_max_step, upper = log_max_step> step4[M];
-    real <lower = -log_max_step, upper = log_max_step> step5[M];
 
     real <lower=0> phi;
 
@@ -63,7 +59,6 @@ transformed parameters {
     real chgpt2[M];
     real chgpt3[M];
     real chgpt4[M];
-    real chgpt5[M];
 
     matrix[N2,M] prediction   = rep_matrix(0,N2,M);
     matrix[N2,M] E_admissions = rep_matrix(0,N2,M);
@@ -81,15 +76,13 @@ transformed parameters {
             chgpt1[m] = minChgPt1[M] + (maxChgPt1[M] - minChgPt1[M]) * Uchg1[m];
             chgpt2[m] = minChgPt2[M] + (maxChgPt2[M] - minChgPt2[M]) * Uchg2[m];
             chgpt3[m] = minChgPt3[M] + (maxChgPt3[M] - minChgPt3[M]) * Uchg3[m];
-            chgpt4[m] = minChgPt4[M] + (maxChgPt4[M] - minChgPt4[M]) * Uchg4[m];
-            chgpt5[m] = minChgPt5[M] + (N[m]         - minChgPt5[M]) * Uchg5[m];
+            chgpt4[m] = minChgPt4[M] + (N[m]         - minChgPt4[M]) * Uchg4[m];
 
             Rt[i,m] = R0[m] * exp(
                   step1[m] * int_step(i - chgpt1[m]) * int_step(chgpt2[m] - i)
                 + step2[m] * int_step(i - chgpt2[m]) * int_step(chgpt3[m] - i)
                 + step3[m] * int_step(i - chgpt3[m]) * int_step(chgpt4[m] - i)
-                + step4[m] * int_step(i - chgpt4[m]) * int_step(chgpt5[m] - i)
-                + step5[m] * int_step(i - chgpt5[m])
+                + step4[m] * int_step(i - chgpt4[m])
                 );
         }
 

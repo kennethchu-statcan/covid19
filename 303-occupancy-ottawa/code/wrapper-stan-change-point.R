@@ -3,7 +3,7 @@ wrapper.stan.change.point <- function(
     StanModel          = "change-point",
     FILE.stan.model    = NULL,
     DF.input           = NULL,
-    DF.fatality.rates  = NULL,
+    DF.IHR             = NULL,
     DF.serial.interval = NULL,
     forecast.window    = 7,
     n.chains           = 4,
@@ -28,7 +28,7 @@ wrapper.stan.change.point <- function(
             StanModel          = StanModel,
             FILE.stan.model    = FILE.stan.model,
             DF.input           = DF.input,
-            DF.fatality.rates  = DF.fatality.rates,
+            DF.IHR             = DF.IHR,
             DF.serial.interval = DF.serial.interval,
             RData.output       = RData.output,
             n.chains           = n.chains,
@@ -133,7 +133,7 @@ wrapper.stan_inner <- function(
     StanModel          = NULL,
     FILE.stan.model    = NULL,
     DF.input           = NULL,
-    DF.fatality.rates  = NULL,
+    DF.IHR             = NULL,
     DF.serial.interval = NULL,
     RData.output       = NULL,
     n.chains           = NULL,
@@ -182,7 +182,7 @@ wrapper.stan_inner <- function(
 
     for( jurisdiction in jurisdictions ) {
 
-        CFR <- DF.fatality.rates$weighted_fatality[DF.fatality.rates$jurisdiction == jurisdiction];
+        IHR <- DF.IHR$infection_hospitalization_rate[DF.IHR$jurisdiction == jurisdiction];
 
         d1   <- DF.input[DF.input$jurisdiction == jurisdiction,];
         d1$t <- decimal_date(d1$date);
@@ -200,13 +200,14 @@ wrapper.stan_inner <- function(
 
         decimal.date.minChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-01"))[1],na.rm=TRUE);
         decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-04"))[1],na.rm=TRUE);
+
         decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-05"))[1],na.rm=TRUE);
         decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-06-06"))[1],na.rm=TRUE);
+
         decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-06-07"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-08-01"))[1],na.rm=TRUE);
-        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-08-02"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-03"))[1],na.rm=TRUE);
-        decimal.date.minChgPt5 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-04"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-05"))[1],na.rm=TRUE);
+
+        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-06"))[1],na.rm=TRUE);
 
         cat("\n### ~~~~~~ #####\n")
         cat(paste0("\njurisdiction: ",jurisdiction,"\n"));
@@ -217,8 +218,6 @@ wrapper.stan_inner <- function(
         cat(paste0("\ndecimal.date.minChgPt3: ",decimal.date.minChgPt3,"\n"));
         cat(paste0("\ndecimal.date.maxChgPt3: ",decimal.date.maxChgPt3,"\n"));
         cat(paste0("\ndecimal.date.minChgPt4: ",decimal.date.minChgPt4,"\n"));
-        cat(paste0("\ndecimal.date.maxChgPt4: ",decimal.date.maxChgPt4,"\n"));
-        cat(paste0("\ndecimal.date.minChgPt5: ",decimal.date.minChgPt5,"\n"));
         cat("\n### ~~~~~~ #####\n")
 
         stan_data$minChgPt1 <- c(stan_data$minChgPt1,decimal.date.minChgPt1);
@@ -228,8 +227,6 @@ wrapper.stan_inner <- function(
         stan_data$minChgPt3 <- c(stan_data$minChgPt3,decimal.date.minChgPt3);
         stan_data$maxChgPt3 <- c(stan_data$maxChgPt3,decimal.date.maxChgPt3);
         stan_data$minChgPt4 <- c(stan_data$minChgPt4,decimal.date.minChgPt4);
-        stan_data$maxChgPt4 <- c(stan_data$maxChgPt4,decimal.date.maxChgPt4);
-        stan_data$minChgPt5 <- c(stan_data$minChgPt5,decimal.date.minChgPt5);
 
         dates[[jurisdiction]] = d1$date;
         # hazard estimation
@@ -251,11 +248,11 @@ wrapper.stan_inner <- function(
 
             for( i in 1:length(h) ) {
                 h[i] <- (
-                    CFR * pgammaAlt(i,  mean = mean,cv=cv)
+                    IHR * pgammaAlt(i,  mean = mean,cv=cv)
                     -
-                    CFR * pgammaAlt(i-1,mean = mean,cv=cv)
+                    IHR * pgammaAlt(i-1,mean = mean,cv=cv)
                     ) / (
-                    1 - CFR * pgammaAlt(i-1,mean = mean,cv=cv)
+                    1 - IHR * pgammaAlt(i-1,mean = mean,cv=cv)
                     );
                 }
 
@@ -264,13 +261,13 @@ wrapper.stan_inner <- function(
             mean1 <-  5.1; cv1 <- 0.86; # infection to onset
             mean2 <- 18.8; cv2 <- 0.45; # onset to death
 
-            ## assume that CFR is probability of dying given infection
+            ## assume that IHR is probability of dying given infection
             x1 <- rgammaAlt(5e6,mean1,cv1) # infection-to-onset ----> do all people who are infected get to onset?
             x2 <- rgammaAlt(5e6,mean2,cv2) # onset-to-death
             x2 <- x2 / 2                   # onset-to-admission = (onset-to-death) / 2
 
             f  <- ecdf(x1+x2);
-            convolution <- function(u) { CFR * f(u) }
+            convolution <- function(u) { IHR * f(u) }
 
             h[1] = (convolution(1.5) - convolution(0));
             for( i in 2:length(h) ) {
@@ -345,9 +342,9 @@ wrapper.stan_inner <- function(
         fit <- rstan::sampling(
             object = m,
             data   = stan_data,
-            iter   = 200, # 20,
-            warmup = 100, # 10,
-            chains =   4  #  2
+            iter   = 20, # 20,
+            warmup = 10, # 10,
+            chains =  4  #  2
             );
 
     } else {
