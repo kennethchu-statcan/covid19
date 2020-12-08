@@ -48,39 +48,16 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-jurisdictions <- c(
-    "Denmark",
-    "Italy",
-    "Germany",
-    "Spain",
-    "United_Kingdom",
-    "France",
-    "Norway",
-    "Belgium",
-    "Austria",
-    "Sweden",
-    "Switzerland",
-    "BC",
-    "AB",
-    "ON",
-    "QC",
-    "Ottawa"
-    );
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+set.seed(1234567);
 options(mc.cores = parallel::detectCores());
-
 n.chains <- ifelse(
     test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),
     yes  = 4,
     no   = 16 # getOption("mc.cores")
     );
-
 print( n.chains );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-set.seed(1234567);
-
 data.snapshot <- "2020-12-08.01";
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
