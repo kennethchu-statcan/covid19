@@ -31,7 +31,6 @@ code.files <- c(
     "getData-Ottawa-cases-deaths.R",
     "getData-serial-interval.R",
     "getData-raw.R",
-    #"getData-wIFR.R",
     "getForecast-occupancy.R",
     "initializePlot.R",
     "patchData-Ottawa.R",
