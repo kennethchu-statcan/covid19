@@ -345,9 +345,9 @@ wrapper.stan_inner <- function(
         fit <- rstan::sampling(
             object = m,
             data   = stan_data,
-            iter   = 20,
-            warmup = 10,
-            chains =  2
+            iter   = 200, # 20,
+            warmup = 100, # 10,
+            chains =   4  #  2
             );
 
     } else {

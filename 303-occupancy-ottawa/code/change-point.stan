@@ -85,10 +85,10 @@ transformed parameters {
             chgpt5[m] = minChgPt5[M] + (N[m]         - minChgPt5[M]) * Uchg5[m];
 
             Rt[i,m] = R0[m] * exp(
-                  step1[m] * int_step(i - chgpt1[m])
-                + step2[m] * int_step(i - chgpt2[m])
-                + step3[m] * int_step(i - chgpt3[m])
-                + step4[m] * int_step(i - chgpt4[m])
+                  step1[m] * int_step(i - chgpt1[m]) * int_step(chgpt2[m] - i)
+                + step2[m] * int_step(i - chgpt2[m]) * int_step(chgpt3[m] - i)
+                + step3[m] * int_step(i - chgpt3[m]) * int_step(chgpt4[m] - i)
+                + step4[m] * int_step(i - chgpt4[m]) * int_step(chgpt5[m] - i)
                 + step5[m] * int_step(i - chgpt5[m])
                 );
         }
