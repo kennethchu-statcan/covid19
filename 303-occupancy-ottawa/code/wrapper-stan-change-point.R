@@ -199,10 +199,14 @@ wrapper.stan_inner <- function(
         stan_data$EpidemicStart    <- c(stan_data$EpidemicStart,decimal.date.EpidemicStart);
 
         decimal.date.minChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-01"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-21"))[1],na.rm=TRUE);
-        decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-22"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-11"))[1],na.rm=TRUE);
-        decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-05-01"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-04"))[1],na.rm=TRUE);
+        decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-05"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-06-06"))[1],na.rm=TRUE);
+        decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-06-07"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-08-01"))[1],na.rm=TRUE);
+        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-08-02"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-03"))[1],na.rm=TRUE);
+        decimal.date.minChgPt5 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-04"))[1],na.rm=TRUE);
 
         cat("\n### ~~~~~~ #####\n")
         cat(paste0("\njurisdiction: ",jurisdiction,"\n"));
@@ -211,11 +215,10 @@ wrapper.stan_inner <- function(
         cat(paste0("\ndecimal.date.minChgPt2: ",decimal.date.minChgPt2,"\n"));
         cat(paste0("\ndecimal.date.maxChgPt2: ",decimal.date.maxChgPt2,"\n"));
         cat(paste0("\ndecimal.date.minChgPt3: ",decimal.date.minChgPt3,"\n"));
-        # temp.d1 <- d1;
-        # temp.d1[,"row.index"] <- seq(1,nrow(temp.d1),1);
-        # temp.d1 <- temp.d1[,c("row.index",setdiff(colnames(d1),"row.index"))];
-        # cat("\nd1\n");
-        # print( temp.d1   );
+        cat(paste0("\ndecimal.date.maxChgPt3: ",decimal.date.maxChgPt3,"\n"));
+        cat(paste0("\ndecimal.date.minChgPt4: ",decimal.date.minChgPt4,"\n"));
+        cat(paste0("\ndecimal.date.maxChgPt4: ",decimal.date.maxChgPt4,"\n"));
+        cat(paste0("\ndecimal.date.minChgPt5: ",decimal.date.minChgPt5,"\n"));
         cat("\n### ~~~~~~ #####\n")
 
         stan_data$minChgPt1 <- c(stan_data$minChgPt1,decimal.date.minChgPt1);
@@ -223,6 +226,10 @@ wrapper.stan_inner <- function(
         stan_data$minChgPt2 <- c(stan_data$minChgPt2,decimal.date.minChgPt2);
         stan_data$maxChgPt2 <- c(stan_data$maxChgPt2,decimal.date.maxChgPt2);
         stan_data$minChgPt3 <- c(stan_data$minChgPt3,decimal.date.minChgPt3);
+        stan_data$maxChgPt3 <- c(stan_data$maxChgPt3,decimal.date.maxChgPt3);
+        stan_data$minChgPt4 <- c(stan_data$minChgPt4,decimal.date.minChgPt4);
+        stan_data$maxChgPt4 <- c(stan_data$maxChgPt4,decimal.date.maxChgPt4);
+        stan_data$minChgPt5 <- c(stan_data$minChgPt5,decimal.date.minChgPt5);
 
         dates[[jurisdiction]] = d1$date;
         # hazard estimation
@@ -321,10 +328,14 @@ wrapper.stan_inner <- function(
             list(
                 Uchg1 = runif(length(jurisdictions), min = 0, max = 1),
                 Uchg2 = runif(length(jurisdictions), min = 0, max = 1),
-                # Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
+                Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
+                Uchg4 = runif(length(jurisdictions), min = 0, max = 1),
+               #Uchg5 = runif(length(jurisdictions), min = 0, max = 1),
                 step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
-                #,step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
+                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
+                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
+              #,step5 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
                 )
             }
         )
@@ -336,7 +347,7 @@ wrapper.stan_inner <- function(
             data   = stan_data,
             iter   = 20,
             warmup = 10,
-            chains = 2
+            chains =  2
             );
 
     } else {

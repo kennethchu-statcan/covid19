@@ -31,6 +31,7 @@ code.files <- c(
     "getData-serial-interval.R",
     "getData-raw.R",
     "getData-wIFR.R",
+    "getForecast-occupancy.R",
     "initializePlot.R",
     "patchData-Ottawa.R",
     "patchData.R",
@@ -177,7 +178,7 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
     DEBUG           = TRUE # FALSE
     );
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 dashboard.files <- c("dashboard-change-point","dashboard-length-of-stay");
 for ( dashboard.file in dashboard.files ) {
     rmarkdown::render(
@@ -186,6 +187,12 @@ for ( dashboard.file in dashboard.files ) {
         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
         );
     }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# DF.forecast.occupancy <- getForecast.occupancy(
+#     results.stan.change.point = results.stan.change.point,
+#     results.stan.LoS          = results.stan.LoS
+#     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 

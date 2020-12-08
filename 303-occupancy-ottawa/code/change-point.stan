@@ -10,6 +10,10 @@ data {
     int minChgPt2[M];
     int maxChgPt2[M];
     int minChgPt3[M];
+    int maxChgPt3[M];
+    int minChgPt4[M];
+    int maxChgPt4[M];
+    int minChgPt5[M];
 
     int            EpidemicStart[M];
     int  <lower=1> N[M];    // days of observed data for jurisdiction m. each entry must be <= N2
@@ -38,10 +42,14 @@ parameters {
     real <lower=0,upper=1> Uchg1[M];
     real <lower=0,upper=1> Uchg2[M];
     real <lower=0,upper=1> Uchg3[M];
+    real <lower=0,upper=1> Uchg4[M];
+    real <lower=0,upper=1> Uchg5[M];
 
     real <lower = -log_max_step, upper = log_max_step> step1[M];
     real <lower = -log_max_step, upper = log_max_step> step2[M];
     real <lower = -log_max_step, upper = log_max_step> step3[M];
+    real <lower = -log_max_step, upper = log_max_step> step4[M];
+    real <lower = -log_max_step, upper = log_max_step> step5[M];
 
     real <lower=0> phi;
 
@@ -54,6 +62,8 @@ transformed parameters {
     real chgpt1[M];
     real chgpt2[M];
     real chgpt3[M];
+    real chgpt4[M];
+    real chgpt5[M];
 
     matrix[N2,M] prediction   = rep_matrix(0,N2,M);
     matrix[N2,M] E_admissions = rep_matrix(0,N2,M);
@@ -70,12 +80,16 @@ transformed parameters {
 
             chgpt1[m] = minChgPt1[M] + (maxChgPt1[M] - minChgPt1[M]) * Uchg1[m];
             chgpt2[m] = minChgPt2[M] + (maxChgPt2[M] - minChgPt2[M]) * Uchg2[m];
-            chgpt3[m] = minChgPt3[M] + (N[m]         - minChgPt3[M]) * Uchg3[m];
+            chgpt3[m] = minChgPt3[M] + (maxChgPt3[M] - minChgPt3[M]) * Uchg3[m];
+            chgpt4[m] = minChgPt4[M] + (maxChgPt4[M] - minChgPt4[M]) * Uchg4[m];
+            chgpt5[m] = minChgPt5[M] + (N[m]         - minChgPt5[M]) * Uchg5[m];
 
             Rt[i,m] = R0[m] * exp(
                   step1[m] * int_step(i - chgpt1[m])
                 + step2[m] * int_step(i - chgpt2[m])
                 + step3[m] * int_step(i - chgpt3[m])
+                + step4[m] * int_step(i - chgpt4[m])
+                + step5[m] * int_step(i - chgpt5[m])
                 );
         }
 
@@ -106,11 +120,19 @@ model {
 
     tau ~ exponential(0.03);
     for (m in 1:M) {
+
         y[m]     ~ exponential(1.0/tau);
+
         Uchg1[m] ~ uniform(0,1);
         Uchg2[m] ~ uniform(0,1);
+        Uchg3[m] ~ uniform(0,1);
+        Uchg4[m] ~ uniform(0,1);
+
         step1[m] ~ uniform( -log_max_step , log_max_step );
         step2[m] ~ uniform( -log_max_step , log_max_step );
+        step3[m] ~ uniform( -log_max_step , log_max_step );
+        step4[m] ~ uniform( -log_max_step , log_max_step );
+
     }
 
     phi ~ normal(0,5);
