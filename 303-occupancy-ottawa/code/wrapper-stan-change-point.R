@@ -202,12 +202,12 @@ wrapper.stan_inner <- function(
         decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-04"))[1],na.rm=TRUE);
 
         decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-05"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-06-06"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-05"))[1],na.rm=TRUE);
 
-        decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-06-07"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-05"))[1],na.rm=TRUE);
+        decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-06"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-31"))[1],na.rm=TRUE);
 
-        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-06"))[1],na.rm=TRUE);
+        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-11-01"))[1],na.rm=TRUE);
 
         cat("\n### ~~~~~~ #####\n")
         cat(paste0("\njurisdiction: ",jurisdiction,"\n"));
