@@ -29,8 +29,8 @@ transformed parameters {
 
     for (j in 1:n_jurisdictions) {
 
-        mu[j] = 2.0 + 48.0 * uniform_mu[j];  // mu ~ Uniform(2,  50  )
-        cv[j] = 0.1 +  0.8 * uniform_cv[j];  // cv ~ Uniform(0.1, 0.9)
+        mu[j] = 2.0 + 48.0 * uniform_mu[j];  // mu ~ Uniform(2.0, 50.0)
+        cv[j] = 0.1 +  1.9 * uniform_cv[j];  // cv ~ Uniform(0.1,  2.0)
 
         alpha[j] = 1 / (cv[j] * cv[j]);
          beta[j] = alpha[j] / mu[j];
