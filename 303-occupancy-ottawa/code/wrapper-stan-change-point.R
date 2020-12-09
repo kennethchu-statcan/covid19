@@ -158,24 +158,27 @@ wrapper.stan_inner <- function(
     reported_cases <- list();
 
     stan_data <- list(
-        log_max_step  = log(4),
-        M             = length(jurisdictions),
-        N             = NULL,
-        x1            = poly(1:N2,2)[,1],
-        x2            = poly(1:N2,2)[,2],
-        y             = NULL,
-        admissions    = NULL,
-        f             = NULL,
-        N0            = 6, # N0 = 6 to make it consistent with Rayleigh
-        cases         = NULL,
-        LENGTHSCALE   = 7,
-        SI            = DF.serial.interval[,"fit"][1:N2],
-        EpidemicStart = NULL,
-        minChgPt1     = NULL,
-        maxChgPt1     = NULL,
-        minChgPt2     = NULL,
-        maxChgPt2     = NULL,
-        minChgPt3     = NULL
+        log_max_step_up   = log(1.5),
+        log_max_step_down = log(4.0),
+        M                 = length(jurisdictions),
+        N                 = NULL,
+        x1                = poly(1:N2,2)[,1],
+        x2                = poly(1:N2,2)[,2],
+        y                 = NULL,
+        admissions        = NULL,
+        f                 = NULL,
+        N0                = 6, # N0 = 6 to make it consistent with Rayleigh
+        cases             = NULL,
+        LENGTHSCALE       = 7,
+        SI                = DF.serial.interval[,"fit"][1:N2],
+        EpidemicStart     = NULL,
+        minChgPt1         = NULL,
+        maxChgPt1         = NULL,
+        minChgPt2         = NULL,
+        maxChgPt2         = NULL,
+        minChgPt3         = NULL,
+        maxChgPt3         = NULL,
+        minChgPt4         = NULL
         );
 
     admissions_by_jurisdiction = list();
@@ -328,11 +331,11 @@ wrapper.stan_inner <- function(
                 Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
                 Uchg4 = runif(length(jurisdictions), min = 0, max = 1),
                #Uchg5 = runif(length(jurisdictions), min = 0, max = 1),
-                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]]),
-                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
-              #,step5 = runif(length(jurisdictions), min = -stan_data[["log_max_step"]], max = stan_data[["log_max_step"]])
+                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]]),
+                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]]),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]]),
+                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]])
+              #,step5 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]])
                 )
             }
         )
@@ -342,9 +345,9 @@ wrapper.stan_inner <- function(
         fit <- rstan::sampling(
             object = m,
             data   = stan_data,
-            iter   = 20, # 20,
-            warmup = 10, # 10,
-            chains =  4  #  2
+            iter   = 100, # 20,
+            warmup =  50, # 10,
+            chains =   4  #  2
             );
 
     } else {

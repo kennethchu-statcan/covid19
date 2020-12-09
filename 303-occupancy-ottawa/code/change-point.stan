@@ -1,9 +1,10 @@
 data {
 
-    int  <lower=1> M;                // number of jurisdictions
-    int  <lower=1> N0;               // number of days for which to impute infections
-    int  <lower=1> N2;               // days of observed data + # of days to forecast
-    real <lower=0> log_max_step;     // natural logarithm of absolute value of maximum step size
+    int  <lower=1> M;                  // number of jurisdictions
+    int  <lower=1> N0;                 // number of days for which to impute infections
+    int  <lower=1> N2;                 // days of observed data + # of days to forecast
+    real <lower=0> log_max_step_up;    // natural logarithm of absolute value of maximum   upward step size
+    real <lower=0> log_max_step_down;  // natural logarithm of absolute value of maximum downward step size
 
     int minChgPt1[M];
     int maxChgPt1[M];
@@ -42,10 +43,10 @@ parameters {
     real <lower=0,upper=1> Uchg3[M];
     real <lower=0,upper=1> Uchg4[M];
 
-    real <lower = -log_max_step, upper = log_max_step> step1[M];
-    real <lower = -log_max_step, upper = log_max_step> step2[M];
-    real <lower = -log_max_step, upper = log_max_step> step3[M];
-    real <lower = -log_max_step, upper = log_max_step> step4[M];
+    real <lower = -log_max_step_down, upper = log_max_step_up> step1[M];
+    real <lower = -log_max_step_down, upper = log_max_step_up> step2[M];
+    real <lower = -log_max_step_down, upper = log_max_step_up> step3[M];
+    real <lower = -log_max_step_down, upper = log_max_step_up> step4[M];
 
     real <lower=0> phi;
 
@@ -121,10 +122,10 @@ model {
         Uchg3[m] ~ uniform(0,1);
         Uchg4[m] ~ uniform(0,1);
 
-        step1[m] ~ uniform( -log_max_step , log_max_step );
-        step2[m] ~ uniform( -log_max_step , log_max_step );
-        step3[m] ~ uniform( -log_max_step , log_max_step );
-        step4[m] ~ uniform( -log_max_step , log_max_step );
+        step1[m] ~ uniform( -log_max_step_down , log_max_step_up );
+        step2[m] ~ uniform( -log_max_step_down , log_max_step_up );
+        step3[m] ~ uniform( -log_max_step_down , log_max_step_up );
+        step4[m] ~ uniform( -log_max_step_down , log_max_step_up );
 
     }
 
