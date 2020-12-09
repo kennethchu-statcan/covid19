@@ -48,7 +48,8 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-set.seed(1234567);
+#set.seed(1234567);
+set.seed(7654321);
 options(mc.cores = parallel::detectCores());
 n.chains <- ifelse(
     test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),

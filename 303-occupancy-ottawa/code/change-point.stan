@@ -1,10 +1,11 @@
+
 data {
 
-    int  <lower=1> M;                  // number of jurisdictions
-    int  <lower=1> N0;                 // number of days for which to impute infections
-    int  <lower=1> N2;                 // days of observed data + # of days to forecast
-    real <lower=0> log_max_step_up;    // natural logarithm of absolute value of maximum   upward step size
-    real <lower=0> log_max_step_down;  // natural logarithm of absolute value of maximum downward step size
+    int  <lower=1> M;                   // number of jurisdictions
+    int  <lower=1> N0;                  // number of days for which to impute infections
+    int  <lower=1> N2;                  // days of observed data + # of days to forecast
+    real <lower=0> log_max_step_large;  // natural logarithm of absolute value of maximum   upward step size
+    real <lower=0> log_max_step_small;  // natural logarithm of absolute value of maximum downward step size
 
     int minChgPt1[M];
     int maxChgPt1[M];
@@ -43,10 +44,10 @@ parameters {
     real <lower=0,upper=1> Uchg3[M];
     real <lower=0,upper=1> Uchg4[M];
 
-    real <lower = -log_max_step_down, upper = log_max_step_up> step1[M];
-    real <lower = -log_max_step_down, upper = log_max_step_up> step2[M];
-    real <lower = -log_max_step_down, upper = log_max_step_up> step3[M];
-    real <lower = -log_max_step_down, upper = log_max_step_up> step4[M];
+    real <lower = -log_max_step_large, upper = 0>                  step1[M];
+    real <lower = -log_max_step_small, upper = log_max_step_small> step2[M];
+    real <lower = -log_max_step_small, upper = log_max_step_small> step3[M];
+    real <lower = -log_max_step_small, upper = log_max_step_small> step4[M];
 
     real <lower=0> phi;
 
@@ -80,9 +81,9 @@ transformed parameters {
             chgpt4[m] = minChgPt4[M] + (N[m]         - minChgPt4[M]) * Uchg4[m];
 
             Rt[i,m] = R0[m] * exp(
-                  step1[m] * int_step(i - chgpt1[m]) * int_step(chgpt2[m] - i)
-                + step2[m] * int_step(i - chgpt2[m]) * int_step(chgpt3[m] - i)
-                + step3[m] * int_step(i - chgpt3[m]) * int_step(chgpt4[m] - i)
+                  step1[m] * int_step(i - chgpt1[m]) // * int_step(chgpt2[m] - i)
+                + step2[m] * int_step(i - chgpt2[m]) // * int_step(chgpt3[m] - i)
+                + step3[m] * int_step(i - chgpt3[m]) // * int_step(chgpt4[m] - i)
                 + step4[m] * int_step(i - chgpt4[m])
                 );
         }
@@ -122,10 +123,10 @@ model {
         Uchg3[m] ~ uniform(0,1);
         Uchg4[m] ~ uniform(0,1);
 
-        step1[m] ~ uniform( -log_max_step_down , log_max_step_up );
-        step2[m] ~ uniform( -log_max_step_down , log_max_step_up );
-        step3[m] ~ uniform( -log_max_step_down , log_max_step_up );
-        step4[m] ~ uniform( -log_max_step_down , log_max_step_up );
+        step1[m] ~ uniform( -log_max_step_large , 0                  );
+        step2[m] ~ uniform( -log_max_step_small , log_max_step_small );
+        step3[m] ~ uniform( -log_max_step_small , log_max_step_small );
+        step4[m] ~ uniform( -log_max_step_small , log_max_step_small );
 
     }
 

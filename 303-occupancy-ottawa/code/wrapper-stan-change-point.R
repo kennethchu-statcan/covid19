@@ -158,27 +158,27 @@ wrapper.stan_inner <- function(
     reported_cases <- list();
 
     stan_data <- list(
-        log_max_step_up   = log(1.5),
-        log_max_step_down = log(4.0),
-        M                 = length(jurisdictions),
-        N                 = NULL,
-        x1                = poly(1:N2,2)[,1],
-        x2                = poly(1:N2,2)[,2],
-        y                 = NULL,
-        admissions        = NULL,
-        f                 = NULL,
-        N0                = 6, # N0 = 6 to make it consistent with Rayleigh
-        cases             = NULL,
-        LENGTHSCALE       = 7,
-        SI                = DF.serial.interval[,"fit"][1:N2],
-        EpidemicStart     = NULL,
-        minChgPt1         = NULL,
-        maxChgPt1         = NULL,
-        minChgPt2         = NULL,
-        maxChgPt2         = NULL,
-        minChgPt3         = NULL,
-        maxChgPt3         = NULL,
-        minChgPt4         = NULL
+        log_max_step_large = log(4.0),
+        log_max_step_small = log(1.5),
+        M                  = length(jurisdictions),
+        N                  = NULL,
+        x1                 = poly(1:N2,2)[,1],
+        x2                 = poly(1:N2,2)[,2],
+        y                  = NULL,
+        admissions         = NULL,
+        f                  = NULL,
+        N0                 = 6, # N0 = 6 to make it consistent with Rayleigh
+        cases              = NULL,
+        LENGTHSCALE        = 7,
+        SI                 = DF.serial.interval[,"fit"][1:N2],
+        EpidemicStart      = NULL,
+        minChgPt1          = NULL,
+        maxChgPt1          = NULL,
+        minChgPt2          = NULL,
+        maxChgPt2          = NULL,
+        minChgPt3          = NULL,
+        maxChgPt3          = NULL,
+        minChgPt4          = NULL
         );
 
     admissions_by_jurisdiction = list();
@@ -202,13 +202,13 @@ wrapper.stan_inner <- function(
         stan_data$EpidemicStart    <- c(stan_data$EpidemicStart,decimal.date.EpidemicStart);
 
         decimal.date.minChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-01"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-04"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-28"))[1],na.rm=TRUE);
 
-        decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-04-05"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-05"))[1],na.rm=TRUE);
+        decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-07-05"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-08-01"))[1],na.rm=TRUE);
 
         decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-06"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-31"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-03"))[1],na.rm=TRUE);
 
         decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-11-01"))[1],na.rm=TRUE);
 
@@ -331,11 +331,11 @@ wrapper.stan_inner <- function(
                 Uchg3 = runif(length(jurisdictions), min = 0, max = 1),
                 Uchg4 = runif(length(jurisdictions), min = 0, max = 1),
                #Uchg5 = runif(length(jurisdictions), min = 0, max = 1),
-                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]]),
-                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]]),
-                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]]),
-                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]])
-              #,step5 = runif(length(jurisdictions), min = -stan_data[["log_max_step_down"]], max = stan_data[["log_max_step_up"]])
+                step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step_large"]], max = 0                                ),
+                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]]),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]]),
+                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]])
+              #,step5 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]])
                 )
             }
         )
