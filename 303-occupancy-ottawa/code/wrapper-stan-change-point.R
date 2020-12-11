@@ -342,12 +342,22 @@ wrapper.stan_inner <- function(
 
     if( DEBUG ) {
 
+        if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
+            my.iter     <- 40;
+            my.warmup   <- 20;
+            my.n.chains <- n.chains;
+        } else {
+            my.iter     <- 200;
+            my.warmup   <- 100;
+            my.n.chains <- n.chains;
+           }
+
         fit <- rstan::sampling(
             object = m,
             data   = stan_data,
-            iter   = 100, # 20,
-            warmup =  50, # 10,
-            chains =   4  #  2
+            iter   = my.iter,     # 20,
+            warmup = my.warmup,   # 10,
+            chains = my.n.chains  #  2
             );
 
     } else {
@@ -374,11 +384,22 @@ wrapper.stan_inner <- function(
         #    control = list(adapt_delta = 0.90, max_treedepth = 10)
         #    );
 
+        # fit = rstan::sampling(
+        #     object  = m,
+        #     data    = stan_data,
+        #     iter    = 2000,
+        #     warmup  = 1000,
+        #     chains  = n.chains,
+        #     thin    = 4,
+        #     init    = list.init,
+        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
+        #     );
+
         fit = rstan::sampling(
             object  = m,
             data    = stan_data,
-            iter    = 2000,
-            warmup  = 1000,
+            iter    = 1000,
+            warmup  =  500,
             chains  = n.chains,
             thin    = 4,
             init    = list.init,
