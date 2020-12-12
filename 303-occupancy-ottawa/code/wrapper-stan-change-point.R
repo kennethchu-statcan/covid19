@@ -156,7 +156,8 @@ plot.cowplot.changepoints <- function(
             variable.observed  = 'cases',
             variable.estimated = 'prediction',
             plot.subtitle      = 'COVID-19 daily confirmed case counts & estimated (true) infection counts',
-            plot.breaks        = seq(0,1000,100)
+            plot.breaks        = seq(0,1000,100),
+            textsize.axis      = 27
             );
         plot.infections <- plot.infections + theme(axis.text.x = element_blank());
 
@@ -167,7 +168,8 @@ plot.cowplot.changepoints <- function(
             variable.observed  = 'admissions',
             variable.estimated = 'E_admissions',
             plot.subtitle      = 'COVID-19 daily new hospital admissions',
-            plot.breaks        = seq(0,100,2)
+            plot.breaks        = seq(0,100,2),
+            textsize.axis      = 27
             );
         plot.admissions <- plot.admissions + theme(axis.text.x = element_blank());
 
@@ -176,14 +178,16 @@ plot.cowplot.changepoints <- function(
             index.jurisdiction = index.jurisdiction,
             jurisdiction       = jurisdiction,
             plot.subtitle      = 'COVID-19 time-varying reproduction number',
-            plot.breaks        = seq(0,10,2)
+            plot.breaks        = seq(0,10,2),
+            textsize.axis      = 27
             );
         plot.Rt <- plot.Rt + theme(axis.text.x = element_blank());
 
         plot.stepsize.vs.chgpt <- plot.cowplot.changepoints_stepsize.vs.chgpt(
             list.input         = list.input,
             index.jurisdiction = index.jurisdiction,
-            jurisdiction       = jurisdiction
+            jurisdiction       = jurisdiction,
+            textsize.axis      = 27
             );
 
         my.cowplot <- cowplot::plot_grid(
@@ -193,7 +197,7 @@ plot.cowplot.changepoints <- function(
             plot.stepsize.vs.chgpt,
             ncol        = 1,
             align       = "v",
-            rel_heights = c(1,1,1,1.75)
+            rel_heights = c(1,1,1,1.3)
             );
 
         PNG.output  <- paste0("plot-ChgPt-cowplot-",jurisdiction,".png");
@@ -215,7 +219,8 @@ plot.cowplot.changepoints <- function(
 plot.cowplot.changepoints_stepsize.vs.chgpt <- function(
     list.input         = NULL,
     index.jurisdiction = NULL,
-    jurisdiction       = NULL
+    jurisdiction       = NULL,
+    textsize.axis      = 27
     ) {
 
     DF.chgpt1 <- plot.stepsize.vs.chgpt_getData(
@@ -253,18 +258,6 @@ plot.cowplot.changepoints_stepsize.vs.chgpt <- function(
         DF.chgpt4
         );
 
-    # cat('\nstr(DF.jurisdiction)\n');
-    # print( str(DF.jurisdiction)   );
-    #
-    # cat("\nlist.input[['dates']][[index.jurisdiction]]\n");
-    # print( list.input[['dates']][[index.jurisdiction]]   );
-    #
-    # retained.rows   <- (DF.jurisdiction[,'date'] %in% list.input[['dates']][[index.jurisdiction]]);
-    # DF.jurisdiction <- DF.jurisdiction[retained.rows,];
-    #
-    # cat('\nstr(DF.jurisdiction)\n');
-    # print( str(DF.jurisdiction)   );
-
     my.ggplot <- plot.stepsize.vs.chgpt_make.plots(
         DF.jurisdiction = DF.jurisdiction,
         StanModel       = list.input[["StanModel"]],
@@ -274,11 +267,22 @@ plot.cowplot.changepoints_stepsize.vs.chgpt <- function(
         save.to.disk    = FALSE
         );
 
-    my.ggplot <- my.ggplot + theme(legend.position = "none");
-    my.ggplot <- my.ggplot + theme(axis.title.y = element_blank());
+    my.ggplot <- my.ggplot + theme(
+        legend.position = "none",
+        axis.title.x    = element_blank(),
+        axis.title.y    = element_blank(),
+        axis.text.x     = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5),
+        axis.text.y     = element_text(size = textsize.axis, face = "bold")
+        );
+
     my.ggplot <- my.ggplot + scale_x_date(
         limits      = range(list.input[["dates"]][[index.jurisdiction]]),
         date_breaks = "2 weeks"
+        );
+
+    my.ggplot <- my.ggplot + scale_y_continuous(
+        limits = c(  -2,2),
+        breaks = seq(-2,2,1)
         );
 
     return( my.ggplot );
@@ -291,7 +295,7 @@ plot.cowplot.changepoints_Rt <- function(
     jurisdiction       = NULL,
     plot.subtitle      = NULL,
     plot.breaks        = NULL,
-    textsize.axis      = 20
+    textsize.axis      = 27
     ) {
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -355,11 +359,12 @@ plot.cowplot.changepoints_Rt <- function(
         colour     = "gray"
         );
 
-    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
     my.ggplot <- my.ggplot + theme(
-        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5),
+        axis.text.y = element_text(size = textsize.axis, face = "bold")
         );
 
+    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
     my.ggplot <- my.ggplot + scale_y_continuous(
         limits = c(0,1.75*max(DF.plot[,'percentile.75.0'])),
         breaks = plot.breaks
@@ -390,7 +395,7 @@ plot.cowplot.changepoints_expected <- function(
     variable.estimated = NULL,
     plot.subtitle      = NULL,
     plot.breaks        = seq(0,1000,50),
-    textsize.axis      = 20
+    textsize.axis      = 27
     ) {
 
     DF.plot <- list.input[['observed.data']][[jurisdiction]];
@@ -469,11 +474,12 @@ plot.cowplot.changepoints_expected <- function(
     #     colour  = "yellow"
     #     );
 
-    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
     my.ggplot <- my.ggplot + theme(
-        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5),
+        axis.text.y = element_text(size = textsize.axis, face = "bold")
         );
 
+    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
     my.ggplot <- my.ggplot + scale_y_continuous(
         limits = NULL,
         breaks = plot.breaks
