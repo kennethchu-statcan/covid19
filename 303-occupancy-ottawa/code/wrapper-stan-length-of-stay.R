@@ -876,11 +876,11 @@ wrapper.stan.length.of.stay_inner <- function(
     n.jurisdictions <- length(jurisdictions);
 
     if( DEBUG == FALSE ) {
-        N2 = 300 # Increase this for a further forecast
+        N2 = 360 # Increase this for a further forecast
     }  else  {
         ### For faster runs:
         # jurisdictions <- c("Austria","Belgium") #,Spain")
-        N2 = 300
+        N2 = 360
         }
 
     stan_data <- list(
@@ -931,13 +931,32 @@ wrapper.stan.length.of.stay_inner <- function(
 
     if( DEBUG ) {
 
+        # results.rstan.sampling <- rstan::sampling(
+        #     object = my.stan.model,
+        #     data   = stan_data,
+        #     init   = list.init,
+        #     iter   = 20,
+        #     warmup = 10,
+        #     chains =  2
+        #     );
+
+        if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
+            my.iter     <- 40;
+            my.warmup   <- 20;
+            my.n.chains <- n.chains;
+        } else {
+            my.iter     <- 200;
+            my.warmup   <- 100;
+            my.n.chains <- n.chains;
+           }
+
         results.rstan.sampling <- rstan::sampling(
             object = my.stan.model,
             data   = stan_data,
             init   = list.init,
-            iter   = 20,
-            warmup = 10,
-            chains =  2
+            iter   = my.iter,     # 20,
+            warmup = my.warmup,   # 10,
+            chains = my.n.chains  #  2
             );
 
     } else {
