@@ -80,3 +80,189 @@ my.ggplot <- my.ggplot + ggplot2::xlab('number of days');
 
 my.ggplot;
 ```
+
+Ottawa 1
+=======================================================================
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-cowplot-Ottawa.png")
+    )
+```
+
+Ottawa 2
+=======================================================================
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-cowplot-ON.png")
+    )
+```
+
+ChgPt 1 & 4
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt1.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt4.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt1.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt4.png")
+    )
+```
+
+ChgPt 2 & 3
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt2.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt3.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt2.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt3.png")
+    )
+```
+
+Step Size 1 & 4
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step1.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step4.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step1.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step4.png")
+    )
+```
+
+Step Size 2 & 3
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step2.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step3.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step2.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step3.png")
+    )
+```
