@@ -55,17 +55,18 @@ wrapper.stan.change.point <- function(
     print( str(list.output[['out']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    plot.cowplot.changepoints(
+        list.input          = list.output,
+        forecast.window     = forecast.window,
+        remove.stuck.chains = FALSE
+        );
+
     plot.trace.changepoints(
         list.input          = list.output,
         remove.stuck.chains = FALSE
         );
 
     plot.density.changepoints(
-        list.input          = list.output,
-        remove.stuck.chains = FALSE
-        );
-
-    plot.cowplot.changepoints(
         list.input          = list.output,
         remove.stuck.chains = FALSE
         );
@@ -138,6 +139,7 @@ wrapper.stan.change.point_patch <- function(
 
 plot.cowplot.changepoints <- function(
     list.input          = NULL,
+    forecast.window     = 7,
     remove.stuck.chains = FALSE
     ) {
 
@@ -149,6 +151,18 @@ plot.cowplot.changepoints <- function(
 
         jurisdiction <- jurisdictions[index.jurisdiction];
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        last.estimated.date.index <- length(list.input[["dates"]][[jurisdiction]]);
+        DF.temp                   <- list.input[['out']][['E_admissions']][,,index.jurisdiction];
+        last.forecast.date.index  <- min( last.estimated.date.index + forecast.window , ncol(DF.temp) );
+        n.days.forecast           <- last.forecast.date.index - last.estimated.date.index;
+        dates.forecast            <- max(list.input[['dates']][[jurisdiction]]) + seq(0,n.days.forecast);
+        common.date.limits <- c(
+            min(list.input[['dates']][[jurisdiction]]),
+            max(dates.forecast)
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         plot.infections <- plot.cowplot.changepoints_expected(
             list.input         = list.input,
             index.jurisdiction = index.jurisdiction,
@@ -160,7 +174,18 @@ plot.cowplot.changepoints <- function(
             textsize.axis      = 27
             );
         plot.infections <- plot.infections + theme(axis.text.x = element_blank());
+        plot.infections <- plot.infections + scale_x_date(
+            limits      = common.date.limits,
+            date_breaks = "2 weeks"
+            );
+        plot.infections <- plot.infections + geom_vline(
+            xintercept = dates.forecast[1],
+            col        = "black",
+            linetype   = "dashed",
+            alpha      = 0.85
+            );
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         plot.admissions <- plot.cowplot.changepoints_expected(
             list.input         = list.input,
             index.jurisdiction = index.jurisdiction,
@@ -168,11 +193,24 @@ plot.cowplot.changepoints <- function(
             variable.observed  = 'admissions',
             variable.estimated = 'E_admissions',
             plot.subtitle      = 'COVID-19 daily new hospital admissions',
+            plot.forecast      = TRUE,
+            forecast.window    = forecast.window,
             plot.breaks        = seq(0,100,2),
             textsize.axis      = 27
             );
         plot.admissions <- plot.admissions + theme(axis.text.x = element_blank());
+        plot.admissions <- plot.admissions + scale_x_date(
+            limits      = common.date.limits,
+            date_breaks = "2 weeks"
+            );
+        plot.admissions <- plot.admissions + geom_vline(
+            xintercept = dates.forecast[1],
+            col        = "black",
+            linetype   = "dashed",
+            alpha      = 0.85
+            );
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         plot.Rt <- plot.cowplot.changepoints_Rt(
             list.input         = list.input,
             index.jurisdiction = index.jurisdiction,
@@ -182,14 +220,36 @@ plot.cowplot.changepoints <- function(
             textsize.axis      = 27
             );
         plot.Rt <- plot.Rt + theme(axis.text.x = element_blank());
+        plot.Rt <- plot.Rt + scale_x_date(
+            limits      = common.date.limits,
+            date_breaks = "2 weeks"
+            );
+        plot.Rt <- plot.Rt + geom_vline(
+            xintercept = dates.forecast[1],
+            col        = "black",
+            linetype   = "dashed",
+            alpha      = 0.85
+            );
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         plot.stepsize.vs.chgpt <- plot.cowplot.changepoints_stepsize.vs.chgpt(
             list.input         = list.input,
             index.jurisdiction = index.jurisdiction,
             jurisdiction       = jurisdiction,
             textsize.axis      = 27
             );
+        plot.stepsize.vs.chgpt <- plot.stepsize.vs.chgpt + scale_x_date(
+            limits      = common.date.limits,
+            date_breaks = "2 weeks"
+            );
+        plot.stepsize.vs.chgpt <- plot.stepsize.vs.chgpt + geom_vline(
+            xintercept = dates.forecast[1],
+            col        = "black",
+            linetype   = "dashed",
+            alpha      = 0.85
+            );
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         my.cowplot <- cowplot::plot_grid(
             plot.infections,
             plot.admissions,
@@ -395,6 +455,8 @@ plot.cowplot.changepoints_expected <- function(
     variable.estimated = NULL,
     plot.subtitle      = NULL,
     plot.breaks        = seq(0,1000,50),
+    plot.forecast      = FALSE,
+    forecast.window    = NULL,
     textsize.axis      = 27
     ) {
 
@@ -408,14 +470,14 @@ plot.cowplot.changepoints_expected <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.estimated.infections <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
-    # DF.estimated.infections <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
+    DF.estimated <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
+    # DF.estimated <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
 
-    selected.columns <- seq(1,length(list.input[["dates"]][[jurisdiction]]));
-    DF.estimated.infections <- DF.estimated.infections[,selected.columns];
+    columns.estimated <- seq(1,length(list.input[["dates"]][[jurisdiction]]));
+    DF.estimated <- DF.estimated[,columns.estimated];
 
     DF.quantiles <- matrixStats::colQuantiles(
-        x     = DF.estimated.infections,
+        x     = DF.estimated,
         probs = c(0.025,0.25,0.5,0.75,0.975)
         );
     colnames(DF.quantiles) <- c(
@@ -426,7 +488,36 @@ plot.cowplot.changepoints_expected <- function(
         "percentile.97.5"
         );
 
-    DF.quantiles <- cbind(DF.quantiles,date = list.input[['dates']][[jurisdiction]]);
+    DF.quantiles <- cbind(DF.quantiles, date = list.input[['dates']][[jurisdiction]]);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    if ( plot.forecast ) {
+
+        DF.forecast <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
+
+        last.estimated.date.index <- length(list.input[["dates"]][[jurisdiction]]);
+        last.forecast.date.index  <- min( last.estimated.date.index + forecast.window , ncol(DF.forecast) );
+        columns.forecast          <- seq(last.estimated.date.index,last.forecast.date.index);
+
+        DF.forecast <- DF.forecast[,columns.forecast];
+        DF.quantiles.forecast  <- matrixStats::colQuantiles(
+            x     = DF.forecast,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        DF.quantiles.forecast <- as.data.frame(DF.quantiles.forecast);
+        colnames(DF.quantiles.forecast) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+
+        n.days.forecast       <- last.forecast.date.index - last.estimated.date.index;
+        dates.forecast        <- max(list.input[['dates']][[jurisdiction]]) + seq(0,n.days.forecast);
+        DF.quantiles.forecast <- cbind(DF.quantiles.forecast, date = dates.forecast);
+
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.plot <- merge(
@@ -456,6 +547,23 @@ plot.cowplot.changepoints_expected <- function(
         fill    = "deepskyblue4",
         colour  = NA
         );
+
+    if ( plot.forecast ) {
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles.forecast,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.50,
+            fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles.forecast,
+            mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+            alpha   = 0.75,
+            fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+        }
 
     my.ggplot <- my.ggplot + geom_col(
         data    = DF.plot,
@@ -488,15 +596,15 @@ plot.cowplot.changepoints_expected <- function(
     my.ggplot <- my.ggplot + xlab("");
     my.ggplot <- my.ggplot + ylab("");
 
-    # PNG.output  <- paste0("plot-ChgPt-infections-",jurisdiction,".png");
-    # ggsave(
-    #     file   = PNG.output,
-    #     plot   = my.ggplot,
-    #     dpi    = 300,
-    #     height =   5,
-    #     width  =  24,
-    #     units  = 'in'
-    #     );
+    PNG.output  <- paste0("plot-ChgPt-",variable.observed,"-",jurisdiction,".png");
+    ggsave(
+        file   = PNG.output,
+        plot   = my.ggplot,
+        dpi    = 300,
+        height =   5,
+        width  =  32,
+        units  = 'in'
+        );
 
     return( my.ggplot )
 
