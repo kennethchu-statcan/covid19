@@ -931,15 +931,6 @@ wrapper.stan.length.of.stay_inner <- function(
 
     if( DEBUG ) {
 
-        # results.rstan.sampling <- rstan::sampling(
-        #     object = my.stan.model,
-        #     data   = stan_data,
-        #     init   = list.init,
-        #     iter   = 20,
-        #     warmup = 10,
-        #     chains =  2
-        #     );
-
         if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
             my.iter     <- 40;
             my.warmup   <- 20;
