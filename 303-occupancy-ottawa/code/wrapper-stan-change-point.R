@@ -42,8 +42,33 @@ wrapper.stan.change.point <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.output <- wrapper.stan.change.point_patch(
+        list.input = list.output,
+        DF.input   = DF.input
+        );
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat("\nstr(list.output[['out']])\n");
     print( str(list.output[['out']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    plot.trace.changepoints(
+        list.input          = list.output,
+        remove.stuck.chains = FALSE
+        );
+
+    plot.density.changepoints(
+        list.input          = list.output,
+        remove.stuck.chains = FALSE
+        );
+
+    plot.cowplot.changepoints(
+        list.input          = list.output,
+        remove.stuck.chains = FALSE
+        );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     wrapper.stan_visualize.results(
@@ -72,6 +97,602 @@ wrapper.stan.change.point <- function(
     }
 
 ##################################################
+wrapper.stan.change.point_patch <- function(
+    list.input = NULL,
+    DF.input   = NULL
+    ) {
+
+    list.output <- list.input;
+
+    if ( !('observed.data' %in% names(list.input)) ) {
+        jurisdictions <- unique(DF.input[,'jurisdiction']);
+        observed.data <- list();
+        for( jurisdiction in jurisdictions ) {
+            DF.jurisdiction   <- DF.input[DF.input$jurisdiction == jurisdiction,];
+            DF.jurisdiction$t <- lubridate::decimal_date(DF.jurisdiction$date);
+            DF.jurisdiction   <- DF.jurisdiction[order(DF.jurisdiction$t),];
+            observed.data[[jurisdiction]] <- DF.jurisdiction;
+            } # for( jurisdiction in jurisdictions )
+        list.output[['observed.data']] <- observed.data;
+        }
+
+    # if ( !('is.not.stuck' %in% names(list.input)) ) {
+    #     jurisdictions   <- unique(DF.input[,'jurisdiction']);
+    #     n.jurisdictions <- length(jurisdictions);
+    #     is.not.stuck    <- list();
+    #     for( temp.index in 1:n.jurisdictions ) {
+    #         jurisdiction  <- jurisdictions[temp.index];
+    #         temp.0 <- list.input[['extracted.samples']][['alpha']][,temp.index];
+    #         temp.1 <- abs(temp.0 - c(NA,temp.0[seq(1,length(temp.0)-1)]));
+    #         temp.2 <- abs(temp.0 - c(temp.0[seq(2,length(temp.0))],NA));
+    #         temp.3 <- (temp.1 < 1e-6) | (temp.2 < 1e-6);
+    #         temp.3[c(1,length(temp.3))] <- FALSE;
+    #         is.not.stuck[[jurisdiction]] <- !temp.3;
+    #         } # for( jurisdiction in jurisdictions )
+    #     list.output[['is.not.stuck']] <- is.not.stuck;
+    #     }
+
+    return( list.output );
+
+    }
+
+plot.cowplot.changepoints <- function(
+    list.input          = NULL,
+    remove.stuck.chains = FALSE
+    ) {
+
+    require(ggplot2);
+    require(cowplot);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    for ( index.jurisdiction in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[index.jurisdiction];
+
+        plot.infections <- plot.cowplot.changepoints_expected(
+            list.input         = list.input,
+            index.jurisdiction = index.jurisdiction,
+            jurisdiction       = jurisdiction,
+            variable.observed  = 'cases',
+            variable.estimated = 'prediction',
+            plot.subtitle      = 'COVID-19 daily confirmed case counts & estimated (true) infection counts',
+            plot.breaks        = seq(0,1000,50)
+            );
+        plot.infections <- plot.infections + theme(axis.text.x = element_blank());
+
+        plot.admissions <- plot.cowplot.changepoints_expected(
+            list.input         = list.input,
+            index.jurisdiction = index.jurisdiction,
+            jurisdiction       = jurisdiction,
+            variable.observed  = 'admissions',
+            variable.estimated = 'E_admissions',
+            plot.subtitle      = 'COVID-19 daily new hospital admissions',
+            plot.breaks        = seq(0,100,4)
+            );
+
+        # PNG.output  <- paste0("plot-ChgPt-cowplot-",jurisdiction,".png");
+        # ggplot2::ggsave(
+        #     file   = PNG.output,
+        #     plot   = plot.infections,
+        #     dpi    = 300,
+        #     height =  3 + 3 + 5,
+        #     width  =  24,
+        #     units  = 'in'
+        #     );
+
+        # plot.admissions <- plot.cowplot.changepoints_admissions(
+        #     list.input         = list.input,
+        #     index.jurisdiction = index.jurisdiction,
+        #     jurisdiction       = jurisdiction
+        #     );
+        #
+        # plot.Rt <- plot.cowplot.changepoints_Rt(
+        #     list.input         = list.input,
+        #     index.jurisdiction = index.jurisdiction,
+        #     jurisdiction       = jurisdiction
+        #     );
+        #
+        # plot.stepsize.vs.chgpt <- plot.cowplot.changepoints_stepsize.vs.chgpt(
+        #     list.input         = list.input,
+        #     index.jurisdiction = index.jurisdiction,
+        #     jurisdiction       = jurisdiction
+        #     );
+
+        my.cowplot <- cowplot::plot_grid(
+            plot.infections,
+            plot.admissions,
+            #plot.Rt,
+            #plot.stepsize.vs.chgpt,
+            ncol        = 1,
+            align       = "v",
+            rel_heights = c(1,1,1.5)
+            );
+
+        PNG.output  <- paste0("plot-ChgPt-cowplot-",jurisdiction,".png");
+        cowplot::ggsave2(
+            file   = PNG.output,
+            plot   = my.cowplot,
+            dpi    = 300,
+            height =  3 + 3 + 5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    return(NULL);
+
+    }
+
+plot.cowplot.changepoints_expected <- function(
+    list.input         = NULL,
+    index.jurisdiction = NULL,
+    jurisdiction       = NULL,
+    variable.observed  = NULL,
+    variable.estimated = NULL,
+    plot.subtitle      = NULL,
+    plot.breaks        = seq(0,1000,50),
+    textsize.axis      = 20
+    ) {
+
+    DF.plot <- list.input[['observed.data']][[jurisdiction]];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    colnames(DF.plot) <- gsub(
+        x           = colnames(DF.plot),
+        pattern     = variable.observed,
+        replacement = "variable.observed"
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.estimated.infections <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
+    # DF.estimated.infections <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
+
+    selected.columns <- seq(ncol(DF.estimated.infections)-length(list.input[["dates"]][[jurisdiction]])+1,ncol(DF.estimated.infections));
+    DF.estimated.infections <- DF.estimated.infections[,selected.columns];
+
+    DF.quantiles <- matrixStats::colQuantiles(
+        x     = DF.estimated.infections,
+        probs = c(0.025,0.25,0.5,0.75,0.975)
+        );
+    colnames(DF.quantiles) <- c(
+        "percentile.02.5",
+        "percentile.25.0",
+        "percentile.50.0",
+        "percentile.75.0",
+        "percentile.97.5"
+        );
+
+    DF.quantiles <- cbind(DF.quantiles,date = list.input[['dates']][[jurisdiction]]);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    #DF.plot <- cbind(DF.plot,DF.quantiles);
+    DF.plot <- merge(
+        x  = DF.plot,
+        y  = DF.quantiles,
+        by = 'date'
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    my.ggplot <- initializePlot(
+        title    = NULL,
+        # subtitle = paste0(jurisdiction,' COVID-19 daily confirmed case counts & estimated (true) infection counts')
+        subtitle = paste0(jurisdiction,' ',plot.subtitle)
+        );
+
+    my.ggplot <- my.ggplot + geom_ribbon(
+        data    = DF.plot,
+        mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+        alpha   = 0.75,
+        fill    = "cyan",
+        colour  = NA
+        );
+
+    # my.ggplot <- my.ggplot + geom_ribbon(
+    #     data    = DF.plot,
+    #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+    #     alpha   = 0.75,
+    #     fill    = "darkcyan",
+    #     colour  = NA
+    #     );
+
+    my.ggplot <- my.ggplot + geom_col(
+        data    = DF.plot,
+        mapping = aes(x = date, y = variable.observed),
+        alpha   = 0.50,
+        size    = 0.75,
+        fill    = "black",
+        colour  = NA
+        );
+
+    my.ggplot <- my.ggplot + geom_line(
+        data    = DF.plot,
+        mapping = aes(x = date, y = percentile.50.0),
+        alpha   = 0.85,
+        size    = 1.00,
+        colour  = "red"
+        );
+
+    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+    my.ggplot <- my.ggplot + theme(
+        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+        );
+
+    my.ggplot <- my.ggplot + scale_y_continuous(
+        limits = NULL,
+        breaks = plot.breaks
+        );
+
+    my.ggplot <- my.ggplot + xlab("");
+    my.ggplot <- my.ggplot + ylab("");
+
+    # PNG.output  <- paste0("plot-ChgPt-infections-",jurisdiction,".png");
+    # ggsave(
+    #     file   = PNG.output,
+    #     plot   = my.ggplot,
+    #     dpi    = 300,
+    #     height =   5,
+    #     width  =  24,
+    #     units  = 'in'
+    #     );
+
+    return( my.ggplot )
+
+    }
+
+plot.cowplot.changepoints_infections <- function(
+    list.input         = NULL,
+    index.jurisdiction = NULL,
+    jurisdiction       = NULL,
+    textsize.axis      = 20
+    ) {
+
+    DF.plot <- list.input[['observed.data']][[jurisdiction]];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.estimated.infections <- list.input[['out']][['prediction']][,,index.jurisdiction];
+    # DF.estimated.infections <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
+
+    selected.columns <- seq(ncol(DF.estimated.infections)-length(list.input[["dates"]][[jurisdiction]])+1,ncol(DF.estimated.infections));
+    DF.estimated.infections <- DF.estimated.infections[,selected.columns];
+
+    DF.quantiles <- matrixStats::colQuantiles(
+        x     = DF.estimated.infections,
+        probs = c(0.025,0.25,0.5,0.75,0.975)
+        );
+    colnames(DF.quantiles) <- c(
+        "percentile.02.5",
+        "percentile.25.0",
+        "percentile.50.0",
+        "percentile.75.0",
+        "percentile.97.5"
+        );
+
+    DF.quantiles <- cbind(DF.quantiles,date = list.input[['dates']][[jurisdiction]]);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    #DF.plot <- cbind(DF.plot,DF.quantiles);
+    DF.plot <- merge(
+        x  = DF.plot,
+        y  = DF.quantiles,
+        by = 'date'
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    my.ggplot <- initializePlot(
+        title    = NULL,
+        subtitle = paste0(jurisdiction,' COVID-19 daily confirmed case counts & estimated (true) infection counts')
+        );
+
+    my.ggplot <- my.ggplot + geom_ribbon(
+        data    = DF.plot,
+        mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+        alpha   = 0.75,
+        fill    = "cyan",
+        colour  = NA
+        );
+
+    # my.ggplot <- my.ggplot + geom_ribbon(
+    #     data    = DF.plot,
+    #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+    #     alpha   = 0.75,
+    #     fill    = "darkcyan",
+    #     colour  = NA
+    #     );
+
+    my.ggplot <- my.ggplot + geom_col(
+        data    = DF.plot,
+        mapping = aes(x = date, y = cases),
+        alpha   = 0.50,
+        size    = 0.75,
+        fill    = "black",
+        colour  = NA
+        );
+
+    my.ggplot <- my.ggplot + geom_line(
+        data    = DF.plot,
+        mapping = aes(x = date, y = percentile.50.0),
+        alpha   = 0.85,
+        size    = 1.00,
+        colour  = "red"
+        );
+
+    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+    my.ggplot <- my.ggplot + theme(
+        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+        );
+
+    my.ggplot <- my.ggplot + scale_y_continuous(
+        limits = NULL,
+        breaks = seq(0,1000,50)
+        );
+
+    my.ggplot <- my.ggplot + xlab("");
+    my.ggplot <- my.ggplot + ylab("");
+
+    # PNG.output  <- paste0("plot-ChgPt-infections-",jurisdiction,".png");
+    # ggsave(
+    #     file   = PNG.output,
+    #     plot   = my.ggplot,
+    #     dpi    = 300,
+    #     height =   5,
+    #     width  =  24,
+    #     units  = 'in'
+    #     );
+
+    return( my.ggplot )
+
+    }
+
+plot.trace.changepoints <- function(
+    list.input          = NULL,
+    remove.stuck.chains = FALSE
+    ) {
+
+    require(ggplot2);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    change.points <- grep( x = names(list.input[['out']]), pattern = "chgpt[0-9]", value = TRUE);
+    step.sizes    <- grep( x = names(list.input[['out']]), pattern = "step[0-9]",  value = TRUE);
+
+    for ( index.jurisdiction in 1:length(jurisdictions) ) {
+    for ( index.change.point in 1:length(change.points) ) {
+
+        jurisdiction  <- jurisdictions[index.jurisdiction];
+        temp.chgpt    <- change.points[index.change.point];
+        temp.stepsize <- step.sizes[   index.change.point];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        vector.chgpt    <- list.input[["out"]][[temp.chgpt   ]][,index.jurisdiction];
+        vector.stepsize <- list.input[["out"]][[temp.stepsize]][,index.jurisdiction];
+
+        # if ( remove.stuck.chains ) {
+        #     temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
+        #     temp.beta  <- temp.beta[ list.input[["is.not.stuck"]][[jurisdiction]]];
+        #     }
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- data.frame(
+            index        = seq(1,length(vector.chgpt),1),
+            change.point = vector.chgpt,
+            step.size    = vector.stepsize
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,", ",temp.chgpt)
+            );
+
+        my.ggplot <- my.ggplot + geom_point(
+            data    = DF.plot,
+            mapping = aes(x = index, y = change.point),
+            alpha   = 0.5,
+            size    = 0.5
+            );
+
+        my.ggplot <- my.ggplot + xlab('iteration');
+        my.ggplot <- my.ggplot + ylab('change point (date index)');
+
+        # my.ggplot <- my.ggplot + scale_x_continuous(
+        #     limits = c(0,50),
+        #     breaks = seq(0,50,10)
+        #     );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = c(1,366),
+            breaks = seq(1,366,28)
+            );
+
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-ChgPt-trace-",jurisdiction,"-",temp.chgpt,"-stuck-chains-removed.png"),
+            no   = paste0("plot-ChgPt-trace-",jurisdiction,"-",temp.chgpt,".png")
+            );
+
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,", ",temp.stepsize)
+            );
+
+        my.ggplot <- my.ggplot + geom_point(
+            data    = DF.plot,
+            mapping = aes(x = index, y = step.size),
+            alpha   = 0.5,
+            size    = 0.5
+            );
+
+        my.ggplot <- my.ggplot + xlab('iteration');
+        my.ggplot <- my.ggplot + ylab('step size( natural log )');
+
+        # my.ggplot <- my.ggplot + scale_x_continuous(
+        #     limits = c(0,50),
+        #     breaks = seq(0,50,10)
+        #     );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = c(-2,2),
+            breaks = seq(-2,2,0.5)
+            );
+
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-ChgPt-trace-",jurisdiction,"-",temp.stepsize,"-stuck-chains-removed.png"),
+            no   = paste0("plot-ChgPt-trace-",jurisdiction,"-",temp.stepsize,".png")
+            );
+
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+        }}
+
+    return( NULL );
+
+    }
+
+plot.density.changepoints <- function(
+    list.input          = NULL,
+    remove.stuck.chains = FALSE
+    ) {
+
+    require(ggplot2);
+
+    jurisdictions <- list.input[["jurisdictions"]];
+    change.points <- grep( x = names(list.input[['out']]), pattern = "chgpt[0-9]", value = TRUE);
+    step.sizes    <- grep( x = names(list.input[['out']]), pattern = "step[0-9]",  value = TRUE);
+
+    for ( index.jurisdiction in 1:length(jurisdictions) ) {
+    for ( index.change.point in 1:length(change.points) ) {
+
+        jurisdiction  <- jurisdictions[index.jurisdiction];
+        temp.chgpt    <- change.points[index.change.point];
+        temp.stepsize <- step.sizes[   index.change.point];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        vector.chgpt    <- list.input[["out"]][[temp.chgpt   ]][,index.jurisdiction];
+        vector.stepsize <- list.input[["out"]][[temp.stepsize]][,index.jurisdiction];
+
+        # if ( remove.stuck.chains ) {
+        #     temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
+        #     temp.beta  <- temp.beta[ list.input[["is.not.stuck"]][[jurisdiction]]];
+        #     }
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- data.frame(
+            index        = seq(1,length(vector.chgpt),1),
+            change.point = vector.chgpt,
+            step.size    = vector.stepsize
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,", ",temp.chgpt)
+            );
+
+        my.ggplot <- my.ggplot + geom_density(
+            data    = DF.plot,
+            mapping = aes(x = change.point),
+            alpha   = 0.5,
+            size    = 0.5
+            );
+
+        my.ggplot <- my.ggplot + xlab('change point (date index)');
+        my.ggplot <- my.ggplot + ylab('posterior density');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(1,366),
+            breaks = seq(1,366,28)
+            );
+
+        # my.ggplot <- my.ggplot + scale_y_continuous(
+        #     limits = c(0,50),
+        #     breaks = seq(0,50,10)
+        #     );
+
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-ChgPt-density-",jurisdiction,"-",temp.chgpt,"-stuck-chains-removed.png"),
+            no   = paste0("plot-ChgPt-density-",jurisdiction,"-",temp.chgpt,".png")
+            );
+
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,", ",temp.stepsize)
+            );
+
+        my.ggplot <- my.ggplot + geom_density(
+            data    = DF.plot,
+            mapping = aes(x = step.size),
+            alpha   = 0.5,
+            size    = 0.5
+            );
+
+        my.ggplot <- my.ggplot + xlab('step size( natural log )');
+        my.ggplot <- my.ggplot + ylab('posterior density');
+
+        my.ggplot <- my.ggplot + scale_x_continuous(
+            limits = c(-2,2),
+            breaks = seq(-2,2,0.5)
+            );
+
+        # my.ggplot <- my.ggplot + scale_y_continuous(
+        #     limits = c(0,50),
+        #     breaks = seq(0,50,10)
+        #     );
+
+        PNG.output <- ifelse(
+            test = remove.stuck.chains,
+            yes  = paste0("plot-ChgPt-density-",jurisdiction,"-",temp.stepsize,"-stuck-chains-removed.png"),
+            no   = paste0("plot-ChgPt-density-",jurisdiction,"-",temp.stepsize,".png")
+            );
+
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  16,
+            units  = 'in'
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+        }}
+
+    return( NULL );
+
+    }
+
 wrapper.stan_visualize.results <- function(
     list.input = NULL
     ) {
@@ -181,7 +802,8 @@ wrapper.stan_inner <- function(
         minChgPt4          = NULL
         );
 
-    admissions_by_jurisdiction = list();
+    admissions_by_jurisdiction <- list();
+    observed.data              <- list();
 
     for( jurisdiction in jurisdictions ) {
 
@@ -190,6 +812,8 @@ wrapper.stan_inner <- function(
         d1   <- DF.input[DF.input$jurisdiction == jurisdiction,];
         d1$t <- decimal_date(d1$date);
         d1   <- d1[order(d1$t),];
+
+        observed.data[[jurisdiction]] <- d1;
 
         index  <- which(d1$cases>0)[1];
         index1 <- which(cumsum(d1$admissions)>=10)[1]; # also 5
@@ -415,12 +1039,13 @@ wrapper.stan_inner <- function(
 
     list.output <- list(
         StanModel                  = StanModel,
+        jurisdictions              = jurisdictions,
+        observed.data              = observed.data,
         fit                        = fit,
         prediction                 = prediction,
         dates                      = dates,
         reported_cases             = reported_cases,
         admissions_by_jurisdiction = admissions_by_jurisdiction,
-        jurisdictions              = jurisdictions,
         estimated_admissions       = estimated.admissions,
         estimated_admissions_cf    = estimated.admissions.cf,
         out                        = out
