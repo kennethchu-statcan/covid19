@@ -206,7 +206,7 @@ plot.cowplot.changepoints <- function(
             plot   = my.cowplot,
             dpi    = 300,
             height =  3 * 5 + 5,
-            width  =  24,
+            width  =  32,
             units  = 'in'
             );
 
