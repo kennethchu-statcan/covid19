@@ -156,7 +156,7 @@ plot.cowplot.changepoints <- function(
             variable.observed  = 'cases',
             variable.estimated = 'prediction',
             plot.subtitle      = 'COVID-19 daily confirmed case counts & estimated (true) infection counts',
-            plot.breaks        = seq(0,1000,50)
+            plot.breaks        = seq(0,1000,100)
             );
         plot.infections <- plot.infections + theme(axis.text.x = element_blank());
 
@@ -167,45 +167,33 @@ plot.cowplot.changepoints <- function(
             variable.observed  = 'admissions',
             variable.estimated = 'E_admissions',
             plot.subtitle      = 'COVID-19 daily new hospital admissions',
-            plot.breaks        = seq(0,100,4)
+            plot.breaks        = seq(0,100,2)
             );
+        plot.admissions <- plot.admissions + theme(axis.text.x = element_blank());
 
-        # PNG.output  <- paste0("plot-ChgPt-cowplot-",jurisdiction,".png");
-        # ggplot2::ggsave(
-        #     file   = PNG.output,
-        #     plot   = plot.infections,
-        #     dpi    = 300,
-        #     height =  3 + 3 + 5,
-        #     width  =  24,
-        #     units  = 'in'
-        #     );
+        plot.Rt <- plot.cowplot.changepoints_Rt(
+            list.input         = list.input,
+            index.jurisdiction = index.jurisdiction,
+            jurisdiction       = jurisdiction,
+            plot.subtitle      = 'COVID-19 time-varying reproduction number',
+            plot.breaks        = seq(0,10,2)
+            );
+        plot.Rt <- plot.Rt + theme(axis.text.x = element_blank());
 
-        # plot.admissions <- plot.cowplot.changepoints_admissions(
-        #     list.input         = list.input,
-        #     index.jurisdiction = index.jurisdiction,
-        #     jurisdiction       = jurisdiction
-        #     );
-        #
-        # plot.Rt <- plot.cowplot.changepoints_Rt(
-        #     list.input         = list.input,
-        #     index.jurisdiction = index.jurisdiction,
-        #     jurisdiction       = jurisdiction
-        #     );
-        #
-        # plot.stepsize.vs.chgpt <- plot.cowplot.changepoints_stepsize.vs.chgpt(
-        #     list.input         = list.input,
-        #     index.jurisdiction = index.jurisdiction,
-        #     jurisdiction       = jurisdiction
-        #     );
+        plot.stepsize.vs.chgpt <- plot.cowplot.changepoints_stepsize.vs.chgpt(
+            list.input         = list.input,
+            index.jurisdiction = index.jurisdiction,
+            jurisdiction       = jurisdiction
+            );
 
         my.cowplot <- cowplot::plot_grid(
             plot.infections,
             plot.admissions,
-            #plot.Rt,
-            #plot.stepsize.vs.chgpt,
+            plot.Rt,
+            plot.stepsize.vs.chgpt,
             ncol        = 1,
             align       = "v",
-            rel_heights = c(1,1,1.5)
+            rel_heights = c(1,1,1,1.75)
             );
 
         PNG.output  <- paste0("plot-ChgPt-cowplot-",jurisdiction,".png");
@@ -213,7 +201,7 @@ plot.cowplot.changepoints <- function(
             file   = PNG.output,
             plot   = my.cowplot,
             dpi    = 300,
-            height =  3 + 3 + 5,
+            height =  3 * 5 + 5,
             width  =  24,
             units  = 'in'
             );
@@ -221,6 +209,176 @@ plot.cowplot.changepoints <- function(
         }
 
     return(NULL);
+
+    }
+
+plot.cowplot.changepoints_stepsize.vs.chgpt <- function(
+    list.input         = NULL,
+    index.jurisdiction = NULL,
+    jurisdiction       = NULL
+    ) {
+
+    DF.chgpt1 <- plot.stepsize.vs.chgpt_getData(
+        list.input         = list.input,
+        jurisdiction.index = index.jurisdiction,
+        which.chgpt        = "chgpt1",
+        which.step         = "step1"
+        );
+
+    DF.chgpt2 <- plot.stepsize.vs.chgpt_getData(
+        list.input         = list.input,
+        jurisdiction.index = index.jurisdiction,
+        which.chgpt        = "chgpt2",
+        which.step         = "step2"
+        );
+
+    DF.chgpt3 <- plot.stepsize.vs.chgpt_getData(
+        list.input         = list.input,
+        jurisdiction.index = index.jurisdiction,
+        which.chgpt        = "chgpt3",
+        which.step         = "step3"
+        );
+
+    DF.chgpt4 <- plot.stepsize.vs.chgpt_getData(
+        list.input         = list.input,
+        jurisdiction.index = index.jurisdiction,
+        which.chgpt        = "chgpt4",
+        which.step         = "step4"
+        );
+
+    DF.jurisdiction <- rbind(
+        DF.chgpt1,
+        DF.chgpt2,
+        DF.chgpt3,
+        DF.chgpt4
+        );
+
+    # cat('\nstr(DF.jurisdiction)\n');
+    # print( str(DF.jurisdiction)   );
+    #
+    # cat("\nlist.input[['dates']][[index.jurisdiction]]\n");
+    # print( list.input[['dates']][[index.jurisdiction]]   );
+    #
+    # retained.rows   <- (DF.jurisdiction[,'date'] %in% list.input[['dates']][[index.jurisdiction]]);
+    # DF.jurisdiction <- DF.jurisdiction[retained.rows,];
+    #
+    # cat('\nstr(DF.jurisdiction)\n');
+    # print( str(DF.jurisdiction)   );
+
+    my.ggplot <- plot.stepsize.vs.chgpt_make.plots(
+        DF.jurisdiction = DF.jurisdiction,
+        StanModel       = list.input[["StanModel"]],
+        jurisdiction    = list.input[["jurisdictions"]][[index.jurisdiction]],
+        min.date        = min(list.input[["dates"]][[index.jurisdiction]]),
+        max.date        = max(list.input[["dates"]][[index.jurisdiction]]),
+        save.to.disk    = FALSE
+        );
+
+    my.ggplot <- my.ggplot + theme(legend.position = "none");
+    my.ggplot <- my.ggplot + theme(axis.title.y = element_blank());
+    my.ggplot <- my.ggplot + scale_x_date(
+        limits      = range(list.input[["dates"]][[index.jurisdiction]]),
+        date_breaks = "2 weeks"
+        );
+
+    return( my.ggplot );
+
+    }
+
+plot.cowplot.changepoints_Rt <- function(
+    list.input         = NULL,
+    index.jurisdiction = NULL,
+    jurisdiction       = NULL,
+    plot.subtitle      = NULL,
+    plot.breaks        = NULL,
+    textsize.axis      = 20
+    ) {
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.Rt <- list.input[['out']][['Rt']][,,index.jurisdiction];
+    # DF.Rt <- DF.Rt[list.input[['is.not.stuck']][[jurisdiction]],];
+
+    selected.columns <- seq(1,length(list.input[["dates"]][[jurisdiction]]));
+    DF.Rt <- DF.Rt[,selected.columns];
+
+    DF.quantiles <- matrixStats::colQuantiles(
+        x     = DF.Rt,
+        probs = c(0.025,0.25,0.5,0.75,0.975)
+        );
+    colnames(DF.quantiles) <- c(
+        "percentile.02.5",
+        "percentile.25.0",
+        "percentile.50.0",
+        "percentile.75.0",
+        "percentile.97.5"
+        );
+
+    DF.quantiles <- as.data.frame(DF.quantiles);
+    DF.plot      <- cbind(DF.quantiles,date = list.input[['dates']][[jurisdiction]]);
+
+    cat("\nstr(DF.plot)\n");
+    print( str(DF.plot)   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    my.ggplot <- initializePlot(
+        title    = NULL,
+        subtitle = paste0(jurisdiction,' ',plot.subtitle)
+        );
+
+    my.ggplot <- my.ggplot + geom_ribbon(
+        data    = DF.plot,
+        mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+        alpha   = 0.50,
+        fill    = "seagreen",
+        colour  = NA
+        );
+
+    my.ggplot <- my.ggplot + geom_ribbon(
+        data    = DF.plot,
+        mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+        alpha   = 0.75,
+        fill    = "seagreen",
+        colour  = NA
+        );
+
+    # my.ggplot <- my.ggplot + geom_line(
+    #     data    = DF.plot,
+    #     mapping = aes(x = date, y = percentile.50.0),
+    #     alpha   = 0.85,
+    #     size    = 1.00,
+    #     colour  = "yellow"
+    #     );
+
+    my.ggplot <- my.ggplot + geom_hline(
+        yintercept = 1,
+        size       = 1.5,
+        colour     = "gray"
+        );
+
+    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+    my.ggplot <- my.ggplot + theme(
+        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+        );
+
+    my.ggplot <- my.ggplot + scale_y_continuous(
+        limits = c(0,1.75*max(DF.plot[,'percentile.75.0'])),
+        breaks = plot.breaks
+        );
+
+    my.ggplot <- my.ggplot + xlab("");
+    my.ggplot <- my.ggplot + ylab("");
+
+    # PNG.output  <- paste0("plot-ChgPt-infections-",jurisdiction,".png");
+    # ggsave(
+    #     file   = PNG.output,
+    #     plot   = my.ggplot,
+    #     dpi    = 300,
+    #     height =   5,
+    #     width  =  24,
+    #     units  = 'in'
+    #     );
+
+    return( my.ggplot )
 
     }
 
@@ -245,11 +403,10 @@ plot.cowplot.changepoints_expected <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.estimated.infections <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
     # DF.estimated.infections <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
 
-    selected.columns <- seq(ncol(DF.estimated.infections)-length(list.input[["dates"]][[jurisdiction]])+1,ncol(DF.estimated.infections));
+    selected.columns <- seq(1,length(list.input[["dates"]][[jurisdiction]]));
     DF.estimated.infections <- DF.estimated.infections[,selected.columns];
 
     DF.quantiles <- matrixStats::colQuantiles(
@@ -267,7 +424,6 @@ plot.cowplot.changepoints_expected <- function(
     DF.quantiles <- cbind(DF.quantiles,date = list.input[['dates']][[jurisdiction]]);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    #DF.plot <- cbind(DF.plot,DF.quantiles);
     DF.plot <- merge(
         x  = DF.plot,
         y  = DF.quantiles,
@@ -277,42 +433,41 @@ plot.cowplot.changepoints_expected <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     my.ggplot <- initializePlot(
         title    = NULL,
-        # subtitle = paste0(jurisdiction,' COVID-19 daily confirmed case counts & estimated (true) infection counts')
         subtitle = paste0(jurisdiction,' ',plot.subtitle)
         );
 
     my.ggplot <- my.ggplot + geom_ribbon(
         data    = DF.plot,
         mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
-        alpha   = 0.75,
-        fill    = "cyan",
+        alpha   = 0.50,
+        fill    = "deepskyblue4",
         colour  = NA
         );
 
-    # my.ggplot <- my.ggplot + geom_ribbon(
-    #     data    = DF.plot,
-    #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
-    #     alpha   = 0.75,
-    #     fill    = "darkcyan",
-    #     colour  = NA
-    #     );
+    my.ggplot <- my.ggplot + geom_ribbon(
+        data    = DF.plot,
+        mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+        alpha   = 0.75,
+        fill    = "deepskyblue4",
+        colour  = NA
+        );
 
     my.ggplot <- my.ggplot + geom_col(
         data    = DF.plot,
         mapping = aes(x = date, y = variable.observed),
         alpha   = 0.50,
         size    = 0.75,
-        fill    = "black",
+        fill    = "coral4",
         colour  = NA
         );
 
-    my.ggplot <- my.ggplot + geom_line(
-        data    = DF.plot,
-        mapping = aes(x = date, y = percentile.50.0),
-        alpha   = 0.85,
-        size    = 1.00,
-        colour  = "red"
-        );
+    # my.ggplot <- my.ggplot + geom_line(
+    #     data    = DF.plot,
+    #     mapping = aes(x = date, y = percentile.50.0),
+    #     alpha   = 0.85,
+    #     size    = 1.00,
+    #     colour  = "yellow"
+    #     );
 
     my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
     my.ggplot <- my.ggplot + theme(
@@ -322,110 +477,6 @@ plot.cowplot.changepoints_expected <- function(
     my.ggplot <- my.ggplot + scale_y_continuous(
         limits = NULL,
         breaks = plot.breaks
-        );
-
-    my.ggplot <- my.ggplot + xlab("");
-    my.ggplot <- my.ggplot + ylab("");
-
-    # PNG.output  <- paste0("plot-ChgPt-infections-",jurisdiction,".png");
-    # ggsave(
-    #     file   = PNG.output,
-    #     plot   = my.ggplot,
-    #     dpi    = 300,
-    #     height =   5,
-    #     width  =  24,
-    #     units  = 'in'
-    #     );
-
-    return( my.ggplot )
-
-    }
-
-plot.cowplot.changepoints_infections <- function(
-    list.input         = NULL,
-    index.jurisdiction = NULL,
-    jurisdiction       = NULL,
-    textsize.axis      = 20
-    ) {
-
-    DF.plot <- list.input[['observed.data']][[jurisdiction]];
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.estimated.infections <- list.input[['out']][['prediction']][,,index.jurisdiction];
-    # DF.estimated.infections <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
-
-    selected.columns <- seq(ncol(DF.estimated.infections)-length(list.input[["dates"]][[jurisdiction]])+1,ncol(DF.estimated.infections));
-    DF.estimated.infections <- DF.estimated.infections[,selected.columns];
-
-    DF.quantiles <- matrixStats::colQuantiles(
-        x     = DF.estimated.infections,
-        probs = c(0.025,0.25,0.5,0.75,0.975)
-        );
-    colnames(DF.quantiles) <- c(
-        "percentile.02.5",
-        "percentile.25.0",
-        "percentile.50.0",
-        "percentile.75.0",
-        "percentile.97.5"
-        );
-
-    DF.quantiles <- cbind(DF.quantiles,date = list.input[['dates']][[jurisdiction]]);
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    #DF.plot <- cbind(DF.plot,DF.quantiles);
-    DF.plot <- merge(
-        x  = DF.plot,
-        y  = DF.quantiles,
-        by = 'date'
-        );
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    my.ggplot <- initializePlot(
-        title    = NULL,
-        subtitle = paste0(jurisdiction,' COVID-19 daily confirmed case counts & estimated (true) infection counts')
-        );
-
-    my.ggplot <- my.ggplot + geom_ribbon(
-        data    = DF.plot,
-        mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
-        alpha   = 0.75,
-        fill    = "cyan",
-        colour  = NA
-        );
-
-    # my.ggplot <- my.ggplot + geom_ribbon(
-    #     data    = DF.plot,
-    #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
-    #     alpha   = 0.75,
-    #     fill    = "darkcyan",
-    #     colour  = NA
-    #     );
-
-    my.ggplot <- my.ggplot + geom_col(
-        data    = DF.plot,
-        mapping = aes(x = date, y = cases),
-        alpha   = 0.50,
-        size    = 0.75,
-        fill    = "black",
-        colour  = NA
-        );
-
-    my.ggplot <- my.ggplot + geom_line(
-        data    = DF.plot,
-        mapping = aes(x = date, y = percentile.50.0),
-        alpha   = 0.85,
-        size    = 1.00,
-        colour  = "red"
-        );
-
-    my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
-    my.ggplot <- my.ggplot + theme(
-        axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
-        );
-
-    my.ggplot <- my.ggplot + scale_y_continuous(
-        limits = NULL,
-        breaks = seq(0,1000,50)
         );
 
     my.ggplot <- my.ggplot + xlab("");

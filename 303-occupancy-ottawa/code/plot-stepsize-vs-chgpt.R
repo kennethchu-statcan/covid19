@@ -107,7 +107,8 @@ plot.stepsize.vs.chgpt_make.plots <- function(
     StanModel       = NULL,
     jurisdiction    = NULL,
     min.date        = NULL,
-    max.date        = NULL
+    max.date        = NULL,
+    save.to.disk    = TRUE
     ) {
 
     require(ggplot2);
@@ -157,25 +158,27 @@ plot.stepsize.vs.chgpt_make.plots <- function(
         );
 
     my.ggplot <- my.ggplot + theme(
-       axis.text.x = element_text(angle = 45, hjust = 1)
+       axis.text.x = element_text(angle = 90, vjust = 0.5)
        );
 
     my.ggplot <- my.ggplot + guides(
         colour = guide_legend(override.aes = list(alpha =  0.5, size = 5))
         );
 
-    PNG.output <- paste0("plot-",StanModel,"-stepsize-vs-chgpt-",jurisdiction,".png");
-    ggsave(
-        file   = PNG.output,
-        plot   = my.ggplot,
-        dpi    = 300,
-        height =   8,
-        width  =  24,
-        units  = 'in'
-        );
+    if ( save.to.disk ) {
+        PNG.output <- paste0("plot-",StanModel,"-stepsize-vs-chgpt-",jurisdiction,".png");
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   8,
+            width  =  24,
+            units  = 'in'
+            );
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-    return( NULL );
+    return( my.ggplot );
 
     }
