@@ -38,10 +38,10 @@ wrapper.stan.length.of.stay <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    # list.output <- wrapper.stan.length.of.stay_patch(
-    #     list.input = list.output,
-    #     DF.input   = DF.input
-    #     );
+    list.output <- wrapper.stan.length.of.stay_patch(
+        list.input = list.output,
+        DF.input   = DF.input
+        );
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
@@ -497,19 +497,19 @@ wrapper.stan.length.of.stay_patch <- function(
         list.output[['observed.data']] <- observed.data;
         }
 
-    if ( !('is.not.stuck' %in% names(list.input)) ) {
+    #if( !('is.not.stuck' %in% names(list.input)) ) {
+    if ( TRUE ) {
         jurisdictions   <- unique(DF.input[,'jurisdiction']);
         n.jurisdictions <- length(jurisdictions);
         is.not.stuck    <- list();
         for( temp.index in 1:n.jurisdictions ) {
-            jurisdiction  <- jurisdictions[temp.index];
-            temp.0 <- list.input[['extracted.samples']][['alpha']][,temp.index];
-            temp.1 <- abs(temp.0 - c(NA,temp.0[seq(1,length(temp.0)-1)]));
-            temp.2 <- abs(temp.0 - c(temp.0[seq(2,length(temp.0))],NA));
-            temp.3 <- (temp.1 < 1e-6) | (temp.2 < 1e-6);
-            temp.3[c(1,length(temp.3))] <- FALSE;
-            is.not.stuck[[jurisdiction]] <- !temp.3;
-            } # for( jurisdiction in jurisdictions )
+            temp.stddev  <- get.moving.stddev(
+                input.vector = list.input[['extracted.samples']][['alpha']][,temp.index],
+                half.window  = 10
+                );
+            jurisdiction <- jurisdictions[temp.index];
+            is.not.stuck[[jurisdiction]] <- ((0.05 < temp.stddev) & (temp.stddev < 0.5));
+            } # for( temp.index in 1:n.jurisdictions )
         list.output[['is.not.stuck']] <- is.not.stuck;
         }
 
@@ -1003,13 +1003,12 @@ wrapper.stan.length.of.stay_inner <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     is.not.stuck <- list();
     for( temp.index in 1:n.jurisdictions ) {
-        jurisdiction  <- jurisdictions[temp.index];
-        temp.0 <- extracted.samples[['alpha']][,temp.index];
-        temp.1 <- abs(temp.0 - c(NA,temp.0[seq(1,length(temp.0)-1)]));
-        temp.2 <- abs(temp.0 - c(temp.0[seq(2,length(temp.0))],NA));
-        temp.3 <- (temp.1 < 1e-6) | (temp.2 < 1e-6);
-        temp.3[c(1,length(temp.3))] <- FALSE;
-        is.not.stuck[[jurisdiction]] <- !temp.3;
+        temp.stddev  <- get.moving.stddev(
+            input.vector = extracted.samples[['alpha']][,temp.index],
+            half.window  = 10
+            );
+        jurisdiction <- jurisdictions[temp.index];
+        is.not.stuck[[jurisdiction]] <- ((0.05 < temp.stddev) & (temp.stddev < 0.5));
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
