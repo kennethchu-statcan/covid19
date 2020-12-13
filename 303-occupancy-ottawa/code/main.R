@@ -32,6 +32,7 @@ code.files <- c(
     "getData-serial-interval.R",
     "getData-raw.R",
     "getForecast-occupancy.R",
+    "get-moving-stddev.R",
     "initializePlot.R",
     "patchData-Ottawa.R",
     "patchData.R",
