@@ -179,6 +179,34 @@ my.ggplot <- examine.Gamma_plot.mu.cv(
 my.ggplot;
 ```
 
+Ottawa
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-expected-cowplot-Ottawa.png")
+    )
+```
+
+Ottawa 1
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-expected-cowplot-Ottawa1.png")
+    )
+```
+
 Density & Trace
 =======================================================================
 
@@ -272,7 +300,7 @@ knitr::include_graphics(
     )
 ```
 
-Expected
+Density & Trace 1
 =======================================================================
 
 Row
@@ -280,8 +308,87 @@ Row
 
 ###
 
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-mu-Ottawa1.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-cv-Ottawa1.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-mu-Ottawa1.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-cv-Ottawa1.png")
+    )
+```
+
+No Stucks 1
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-mu-Ottawa1-stuck-chains-removed.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-density-cv-Ottawa1-stuck-chains-removed.png")
+    )
+```
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-mu-Ottawa1-stuck-chains-removed.png")
+    )
+```
+
+###
+
+```{r, fig.width = 16}
+knitr::include_graphics(
+    path = file.path(output.directory,"plot-LoS-trace-cv-Ottawa1-stuck-chains-removed.png")
+    )
+```
+
+Scatter 1
+=======================================================================
+
+###
+
 ```{r, fig.width = 32}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-LoS-expected-cowplot-Ottawa.png")
+    path = file.path(output.directory,"plot-LoS-scatter-mu-cv-Ottawa1.png")
     )
 ```
