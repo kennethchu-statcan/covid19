@@ -1,6 +1,6 @@
 ---
-title: "COVID-19 Ottawa"
-author: "DScD StatCan"
+title: "COVID-19"
+# author: "DScD StatCan"
 output:
   flexdashboard::flex_dashboard:
     theme: darkly
