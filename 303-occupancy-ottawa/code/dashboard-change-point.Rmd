@@ -99,7 +99,7 @@ Ottawa 2
 
 ```{r, fig.width = 32}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-cowplot-ON.png")
+    path = file.path(output.directory,"plot-ChgPt-cowplot-Ottawa1.png")
     )
 ```
 
