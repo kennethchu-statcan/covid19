@@ -131,9 +131,9 @@ print( str(DF.ottawa) );
 print( summary(DF.ottawa) );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.ontario <- DF.ottawa;
-DF.ontario[,'jurisdiction'] <- rep('ON',nrow(DF.ontario));
-DF.dummy <- rbind(DF.ottawa,DF.ontario);
+DF.ottawa.01 <- DF.ottawa;
+DF.ottawa.01[,'jurisdiction'] <- rep('Ottawa1',nrow(DF.ottawa.01));
+DF.dummy <- rbind( DF.ottawa , DF.ottawa.01 );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 results.stan.change.point <- wrapper.stan.change.point(
