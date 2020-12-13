@@ -1,6 +1,6 @@
 ---
-title: "COVID-19 Ottawa"
-author: "DScD StatCan"
+title: "COVID-19"
+# author: "DScD StatCan"
 output:
   flexdashboard::flex_dashboard:
     theme: darkly
@@ -71,20 +71,6 @@ visualizeData.Ottawa_cumulative.discharges(
 
 ```{r, fig.width = 24}
 visualizeData.Ottawa_occupancy.hospital(
-    DF.input = DF.ottawa.plot
-    );
-```
-
-ICU
-=======================================================================
-
-Row
------------------------------------------------------------------------
-
-###
-
-```{r, fig.width = 24}
-visualizeData.Ottawa_occupancy.icu(
     DF.input = DF.ottawa.plot
     );
 ```
