@@ -108,7 +108,7 @@ getForecast.occupancy_forecast.discharges <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     index.forecast.day <- n.observed.days + 1;
-    indexes.convoluted.days.1 <- seq(index.forecast.day,index.forecast.day - n.observed.days + 1,-1);
+    indexes.convoluted.days.1 <- seq(index.forecast.day - 1, index.forecast.day - n.observed.days, -1);
     DF.temp.1 <- DF.temp.1.0 * DF.Prob.LoS[indexes.LoS.posterior.samples,indexes.convoluted.days.1];
     DF.output[,1] <- matrixStats::rowSums2(x = DF.temp.1);
 
