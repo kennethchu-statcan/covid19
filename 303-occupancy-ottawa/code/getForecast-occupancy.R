@@ -125,7 +125,7 @@ getForecast.occupancy_forecast.discharges <- function(
 
         DF.temp.1 <- DF.temp.1.0 * DF.Prob.LoS[indexes.LoS.posterior.samples,indexes.convoluted.days.1];
 
-        DF.temp.2.0 <- DF.admissions[,seq(n.observed.days+1,index.forecast.day-1,1)];
+        DF.temp.2.0 <- DF.admissions[,seq(n.observed.days + 1, index.forecast.day - 1,1)];
         DF.temp.2   <- DF.temp.2.0 * DF.Prob.LoS[indexes.LoS.posterior.samples,indexes.convoluted.days.2];
         DF.temp.2   <- matrix(data = DF.temp.2, nrow = nrow(DF.admissions));
 
