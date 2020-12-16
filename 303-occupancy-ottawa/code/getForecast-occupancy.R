@@ -106,7 +106,6 @@ getForecast.occupancy_forecast.discharges <- function(
         byrow = TRUE
         );
 
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     index.forecast.day <- n.observed.days + 1;
     indexes.convoluted.days.1 <- seq(index.forecast.day,index.forecast.day - n.observed.days + 1,-1);
@@ -121,10 +120,11 @@ getForecast.occupancy_forecast.discharges <- function(
         # cat(paste0("\n### index.forecast.day = ",index.forecast.day,"\n"))
         # cat(paste0("\n### n.observed.days    = ",n.observed.days,   "\n"))
 
-        indexes.convoluted.days.1 <- seq(index.forecast.day,index.forecast.day - n.observed.days + 1,-1);
+        indexes.convoluted.days.1 <- seq(index.forecast.day - 1, index.forecast.day - n.observed.days, -1);
+        indexes.convoluted.days.2 <- seq(index.forecast.day - n.observed.days - 1, 1, -1);
+
         DF.temp.1 <- DF.temp.1.0 * DF.Prob.LoS[indexes.LoS.posterior.samples,indexes.convoluted.days.1];
 
-        indexes.convoluted.days.2 <- seq(index.forecast.day - n.observed.days - 1,1,-1);
         DF.temp.2.0 <- DF.admissions[,seq(n.observed.days+1,index.forecast.day-1,1)];
         DF.temp.2   <- DF.temp.2.0 * DF.Prob.LoS[indexes.LoS.posterior.samples,indexes.convoluted.days.2];
         DF.temp.2   <- matrix(data = DF.temp.2, nrow = nrow(DF.admissions));
