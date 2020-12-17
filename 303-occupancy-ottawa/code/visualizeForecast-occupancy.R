@@ -11,12 +11,16 @@ visualizeForecast.occupancy <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    list.plot.admissions <- plot.admissions(
-        list.input = results.stan.LoS
+    list.plot.admissions <- visualizeForecast.occupancy_admissions(
+        results.stan.change.point = results.stan.change.point,
+        results.stan.LoS          = results.stan.LoS,
+        forecast.window           = forecast.window
         );
 
-    list.plot.discharges <- plot.expected.discharges(
-        list.input = results.stan.LoS
+    list.plot.discharges <- visualizeForecast.occupancy_discharges(
+        results.stan.LoS        = results.stan.LoS,
+        list.forecast.occupancy = list.forecast.occupancy,
+        forecast.window         = forecast.window
         );
 
     list.plot.occupancy <- visualizeForecast.occupancy_occupancy(
@@ -60,7 +64,7 @@ visualizeForecast.occupancy_cowplot <- function(
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         min.observed.date <- min(results.stan.LoS[['observed.data']][[jurisdiction]][,'date']);
         max.observed.date <- max(results.stan.LoS[['observed.data']][[jurisdiction]][,'date']);
-        max.forecast.date <- max(as.Date(colnames(list.forecast.occupancy[[jurisdiction]])));
+        max.forecast.date <- max(as.Date(colnames(list.forecast.occupancy[[jurisdiction]][['forecast.occupancy']])));
 
         common.date.limits <- c(
             min.observed.date,
@@ -136,6 +140,325 @@ visualizeForecast.occupancy_cowplot <- function(
 
     }
 
+visualizeForecast.occupancy_admissions <- function(
+    results.stan.change.point = NULL,
+    results.stan.LoS          = NULL,
+    forecast.window           = NULL,
+    textsize.axis             = 20
+    ) {
+
+    thisFunctionName <- "visualizeForecast.occupancy_admissions";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    require(matrixStats);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat("\nstr(results.stan.LoS[['observed.data']])\n");
+    print( str(results.stan.LoS[['observed.data']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.plots    <- list();
+    jurisdictions <- results.stan.LoS[["jurisdictions"]];
+
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.estimated      <- results.stan.change.point[['out']][['E_admissions']][,,temp.index];
+        columns.estimated <- seq(1,length(results.stan.change.point[["dates"]][[jurisdiction]]));
+        DF.estimated      <- DF.estimated[,columns.estimated];
+
+        DF.quantiles <- matrixStats::colQuantiles(
+            x     = DF.estimated,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        DF.quantiles <- as.data.frame(DF.quantiles);
+        colnames(DF.quantiles) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+
+        DF.quantiles <- cbind(DF.quantiles, date = results.stan.change.point[['dates']][[jurisdiction]]);
+
+        cat("\nstr(DF.quantiles)\n");
+        print( str(DF.quantiles)   );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.forecast <- results.stan.change.point[['out']][['E_admissions']][,,temp.index];
+
+        last.estimated.date.index <- length(results.stan.change.point[["dates"]][[jurisdiction]]);
+        last.forecast.date.index  <- min( last.estimated.date.index + forecast.window , ncol(DF.forecast) );
+        columns.forecast          <- seq(last.estimated.date.index,last.forecast.date.index);
+
+        DF.forecast <- DF.forecast[,columns.forecast];
+        DF.quantiles.forecast  <- matrixStats::colQuantiles(
+            x     = DF.forecast,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        DF.quantiles.forecast <- as.data.frame(DF.quantiles.forecast);
+        colnames(DF.quantiles.forecast) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+
+        n.days.forecast       <- last.forecast.date.index - last.estimated.date.index;
+        dates.forecast        <- max(results.stan.change.point[['dates']][[jurisdiction]]) + seq(0,n.days.forecast);
+        DF.quantiles.forecast <- cbind(DF.quantiles.forecast, date = dates.forecast);
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- results.stan.LoS[['observed.data']][[jurisdiction]];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,' COVID-19 daily hospital admissions')
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.50,
+            fill    = "deepskyblue4",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles,
+            mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+            alpha   = 0.75,
+            fill    = "deepskyblue4",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles.forecast,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.50,
+            fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles.forecast,
+            mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+            alpha   = 0.75,
+            fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.plot,
+            mapping = aes(x = date, y = admissions),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "coral4",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+        my.ggplot <- my.ggplot + theme(
+            axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+            );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = NULL,
+            breaks = seq(0,100,2)
+            );
+
+        my.ggplot <- my.ggplot + xlab("");
+        my.ggplot <- my.ggplot + ylab("");
+
+        list.plots[[jurisdiction]] <- my.ggplot;
+
+        PNG.output  <- paste0("plot-occupancy-admissions-",jurisdiction,".png");
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( list.plots );
+
+    }
+
+visualizeForecast.occupancy_discharges <- function(
+    results.stan.LoS        = NULL,
+    list.forecast.occupancy = list.forecast.occupancy,
+    forecast.window         = forecast.window,
+    textsize.axis           = 20
+    ) {
+
+    thisFunctionName <- "visualizeForecast.occupancy_discharges";
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
+    cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    require(matrixStats);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat("\nstr(results.stan.LoS[['observed.data']])\n");
+    print( str(results.stan.LoS[['observed.data']])   );
+
+    cat("\nstr(results.stan.LoS[['extracted.samples']])\n");
+    print( str(results.stan.LoS[['extracted.samples']])   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.plots    <- list();
+    jurisdictions <- results.stan.LoS[["jurisdictions"]];
+
+    for ( temp.index in 1:length(jurisdictions) ) {
+
+        jurisdiction <- jurisdictions[temp.index];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- results.stan.LoS[['observed.data']][[jurisdiction]];
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.expected.discharges <- results.stan.LoS[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- DF.expected.discharges[results.stan.LoS[['is.not.stuck']][[jurisdiction]],];
+
+        DF.quantiles <- matrixStats::colQuantiles(
+            x     = DF.expected.discharges,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        colnames(DF.quantiles) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.forecast.discharges <- list.forecast.occupancy[[jurisdiction]][['forecast.discharges']];
+        DF.quantiles.forecast <- matrixStats::colQuantiles(
+            x     = DF.forecast.discharges,
+            probs = c(0.025,0.25,0.5,0.75,0.975)
+            );
+        DF.quantiles.forecast <- as.data.frame(DF.quantiles.forecast);
+        colnames(DF.quantiles.forecast) <- c(
+            "percentile.02.5",
+            "percentile.25.0",
+            "percentile.50.0",
+            "percentile.75.0",
+            "percentile.97.5"
+            );
+        DF.quantiles.forecast[,'date'] <- as.Date(colnames(DF.forecast.discharges));
+        DF.quantiles.forecast <- DF.quantiles.forecast[,c('date',setdiff(colnames(DF.quantiles.forecast),'date'))];
+        DF.quantiles.forecast <- DF.quantiles.forecast[1:forecast.window,];
+
+        cat("\nstr(DF.quantiles.forecast)\n");
+        print( str(DF.quantiles.forecast)   );
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        DF.plot <- cbind(DF.plot,DF.quantiles);
+
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        my.ggplot <- initializePlot(
+            title    = NULL,
+            subtitle = paste0(jurisdiction,' COVID-19 daily hospital discharges')
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.plot,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.75,
+            fill    = "cyan",
+            colour  = NA
+            );
+
+        # my.ggplot <- my.ggplot + geom_ribbon(
+        #     data    = DF.plot,
+        #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+        #     alpha   = 0.75,
+        #     fill    = "darkcyan",
+        #     colour  = NA
+        #     );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.plot,
+            mapping = aes(x = date, y = discharges),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "black",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_line(
+            data    = DF.plot,
+            mapping = aes(x = date, y = percentile.50.0),
+            alpha   = 0.85,
+            size    = 1.00,
+            colour  = "red"
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles.forecast,
+            mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
+            alpha   = 0.50,
+            fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_ribbon(
+            data    = DF.quantiles.forecast,
+            mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
+            alpha   = 0.75,
+            fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
+        my.ggplot <- my.ggplot + theme(
+            axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
+            );
+
+        my.ggplot <- my.ggplot + scale_y_continuous(
+            limits = NULL,
+            breaks = seq(0,100,2)
+            );
+
+        my.ggplot <- my.ggplot + xlab("");
+        my.ggplot <- my.ggplot + ylab("");
+
+        list.plots[[jurisdiction]] <- my.ggplot;
+
+        PNG.output  <- paste0("plot-occupancy-discharges-",jurisdiction,".png");
+        ggsave(
+            file   = PNG.output,
+            plot   = my.ggplot,
+            dpi    = 300,
+            height =   5,
+            width  =  24,
+            units  = 'in'
+            );
+
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    cat(paste0("\n",thisFunctionName,"() quits."));
+    cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
+    return( list.plots );
+
+    }
+
 visualizeForecast.occupancy_occupancy <- function(
     results.stan.LoS        = NULL,
     list.forecast.occupancy = NULL,
@@ -196,7 +519,7 @@ visualizeForecast.occupancy_occupancy <- function(
             );
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.forecast.occupancy <- list.forecast.occupancy[[jurisdiction]];
+        DF.forecast.occupancy <- list.forecast.occupancy[[jurisdiction]][['forecast.occupancy']];
         DF.quantiles.forecast <- matrixStats::colQuantiles(
             x     = DF.forecast.occupancy,
             probs = c(0.025,0.25,0.5,0.75,0.975)
@@ -265,6 +588,7 @@ visualizeForecast.occupancy_occupancy <- function(
             fill    = "darkgoldenrod1",
             colour  = NA
             );
+
         my.ggplot <- my.ggplot + geom_ribbon(
             data    = DF.quantiles.forecast,
             mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
@@ -288,7 +612,7 @@ visualizeForecast.occupancy_occupancy <- function(
 
         list.plots[[jurisdiction]] <- my.ggplot;
 
-        PNG.output  <- paste0("plot-LoS-expected-occupancy-",jurisdiction,".png");
+        PNG.output  <- paste0("plot-occupancy-occupancy-",jurisdiction,".png");
         ggsave(
             file   = PNG.output,
             plot   = my.ggplot,
@@ -306,201 +630,3 @@ visualizeForecast.occupancy_occupancy <- function(
     return( list.plots );
 
     }
-
-# plot.admissions <- function(
-#     list.input    = NULL,
-#     textsize.axis = 20
-#     ) {
-#
-#     thisFunctionName <- "plot.admissions";
-#     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
-#     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     require(matrixStats);
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     cat("\nstr(list.input[['observed.data']])\n");
-#     print( str(list.input[['observed.data']])   );
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     list.plots    <- list();
-#     jurisdictions <- list.input[["jurisdictions"]];
-#
-#     for ( temp.index in 1:length(jurisdictions) ) {
-#
-#         jurisdiction <- jurisdictions[temp.index];
-#
-#         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#         DF.plot <- list.input[['observed.data']][[jurisdiction]];
-#
-#         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#         my.ggplot <- initializePlot(
-#             title    = NULL,
-#             subtitle = paste0(jurisdiction,' COVID-19 daily hospital admissions')
-#             );
-#
-#         my.ggplot <- my.ggplot + geom_col(
-#             data    = DF.plot,
-#             mapping = aes(x = date, y = admissions),
-#             alpha   = 0.50,
-#             size    = 0.75,
-#             fill    = "black",
-#             colour  = NA
-#             );
-#
-#         my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
-#         my.ggplot <- my.ggplot + theme(
-#             axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
-#             );
-#
-#         my.ggplot <- my.ggplot + scale_y_continuous(
-#             limits = NULL,
-#             breaks = seq(0,100,2)
-#             );
-#
-#         my.ggplot <- my.ggplot + xlab("");
-#         my.ggplot <- my.ggplot + ylab("");
-#
-#         list.plots[[jurisdiction]] <- my.ggplot;
-#
-#         PNG.output  <- paste0("plot-LoS-admissions-",jurisdiction,".png");
-#         ggsave(
-#             file   = PNG.output,
-#             plot   = my.ggplot,
-#             dpi    = 300,
-#             height =   5,
-#             width  =  24,
-#             units  = 'in'
-#             );
-#
-#         }
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     cat(paste0("\n",thisFunctionName,"() quits."));
-#     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
-#     return( list.plots );
-#
-#     }
-#
-# plot.expected.discharges <- function(
-#     list.input    = NULL,
-#     textsize.axis = 20
-#     ) {
-#
-#     thisFunctionName <- "plot.expected.discharges";
-#     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###");
-#     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     require(matrixStats);
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     cat("\nstr(list.input[['observed.data']])\n");
-#     print( str(list.input[['observed.data']])   );
-#
-#     cat("\nstr(list.input[['extracted.samples']])\n");
-#     print( str(list.input[['extracted.samples']])   );
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     list.plots    <- list();
-#     jurisdictions <- list.input[["jurisdictions"]];
-#
-#     for ( temp.index in 1:length(jurisdictions) ) {
-#
-#         jurisdiction <- jurisdictions[temp.index];
-#
-#         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#         DF.plot <- list.input[['observed.data']][[jurisdiction]];
-#
-#         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#         DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
-#         DF.expected.discharges <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
-#
-#         DF.quantiles <- matrixStats::colQuantiles(
-#             x     = DF.expected.discharges,
-#             probs = c(0.025,0.25,0.5,0.75,0.975)
-#             );
-#         colnames(DF.quantiles) <- c(
-#             "percentile.02.5",
-#             "percentile.25.0",
-#             "percentile.50.0",
-#             "percentile.75.0",
-#             "percentile.97.5"
-#             );
-#
-#         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#         DF.plot <- cbind(DF.plot,DF.quantiles);
-#
-#         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#         my.ggplot <- initializePlot(
-#             title    = NULL,
-#             subtitle = paste0(jurisdiction,' COVID-19 daily hospital discharges')
-#             );
-#
-#         my.ggplot <- my.ggplot + geom_ribbon(
-#             data    = DF.plot,
-#             mapping = aes(x = date, ymin = percentile.02.5, ymax = percentile.97.5),
-#             alpha   = 0.75,
-#             fill    = "cyan",
-#             colour  = NA
-#             );
-#
-#         # my.ggplot <- my.ggplot + geom_ribbon(
-#         #     data    = DF.plot,
-#         #     mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
-#         #     alpha   = 0.75,
-#         #     fill    = "darkcyan",
-#         #     colour  = NA
-#         #     );
-#
-#         my.ggplot <- my.ggplot + geom_col(
-#             data    = DF.plot,
-#             mapping = aes(x = date, y = discharges),
-#             alpha   = 0.50,
-#             size    = 0.75,
-#             fill    = "black",
-#             colour  = NA
-#             );
-#
-#         my.ggplot <- my.ggplot + geom_line(
-#             data    = DF.plot,
-#             mapping = aes(x = date, y = percentile.50.0),
-#             alpha   = 0.85,
-#             size    = 1.00,
-#             colour  = "red"
-#             );
-#
-#         my.ggplot <- my.ggplot + scale_x_date(date_breaks = "2 weeks");
-#         my.ggplot <- my.ggplot + theme(
-#             axis.text.x = element_text(size = textsize.axis, face = "bold", angle = 90, vjust = 0.5)
-#             );
-#
-#         my.ggplot <- my.ggplot + scale_y_continuous(
-#             limits = NULL,
-#             breaks = seq(0,100,2)
-#             );
-#
-#         my.ggplot <- my.ggplot + xlab("");
-#         my.ggplot <- my.ggplot + ylab("");
-#
-#         list.plots[[jurisdiction]] <- my.ggplot;
-#
-#         PNG.output  <- paste0("plot-LoS-expected-discharges-",jurisdiction,".png");
-#         ggsave(
-#             file   = PNG.output,
-#             plot   = my.ggplot,
-#             dpi    = 300,
-#             height =   5,
-#             width  =  24,
-#             units  = 'in'
-#             );
-#
-#         }
-#
-#     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#     cat(paste0("\n",thisFunctionName,"() quits."));
-#     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
-#     return( list.plots );
-#
-#     }

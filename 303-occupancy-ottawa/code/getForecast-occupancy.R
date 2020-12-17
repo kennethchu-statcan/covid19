@@ -92,7 +92,10 @@ getForecast.occupancy <- function(
             cat("\nsummary(DF.forecast.occupancy)\n");
             print( summary(DF.forecast.occupancy)   );
 
-            list.output[[ jurisdiction ]] <- DF.forecast.occupancy
+            list.output[[ jurisdiction ]] <- list(
+                forecast.discharges = DF.forecast.discharges,
+                forecast.occupancy  = DF.forecast.occupancy
+                );
 
             }
 
