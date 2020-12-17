@@ -10,6 +10,7 @@ getForecast.occupancy <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     require(dplyr);
+    require(matrixStats);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( file.exists(RData.output) ) {
@@ -27,29 +28,67 @@ getForecast.occupancy <- function(
         print( names(results.stan.LoS)   );
 
         jurisdictions <- results.stan.LoS[['jurisdictions']];
-        for ( index.jurisdiction in 1:length(jurisdiction) ) {
+        for ( index.jurisdiction in 1:length(jurisdictions) ) {
 
             jurisdiction <- jurisdictions[index.jurisdiction];
-            index.jurisdiction.chgpt <- which( jurisdiction == results.stan.change.point[['jurisdictions']] )
+            index.jurisdiction.chgpt <- which( jurisdiction == results.stan.change.point[['jurisdictions']] );
 
-            DF.cumulatve.forecast.admissions <- getForecast.occupancy_getCumulatveForecast.admissions(
-                observation.dates = results.stan.change.point[['dates']][[jurisdiction]];
-                DF.admissions     = results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt]
+            DF.observed.data       <- results.stan.change.point[['observed.data']][[jurisdiction]]
+            observation.dates      <- DF.observed.data[,'date'];
+            DF.expected.admissions <- results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt];
+            n.days                 <- ncol(DF.expected.admissions);
+
+            cat("\nresults.stan.change.point[['dates']][[jurisdiction]]\n");
+            print( results.stan.change.point[['dates']][[jurisdiction]]   );
+
+            cat("\nstr(results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt])\n");
+            print( str(results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt])   );
+
+            cat("\nstr(results.stan.change.point[['observed.data']][[jurisdiction]])\n");
+            print( str(results.stan.change.point[['observed.data']][[jurisdiction]])   );
+
+            cat("\nstr(results.stan.LoS[['observed.data']][[jurisdiction]])\n");
+            print( str(results.stan.LoS[['observed.data']][[jurisdiction]])   );
+
+            DF.cumulative.forecast.admissions <- getForecast.occupancy_getCumulatveForecast.admissions(
+                observation.dates = observation.dates,
+                DF.admissions     = DF.expected.admissions
                 );
+
+            cat("\nstr(DF.cumulative.forecast.admissions)\n");
+            print( str(DF.cumulative.forecast.admissions)   );
 
             DF.Prob.LoS <- getForecast.occupancy_get.Prob.LoS(
                 index.jurisdiction    = index.jurisdiction,
                 LoS.posterior.samples = results.stan.LoS[['extracted.samples']],
-                n.days                = dim(results.stan.change.point[['out']][['E_admissions']])[2]
+                n.days                = n.days # dim(results.stan.change.point[['out']][['E_admissions']])[2]
                 );
 
+            cat("\nstr(DF.Prob.LoS)\n");
+            print( str(DF.Prob.LoS)   );
+
             DF.forecast.discharges <- getForecast.occupancy_forecast.discharges(
-                DF.observed.data = results.stan.LoS[['observed.data']][[jurisdiction]],
-                DF.admissions    = results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt],
+                DF.observed.data = DF.observed.data,
+                DF.admissions    = DF.expected.admissions,
                 DF.Prob.LoS      = DF.Prob.LoS
                 );
 
-            results.stan.LoS[['extracted.samples']][['']]
+            cat("\nstr(DF.forecast.discharges)\n");
+            print( str(DF.forecast.discharges)   );
+
+            DF.cumulative.forecast.discharges <- matrixStats::rowCumsums(x = DF.forecast.discharges);
+            colnames(DF.cumulative.forecast.discharges) <- colnames(DF.forecast.discharges);
+
+            cat("\nstr(DF.cumulative.forecast.discharges)\n");
+            print( str(DF.cumulative.forecast.discharges)   );
+
+            DF.forecast.occupancy <- DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
+
+            cat("\nstr(DF.forecast.occupancy)\n");
+            print( str(DF.forecast.occupancy)   );
+
+            cat("\nsummary(DF.forecast.occupancy)\n");
+            print( summary(DF.forecast.occupancy)   );
 
             }
 
@@ -92,10 +131,13 @@ getForecast.occupancy_forecast.discharges <- function(
     n.samples.chgpt <- nrow(DF.admissions);
     n.forecast.days <- ncol(DF.admissions) - nrow(DF.observed.data);
 
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.output <- matrix(
         data = rep(x = NA, times = n.samples.chgpt * n.forecast.days),
         nrow = n.samples.chgpt
         );
+    colnames.DF.output  <- max(DF.observed.data[,'date'])  + seq(1,n.forecast.days);
+    colnames(DF.output) <- as.character(colnames.DF.output);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     n.observed.days <- nrow(DF.observed.data);
@@ -146,14 +188,20 @@ getForecast.occupancy_get.Prob.LoS <- function(
     require(stats);
 
     DF.parameters <- data.frame(
-        shape = LoS.posterior.samples[['extracted.samples']][['alpha']][,index.jurisdiction],
-        rate  = LoS.posterior.samples[['extracted.samples']][['beta']] [,index.jurisdiction]
+        shape = LoS.posterior.samples[['alpha']][,index.jurisdiction],
+        rate  = LoS.posterior.samples[['beta']] [,index.jurisdiction]
         );
 
     indexes.date    <- seq(1,n.days);
     upper.limits    <- indexes.date + 0.5;
     lower.limits    <- indexes.date - 0.5;
     lower.limits[1] <- 0;
+
+    DF.temp <- data.frame(
+        date.index  = indexes.date,
+        lower.limit = lower.limits,
+        upper.limit = upper.limits
+        );
 
     # pgamma(q, shape = alpha, rate = beta, lower.tail = TRUE, log.p = FALSE)
 
