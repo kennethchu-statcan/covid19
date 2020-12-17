@@ -51,8 +51,8 @@ getForecast.occupancy <- function(
             print( str(results.stan.LoS[['observed.data']][[jurisdiction]])   );
 
             DF.cumulative.forecast.admissions <- getForecast.occupancy_getCumulatveForecast.admissions(
-                observation.dates = observation.dates,
-                DF.admissions     = DF.expected.admissions
+                DF.observed.data = DF.observed.data,
+                DF.admissions    = DF.expected.admissions
                 );
 
             cat("\nstr(DF.cumulative.forecast.admissions)\n");
@@ -223,20 +223,31 @@ getForecast.occupancy_get.Prob.LoS <- function(
     }
 
 getForecast.occupancy_getCumulatveForecast.admissions <- function(
-    observation.dates = NULL,
-    DF.admissions     = NULL
+    DF.observed.data = NULL,
+    DF.admissions    = NULL
     ) {
 
     require(matrixStats);
 
-    DF.forecast.admission <- DF.admissions[,seq(1+length(observation.dates),ncol(DF.admissions))];
-    forcast.dates <- observation.dates[length(observation.dates)] + seq(1,ncol(DF.forecast.admission));
-    colnames(DF.forecast.admission) <- as.character(forcast.dates);
+    # DF.cumulatve.admissions <- matrixStats::rowCumsums(x = DF.admissions);
+    # colnames(DF.cumulatve.admissions) <- colnames(DF.admissions);
+    #
+    # DF.output <- DF.cumulatve.admissions[,seq(1+length(observation.dates),ncol(DF.cumulatve.admissions))];
+    #
+    # return( DF.output );
 
-    DF.cumulatve.forecast.admission <- matrixStats::rowCumsums(x = DF.forecast.admission);
-    colnames(DF.cumulatve.forecast.admission) <- colnames(DF.forecast.admission);
+    observation.dates <- DF.observed.data[,'date'];
 
-    return( DF.cumulatve.forecast.admission );
+    DF.forecast.admissions <- DF.admissions[,seq(1+length(observation.dates),ncol(DF.admissions))];
+    forcast.dates <- observation.dates[length(observation.dates)] + seq(1,ncol(DF.forecast.admissions));
+    colnames(DF.forecast.admissions) <- as.character(forcast.dates);
+
+    DF.cumulatve.forecast.admissions <- matrixStats::rowCumsums(x = DF.forecast.admissions);
+    colnames(DF.cumulatve.forecast.admissions) <- colnames(DF.forecast.admissions);
+
+    DF.cumulatve.forecast.admissions <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulatve.forecast.admissions;
+
+    return( DF.cumulatve.forecast.admissions );
 
     }
 
