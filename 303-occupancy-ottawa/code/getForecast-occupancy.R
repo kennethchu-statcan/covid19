@@ -27,7 +27,9 @@ getForecast.occupancy <- function(
         cat("\nnames(results.stan.LoS)\n");
         print( names(results.stan.LoS)   );
 
+        list.output   <- list();
         jurisdictions <- results.stan.LoS[['jurisdictions']];
+
         for ( index.jurisdiction in 1:length(jurisdictions) ) {
 
             jurisdiction <- jurisdictions[index.jurisdiction];
@@ -90,28 +92,22 @@ getForecast.occupancy <- function(
             cat("\nsummary(DF.forecast.occupancy)\n");
             print( summary(DF.forecast.occupancy)   );
 
-            }
+            list.output[[ jurisdiction ]] <- DF.forecast.occupancy
 
+            }
 
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    # write.csv(
-    #     x         = DF.output,
-    #     file      = gsub(x = RData.output, pattern = "\\.RData$", replacement = ".csv"),
-    #     row.names = FALSE
-    #     );
-    #
-    # base::saveRDS(
-    #     file   = RData.output,
-    #     object = DF.output
-    #     );
+    if (!is.null(RData.output)) {
+        saveRDS(object = list.output, file = RData.output);
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
     # return( DF.output );
-    return( NULL );
+    return( list.output );
 
     }
 
@@ -296,12 +292,5 @@ getForecast.occupancy_cowplot <- function(
         }
 
     return( NULL );
-
-    }
-
-##################################################
-getForecast.occupancy_cumulative.forecast.admissions <- function(
-    list.input = NULL
-    ) {
 
     }
