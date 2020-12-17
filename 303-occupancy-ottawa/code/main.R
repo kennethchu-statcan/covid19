@@ -40,6 +40,8 @@ code.files <- c(
     "plot-forecast.R",
     "plot-stepsize-vs-chgpt.R",
     "visualizeData-Ottawa.R",
+    "visualizeModel-change-point.R",
+    "visualizeModel-length-of-stay.R",
     "wrapper-stan-length-of-stay.R",
     "wrapper-stan-change-point.R"
     );
@@ -148,6 +150,11 @@ results.stan.change.point <- wrapper.stan.change.point(
     DEBUG              = TRUE # FALSE
     );
 
+visualizeModel.change.point(
+    list.input      = results.stan.change.point,
+    forecast.window = 14
+    );
+
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 results.stan.LoS <- wrapper.stan.length.of.stay(
     StanModel       = 'length-of-stay',
@@ -155,6 +162,10 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
     DF.input        = DF.dummy,
     n.chains        = n.chains,
     DEBUG           = TRUE # FALSE
+    );
+
+visualizeModel.length.of.stay(
+    list.input = results.stan.LoS
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
