@@ -40,6 +40,7 @@ code.files <- c(
     "plot-forecast.R",
     "plot-stepsize-vs-chgpt.R",
     "visualizeData-Ottawa.R",
+    "visualizeForecast-occupancy.R",
     "visualizeModel-change-point.R",
     "visualizeModel-length-of-stay.R",
     "wrapper-stan-length-of-stay.R",
@@ -179,12 +180,18 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
 #     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.forecast.occupancy <- getForecast.occupancy(
+list.forecast.occupancy <- getForecast.occupancy(
     results.stan.change.point = results.stan.change.point,
     results.stan.LoS          = results.stan.LoS
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+visualizeForecast.occupancy(
+    results.stan.change.point = results.stan.change.point,
+    results.stan.LoS          = results.stan.LoS,
+    list.forecast.occupancy   = list.forecast.occupancy,
+    forecast.window           = 14
+    );
 
 ##################################################
 print( warnings() );
