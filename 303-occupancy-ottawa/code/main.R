@@ -150,10 +150,10 @@ results.stan.change.point <- wrapper.stan.change.point(
     DEBUG              = TRUE # FALSE
     );
 
-visualizeModel.change.point(
-    list.input      = results.stan.change.point,
-    forecast.window = 14
-    );
+# visualizeModel.change.point(
+#     list.input      = results.stan.change.point,
+#     forecast.window = 14
+#     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 results.stan.LoS <- wrapper.stan.length.of.stay(
@@ -164,25 +164,25 @@ results.stan.LoS <- wrapper.stan.length.of.stay(
     DEBUG           = TRUE # FALSE
     );
 
-visualizeModel.length.of.stay(
-    list.input = results.stan.LoS
-    );
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-dashboard.files <- c("dashboard-change-point","dashboard-length-of-stay");
-for ( dashboard.file in dashboard.files ) {
-    rmarkdown::render(
-        input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-        output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-        output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
-        );
-    }
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# DF.forecast.occupancy <- getForecast.occupancy(
-#     results.stan.change.point = results.stan.change.point,
-#     results.stan.LoS          = results.stan.LoS
+# visualizeModel.length.of.stay(
+#     list.input = results.stan.LoS
 #     );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# dashboard.files <- c("dashboard-change-point","dashboard-length-of-stay");
+# for ( dashboard.file in dashboard.files ) {
+#     rmarkdown::render(
+#         input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+#         output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+#         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+#         );
+#     }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.forecast.occupancy <- getForecast.occupancy(
+    results.stan.change.point = results.stan.change.point,
+    results.stan.LoS          = results.stan.LoS
+    );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
