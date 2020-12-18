@@ -84,7 +84,7 @@ getForecast.occupancy <- function(
             cat("\nstr(DF.cumulative.forecast.discharges)\n");
             print( str(DF.cumulative.forecast.discharges)   );
 
-            DF.forecast.occupancy <- DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
+            DF.forecast.occupancy <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
 
             cat("\nstr(DF.forecast.occupancy)\n");
             print( str(DF.forecast.occupancy)   );
@@ -244,7 +244,7 @@ getForecast.occupancy_getCumulatveForecast.admissions <- function(
     DF.cumulatve.forecast.admissions <- matrixStats::rowCumsums(x = DF.forecast.admissions);
     colnames(DF.cumulatve.forecast.admissions) <- colnames(DF.forecast.admissions);
 
-    DF.cumulatve.forecast.admissions <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulatve.forecast.admissions;
+#   DF.cumulatve.forecast.admissions <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulatve.forecast.admissions;
 
     return( DF.cumulatve.forecast.admissions );
 
