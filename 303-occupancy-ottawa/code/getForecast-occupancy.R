@@ -60,6 +60,7 @@ getForecast.occupancy <- function(
             # cat("\nstr(DF.cumulative.forecast.admissions)\n");
             # print( str(DF.cumulative.forecast.admissions)   );
 
+            ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
             DF.Prob.LoS <- getForecast.occupancy_get.Prob.LoS(
                 index.jurisdiction    = index.jurisdiction,
                 LoS.posterior.samples = results.stan.LoS[['extracted.samples']],
@@ -69,10 +70,19 @@ getForecast.occupancy <- function(
             # cat("\nstr(DF.Prob.LoS)\n");
             # print( str(DF.Prob.LoS)   );
 
+            ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+            indexes.LoS.posterior.samples <- base::sample(
+                x       = seq(1,nrow(DF.Prob.LoS)),
+                size    = nrow(DF.expected.admissions),
+                replace = TRUE
+                );
+
+            ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
             DF.forecast.discharges <- getForecast.occupancy_forecast.discharges(
-                DF.observed.data = DF.observed.data,
-                DF.admissions    = DF.expected.admissions,
-                DF.Prob.LoS      = DF.Prob.LoS
+                DF.observed.data              = DF.observed.data,
+                DF.admissions                 = DF.expected.admissions,
+                DF.Prob.LoS                   = DF.Prob.LoS,
+                indexes.LoS.posterior.samples = indexes.LoS.posterior.samples
                 );
 
             # cat("\nstr(DF.forecast.discharges)\n");
@@ -84,15 +94,25 @@ getForecast.occupancy <- function(
             # cat("\nstr(DF.cumulative.forecast.discharges)\n");
             # print( str(DF.cumulative.forecast.discharges)   );
 
-            DF.forecast.occupancy <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
+            ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+            DF.estimated.discharges <- results.stan.LoS[['extracted.samples']][['E_discharges']][,,index.jurisdiction];
+            DF.estimated.discharges <- DF.estimated.discharges[indexes.LoS.posterior.samples,];
 
-            # cat("\nstr(DF.forecast.occupancy)\n");
-            # print( str(DF.forecast.occupancy)   );
-            #
-            # cat("\nsummary(DF.forecast.occupancy)\n");
-            # print( summary(DF.forecast.occupancy)   );
+            estimated.occupancy.last.observed.day <- sum(DF.observed.data[,'admissions']) - matrixStats::rowSums2(x = DF.estimated.discharges);
 
-            list.output[[ jurisdiction ]] <- list(
+            DF.estimated.occupancy.last.observed.day <- matrix(
+                data  = rep(x = estimated.occupancy.last.observed.day, times = ncol(DF.cumulative.forecast.admissions)),
+                nrow  = length(estimated.occupancy.last.observed.day),
+                byrow = FALSE
+                );
+
+            ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+            # DF.forecast.occupancy <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
+            DF.forecast.occupancy <- DF.estimated.occupancy.last.observed.day + DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
+            colnames(DF.forecast.occupancy) <- colnames(DF.cumulative.forecast.discharges);
+
+            ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+              list.output[[ jurisdiction ]] <- list(
                 forecast.discharges = DF.forecast.discharges,
                 forecast.occupancy  = DF.forecast.occupancy
                 );
@@ -116,16 +136,17 @@ getForecast.occupancy <- function(
 
 ##################################################
 getForecast.occupancy_forecast.discharges <- function(
-    DF.observed.data = NULL,
-    DF.admissions    = NULL,
-    DF.Prob.LoS      = NULL
+    DF.observed.data              = NULL,
+    DF.admissions                 = NULL,
+    DF.Prob.LoS                   = NULL,
+    indexes.LoS.posterior.samples = NULL
     ) {
 
-    indexes.LoS.posterior.samples <- base::sample(
-        x       = seq(1,nrow(DF.Prob.LoS)),
-        size    = nrow(DF.admissions),
-        replace = TRUE
-        );
+    # indexes.LoS.posterior.samples <- base::sample(
+    #     x       = seq(1,nrow(DF.Prob.LoS)),
+    #     size    = nrow(DF.admissions),
+    #     replace = TRUE
+    #     );
 
     n.samples.chgpt <- nrow(DF.admissions);
     n.forecast.days <- ncol(DF.admissions) - nrow(DF.observed.data);
