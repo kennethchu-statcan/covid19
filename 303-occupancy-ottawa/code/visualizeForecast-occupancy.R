@@ -406,15 +406,6 @@ visualizeForecast.occupancy_discharges <- function(
         #     colour  = NA
         #     );
 
-        my.ggplot <- my.ggplot + geom_col(
-            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
-            mapping = aes(x = date, y = discharges),
-            alpha   = 0.50,
-            size    = 0.75,
-            fill    = "black",
-            colour  = NA
-            );
-
         my.ggplot <- my.ggplot + geom_line(
             data    = DF.plot,
             mapping = aes(x = date, y = percentile.50.0),
@@ -436,6 +427,15 @@ visualizeForecast.occupancy_discharges <- function(
             mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
             alpha   = 0.75,
             fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
+            mapping = aes(x = date, y = discharges),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "black",
             colour  = NA
             );
 
@@ -581,15 +581,6 @@ visualizeForecast.occupancy_occupancy <- function(
         #     colour  = NA
         #     );
 
-        my.ggplot <- my.ggplot + geom_col(
-            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
-            mapping = aes(x = date, y = occupancy),
-            alpha   = 0.50,
-            size    = 0.75,
-            fill    = "black",
-            colour  = NA
-            );
-
         my.ggplot <- my.ggplot + geom_line(
             data    = DF.plot,
             mapping = aes(x = date, y = percentile.50.0),
@@ -611,6 +602,15 @@ visualizeForecast.occupancy_occupancy <- function(
             mapping = aes(x = date, ymin = percentile.25.0, ymax = percentile.75.0),
             alpha   = 0.75,
             fill    = "darkgoldenrod1",
+            colour  = NA
+            );
+
+        my.ggplot <- my.ggplot + geom_col(
+            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
+            mapping = aes(x = date, y = occupancy),
+            alpha   = 0.50,
+            size    = 0.75,
+            fill    = "black",
             colour  = NA
             );
 
