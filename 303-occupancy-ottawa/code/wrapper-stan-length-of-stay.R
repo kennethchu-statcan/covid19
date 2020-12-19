@@ -191,7 +191,7 @@ wrapper.stan.length.of.stay_inner <- function(
             sampler.control <- NULL;
         } else {
             n.iterations    <-  200;
-            my.warmup       <-  100;
+            n.warmup        <-  100;
             period.thinning <-    1;
             sampler.control <- NULL;
            }
