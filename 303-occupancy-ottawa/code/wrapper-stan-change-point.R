@@ -321,7 +321,7 @@ wrapper.stan_inner <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     results.rstan.sampling <- rstan::sampling(
-        object  = my.stan.model, # m,
+        object  = my.stan.model,
         data    = stan_data,
         init    = list.init,
         iter    = n.iterations,
