@@ -1,0 +1,72 @@
+---
+title: "COVID-19"
+# author: "DScD StatCan"
+output:
+  flexdashboard::flex_dashboard:
+    theme: darkly
+    social: menu
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(plyr)
+# library(plotly)
+```
+
+Ottawa Forecast 1
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(temp.directory,"plot-occupancy-cowplot-01-Ottawa.png")
+    )
+```
+
+Ottawa Forecast 2
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(temp.directory,"plot-occupancy-cowplot-02-Ottawa.png")
+    )
+```
+
+Ottawa1 Forecast 1
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(temp.directory,"plot-occupancy-cowplot-01-Ottawa1.png")
+    )
+```
+
+Ottawa1 Forecast 2
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+###
+
+```{r, fig.width = 32}
+knitr::include_graphics(
+    path = file.path(temp.directory,"plot-occupancy-cowplot-02-Ottawa1.png")
+    )
+```
