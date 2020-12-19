@@ -186,16 +186,6 @@ for ( cut.off.date in cut.off.dates ) {
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    dashboard.files <- c("dashboard-change-point","dashboard-length-of-stay");
-    for ( dashboard.file in dashboard.files ) {
-        rmarkdown::render(
-            input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-            output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-            output_file   = file.path(temp.directory,paste0(dashboard.file,".html"))
-            );
-        }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.forecast.occupancy <- getForecast.occupancy(
         results.stan.change.point = results.stan.change.point,
         results.stan.LoS          = results.stan.LoS
@@ -209,6 +199,21 @@ for ( cut.off.date in cut.off.dates ) {
         list.forecast.occupancy   = list.forecast.occupancy,
         forecast.window           = 14
         );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    dashboard.files <- c(
+        "dashboard-change-point",
+        "dashboard-length-of-stay",
+        "dashboard-occupancy-forecast"
+        );
+
+    for ( dashboard.file in dashboard.files ) {
+        rmarkdown::render(
+            input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+            output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+            output_file   = file.path(temp.directory,paste0(dashboard.file,".html"))
+            );
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     setwd( output.directory );
