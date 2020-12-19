@@ -8,22 +8,15 @@ visualizeModel.length.of.stay <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-
-    print("A-1");
-
     plot.density.mu.cv(
         list.input          = list.input,
         remove.stuck.chains = FALSE
         );
 
-    print("A-2");
-
     plot.trace.mu.cv(
         list.input          = list.input,
         remove.stuck.chains = FALSE
         );
-
-    print("A-3");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     plot.density.mu.cv(
@@ -31,47 +24,33 @@ visualizeModel.length.of.stay <- function(
         remove.stuck.chains = TRUE
         );
 
-    print("A-4");
-
     plot.trace.mu.cv(
         list.input          = list.input,
         remove.stuck.chains = TRUE
         );
-
-    print("A-5");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     plot.scatter.mu.cv(
         list.input = list.input
         );
 
-    print("A-6");
-
     list.plot.admissions <- plot.admissions(
         list.input = list.input
         );
-
-    print("A-7");
 
     list.plot.discharges <- plot.expected.discharges(
         list.input = list.input
         );
 
-    print("A-8");
-
     list.plot.occupancy <- plot.expected.occupancy(
         list.input = list.input
         );
-
-    print("A-9");
 
     plot.cowplot.discharges.occupancy(
         list.plot.admissions = list.plot.admissions,
         list.plot.discharges = list.plot.discharges,
         list.plot.occupancy  = list.plot.occupancy
         );
-
-    print("A-10");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
@@ -218,8 +197,8 @@ plot.expected.occupancy <- function(
     cat("\nstr(list.input[['observed.data']])\n");
     print( str(list.input[['observed.data']])   );
 
-    cat("\nstr(list.input[['extracted.samples']])\n");
-    print( str(list.input[['extracted.samples']])   );
+    cat("\nstr(list.input[['posterior.samples']])\n");
+    print( str(list.input[['posterior.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.plots    <- list();
@@ -233,7 +212,7 @@ plot.expected.occupancy <- function(
         DF.plot <- list.input[['observed.data']][[jurisdiction]];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- list.input[['posterior.samples']][['E_discharges']][,,temp.index];
         DF.expected.discharges <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
 
         DF.expected.cumulative.discharges <- matrixStats::rowCumsums(x = DF.expected.discharges);
@@ -351,8 +330,8 @@ plot.expected.discharges <- function(
     cat("\nstr(list.input[['observed.data']])\n");
     print( str(list.input[['observed.data']])   );
 
-    cat("\nstr(list.input[['extracted.samples']])\n");
-    print( str(list.input[['extracted.samples']])   );
+    cat("\nstr(list.input[['posterior.samples']])\n");
+    print( str(list.input[['posterior.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.plots    <- list();
@@ -366,7 +345,7 @@ plot.expected.discharges <- function(
         DF.plot <- list.input[['observed.data']][[jurisdiction]];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.expected.discharges <- list.input[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- list.input[['posterior.samples']][['E_discharges']][,,temp.index];
         DF.expected.discharges <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
 
         DF.quantiles <- matrixStats::colQuantiles(
@@ -470,8 +449,8 @@ plot.trace.mu.cv <- function(
         jurisdiction <- jurisdictions[temp.index];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
-        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+        temp.alpha <- list.input[["posterior.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["posterior.samples"]][["beta" ]][,temp.index];
 
         if ( remove.stuck.chains ) {
             temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
@@ -602,8 +581,8 @@ plot.density.mu.cv <- function(
         jurisdiction <- jurisdictions[temp.index];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
-        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+        temp.alpha <- list.input[["posterior.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["posterior.samples"]][["beta" ]][,temp.index];
 
         if ( remove.stuck.chains ) {
             temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
@@ -707,8 +686,8 @@ plot.scatter.mu.cv <- function(
 
         jurisdiction <- jurisdictions[temp.index];
 
-        temp.alpha <- list.input[["extracted.samples"]][["alpha"]][,temp.index];
-        temp.beta  <- list.input[["extracted.samples"]][["beta" ]][,temp.index];
+        temp.alpha <- list.input[["posterior.samples"]][["alpha"]][,temp.index];
+        temp.beta  <- list.input[["posterior.samples"]][["beta" ]][,temp.index];
 
         DF.plot <- data.frame(
             mu = temp.alpha / temp.beta,

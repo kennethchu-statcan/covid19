@@ -172,7 +172,7 @@ visualizeForecast.occupancy_admissions <- function(
         jurisdiction <- jurisdictions[temp.index];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.estimated      <- results.stan.change.point[['out']][['E_admissions']][,,temp.index];
+        DF.estimated      <- results.stan.change.point[['posterior.samples']][['E_admissions']][,,temp.index];
         columns.estimated <- seq(1,length(results.stan.change.point[["dates"]][[jurisdiction]]));
         DF.estimated      <- DF.estimated[,columns.estimated];
 
@@ -195,7 +195,7 @@ visualizeForecast.occupancy_admissions <- function(
         print( str(DF.quantiles)   );
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.forecast <- results.stan.change.point[['out']][['E_admissions']][,,temp.index];
+        DF.forecast <- results.stan.change.point[['posterior.samples']][['E_admissions']][,,temp.index];
 
         last.estimated.date.index <- length(results.stan.change.point[["dates"]][[jurisdiction]]);
         last.forecast.date.index  <- min( last.estimated.date.index + forecast.window , ncol(DF.forecast) );
@@ -322,8 +322,8 @@ visualizeForecast.occupancy_discharges <- function(
     cat("\nstr(results.stan.LoS[['observed.data']])\n");
     print( str(results.stan.LoS[['observed.data']])   );
 
-    cat("\nstr(results.stan.LoS[['extracted.samples']])\n");
-    print( str(results.stan.LoS[['extracted.samples']])   );
+    cat("\nstr(results.stan.LoS[['posterior.samples']])\n");
+    print( str(results.stan.LoS[['posterior.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.plots    <- list();
@@ -337,7 +337,7 @@ visualizeForecast.occupancy_discharges <- function(
         DF.plot <- results.stan.LoS[['observed.data']][[jurisdiction]];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.expected.discharges <- results.stan.LoS[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- results.stan.LoS[['posterior.samples']][['E_discharges']][,,temp.index];
         DF.expected.discharges <- DF.expected.discharges[results.stan.LoS[['is.not.stuck']][[jurisdiction]],];
 
         DF.quantiles <- matrixStats::colQuantiles(
@@ -484,8 +484,8 @@ visualizeForecast.occupancy_occupancy <- function(
     cat("\nstr(results.stan.LoS[['observed.data']])\n");
     print( str(results.stan.LoS[['observed.data']])   );
 
-    cat("\nstr(results.stan.LoS[['extracted.samples']])\n");
-    print( str(results.stan.LoS[['extracted.samples']])   );
+    cat("\nstr(results.stan.LoS[['posterior.samples']])\n");
+    print( str(results.stan.LoS[['posterior.samples']])   );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.plots    <- list();
@@ -499,7 +499,7 @@ visualizeForecast.occupancy_occupancy <- function(
         DF.plot <- results.stan.LoS[['observed.data']][[jurisdiction]];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.expected.discharges <- results.stan.LoS[['extracted.samples']][['E_discharges']][,,temp.index];
+        DF.expected.discharges <- results.stan.LoS[['posterior.samples']][['E_discharges']][,,temp.index];
         DF.expected.discharges <- DF.expected.discharges[results.stan.LoS[['is.not.stuck']][[jurisdiction]],];
 
         DF.expected.cumulative.discharges <- matrixStats::rowCumsums(x = DF.expected.discharges);

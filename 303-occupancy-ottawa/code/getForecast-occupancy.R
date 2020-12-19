@@ -37,14 +37,14 @@ getForecast.occupancy <- function(
 
             DF.observed.data       <- results.stan.change.point[['observed.data']][[jurisdiction]]
             observation.dates      <- DF.observed.data[,'date'];
-            DF.expected.admissions <- results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt];
+            DF.expected.admissions <- results.stan.change.point[['posterior.samples']][['E_admissions']][,,index.jurisdiction.chgpt];
             n.days                 <- ncol(DF.expected.admissions);
 
             # cat("\nresults.stan.change.point[['dates']][[jurisdiction]]\n");
             # print( results.stan.change.point[['dates']][[jurisdiction]]   );
             #
-            # cat("\nstr(results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt])\n");
-            # print( str(results.stan.change.point[['out']][['E_admissions']][,,index.jurisdiction.chgpt])   );
+            # cat("\nstr(results.stan.change.point[['posterior.samples']][['E_admissions']][,,index.jurisdiction.chgpt])\n");
+            # print( str(results.stan.change.point[['posterior.samples']][['E_admissions']][,,index.jurisdiction.chgpt])   );
             #
             # cat("\nstr(results.stan.change.point[['observed.data']][[jurisdiction]])\n");
             # print( str(results.stan.change.point[['observed.data']][[jurisdiction]])   );
@@ -63,8 +63,8 @@ getForecast.occupancy <- function(
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
             DF.Prob.LoS <- getForecast.occupancy_get.Prob.LoS(
                 index.jurisdiction    = index.jurisdiction,
-                LoS.posterior.samples = results.stan.LoS[['extracted.samples']],
-                n.days                = n.days # dim(results.stan.change.point[['out']][['E_admissions']])[2]
+                LoS.posterior.samples = results.stan.LoS[['posterior.samples']],
+                n.days                = n.days # dim(results.stan.change.point[['posterior.samples']][['E_admissions']])[2]
                 );
 
             # cat("\nstr(DF.Prob.LoS)\n");
@@ -95,7 +95,7 @@ getForecast.occupancy <- function(
             # print( str(DF.cumulative.forecast.discharges)   );
 
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-            DF.estimated.discharges <- results.stan.LoS[['extracted.samples']][['E_discharges']][,,index.jurisdiction];
+            DF.estimated.discharges <- results.stan.LoS[['posterior.samples']][['E_discharges']][,,index.jurisdiction];
             DF.estimated.discharges <- DF.estimated.discharges[indexes.LoS.posterior.samples,];
 
             estimated.occupancy.last.observed.day <- sum(DF.observed.data[,'admissions']) - matrixStats::rowSums2(x = DF.estimated.discharges);

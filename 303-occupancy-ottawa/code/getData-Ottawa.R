@@ -131,12 +131,7 @@ getData.Ottawa_standardize <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    print("A-1");
-
     DF.output <- DF.output[,selected.colnames];
-
-    print("A-2");
-
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "Cumulative_Deaths_by_Date_of_Death",

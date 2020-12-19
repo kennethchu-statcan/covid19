@@ -4,7 +4,11 @@ wrapper.stan.length.of.stay <- function(
     FILE.stan.model = NULL,
     DF.input        = NULL,
     RData.output    = paste0('stan-model-',StanModel,'.RData'),
-    n.chains        = 4,
+    n.chains        =    4,
+    n.iterations    = 2000,
+    n.warmup        = 1000,
+    period.thinning =    4,
+    sampler.control = list(adapt_delta = 0.90, max_treedepth = 10),
     DEBUG           = FALSE
     ) {
 
@@ -27,6 +31,10 @@ wrapper.stan.length.of.stay <- function(
             DF.input        = DF.input,
             RData.output    = RData.output,
             n.chains        = n.chains,
+            n.iterations    = n.iterations,
+            n.warmup        = n.warmup,
+            period.thinning = period.thinning,
+            sampler.control = sampler.control,
             DEBUG           = DEBUG
             );
 
@@ -76,7 +84,7 @@ wrapper.stan.length.of.stay_patch <- function(
         is.not.stuck    <- list();
         for( temp.index in 1:n.jurisdictions ) {
             temp.stddev  <- get.moving.stddev(
-                input.vector = list.input[['extracted.samples']][['alpha']][,temp.index],
+                input.vector = list.input[['posterior.samples']][['alpha']][,temp.index],
                 half.window  = 10
                 );
             jurisdiction <- jurisdictions[temp.index];
@@ -95,6 +103,10 @@ wrapper.stan.length.of.stay_inner <- function(
     DF.input        = NULL,
     RData.output    = NULL,
     n.chains        = NULL,
+    n.iterations    = NULL,
+    n.warmup        = NULL,
+    period.thinning = NULL,
+    sampler.control = NULL,
     DEBUG           = FALSE
     ) {
 
@@ -143,12 +155,11 @@ wrapper.stan.length.of.stay_inner <- function(
     ##############################################
     cat("\nstr(stan_data)\n");
     print( str(stan_data)   );
-    saveRDS(object = stan_data, file = "data-stan-length-of-stay.RData");
-    # return( NULL );
+    saveRDS(object = stan_data, file = paste0("data-stan-",StanModel,".RData"));
     ##############################################
     ##############################################
     list.init <- lapply(
-        X   = 1:n.chains, # 1:getOption("mc.cores"),
+        X   = 1:n.chains,
         FUN = function(x) {
             list(
                 uniform_mu = runif(n.jurisdictions, min = 0, max = 1),
@@ -157,82 +168,41 @@ wrapper.stan.length.of.stay_inner <- function(
             }
         );
 
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if( DEBUG ) {
-
         if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
-            my.iter     <- 40;
-            my.warmup   <- 20;
-            my.n.chains <- n.chains;
+            n.iterations    <-   40;
+            n.warmup        <-   20;
+            period.thinning <-    1;
+            sampler.control <- NULL;
         } else {
-            my.iter     <- 200;
-            my.warmup   <- 100;
-            my.n.chains <- n.chains;
+            n.iterations    <-  200;
+            my.warmup       <-  100;
+            period.thinning <-    1;
+            sampler.control <- NULL;
            }
-
-        results.rstan.sampling <- rstan::sampling(
-            object = my.stan.model,
-            data   = stan_data,
-            init   = list.init,
-            iter   = my.iter,     # 20,
-            warmup = my.warmup,   # 10,
-            chains = my.n.chains  #  2
-            );
-
-    } else {
-
-        # results.rstan.sampling = rstan::sampling(
-        #     object  = my.stan.model,
-        #     data    = stan_data,
-        #     iter    = 4000,
-        #     warmup  = 2000,
-        #     chains  = 8,
-        #     thin    = 4,
-        #     init    = list.init,
-        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
-        #     );
-
-        # results.rstan.sampling <- rstan::sampling(
-        #    object  = my.stan.model,
-        #    data    = stan_data,
-        #    iter    = 200,
-        #    warmup  = 100,
-        #    chains  = 4,
-        #    thin    = 4,
-        #    init    = list.init,
-        #    control = list(adapt_delta = 0.90, max_treedepth = 10)
-        #    );
-
-        # results.rstan.sampling <- rstan::sampling(
-        #     object  = my.stan.model,
-        #     data    = stan_data,
-        #     init    = list.init,
-        #     iter    = 1000,
-        #     warmup  =  500,
-        #     chains  =    8,
-        #     thin    =    4,
-        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
-        #     );
-
-        results.rstan.sampling <- rstan::sampling(
-            object  = my.stan.model,
-            data    = stan_data,
-            init    = list.init,
-            iter    = 2000,
-            warmup  = 1000,
-            chains  = n.chains,
-            thin    = 4,
-            control = list(adapt_delta = 0.90, max_treedepth = 10)
-            );
-
         }
 
-    extracted.samples <- rstan::extract(results.rstan.sampling);
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    results.rstan.sampling <- rstan::sampling(
+        object  = my.stan.model,
+        data    = stan_data,
+        init    = list.init,
+        iter    = n.iterations,
+        warmup  = n.warmup,
+        chains  = n.chains,
+        thin    = period.thinning,
+        control = sampler.control
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    posterior.samples <- rstan::extract(results.rstan.sampling);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     is.not.stuck <- list();
     for( temp.index in 1:n.jurisdictions ) {
         temp.stddev  <- get.moving.stddev(
-            input.vector = extracted.samples[['alpha']][,temp.index],
+            input.vector = posterior.samples[['alpha']][,temp.index],
             half.window  = 10
             );
         jurisdiction <- jurisdictions[temp.index];
@@ -245,8 +215,15 @@ wrapper.stan.length.of.stay_inner <- function(
         jurisdictions          = jurisdictions,
         observed.data          = observed.data,
         results.rstan.sampling = results.rstan.sampling,
-        extracted.samples      = extracted.samples,
-        is.not.stuck           = is.not.stuck
+        posterior.samples      = posterior.samples,
+        is.not.stuck           = is.not.stuck,
+        sampling.parameters = list(
+            n.chains        = n.chains,
+            n.iterations    = n.iterations,
+            n.warmup        = n.warmup,
+            period.thinning = period.thinning,
+            control         = sampler.control
+            )
         );
 
     return( list.output );

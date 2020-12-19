@@ -5,8 +5,12 @@ wrapper.stan.change.point <- function(
     DF.input           = NULL,
     DF.IHR             = NULL,
     DF.serial.interval = NULL,
-    forecast.window    = 7,
-    n.chains           = 4,
+    forecast.window    =    7,
+    n.chains           =    4,
+    n.iterations       = 1000,
+    n.warmup           =  500,
+    period.thinning    =    4,
+    sampler.control    = list(adapt_delta = 0.90, max_treedepth = 10),
     RData.output       = paste0('stan-model-',StanModel,'.RData'),
     DEBUG              = FALSE
     ) {
@@ -32,6 +36,10 @@ wrapper.stan.change.point <- function(
             DF.serial.interval = DF.serial.interval,
             RData.output       = RData.output,
             n.chains           = n.chains,
+            n.iterations       = n.iterations,
+            n.warmup           = n.warmup,
+            period.thinning    = period.thinning,
+            sampler.control    = sampler.control,
             DEBUG              = DEBUG
             );
 
@@ -75,22 +83,6 @@ wrapper.stan.change.point_patch <- function(
         list.output[['observed.data']] <- observed.data;
         }
 
-    # if ( !('is.not.stuck' %in% names(list.input)) ) {
-    #     jurisdictions   <- unique(DF.input[,'jurisdiction']);
-    #     n.jurisdictions <- length(jurisdictions);
-    #     is.not.stuck    <- list();
-    #     for( temp.index in 1:n.jurisdictions ) {
-    #         jurisdiction  <- jurisdictions[temp.index];
-    #         temp.0 <- list.input[['extracted.samples']][['alpha']][,temp.index];
-    #         temp.1 <- abs(temp.0 - c(NA,temp.0[seq(1,length(temp.0)-1)]));
-    #         temp.2 <- abs(temp.0 - c(temp.0[seq(2,length(temp.0))],NA));
-    #         temp.3 <- (temp.1 < 1e-6) | (temp.2 < 1e-6);
-    #         temp.3[c(1,length(temp.3))] <- FALSE;
-    #         is.not.stuck[[jurisdiction]] <- !temp.3;
-    #         } # for( jurisdiction in jurisdictions )
-    #     list.output[['is.not.stuck']] <- is.not.stuck;
-    #     }
-
     return( list.output );
 
     }
@@ -103,6 +95,10 @@ wrapper.stan_inner <- function(
     DF.serial.interval = NULL,
     RData.output       = NULL,
     n.chains           = NULL,
+    n.iterations       = NULL,
+    n.warmup           = NULL,
+    period.thinning    = NULL,
+    sampler.control    = NULL,
     DEBUG              = FALSE
     ) {
 
@@ -281,18 +277,17 @@ wrapper.stan_inner <- function(
     stan_data$y <- t(stan_data$y);
     # options(mc.cores = parallel::detectCores())
     rstan_options(auto_write = TRUE)
-    m <- rstan::stan_model(FILE.stan.model);
+    my.stan.model <- rstan::stan_model(FILE.stan.model);
 
     ##############################################
     ##############################################
     cat("\nstr(stan_data)\n");
     print( str(stan_data)   );
-    saveRDS(object = stan_data, file = "data-stan-change-point.RData");
-    # return( NULL );
+    saveRDS(object = stan_data, file = paste0("data-stan-",StanModel,".RData"));
     ##############################################
     ##############################################
     list.init <- lapply(
-        X   = 1:n.chains, # 1:getOption("mc.cores"),
+        X   = 1:n.chains,
         FUN = function(x) {
             list(
                 Uchg1 = runif(length(jurisdictions), min = 0, max = 1),
@@ -309,91 +304,58 @@ wrapper.stan_inner <- function(
             }
         )
 
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if( DEBUG ) {
-
         if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
-            my.iter     <- 40;
-            my.warmup   <- 20;
-            my.n.chains <- n.chains;
+            n.iterations    <-   40;
+            n.warmup        <-   20;
+            period.thinning <-    1;
+            sampler.control <- NULL;
         } else {
-            my.iter     <- 200;
-            my.warmup   <- 100;
-            my.n.chains <- n.chains;
+            n.iterations    <-  200;
+            my.warmup       <-  100;
+            period.thinning <-    1;
+            sampler.control <- NULL;
            }
-
-        fit <- rstan::sampling(
-            object = m,
-            data   = stan_data,
-            iter   = my.iter,     # 20,
-            warmup = my.warmup,   # 10,
-            chains = my.n.chains  #  2
-            );
-
-    } else {
-
-        # fit = rstan::sampling(
-        #     object  = m,
-        #     data    = stan_data,
-        #     iter    = 4000,
-        #     warmup  = 2000,
-        #     chains  = 8,
-        #     thin    = 4,
-        #     init    = list.init,
-        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
-        #     );
-
-        #fit <- rstan::sampling(
-        #    object  = m,
-        #    data    = stan_data,
-        #    iter    = 200,
-        #    warmup  = 100,
-        #    chains  = 4,
-        #    thin    = 4,
-        #    init    = list.init,
-        #    control = list(adapt_delta = 0.90, max_treedepth = 10)
-        #    );
-
-        # fit = rstan::sampling(
-        #     object  = m,
-        #     data    = stan_data,
-        #     iter    = 2000,
-        #     warmup  = 1000,
-        #     chains  = n.chains,
-        #     thin    = 4,
-        #     init    = list.init,
-        #     control = list(adapt_delta = 0.90, max_treedepth = 10)
-        #     );
-
-        fit = rstan::sampling(
-            object  = m,
-            data    = stan_data,
-            iter    = 1000,
-            warmup  =  500,
-            chains  = n.chains,
-            thin    = 4,
-            init    = list.init,
-            control = list(adapt_delta = 0.90, max_treedepth = 10)
-            );
-
         }
 
-    out                     <- rstan::extract(fit);
-    prediction              <- out$prediction;
-    estimated.admissions    <- out$E_admissions;
-    estimated.admissions.cf <- out$E_admissions0;
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    results.rstan.sampling <- rstan::sampling(
+        object  = my.stan.model, # m,
+        data    = stan_data,
+        init    = list.init,
+        iter    = n.iterations,
+        warmup  = n.warmup,
+        chains  = n.chains,
+        thin    = period.thinning,
+        control = sampler.control
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    posterior.samples       <- rstan::extract(results.rstan.sampling);
+    prediction              <- posterior.samples$prediction;
+    estimated.admissions    <- posterior.samples$E_admissions;
+    estimated.admissions.cf <- posterior.samples$E_admissions0;
 
     list.output <- list(
         StanModel                  = StanModel,
         jurisdictions              = jurisdictions,
         observed.data              = observed.data,
-        fit                        = fit,
+        results.rstan.sampling     = results.rstan.sampling,
         prediction                 = prediction,
         dates                      = dates,
         reported_cases             = reported_cases,
         admissions_by_jurisdiction = admissions_by_jurisdiction,
         estimated_admissions       = estimated.admissions,
         estimated_admissions_cf    = estimated.admissions.cf,
-        out                        = out
+        posterior.samples          = posterior.samples,
+        sampling.parameters = list(
+            n.chains        = n.chains,
+            n.iterations    = n.iterations,
+            n.warmup        = n.warmup,
+            period.thinning = period.thinning,
+            control         = sampler.control
+            )
         );
 
     return( list.output );

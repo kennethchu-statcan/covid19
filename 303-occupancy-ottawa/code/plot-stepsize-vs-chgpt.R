@@ -80,22 +80,22 @@ plot.stepsize.vs.chgpt_getData <- function(
     which.step         = NULL
     ) {
 
-    cat("\nstr(list.input[['out']])\n")
-    print( str(list.input[['out']])   );
+    cat("\nstr(list.input[['posterior.samples']])\n")
+    print( str(list.input[['posterior.samples']])   );
 
     cat("\nwhich.chgpt\n");
     print( which.chgpt   );
 
     temp.dates <- as.Date(
-        x      = list.input[['out']][[which.chgpt]][,jurisdiction.index],
+        x      = list.input[['posterior.samples']][[which.chgpt]][,jurisdiction.index],
         origin = as.Date(list.input[['dates']][[jurisdiction.index]][1])
         );
 
     DF.output <- data.frame(
-        "jurisdiction" = rep(list.input[["jurisdictions"]][[jurisdiction.index]],nrow(list.input[['out']][[which.chgpt]])),
-        "chgpt"        = rep(which.chgpt,nrow(list.input[['out']][[which.chgpt]])),
+        "jurisdiction" = rep(list.input[["jurisdictions"]][[jurisdiction.index]],nrow(list.input[['posterior.samples']][[which.chgpt]])),
+        "chgpt"        = rep(which.chgpt,nrow(list.input[['posterior.samples']][[which.chgpt]])),
         "date"         = temp.dates,
-        "stepsize"     = list.input[['out']][[which.step]][,jurisdiction.index]
+        "stepsize"     = list.input[['posterior.samples']][[which.step]][,jurisdiction.index]
         );
 
     return( DF.output );

@@ -62,12 +62,13 @@ options(mc.cores = parallel::detectCores());
 n.chains <- ifelse(
     test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),
     yes  = 4,
-    no   = 16 # getOption("mc.cores")
+    no   = 2 * getOption("mc.cores")
     );
 print( n.chains );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-data.snapshot <- "2020-12-13.01";
+#data.snapshot <- "2020-12-13.01";
+data.snapshot <- "2020-12-18.01";
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.IHR <- getData.IHR(
@@ -141,7 +142,8 @@ DF.ottawa.01[,'jurisdiction'] <- rep('Ottawa1',nrow(DF.ottawa.01));
 DF.complete <- rbind( DF.ottawa , DF.ottawa.01 );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-cut.off.dates <- c("2020-11-27","2020-12-04","2020-12-11");
+# cut.off.dates <- c("2020-11-20","2020-11-27","2020-12-04","2020-12-11");
+cut.off.dates <- c("2020-11-27");
 
 for ( cut.off.date in cut.off.dates ) {
 

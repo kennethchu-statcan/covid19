@@ -23,7 +23,7 @@ plot.3.panel <- function(
     jurisdictions              <- list.input[["jurisdictions"             ]];
     prediction                 <- list.input[["prediction"                ]];
     estimated.admissions       <- list.input[["estimated_admissions"      ]];
-    out                        <- list.input[["out"                       ]];
+    out                        <- list.input[["posterior.samples"         ]];
     reported_cases             <- list.input[["reported_cases"            ]];
     admissions_by_jurisdiction <- list.input[["admissions_by_jurisdiction"]];
 

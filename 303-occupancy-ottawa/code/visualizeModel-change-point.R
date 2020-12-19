@@ -67,7 +67,7 @@ plot.cowplot.changepoints <- function(
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         last.estimated.date.index <- length(list.input[["dates"]][[jurisdiction]]);
-        DF.temp                   <- list.input[['out']][['E_admissions']][,,index.jurisdiction];
+        DF.temp                   <- list.input[['posterior.samples']][['E_admissions']][,,index.jurisdiction];
         last.forecast.date.index  <- min( last.estimated.date.index + forecast.window , ncol(DF.temp) );
         n.days.forecast           <- last.forecast.date.index - last.estimated.date.index;
         dates.forecast            <- max(list.input[['dates']][[jurisdiction]]) + seq(0,n.days.forecast);
@@ -273,7 +273,7 @@ plot.cowplot.changepoints_Rt <- function(
     ) {
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.Rt <- list.input[['out']][['Rt']][,,index.jurisdiction];
+    DF.Rt <- list.input[['posterior.samples']][['Rt']][,,index.jurisdiction];
     # DF.Rt <- DF.Rt[list.input[['is.not.stuck']][[jurisdiction]],];
 
     selected.columns <- seq(1,length(list.input[["dates"]][[jurisdiction]]));
@@ -384,7 +384,7 @@ plot.cowplot.changepoints_expected <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    DF.estimated <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
+    DF.estimated <- list.input[['posterior.samples']][[variable.estimated]][,,index.jurisdiction];
     # DF.estimated <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
 
     columns.estimated <- seq(1,length(list.input[["dates"]][[jurisdiction]]));
@@ -407,7 +407,7 @@ plot.cowplot.changepoints_expected <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     if ( plot.forecast ) {
 
-        DF.forecast <- list.input[['out']][[variable.estimated]][,,index.jurisdiction];
+        DF.forecast <- list.input[['posterior.samples']][[variable.estimated]][,,index.jurisdiction];
 
         last.estimated.date.index <- length(list.input[["dates"]][[jurisdiction]]);
         last.forecast.date.index  <- min( last.estimated.date.index + forecast.window , ncol(DF.forecast) );
@@ -532,8 +532,8 @@ plot.trace.changepoints <- function(
     require(ggplot2);
 
     jurisdictions <- list.input[["jurisdictions"]];
-    change.points <- grep( x = names(list.input[['out']]), pattern = "chgpt[0-9]", value = TRUE);
-    step.sizes    <- grep( x = names(list.input[['out']]), pattern = "step[0-9]",  value = TRUE);
+    change.points <- grep( x = names(list.input[['posterior.samples']]), pattern = "chgpt[0-9]", value = TRUE);
+    step.sizes    <- grep( x = names(list.input[['posterior.samples']]), pattern = "step[0-9]",  value = TRUE);
 
     for ( index.jurisdiction in 1:length(jurisdictions) ) {
     for ( index.change.point in 1:length(change.points) ) {
@@ -543,8 +543,8 @@ plot.trace.changepoints <- function(
         temp.stepsize <- step.sizes[   index.change.point];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        vector.chgpt    <- list.input[["out"]][[temp.chgpt   ]][,index.jurisdiction];
-        vector.stepsize <- list.input[["out"]][[temp.stepsize]][,index.jurisdiction];
+        vector.chgpt    <- list.input[['posterior.samples']][[temp.chgpt   ]][,index.jurisdiction];
+        vector.stepsize <- list.input[['posterior.samples']][[temp.stepsize]][,index.jurisdiction];
 
         # if ( remove.stuck.chains ) {
         #     temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
@@ -656,8 +656,8 @@ plot.density.changepoints <- function(
     require(ggplot2);
 
     jurisdictions <- list.input[["jurisdictions"]];
-    change.points <- grep( x = names(list.input[['out']]), pattern = "chgpt[0-9]", value = TRUE);
-    step.sizes    <- grep( x = names(list.input[['out']]), pattern = "step[0-9]",  value = TRUE);
+    change.points <- grep( x = names(list.input[['posterior.samples']]), pattern = "chgpt[0-9]", value = TRUE);
+    step.sizes    <- grep( x = names(list.input[['posterior.samples']]), pattern = "step[0-9]",  value = TRUE);
 
     for ( index.jurisdiction in 1:length(jurisdictions) ) {
     for ( index.change.point in 1:length(change.points) ) {
@@ -667,8 +667,8 @@ plot.density.changepoints <- function(
         temp.stepsize <- step.sizes[   index.change.point];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        vector.chgpt    <- list.input[["out"]][[temp.chgpt   ]][,index.jurisdiction];
-        vector.stepsize <- list.input[["out"]][[temp.stepsize]][,index.jurisdiction];
+        vector.chgpt    <- list.input[['posterior.samples']][[temp.chgpt   ]][,index.jurisdiction];
+        vector.stepsize <- list.input[['posterior.samples']][[temp.stepsize]][,index.jurisdiction];
 
         # if ( remove.stuck.chains ) {
         #     temp.alpha <- temp.alpha[list.input[["is.not.stuck"]][[jurisdiction]]];
@@ -784,7 +784,7 @@ visualizeModel.change.point_basic <- function(
     StanModel     <- list.input[["StanModel"]];
     jurisdictions <- list.input[["jurisdictions"]];
 
-    step1 <- as.matrix(list.input[["out"]][["step1"]]);
+    step1 <- as.matrix(list.input[['posterior.samples']][["step1"]]);
     colnames(step1) <- jurisdictions;
     g <- bayesplot::mcmc_intervals(step1, prob = .9);
     ggsave(
@@ -803,7 +803,7 @@ visualizeModel.change.point_basic <- function(
     #    height   = 6
     #    );
 
-    R0 <- as.matrix(list.input[["out"]][["R0"]]);
+    R0 <- as.matrix(list.input[['posterior.samples']][["R0"]]);
     colnames(R0) <- jurisdictions;
     g <- bayesplot::mcmc_intervals(R0,prob = .9);
     ggsave(
@@ -813,8 +813,8 @@ visualizeModel.change.point_basic <- function(
         height   = 6
         );
 
-    dimensions   <- dim(list.input[["out"]][["Rt"]]);
-    Rt           <- as.matrix(list.input[["out"]][["Rt"]][,dimensions[2],]);
+    dimensions   <- dim(list.input[['posterior.samples']][["Rt"]]);
+    Rt           <- as.matrix(list.input[['posterior.samples']][["Rt"]][,dimensions[2],]);
     colnames(Rt) <- jurisdictions;
 
     g <- bayesplot::mcmc_intervals(Rt,prob = .9);
