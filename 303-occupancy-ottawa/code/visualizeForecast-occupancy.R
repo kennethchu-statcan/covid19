@@ -26,21 +26,27 @@ visualizeForecast.occupancy <- function(
         forecast.window         = forecast.window
         );
 
-    list.plot.occupancy <- visualizeForecast.occupancy_occupancy(
-        DF.complete             = DF.complete,
-        results.stan.LoS        = results.stan.LoS,
-        list.forecast.occupancy = list.forecast.occupancy,
-        forecast.window         = forecast.window
-        );
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    forecast.occupancy.versions <- c("01","02");
 
-    visualizeForecast.occupancy_cowplot(
-        results.stan.LoS        = results.stan.LoS,
-        list.forecast.occupancy = list.forecast.occupancy,
-        list.plot.admissions    = list.plot.admissions,
-        list.plot.discharges    = list.plot.discharges,
-        list.plot.occupancy     = list.plot.occupancy,
-        forecast.window         = forecast.window
-        );
+    for ( forecast.occupancy.version in forecast.occupancy.versions ) {
+        list.plot.occupancy <- visualizeForecast.occupancy_occupancy(
+            forecast.occupancy.version = forecast.occupancy.version,
+            DF.complete                = DF.complete,
+            results.stan.LoS           = results.stan.LoS,
+            list.forecast.occupancy    = list.forecast.occupancy,
+            forecast.window            = forecast.window
+            );
+        visualizeForecast.occupancy_cowplot(
+            forecast.occupancy.version = forecast.occupancy.version,
+            results.stan.LoS           = results.stan.LoS,
+            list.forecast.occupancy    = list.forecast.occupancy,
+            list.plot.admissions       = list.plot.admissions,
+            list.plot.discharges       = list.plot.discharges,
+            list.plot.occupancy        = list.plot.occupancy,
+            forecast.window            = forecast.window
+            );
+        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
@@ -51,12 +57,13 @@ visualizeForecast.occupancy <- function(
 
 ##################################################
 visualizeForecast.occupancy_cowplot <- function(
-    results.stan.LoS        = NULL,
-    list.forecast.occupancy = NULL,
-    list.plot.admissions    = NULL,
-    list.plot.discharges    = NULL,
-    list.plot.occupancy     = NULL,
-    forecast.window         = NULL
+    forecast.occupancy.version = NULL,
+    results.stan.LoS           = NULL,
+    list.forecast.occupancy    = NULL,
+    list.plot.admissions       = NULL,
+    list.plot.discharges       = NULL,
+    list.plot.occupancy        = NULL,
+    forecast.window            = NULL
     ) {
 
     require(ggplot2);
@@ -68,7 +75,8 @@ visualizeForecast.occupancy_cowplot <- function(
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         min.observed.date <- min(results.stan.LoS[['observed.data']][[jurisdiction]][,'date']);
         max.observed.date <- max(results.stan.LoS[['observed.data']][[jurisdiction]][,'date']);
-        max.forecast.date <- max(as.Date(colnames(list.forecast.occupancy[[jurisdiction]][['forecast.occupancy']])));
+        #max.forecast.date <- max(as.Date(colnames(list.forecast.occupancy[[jurisdiction]][['forecast.occupancy']])));
+        max.forecast.date <- max(as.Date(colnames(list.forecast.occupancy[[jurisdiction]][[paste0('forecast.occupancy.',forecast.occupancy.version)]])));
 
         common.date.limits <- c(
             min.observed.date,
@@ -128,7 +136,7 @@ visualizeForecast.occupancy_cowplot <- function(
             rel_heights = c(1,1,1.5)
             );
 
-        PNG.output  <- paste0("plot-occupancy-cowplot-",jurisdiction,".png");
+        PNG.output <- paste0("plot-occupancy-cowplot-",forecast.occupancy.version,"-",jurisdiction,".png");
         cowplot::ggsave2(
             file   = PNG.output,
             plot   = my.cowplot,
@@ -466,11 +474,12 @@ visualizeForecast.occupancy_discharges <- function(
     }
 
 visualizeForecast.occupancy_occupancy <- function(
-    DF.complete             = NULL,
-    results.stan.LoS        = NULL,
-    list.forecast.occupancy = NULL,
-    forecast.window         = NULL,
-    textsize.axis           = 20
+    forecast.occupancy.version = NULL,
+    DF.complete                = NULL,
+    results.stan.LoS           = NULL,
+    list.forecast.occupancy    = NULL,
+    forecast.window            = NULL,
+    textsize.axis              = 20
     ) {
 
     thisFunctionName <- "visualizeForecast.occupancy_occupancy";
@@ -526,7 +535,8 @@ visualizeForecast.occupancy_occupancy <- function(
             );
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.forecast.occupancy <- list.forecast.occupancy[[jurisdiction]][['forecast.occupancy']];
+        temp.flag             <- paste0('forecast.occupancy.',forecast.occupancy.version);
+        DF.forecast.occupancy <- list.forecast.occupancy[[jurisdiction]][[temp.flag]];
         DF.quantiles.forecast <- matrixStats::colQuantiles(
             x     = DF.forecast.occupancy,
             probs = c(0.025,0.25,0.5,0.75,0.975)
@@ -619,7 +629,7 @@ visualizeForecast.occupancy_occupancy <- function(
 
         list.plots[[jurisdiction]] <- my.ggplot;
 
-        PNG.output  <- paste0("plot-occupancy-occupancy-",jurisdiction,".png");
+        PNG.output  <- paste0("plot-occupancy-occupancy-",forecast.occupancy.version,"-",jurisdiction,".png");
         ggsave(
             file   = PNG.output,
             plot   = my.ggplot,

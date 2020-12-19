@@ -47,10 +47,15 @@ wrapper.stan.length.of.stay <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    list.output <- wrapper.stan.length.of.stay_patch(
-        list.input = list.output,
-        DF.input   = DF.input
-        );
+    # list.output <- wrapper.stan.length.of.stay_patch(
+    #     list.input            = list.output,
+    #     DF.input              = DF.input,
+    #     threshold.stuck.chain = threshold.stuck.chain,
+    #     n.chains              = n.chains,
+    #     n.iterations          = n.iterations,
+    #     n.warmup              = n.warmup,
+    #     period.thinning       = period.thinning
+    #     );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
@@ -61,14 +66,19 @@ wrapper.stan.length.of.stay <- function(
 
 ##################################################
 wrapper.stan.length.of.stay_patch <- function(
-    list.input = NULL,
-    DF.input   = NULL
+    list.input            = NULL,
+    DF.input              = NULL,
+    threshold.stuck.chain = NULL,
+    n.chains              = NULL,
+    n.iterations          = NULL,
+    n.warmup              = NULL,
+    period.thinning       = NULL
     ) {
 
     list.output <- list.input;
 
     if ( !('observed.data' %in% names(list.input)) ) {
-        jurisdictions <- unique(DF.input[,'jurisdiction']);
+        jurisdictions <- list.input[['jurisdictions']];
         observed.data <- list();
         for( jurisdiction in jurisdictions ) {
             DF.jurisdiction   <- DF.input[DF.input$jurisdiction == jurisdiction,];
@@ -79,19 +89,20 @@ wrapper.stan.length.of.stay_patch <- function(
         list.output[['observed.data']] <- observed.data;
         }
 
-    #if( !('is.not.stuck' %in% names(list.input)) ) {
-    if ( TRUE ) {
-        jurisdictions   <- unique(DF.input[,'jurisdiction']);
-        n.jurisdictions <- length(jurisdictions);
-        is.not.stuck    <- list();
-        for( temp.index in 1:n.jurisdictions ) {
-            temp.stddev  <- get.moving.stddev(
-                input.vector = list.input[['posterior.samples']][['alpha']][,temp.index],
-                half.window  = 10
+    if( !('is.not.stuck' %in% names(list.input)) ) {
+        jurisdictions <- list.input[['jurisdictions']];
+        is.not.stuck  <- list();
+        for( temp.index in 1:length(jurisdictions) ) {
+            jusrisdiction <- jurisdictions[temp.index];
+            is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
+                threshold.stuck.chain = threshold.stuck.chain,
+                input.vector          = list.input[['posterior.samples']][['alpha']][,temp.index],
+                n.chains              = n.chains,
+                n.iterations          = n.iterations,
+                n.warmup              = n.warmup,
+                period.thinning       = period.thinning
                 );
-            jurisdiction <- jurisdictions[temp.index];
-            is.not.stuck[[jurisdiction]] <- ((0.05 < temp.stddev) & (temp.stddev < 0.5));
-            } # for( temp.index in 1:n.jurisdictions )
+            } # for( temp.index in 1:length(jurisdictions) )
         list.output[['is.not.stuck']] <- is.not.stuck;
         }
 
@@ -204,6 +215,7 @@ wrapper.stan.length.of.stay_inner <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     is.not.stuck <- list();
     for( temp.index in 1:n.jurisdictions ) {
+        jurisdiction <- jurisdictions[temp.index];
         is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
             threshold.stuck.chain = threshold.stuck.chain,
             input.vector          = posterior.samples[['alpha']][,temp.index],
@@ -232,6 +244,7 @@ wrapper.stan.length.of.stay_inner <- function(
             )
         );
 
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     return( list.output );
 
     }
@@ -247,20 +260,13 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
 
     require(dplyr);
 
-    # temp.stddev  <- get.moving.stddev(
-    #     input.vector = posterior.samples[['alpha']][,temp.index],
-    #     half.window  = 10
-    #     );
-    # jurisdiction <- jurisdictions[temp.index];
-    # is.not.stuck[[jurisdiction]] <- ((0.05 < temp.stddev) & (temp.stddev < 0.5));
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     chain.size <- (n.iterations - n.warmup) / period.thinning;
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.samples <- data.frame(
         index    = seq(1,length(input.vector)),
-        chain.ID = rep( x = seq(1,n.chains), each = chain.size),
+        chain.ID = rep(x = seq(1,n.chains), each = chain.size),
         value    = input.vector
         );
 

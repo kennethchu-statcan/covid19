@@ -73,11 +73,21 @@ getForecast.occupancy <- function(
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
             posterior.sample.indexes <- seq(1,nrow(DF.Prob.LoS));
             non.stuck.sample.indexes <- posterior.sample.indexes[results.stan.LoS[['is.not.stuck']][[jurisdiction]]];
+
+            cat(paste0("\n# ",thisFunctionName,"(): results.stan.LoS[['is.not.stuck']][[jurisdiction]]","\n"));
+            print( results.stan.LoS[['is.not.stuck']][[jurisdiction]] );
+
+            cat(paste0("\n# ",thisFunctionName,"(): non.stuck.sample.indexes","\n"));
+            print( non.stuck.sample.indexes );
+
             indexes.LoS.posterior.samples <- base::sample(
                 x       = non.stuck.sample.indexes,
                 size    = nrow(DF.expected.admissions),
                 replace = TRUE
                 );
+
+            cat(paste0("\n# ",thisFunctionName,"(): indexes.LoS.posterior.samples","\n"));
+            print( indexes.LoS.posterior.samples );
 
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
             DF.forecast.discharges <- getForecast.occupancy_forecast.discharges(
@@ -109,14 +119,19 @@ getForecast.occupancy <- function(
                 );
 
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-            # DF.forecast.occupancy <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
-            DF.forecast.occupancy <- DF.estimated.occupancy.last.observed.day + DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
-            colnames(DF.forecast.occupancy) <- colnames(DF.cumulative.forecast.discharges);
+            DF.forecast.occupancy.tail <- DF.cumulative.forecast.admissions - DF.cumulative.forecast.discharges;
+
+            DF.forecast.occupancy.01 <- DF.observed.data[nrow(DF.observed.data),'occupancy'] + DF.forecast.occupancy.tail;
+            DF.forecast.occupancy.02 <- DF.estimated.occupancy.last.observed.day             + DF.forecast.occupancy.tail;
+
+            colnames(DF.forecast.occupancy.01) <- colnames(DF.cumulative.forecast.discharges);
+            colnames(DF.forecast.occupancy.02) <- colnames(DF.cumulative.forecast.discharges);
 
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-              list.output[[ jurisdiction ]] <- list(
-                forecast.discharges = DF.forecast.discharges,
-                forecast.occupancy  = DF.forecast.occupancy
+            list.output[[ jurisdiction ]] <- list(
+                forecast.discharges   = DF.forecast.discharges,
+                forecast.occupancy.01 = DF.forecast.occupancy.01,
+                forecast.occupancy.02 = DF.forecast.occupancy.02
                 );
 
             }
