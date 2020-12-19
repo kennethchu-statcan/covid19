@@ -142,8 +142,7 @@ DF.ottawa.01[,'jurisdiction'] <- rep('Ottawa1',nrow(DF.ottawa.01));
 DF.complete <- rbind( DF.ottawa , DF.ottawa.01 );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# cut.off.dates <- c("2020-11-20","2020-11-27","2020-12-04","2020-12-11");
-cut.off.dates <- c("2020-11-27");
+cut.off.dates <- c("2020-11-20","2020-11-27","2020-12-04","2020-12-11");
 
 for ( cut.off.date in cut.off.dates ) {
 
