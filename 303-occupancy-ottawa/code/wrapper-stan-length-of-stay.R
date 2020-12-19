@@ -1,15 +1,16 @@
 
 wrapper.stan.length.of.stay <- function(
-    StanModel       = "length-of-stay",
-    FILE.stan.model = NULL,
-    DF.input        = NULL,
-    RData.output    = paste0('stan-model-',StanModel,'.RData'),
-    n.chains        =    4,
-    n.iterations    = 2000,
-    n.warmup        = 1000,
-    period.thinning =    4,
-    sampler.control = list(adapt_delta = 0.90, max_treedepth = 10),
-    DEBUG           = FALSE
+    StanModel             = "length-of-stay",
+    FILE.stan.model       = NULL,
+    DF.input              = NULL,
+    RData.output          = paste0('stan-model-',StanModel,'.RData'),
+    n.chains              =    4,
+    n.iterations          = 2000,
+    n.warmup              = 1000,
+    period.thinning       =    4,
+    sampler.control       = list(adapt_delta = 0.90, max_treedepth = 10),
+    threshold.stuck.chain = 1e-3,
+    DEBUG                 = FALSE
     ) {
 
     thisFunctionName <- "wrapper.stan.length.of.stay";
@@ -26,16 +27,17 @@ wrapper.stan.length.of.stay <- function(
     } else {
 
         list.output <- wrapper.stan.length.of.stay_inner(
-            StanModel       = StanModel,
-            FILE.stan.model = FILE.stan.model,
-            DF.input        = DF.input,
-            RData.output    = RData.output,
-            n.chains        = n.chains,
-            n.iterations    = n.iterations,
-            n.warmup        = n.warmup,
-            period.thinning = period.thinning,
-            sampler.control = sampler.control,
-            DEBUG           = DEBUG
+            StanModel             = StanModel,
+            FILE.stan.model       = FILE.stan.model,
+            DF.input              = DF.input,
+            RData.output          = RData.output,
+            n.chains              = n.chains,
+            n.iterations          = n.iterations,
+            n.warmup              = n.warmup,
+            period.thinning       = period.thinning,
+            sampler.control       = sampler.control,
+            threshold.stuck.chain = threshold.stuck.chain,
+            DEBUG                 = DEBUG
             );
 
         if (!is.null(RData.output)) {
@@ -98,16 +100,17 @@ wrapper.stan.length.of.stay_patch <- function(
     }
 
 wrapper.stan.length.of.stay_inner <- function(
-    StanModel       = NULL,
-    FILE.stan.model = NULL,
-    DF.input        = NULL,
-    RData.output    = NULL,
-    n.chains        = NULL,
-    n.iterations    = NULL,
-    n.warmup        = NULL,
-    period.thinning = NULL,
-    sampler.control = NULL,
-    DEBUG           = FALSE
+    StanModel             = NULL,
+    FILE.stan.model       = NULL,
+    DF.input              = NULL,
+    RData.output          = NULL,
+    n.chains              = NULL,
+    n.iterations          = NULL,
+    n.warmup              = NULL,
+    period.thinning       = NULL,
+    sampler.control       = NULL,
+    threshold.stuck.chain = NULL,
+    DEBUG                 = FALSE
     ) {
 
     require(rstan);
@@ -201,12 +204,14 @@ wrapper.stan.length.of.stay_inner <- function(
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     is.not.stuck <- list();
     for( temp.index in 1:n.jurisdictions ) {
-        temp.stddev  <- get.moving.stddev(
-            input.vector = posterior.samples[['alpha']][,temp.index],
-            half.window  = 10
+        is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
+            threshold.stuck.chain = threshold.stuck.chain,
+            input.vector          = posterior.samples[['alpha']][,temp.index],
+            n.chains              = n.chains,
+            n.iterations          = n.iterations,
+            n.warmup              = n.warmup,
+            period.thinning       = period.thinning
             );
-        jurisdiction <- jurisdictions[temp.index];
-        is.not.stuck[[jurisdiction]] <- ((0.05 < temp.stddev) & (temp.stddev < 0.5));
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -217,6 +222,7 @@ wrapper.stan.length.of.stay_inner <- function(
         results.rstan.sampling = results.rstan.sampling,
         posterior.samples      = posterior.samples,
         is.not.stuck           = is.not.stuck,
+        threshold.stuck.chain  = threshold.stuck.chain,
         sampling.parameters = list(
             n.chains        = n.chains,
             n.iterations    = n.iterations,
@@ -230,4 +236,54 @@ wrapper.stan.length.of.stay_inner <- function(
 
     }
 
-##################################################
+wrapper.stan.length.of.stay_is.not.stuck <- function(
+    threshold.stuck.chain = NULL,
+    input.vector          = NULL,
+    n.chains              = NULL,
+    n.iterations          = NULL,
+    n.warmup              = NULL,
+    period.thinning       = NULL
+    ) {
+
+    require(dplyr);
+
+    # temp.stddev  <- get.moving.stddev(
+    #     input.vector = posterior.samples[['alpha']][,temp.index],
+    #     half.window  = 10
+    #     );
+    # jurisdiction <- jurisdictions[temp.index];
+    # is.not.stuck[[jurisdiction]] <- ((0.05 < temp.stddev) & (temp.stddev < 0.5));
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    chain.size <- (n.iterations - n.warmup) / period.thinning;
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.samples <- data.frame(
+        index    = seq(1,length(input.vector)),
+        chain.ID = rep( x = seq(1,n.chains), each = chain.size),
+        value    = input.vector
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.chains <- DF.samples[,c('chain.ID','value')] %>%
+        group_by( chain.ID ) %>%
+        summarize(
+            chain.stddev = sd(value, na.rm = TRUE)
+        );
+    DF.chains <- as.data.frame(DF.chains);
+
+    DF.chains[,'is.not.stuck'] <- !(DF.chains[,'chain.stddev'] < threshold.stuck.chain);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.samples <- dplyr::left_join(
+        x  = DF.samples,
+        y  = DF.chains,
+        by = 'chain.ID'
+        );
+    DF.samples <- as.data.frame(DF.samples);
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    # return( list(DF.samples = DF.samples, DF.chains = DF.chains) );
+    return( DF.samples[,'is.not.stuck'] );
+
+    }

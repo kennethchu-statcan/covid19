@@ -71,8 +71,10 @@ getForecast.occupancy <- function(
             # print( str(DF.Prob.LoS)   );
 
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+            posterior.sample.indexes <- seq(1,nrow(DF.Prob.LoS));
+            non.stuck.sample.indexes <- posterior.sample.indexes[results.stan.LoS[['is.not.stuck']][[jurisdiction]]];
             indexes.LoS.posterior.samples <- base::sample(
-                x       = seq(1,nrow(DF.Prob.LoS)),
+                x       = non.stuck.sample.indexes,
                 size    = nrow(DF.expected.admissions),
                 replace = TRUE
                 );
