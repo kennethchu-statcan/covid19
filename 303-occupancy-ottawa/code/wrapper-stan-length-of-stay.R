@@ -261,39 +261,16 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
     require(dplyr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    print("A-0");
-
-    cat(paste0("\n# wrapper.stan.length.of.stay_is.not.stuck(): threshold.stuck.chain = ",threshold.stuck.chain,"\n"));
-    cat(paste0("\n# wrapper.stan.length.of.stay_is.not.stuck(): n.chains = ",             n.chains,             "\n"));
-    cat(paste0("\n# wrapper.stan.length.of.stay_is.not.stuck(): n.iterations = ",         n.iterations,         "\n"));
-    cat(paste0("\n# wrapper.stan.length.of.stay_is.not.stuck(): n.warmup = ",             n.warmup,             "\n"));
-    cat(paste0("\n# wrapper.stan.length.of.stay_is.not.stuck(): period.thinning  = ",     period.thinning,      "\n"));
-
     chain.size <- (n.iterations - n.warmup) / period.thinning;
 
-    cat(paste0("\n# wrapper.stan.length.of.stay_is.not.stuck(): chain.size  = ", chain.size, "\n"));
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    print("A-1");
-
     DF.samples <- data.frame(
         index    = seq(1,length(input.vector)),
         chain.ID = rep(x = seq(1,n.chains), each = chain.size),
         value    = input.vector
         );
 
-    cat("\nstr(DF.samples)\n");
-    print( str(DF.samples)   );
-
-    cat("\nsummary(DF.samples)\n");
-    print( summary(DF.samples)   );
-
-    cat("\nDF.samples\n");
-    print( DF.samples   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    print("A-2");
-
     # DF.chains <- DF.samples[,c('chain.ID','value')] %>%
     #     group_by( chain.ID ) %>%
     #     summarize(
@@ -314,44 +291,15 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
         DF.chains[row.index,'chain.stddev'] <- stats::sd(x = temp.vector, na.rm = TRUE);
         }
 
-    cat("\nstr(DF.chains)\n");
-    print( str(DF.chains)   );
-
-    print("A-3");
-
-    print("A-4");
-
     DF.chains[,'is.not.stuck'] <- !(DF.chains[,'chain.stddev'] < threshold.stuck.chain);
 
-    cat("\nstr(DF.chains)\n");
-    print( str(DF.chains)   );
-
-    cat("\nsummary(DF.chains)\n");
-    print( summary(DF.chains)   );
-
-    cat("\nDF.chains\n");
-    print( DF.chains   );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    print("A-5");
-
     DF.samples <- dplyr::left_join(
         x  = DF.samples,
         y  = DF.chains,
         by = 'chain.ID'
         );
-
-    cat("\nstr(DF.samples)\n");
-    print( str(DF.samples)   );
-
-    print("A-6");
-
     DF.samples <- as.data.frame(DF.samples);
-
-    cat("\nstr(DF.samples)\n");
-    print( str(DF.samples)   );
-
-    print("A-7");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     # return( list(DF.samples = DF.samples, DF.chains = DF.chains) );
