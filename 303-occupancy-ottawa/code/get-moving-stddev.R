@@ -27,9 +27,9 @@ get.moving.stddev <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     output.vector <- c(
-        rep(Inf,half.window),
+        rep(NA,half.window),
         sqrt(matrixStats::rowVars(x = DF.temp)),
-        rep(Inf,half.window)
+        rep(NA,half.window)
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
