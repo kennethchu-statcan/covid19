@@ -194,13 +194,6 @@ plot.expected.occupancy <- function(
     require(matrixStats);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    cat("\nstr(list.input[['observed.data']])\n");
-    print( str(list.input[['observed.data']])   );
-
-    cat("\nstr(list.input[['posterior.samples']])\n");
-    print( str(list.input[['posterior.samples']])   );
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.plots    <- list();
     jurisdictions <- list.input[["jurisdictions"]];
 
@@ -212,17 +205,8 @@ plot.expected.occupancy <- function(
         DF.plot <- list.input[['observed.data']][[jurisdiction]];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        cat("\nstr(list.input[['posterior.samples']][['E_discharges']][,,temp.index])\n");
-        print( str(list.input[['posterior.samples']][['E_discharges']][,,temp.index])   );
-
-        cat("\nstr(list.input[['is.not.stuck']][[jurisdiction]])\n");
-        print( str(list.input[['is.not.stuck']][[jurisdiction]])   );
-
         DF.expected.discharges <- list.input[['posterior.samples']][['E_discharges']][,,temp.index];
         DF.expected.discharges <- DF.expected.discharges[list.input[['is.not.stuck']][[jurisdiction]],];
-
-        cat("\nstr(DF.expected.discharges)\n");
-        print( str(DF.expected.discharges)   );
 
         DF.expected.cumulative.discharges <- matrixStats::rowCumsums(x = DF.expected.discharges);
 
@@ -232,17 +216,7 @@ plot.expected.occupancy <- function(
             byrow = TRUE
             );
 
-        cat("\nstr(DF.cumulative.admissions)\n");
-        print( str(DF.cumulative.admissions)   );
-
-        cat("\nstr(DF.expected.cumulative.discharges)\n");
-        print( str(DF.expected.cumulative.discharges)   );
-
-        print("A-1");
-
         DF.expected.occupancy <- DF.cumulative.admissions - DF.expected.cumulative.discharges;
-
-        print("A-2");
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         DF.quantiles <- matrixStats::colQuantiles(
