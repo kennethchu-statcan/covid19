@@ -8,15 +8,22 @@ visualizeModel.length.of.stay <- function(
     cat(paste0("\n",thisFunctionName,"() starts.\n\n"));
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+
+    print("A-1");
+
     plot.density.mu.cv(
         list.input          = list.input,
         remove.stuck.chains = FALSE
         );
 
+    print("A-2");
+
     plot.trace.mu.cv(
         list.input          = list.input,
         remove.stuck.chains = FALSE
         );
+
+    print("A-3");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     plot.density.mu.cv(
@@ -24,33 +31,47 @@ visualizeModel.length.of.stay <- function(
         remove.stuck.chains = TRUE
         );
 
+    print("A-4");
+
     plot.trace.mu.cv(
         list.input          = list.input,
         remove.stuck.chains = TRUE
         );
+
+    print("A-5");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     plot.scatter.mu.cv(
         list.input = list.input
         );
 
+    print("A-6");
+
     list.plot.admissions <- plot.admissions(
         list.input = list.input
         );
+
+    print("A-7");
 
     list.plot.discharges <- plot.expected.discharges(
         list.input = list.input
         );
 
+    print("A-8");
+
     list.plot.occupancy <- plot.expected.occupancy(
         list.input = list.input
         );
+
+    print("A-9");
 
     plot.cowplot.discharges.occupancy(
         list.plot.admissions = list.plot.admissions,
         list.plot.discharges = list.plot.discharges,
         list.plot.occupancy  = list.plot.occupancy
         );
+
+    print("A-10");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
@@ -458,8 +479,20 @@ plot.trace.mu.cv <- function(
             }
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        cat("\nstr(temp.alpha)\n");
+        print( str(temp.alpha)   );
+
+        cat("\ntemp.alpha\n");
+        print( temp.alpha   );
+
+        cat("\nstr(temp.beta)\n");
+        print( str(temp.beta)   );
+
+        cat("\ntemp.beta\n");
+        print( temp.beta   );
+
         DF.plot <- data.frame(
-            index = seq(1,length(temp.alpha),1),
+            index = { if ( length(temp.alpha)>0 ) { seq(1,length(temp.alpha),1) } else { integer(0) } },
             alpha = temp.alpha,
             beta  = temp.beta,
             mu    = temp.alpha / temp.beta,

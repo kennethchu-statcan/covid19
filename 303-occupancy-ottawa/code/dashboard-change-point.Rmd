@@ -88,7 +88,7 @@ Ottawa
 
 ```{r, fig.width = 32}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-cowplot-Ottawa.png")
+    path = file.path(temp.directory,"plot-ChgPt-cowplot-Ottawa.png")
     )
 ```
 
@@ -99,7 +99,7 @@ Ottawa 1
 
 ```{r, fig.width = 32}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-cowplot-Ottawa1.png")
+    path = file.path(temp.directory,"plot-ChgPt-cowplot-Ottawa1.png")
     )
 ```
 
@@ -113,7 +113,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt1.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-chgpt1.png")
     )
 ```
 
@@ -121,7 +121,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt4.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-chgpt4.png")
     )
 ```
 
@@ -132,7 +132,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt1.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-chgpt1.png")
     )
 ```
 
@@ -140,7 +140,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt4.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-chgpt4.png")
     )
 ```
 
@@ -154,7 +154,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt2.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-chgpt2.png")
     )
 ```
 
@@ -162,7 +162,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-chgpt3.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-chgpt3.png")
     )
 ```
 
@@ -173,7 +173,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt2.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-chgpt2.png")
     )
 ```
 
@@ -181,7 +181,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-chgpt3.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-chgpt3.png")
     )
 ```
 
@@ -195,7 +195,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step1.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-step1.png")
     )
 ```
 
@@ -203,7 +203,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step4.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-step4.png")
     )
 ```
 
@@ -214,7 +214,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step1.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-step1.png")
     )
 ```
 
@@ -222,7 +222,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step4.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-step4.png")
     )
 ```
 
@@ -236,7 +236,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step2.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-step2.png")
     )
 ```
 
@@ -244,7 +244,7 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-density-Ottawa-step3.png")
+    path = file.path(temp.directory,"plot-ChgPt-density-Ottawa-step3.png")
     )
 ```
 
@@ -255,7 +255,7 @@ Row
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step2.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-step2.png")
     )
 ```
 
@@ -263,6 +263,6 @@ knitr::include_graphics(
 
 ```{r, fig.width = 16}
 knitr::include_graphics(
-    path = file.path(output.directory,"plot-ChgPt-trace-Ottawa-step3.png")
+    path = file.path(temp.directory,"plot-ChgPt-trace-Ottawa-step3.png")
     )
 ```

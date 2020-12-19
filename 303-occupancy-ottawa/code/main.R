@@ -54,7 +54,8 @@ for ( code.file in code.files ) {
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #set.seed(1234567);
 #set.seed(7654321);
-set.seed(7777777);
+#set.seed(7777777);
+set.seed(8888888);
 
 options(mc.cores = parallel::detectCores());
 
@@ -137,61 +138,80 @@ print( summary(DF.ottawa) );
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.ottawa.01 <- DF.ottawa;
 DF.ottawa.01[,'jurisdiction'] <- rep('Ottawa1',nrow(DF.ottawa.01));
-DF.dummy <- rbind( DF.ottawa , DF.ottawa.01 );
+DF.complete <- rbind( DF.ottawa , DF.ottawa.01 );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.stan.change.point <- wrapper.stan.change.point(
-    StanModel          = 'change-point',
-    FILE.stan.model    = file.path(code.directory,'change-point.stan'),
-    DF.input           = DF.dummy,
-    DF.IHR             = DF.IHR,
-    DF.serial.interval = DF.serial.interval,
-    forecast.window    = 14,
-    n.chains           = n.chains,
-    DEBUG              = TRUE # FALSE
-    );
+cut.off.dates <- c("2020-11-27","2020-12-04","2020-12-11");
 
-# visualizeModel.change.point(
-#     list.input      = results.stan.change.point,
-#     forecast.window = 14
-#     );
+for ( cut.off.date in cut.off.dates ) {
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-results.stan.LoS <- wrapper.stan.length.of.stay(
-    StanModel       = 'length-of-stay',
-    FILE.stan.model = file.path(code.directory,'length-of-stay.stan'),
-    DF.input        = DF.dummy,
-    n.chains        = n.chains,
-    DEBUG           = TRUE # FALSE
-    );
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    temp.directory <- normalizePath(file.path(output.directory,paste0("cutoff-",cut.off.date)));
+    if ( !dir.exists(temp.directory) ) { dir.create(path = temp.directory, recursive = TRUE); }
+    setwd(temp.directory);
 
-# visualizeModel.length.of.stay(
-#     list.input = results.stan.LoS
-#     );
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.cut.off <- DF.complete[DF.complete[,'date'] <= as.Date(cut.off.date),];
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# dashboard.files <- c("dashboard-change-point","dashboard-length-of-stay");
-# for ( dashboard.file in dashboard.files ) {
-#     rmarkdown::render(
-#         input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-#         output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-#         output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
-#         );
-#     }
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    results.stan.change.point <- wrapper.stan.change.point(
+        StanModel          = 'change-point',
+        FILE.stan.model    = file.path(code.directory,'change-point.stan'),
+        DF.input           = DF.cut.off,
+        DF.IHR             = DF.IHR,
+        DF.serial.interval = DF.serial.interval,
+        forecast.window    = 14,
+        n.chains           = n.chains,
+        DEBUG              = TRUE # FALSE
+        );
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-list.forecast.occupancy <- getForecast.occupancy(
-    results.stan.change.point = results.stan.change.point,
-    results.stan.LoS          = results.stan.LoS
-    );
+    visualizeModel.change.point(
+        list.input      = results.stan.change.point,
+        forecast.window = 14
+        );
 
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-visualizeForecast.occupancy(
-    results.stan.change.point = results.stan.change.point,
-    results.stan.LoS          = results.stan.LoS,
-    list.forecast.occupancy   = list.forecast.occupancy,
-    forecast.window           = 14
-    );
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    results.stan.LoS <- wrapper.stan.length.of.stay(
+        StanModel       = 'length-of-stay',
+        FILE.stan.model = file.path(code.directory,'length-of-stay.stan'),
+        DF.input        = DF.cut.off,
+        n.chains        = n.chains,
+        DEBUG           = TRUE # FALSE
+        );
+
+    visualizeModel.length.of.stay(
+        list.input = results.stan.LoS
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    dashboard.files <- c("dashboard-change-point","dashboard-length-of-stay");
+    for ( dashboard.file in dashboard.files ) {
+        rmarkdown::render(
+            input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+            output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+            output_file   = file.path(temp.directory,paste0(dashboard.file,".html"))
+            );
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    list.forecast.occupancy <- getForecast.occupancy(
+        results.stan.change.point = results.stan.change.point,
+        results.stan.LoS          = results.stan.LoS
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    visualizeForecast.occupancy(
+        DF.complete               = DF.complete,
+        results.stan.change.point = results.stan.change.point,
+        results.stan.LoS          = results.stan.LoS,
+        list.forecast.occupancy   = list.forecast.occupancy,
+        forecast.window           = 14
+        );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    setwd( output.directory );
+
+    }
 
 ##################################################
 print( warnings() );

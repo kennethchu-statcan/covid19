@@ -1,5 +1,6 @@
 
 visualizeForecast.occupancy <- function(
+    DF.complete               = NULL,
     results.stan.change.point = NULL,
     results.stan.LoS          = NULL,
     list.forecast.occupancy   = NULL,
@@ -12,18 +13,21 @@ visualizeForecast.occupancy <- function(
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.plot.admissions <- visualizeForecast.occupancy_admissions(
+        DF.complete               = DF.complete,
         results.stan.change.point = results.stan.change.point,
         results.stan.LoS          = results.stan.LoS,
         forecast.window           = forecast.window
         );
 
     list.plot.discharges <- visualizeForecast.occupancy_discharges(
+        DF.complete             = DF.complete,
         results.stan.LoS        = results.stan.LoS,
         list.forecast.occupancy = list.forecast.occupancy,
         forecast.window         = forecast.window
         );
 
     list.plot.occupancy <- visualizeForecast.occupancy_occupancy(
+        DF.complete             = DF.complete,
         results.stan.LoS        = results.stan.LoS,
         list.forecast.occupancy = list.forecast.occupancy,
         forecast.window         = forecast.window
@@ -141,6 +145,7 @@ visualizeForecast.occupancy_cowplot <- function(
     }
 
 visualizeForecast.occupancy_admissions <- function(
+    DF.complete               = NULL,
     results.stan.change.point = NULL,
     results.stan.LoS          = NULL,
     forecast.window           = NULL,
@@ -215,7 +220,7 @@ visualizeForecast.occupancy_admissions <- function(
         DF.quantiles.forecast <- cbind(DF.quantiles.forecast, date = dates.forecast);
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-        DF.plot <- results.stan.LoS[['observed.data']][[jurisdiction]];
+        # DF.plot <- results.stan.LoS[['observed.data']][[jurisdiction]];
 
         ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         my.ggplot <- initializePlot(
@@ -256,7 +261,7 @@ visualizeForecast.occupancy_admissions <- function(
             );
 
         my.ggplot <- my.ggplot + geom_col(
-            data    = DF.plot,
+            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
             mapping = aes(x = date, y = admissions),
             alpha   = 0.50,
             size    = 0.75,
@@ -299,6 +304,7 @@ visualizeForecast.occupancy_admissions <- function(
     }
 
 visualizeForecast.occupancy_discharges <- function(
+    DF.complete             = NULL,
     results.stan.LoS        = NULL,
     list.forecast.occupancy = list.forecast.occupancy,
     forecast.window         = forecast.window,
@@ -393,7 +399,7 @@ visualizeForecast.occupancy_discharges <- function(
         #     );
 
         my.ggplot <- my.ggplot + geom_col(
-            data    = DF.plot,
+            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
             mapping = aes(x = date, y = discharges),
             alpha   = 0.50,
             size    = 0.75,
@@ -460,6 +466,7 @@ visualizeForecast.occupancy_discharges <- function(
     }
 
 visualizeForecast.occupancy_occupancy <- function(
+    DF.complete             = NULL,
     results.stan.LoS        = NULL,
     list.forecast.occupancy = NULL,
     forecast.window         = NULL,
@@ -565,7 +572,7 @@ visualizeForecast.occupancy_occupancy <- function(
         #     );
 
         my.ggplot <- my.ggplot + geom_col(
-            data    = DF.plot,
+            data    = DF.complete[DF.complete[,'jurisdiction'] == jurisdiction,], # DF.plot,
             mapping = aes(x = date, y = occupancy),
             alpha   = 0.50,
             size    = 0.75,
