@@ -52,13 +52,19 @@ for ( code.file in code.files ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 #set.seed(1234567);
 #set.seed(7654321);
 #set.seed(7777777);
 set.seed(8888888);
 
-options(mc.cores = parallel::detectCores());
+#data.snapshot <- "2020-12-13.01";
+data.snapshot <- "2020-12-18.01";
 
+forecast.window <- 21;
+
+options(mc.cores = parallel::detectCores());
 n.chains <- ifelse(
     test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),
     yes  = 4,
@@ -67,10 +73,8 @@ n.chains <- ifelse(
 print( n.chains );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#data.snapshot <- "2020-12-13.01";
-data.snapshot <- "2020-12-18.01";
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 DF.IHR <- getData.IHR(
     csv.IHR = file.path(data.directory,data.snapshot,"infection-hospitalization-rate.csv")
     );
@@ -161,14 +165,14 @@ for ( cut.off.date in cut.off.dates ) {
         DF.input           = DF.cut.off,
         DF.IHR             = DF.IHR,
         DF.serial.interval = DF.serial.interval,
-        forecast.window    = 14,
+        forecast.window    = forecast.window,
         n.chains           = n.chains,
         DEBUG              = TRUE # FALSE
         );
 
     visualizeModel.change.point(
         list.input      = results.stan.change.point,
-        forecast.window = 14
+        forecast.window = forecast.window
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -196,7 +200,7 @@ for ( cut.off.date in cut.off.dates ) {
         results.stan.change.point = results.stan.change.point,
         results.stan.LoS          = results.stan.LoS,
         list.forecast.occupancy   = list.forecast.occupancy,
-        forecast.window           = 14
+        forecast.window           = forecast.window
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
