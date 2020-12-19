@@ -81,8 +81,38 @@ getData.Ottawa_standardize.DELETEME <- function(
 getData.Ottawa_standardize <- function(
     DF.input = NULL
     ) {
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.output <- DF.input;
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    # patching column name changes in Ottawa data portal that
+    # occured some time between December 13 and 18.
+
+    colnames(DF.output) <- gsub(
+        x           = colnames(DF.output),
+        pattern     = "^_Date$",
+        replacement = "Date"
+        );
+
+    colnames(DF.output) <- gsub(
+        x           = colnames(DF.output),
+        pattern     = "^Cumulative_Deaths_byDate_of_Death$",
+        replacement = "Cumulative_Deaths_by_Date_of_Death"
+        );
+
+    colnames(DF.output) <- gsub(
+        x           = colnames(DF.output),
+        pattern     = "^Daily_Cases_by_ReportedDate$",
+        replacement = "Daily_Cases_by_Reported_Date"
+        );
+
+    cat("\ncolnames(DF.output)\n");
+    print( colnames(DF.output)   );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     selected.colnames <- c(
-        "_Date",
+        "Date",
         "Cumulative_Deaths_by_Date_of_Death",
         "Daily_Cases_by_Reported_Date",
         "Cases_Newly_Admitted_to_Hospital",
@@ -90,7 +120,23 @@ getData.Ottawa_standardize <- function(
         "Cases_Currently_in_ICU",
         "OBJECTID"
         );
-    DF.output <- DF.input[,selected.colnames];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    missing.colnames <- setdiff(selected.colnames,colnames(DF.output));
+    if ( length(missing.colnames) > 0 ) {
+        cat("\ngetData.Ottawa_standardize(): missing.colnames\n");
+        print( missing.colnames );
+    } else {
+        cat("\ngetData.Ottawa_standardize(): all expected columns are present.\n");
+        }
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    print("A-1");
+
+    DF.output <- DF.output[,selected.colnames];
+
+    print("A-2");
+
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
         pattern     = "Cumulative_Deaths_by_Date_of_Death",
@@ -118,7 +164,7 @@ getData.Ottawa_standardize <- function(
         );
     colnames(DF.output) <- gsub(
         x           = colnames(DF.output),
-        pattern     = "_Date",
+        pattern     = "Date",
         replacement = "date"
         );
     colnames(DF.output) <- tolower(colnames(DF.output));
@@ -127,11 +173,16 @@ getData.Ottawa_standardize <- function(
         pattern     = "objectid",
         replacement = "object.ID"
         );
+
+    cat("\ncolnames(DF.output)\n");
+    print( colnames(DF.output)   );
+
     DF.output[,'date'] <- as.Date(gsub(
         x           = DF.output[,'date'],
         pattern     = " 00:00:00",
         replacement = ""
         ));
+
     temp.colnames <- c(
         "cumulative.deaths",
         "new.cases",
@@ -139,6 +190,11 @@ getData.Ottawa_standardize <- function(
         "occupancy.hospital",
         "occupancy.icu"
         );
+
+    missing.colnames <- setdiff(temp.colnames,colnames(DF.output));
+    cat("\ngetData.Ottawa_standardize(): missing.colnames\n");
+    print( missing.colnames );
+
     for ( temp.variable in temp.colnames) {
         DF.output[is.na(DF.output[,temp.variable]),temp.variable] <- 0;
         }
