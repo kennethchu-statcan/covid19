@@ -281,7 +281,7 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
         temp.chain.ID   <- DF.chains[row.index,'chain.ID'];
         is.selected.row <- (DF.samples[,'chain.ID'] == temp.chain.ID);
         temp.vector     <- DF.samples[is.selected.row,'value'];
-        DF.chains[row.index,'chain.var'] <- stats::sd(x = temp.vector, na.rm = TRUE);
+        DF.chains[row.index,'chain.var'] <- stats::var(x = temp.vector, na.rm = TRUE);
         }
 
     DF.chains[,'normalized.chain.var'] <- DF.chains[,'chain.var'] / sum(DF.chains[,'chain.var']);
