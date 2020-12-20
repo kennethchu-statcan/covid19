@@ -68,7 +68,7 @@ options(mc.cores = parallel::detectCores());
 n.chains <- ifelse(
     test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),
     yes  = 4,
-    no   = 2 * getOption("mc.cores")
+    no   = getOption("mc.cores")
     );
 print( n.chains );
 
