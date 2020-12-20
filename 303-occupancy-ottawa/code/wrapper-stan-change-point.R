@@ -122,6 +122,7 @@ wrapper.stan_inner <- function(
     stan_data <- list(
         log_max_step_large = log(4.0),
         log_max_step_small = log(1.5),
+        log_max_step_four  = log(1.1),
         M                  = length(jurisdictions),
         N                  = NULL,
         x1                 = poly(1:N2,2)[,1],
@@ -296,9 +297,9 @@ wrapper.stan_inner <- function(
                 Uchg4 = runif(length(jurisdictions), min = 0, max = 1),
                #Uchg5 = runif(length(jurisdictions), min = 0, max = 1),
                 step1 = runif(length(jurisdictions), min = -stan_data[["log_max_step_large"]], max = 0                                ),
-                step2 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]]),
-                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]]),
-                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]])
+                step2 = runif(length(jurisdictions), min =  0,                                 max = stan_data[["log_max_step_small"]]),
+                step3 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = 0                                ),
+                step4 = runif(length(jurisdictions), min = -stan_data[["log_max_step_four"]],  max = stan_data[["log_max_step_four" ]])
               #,step5 = runif(length(jurisdictions), min = -stan_data[["log_max_step_small"]], max = stan_data[["log_max_step_small"]])
                 )
             }
