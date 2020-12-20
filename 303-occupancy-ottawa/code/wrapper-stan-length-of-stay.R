@@ -9,7 +9,7 @@ wrapper.stan.length.of.stay <- function(
     n.warmup              = 1000,
     period.thinning       =    4,
     sampler.control       = list(adapt_delta = 0.90, max_treedepth = 10),
-    threshold.stuck.chain = 1e-3,
+    threshold.stuck.chain = 0.05,
     DEBUG                 = FALSE
     ) {
 
@@ -271,27 +271,24 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    # DF.chains <- DF.samples[,c('chain.ID','value')] %>%
-    #     group_by( chain.ID ) %>%
-    #     summarize(
-    #         chain.stddev = sd(value, na.rm = TRUE)
-    #     );
-    # DF.chains <- as.data.frame(DF.chains);
-
     chain.IDs <- unique(DF.samples[,'chain.ID']);
     DF.chains <- data.frame(
-        chain.ID     = chain.IDs,
-        chain.stddev = rep(x = 0, times = length(chain.IDs))
+        chain.ID  = chain.IDs,
+        chain.var = rep(x = 0, times = length(chain.IDs))
         );
 
     for ( row.index in 1:nrow(DF.chains) ) {
         temp.chain.ID   <- DF.chains[row.index,'chain.ID'];
         is.selected.row <- (DF.samples[,'chain.ID'] == temp.chain.ID);
         temp.vector     <- DF.samples[is.selected.row,'value'];
-        DF.chains[row.index,'chain.stddev'] <- stats::sd(x = temp.vector, na.rm = TRUE);
+        DF.chains[row.index,'chain.var'] <- stats::sd(x = temp.vector, na.rm = TRUE);
         }
 
-    DF.chains[,'is.not.stuck'] <- !(DF.chains[,'chain.stddev'] < threshold.stuck.chain);
+    DF.chains[,'normalized.chain.var'] <- DF.chains[,'chain.var'] / sum(DF.chains[,'chain.var']);
+    DF.chains[,'normalized.chain.var'] <- nrow(DF.chains) * DF.chains[,'normalized.chain.var'];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.chains[,'is.not.stuck'] <- !(DF.chains[,'normalized.chain.var'] < threshold.stuck.chain);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.samples <- dplyr::left_join(
