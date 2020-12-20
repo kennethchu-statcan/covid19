@@ -60,7 +60,7 @@ for ( code.file in code.files ) {
 set.seed(8888888);
 
 #data.snapshot <- "2020-12-13.01";
-data.snapshot <- "2020-12-18.01";
+data.snapshot <- "2020-12-19.01";
 
 forecast.window <- 21;
 
