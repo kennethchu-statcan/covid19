@@ -261,12 +261,13 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
     require(dplyr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    chain.size <- (n.iterations - n.warmup) / period.thinning;
+    # chain.size <- (n.iterations - n.warmup) / period.thinning;
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.samples <- data.frame(
         index    = seq(1,length(input.vector)),
-        chain.ID = rep(x = seq(1,n.chains), each = chain.size),
+      # chain.ID = rep(x = seq(1,n.chains), each = chain.size),
+        chain.ID = rep(x = seq(1,n.chains), each = length(input.vector) / n.chains),
         value    = input.vector
         );
 
