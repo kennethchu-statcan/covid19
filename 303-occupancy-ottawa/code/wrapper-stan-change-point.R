@@ -5,6 +5,7 @@ wrapper.stan.change.point <- function(
     DF.input           = NULL,
     DF.IHR             = NULL,
     DF.serial.interval = NULL,
+    buffer.period      =   14,
     forecast.window    =    7,
     n.chains           =    4,
     n.iterations       = 1000,
@@ -34,6 +35,7 @@ wrapper.stan.change.point <- function(
             DF.input           = DF.input,
             DF.IHR             = DF.IHR,
             DF.serial.interval = DF.serial.interval,
+            buffer.period      = buffer.period,
             RData.output       = RData.output,
             n.chains           = n.chains,
             n.iterations       = n.iterations,
@@ -93,6 +95,7 @@ wrapper.stan_inner <- function(
     DF.input           = NULL,
     DF.IHR             = NULL,
     DF.serial.interval = NULL,
+    buffer.period      = NULL,
     RData.output       = NULL,
     n.chains           = NULL,
     n.iterations       = NULL,
@@ -141,7 +144,8 @@ wrapper.stan_inner <- function(
         maxChgPt2          = NULL,
         minChgPt3          = NULL,
         maxChgPt3          = NULL,
-        minChgPt4          = NULL
+        minChgPt4          = NULL,
+        maxChgPt4          = NULL
         );
 
     admissions_by_jurisdiction <- list();
@@ -164,20 +168,25 @@ wrapper.stan_inner <- function(
         print(sprintf("First non-zero cases is on day %d, and 30 days before 5 days is day %d",index,index2));
         d1 <- d1[index2:nrow(d1),];
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         decimal.date.EpidemicStart <- index1+1-index2;
         stan_data$EpidemicStart    <- c(stan_data$EpidemicStart,decimal.date.EpidemicStart);
 
-        decimal.date.minChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-01"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-03-28"))[1],na.rm=TRUE);
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+        decimal.date.minChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-03-01"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt1 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-03-28"))[1],na.rm=TRUE);
 
-        decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-07-05"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-08-01"))[1],na.rm=TRUE);
+        decimal.date.minChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-07-05"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt2 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-08-01"))[1],na.rm=TRUE);
 
-        decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-09-06"))[1],na.rm=TRUE);
-        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-10-03"))[1],na.rm=TRUE);
+        decimal.date.minChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-09-06"))[1],na.rm=TRUE);
+        decimal.date.maxChgPt3 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-10-03"))[1],na.rm=TRUE);
 
-        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date==as.Date("2020-11-01"))[1],na.rm=TRUE);
+        decimal.date.minChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date == as.Date("2020-11-01"))[1],na.rm=TRUE);
+        date.maxChgPt4         <- d1[nrow(d1),'date'] - buffer.period;
+        decimal.date.maxChgPt4 <- max(decimal.date.EpidemicStart,which(d1$date == date.maxChgPt4       )[1],na.rm=TRUE);
 
+        ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
         cat("\n### ~~~~~~ #####\n")
         cat(paste0("\njurisdiction: ",jurisdiction,"\n"));
         cat(paste0("\ndecimal.date.minChgPt1: ",decimal.date.minChgPt1,"\n"));
@@ -187,6 +196,7 @@ wrapper.stan_inner <- function(
         cat(paste0("\ndecimal.date.minChgPt3: ",decimal.date.minChgPt3,"\n"));
         cat(paste0("\ndecimal.date.maxChgPt3: ",decimal.date.maxChgPt3,"\n"));
         cat(paste0("\ndecimal.date.minChgPt4: ",decimal.date.minChgPt4,"\n"));
+        cat(paste0("\ndecimal.date.maxChgPt4: ",decimal.date.maxChgPt4,"\n"));
         cat("\n### ~~~~~~ #####\n")
 
         stan_data$minChgPt1 <- c(stan_data$minChgPt1,decimal.date.minChgPt1);
@@ -196,6 +206,7 @@ wrapper.stan_inner <- function(
         stan_data$minChgPt3 <- c(stan_data$minChgPt3,decimal.date.minChgPt3);
         stan_data$maxChgPt3 <- c(stan_data$maxChgPt3,decimal.date.maxChgPt3);
         stan_data$minChgPt4 <- c(stan_data$minChgPt4,decimal.date.minChgPt4);
+        stan_data$maxChgPt4 <- c(stan_data$maxChgPt4,decimal.date.maxChgPt4);
 
         dates[[jurisdiction]] = d1$date;
         # hazard estimation
