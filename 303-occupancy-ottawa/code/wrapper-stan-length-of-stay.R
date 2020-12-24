@@ -9,7 +9,7 @@ wrapper.stan.length.of.stay <- function(
     n.warmup              = 1000,
     period.thinning       =    4,
     sampler.control       = list(adapt_delta = 0.90, max_treedepth = 10),
-    threshold.stuck.chain = 1e-3,
+    threshold.stuck.chain = 0.05,
     DEBUG                 = FALSE
     ) {
 
@@ -57,6 +57,16 @@ wrapper.stan.length.of.stay <- function(
     #     period.thinning       = period.thinning
     #     );
 
+    list.output <- wrapper.stan.length.of.stay_patch(
+        list.input            = list.output,
+        DF.input              = DF.input,
+        threshold.stuck.chain = threshold.stuck.chain,
+        n.chains              = n.chains,
+        n.iterations          = n.iterations,
+        n.warmup              = n.warmup,
+        period.thinning       = period.thinning
+        );
+
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");
@@ -66,6 +76,40 @@ wrapper.stan.length.of.stay <- function(
 
 ##################################################
 wrapper.stan.length.of.stay_patch <- function(
+    list.input            = NULL,
+    DF.input              = NULL,
+    threshold.stuck.chain = NULL,
+    n.chains              = NULL,
+    n.iterations          = NULL,
+    n.warmup              = NULL,
+    period.thinning       = NULL
+    ) {
+
+    list.output <- list.input;
+
+    if( threshold.stuck.chain != list.input[['threshold.stuck.chain']] ) {
+        list.input[['threshold.stuck.chain']] <- threshold.stuck.chain;
+        jurisdictions <- list.input[['jurisdictions']];
+        is.not.stuck <- list();
+        for( temp.index in 1:length(jurisdictions) ) {
+            jurisdiction <- jurisdictions[temp.index];
+            is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
+                threshold.stuck.chain = threshold.stuck.chain,
+                input.vector          = list.input[['posterior.samples']][['alpha']][,temp.index],
+                n.chains              = n.chains,
+                n.iterations          = n.iterations,
+                n.warmup              = n.warmup,
+                period.thinning       = period.thinning
+                );
+            }
+        list.output[['is.not.stuck']] <- is.not.stuck;
+        }
+
+    return( list.output );
+
+    }
+
+wrapper.stan.length.of.stay_patch_DELETEME <- function(
     list.input            = NULL,
     DF.input              = NULL,
     threshold.stuck.chain = NULL,
@@ -261,37 +305,31 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
     require(dplyr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    chain.size <- (n.iterations - n.warmup) / period.thinning;
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.samples <- data.frame(
         index    = seq(1,length(input.vector)),
-        chain.ID = rep(x = seq(1,n.chains), each = chain.size),
+        chain.ID = rep(x = seq(1,n.chains), each = length(input.vector) / n.chains),
         value    = input.vector
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    # DF.chains <- DF.samples[,c('chain.ID','value')] %>%
-    #     group_by( chain.ID ) %>%
-    #     summarize(
-    #         chain.stddev = sd(value, na.rm = TRUE)
-    #     );
-    # DF.chains <- as.data.frame(DF.chains);
-
     chain.IDs <- unique(DF.samples[,'chain.ID']);
     DF.chains <- data.frame(
-        chain.ID     = chain.IDs,
-        chain.stddev = rep(x = 0, times = length(chain.IDs))
+        chain.ID  = chain.IDs,
+        chain.var = rep(x = 0, times = length(chain.IDs))
         );
 
     for ( row.index in 1:nrow(DF.chains) ) {
         temp.chain.ID   <- DF.chains[row.index,'chain.ID'];
         is.selected.row <- (DF.samples[,'chain.ID'] == temp.chain.ID);
         temp.vector     <- DF.samples[is.selected.row,'value'];
-        DF.chains[row.index,'chain.stddev'] <- stats::sd(x = temp.vector, na.rm = TRUE);
+        DF.chains[row.index,'chain.var'] <- stats::var(x = temp.vector, na.rm = TRUE);
         }
 
-    DF.chains[,'is.not.stuck'] <- !(DF.chains[,'chain.stddev'] < threshold.stuck.chain);
+    DF.chains[,'normalized.chain.var'] <- DF.chains[,'chain.var'] / sum(DF.chains[,'chain.var']);
+    DF.chains[,'normalized.chain.var'] <- nrow(DF.chains) * DF.chains[,'normalized.chain.var'];
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    DF.chains[,'is.not.stuck'] <- !(DF.chains[,'normalized.chain.var'] < threshold.stuck.chain);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.samples <- dplyr::left_join(
