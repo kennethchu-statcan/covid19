@@ -38,11 +38,6 @@ visualizeModel.change.point <- function(
         list.input = list.input
         );
 
-    # plot.forecast(
-    #     list.input      = list.input,
-    #     forecast.window = forecast.window
-    #     );
-
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     cat(paste0("\n",thisFunctionName,"() quits."));
     cat("\n### ~~~~~~~~~~~~~~~~~~~~ ###\n");

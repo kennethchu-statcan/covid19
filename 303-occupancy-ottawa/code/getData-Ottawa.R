@@ -55,29 +55,6 @@ getData.Ottawa <- function(
     }
 
 ##################################################
-getData.Ottawa_standardize.DELETEME <- function(
-    DF.input              = NULL,
-    list.replace.colnames = list(),
-    retained.colnames     = tolower(names(list.replace.colnames))
-    ) {
-
-    DF.output <- DF.input;
-    colnames(DF.output) <- tolower(colnames(DF.output));
-
-    for ( temp.replacement in names(list.replace.colnames) ) {
-        colnames(DF.output) <- gsub(
-            x = colnames(DF.output),
-            pattern     = list.replace.colnames[[temp.replacement]],
-            replacement = temp.replacement
-            );
-        }
-
-    DF.output <- DF.output[,retained.colnames];
-
-    return( DF.output );
-
-    }
-
 getData.Ottawa_standardize <- function(
     DF.input = NULL
     ) {
