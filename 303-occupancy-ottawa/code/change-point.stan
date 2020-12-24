@@ -16,6 +16,7 @@ data {
     int minChgPt3[M];
     int maxChgPt3[M];
     int minChgPt4[M];
+    int maxChgPt4[M];
 
     int            EpidemicStart[M];
     int  <lower=1> N[M];    // days of observed data for jurisdiction m. each entry must be <= N2
@@ -80,7 +81,9 @@ transformed parameters {
             chgpt1[m] = minChgPt1[M] + (maxChgPt1[M] - minChgPt1[M]) * Uchg1[m];
             chgpt2[m] = minChgPt2[M] + (maxChgPt2[M] - minChgPt2[M]) * Uchg2[m];
             chgpt3[m] = minChgPt3[M] + (maxChgPt3[M] - minChgPt3[M]) * Uchg3[m];
-            chgpt4[m] = minChgPt4[M] + (N[m]         - minChgPt4[M]) * Uchg4[m];
+
+         // chgpt4[m] = minChgPt4[M] + (N[m]         - minChgPt4[M]) * Uchg4[m];
+            chgpt4[m] = minChgPt4[M] + (maxChgPt4[M] - minChgPt4[M]) * Uchg4[m];
 
             Rt[i,m] = R0[m] * exp(
                   step1[m] * int_step(i - chgpt1[m]) // * int_step(chgpt2[m] - i)

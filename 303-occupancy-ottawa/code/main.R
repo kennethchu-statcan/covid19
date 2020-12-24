@@ -62,6 +62,7 @@ set.seed(8888888);
 #data.snapshot <- "2020-12-13.01";
 data.snapshot <- "2020-12-19.01";
 
+buffer.period   <- 14;
 forecast.window <- 21;
 
 options(mc.cores = parallel::detectCores());
@@ -165,6 +166,7 @@ for ( cut.off.date in cut.off.dates ) {
         DF.input           = DF.cut.off,
         DF.IHR             = DF.IHR,
         DF.serial.interval = DF.serial.interval,
+        buffer.period      = buffer.period,
         forecast.window    = forecast.window,
         n.chains           = n.chains,
         DEBUG              = TRUE # FALSE
