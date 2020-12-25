@@ -244,9 +244,17 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
     require(dplyr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    # We are NOT taking the value of n.chains (number of chains) at face value.
+    # Instead,  the 'effective' number of chains is computed to guard against
+    # the scenario that any given chain may encounter errors and fail to
+    # generate any posterior samples.
+    chain.size         <- (n.iterations - n.warmup) / period.thinning;
+    n.chains.effective <- length(input.vector) / chain.size;
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     DF.samples <- data.frame(
         index    = seq(1,length(input.vector)),
-        chain.ID = rep(x = seq(1,n.chains), each = length(input.vector) / n.chains),
+        chain.ID = rep(x = seq(1,n.chains.effective), each = chain.size),
         value    = input.vector
         );
 
