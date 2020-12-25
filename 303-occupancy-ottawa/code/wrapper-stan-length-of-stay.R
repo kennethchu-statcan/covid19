@@ -9,8 +9,7 @@ wrapper.stan.length.of.stay <- function(
     n.warmup              = 1000,
     period.thinning       =    4,
     sampler.control       = list(adapt_delta = 0.90, max_treedepth = 10),
-    threshold.stuck.chain = 0.05,
-    DEBUG                 = FALSE
+    threshold.stuck.chain = 0.05
     ) {
 
     thisFunctionName <- "wrapper.stan.length.of.stay";
@@ -36,8 +35,7 @@ wrapper.stan.length.of.stay <- function(
             n.warmup              = n.warmup,
             period.thinning       = period.thinning,
             sampler.control       = sampler.control,
-            threshold.stuck.chain = threshold.stuck.chain,
-            DEBUG                 = DEBUG
+            threshold.stuck.chain = threshold.stuck.chain
             );
 
         if (!is.null(RData.output)) {
@@ -103,22 +101,13 @@ wrapper.stan.length.of.stay_inner <- function(
     n.warmup              = NULL,
     period.thinning       = NULL,
     sampler.control       = NULL,
-    threshold.stuck.chain = NULL,
-    DEBUG                 = FALSE
+    threshold.stuck.chain = NULL
     ) {
 
     require(rstan);
 
     jurisdictions   <- unique(DF.input[,'jurisdiction']);
     n.jurisdictions <- length(jurisdictions);
-
-    if( DEBUG == FALSE ) {
-        N2 = 360 # Increase this for a further forecast
-    }  else  {
-        ### For faster runs:
-        # jurisdictions <- c("Austria","Belgium") #,Spain")
-        N2 = 360
-        }
 
     stan_data <- list(
         n_days          = nrow(DF.input) / n.jurisdictions,
@@ -166,21 +155,6 @@ wrapper.stan.length.of.stay_inner <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if( DEBUG ) {
-        if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
-            n.iterations    <-   40;
-            n.warmup        <-   20;
-            period.thinning <-    1;
-            sampler.control <- NULL;
-        } else {
-            n.iterations    <-  200;
-            n.warmup        <-  100;
-            period.thinning <-    1;
-            sampler.control <- NULL;
-           }
-        }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     results.rstan.sampling <- rstan::sampling(
         object  = my.stan.model,
         data    = stan_data,
@@ -196,28 +170,12 @@ wrapper.stan.length.of.stay_inner <- function(
     posterior.samples <- rstan::extract(results.rstan.sampling);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    # is.not.stuck <- list();
-    # for( temp.index in 1:n.jurisdictions ) {
-    #     jurisdiction <- jurisdictions[temp.index];
-    #     is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
-    #         threshold.stuck.chain = threshold.stuck.chain,
-    #         input.vector          = posterior.samples[['alpha']][,temp.index],
-    #         n.chains              = n.chains,
-    #         n.iterations          = n.iterations,
-    #         n.warmup              = n.warmup,
-    #         period.thinning       = period.thinning
-    #         );
-    #     }
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output <- list(
         StanModel              = StanModel,
         jurisdictions          = jurisdictions,
         observed.data          = observed.data,
         results.rstan.sampling = results.rstan.sampling,
         posterior.samples      = posterior.samples,
-        # is.not.stuck           = is.not.stuck,
-        # threshold.stuck.chain  = threshold.stuck.chain,
         sampling.parameters = list(
             n.chains        = n.chains,
             n.iterations    = n.iterations,

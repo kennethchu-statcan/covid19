@@ -62,16 +62,31 @@ set.seed(8888888);
 #data.snapshot <- "2020-12-13.01";
 data.snapshot <- "2020-12-19.01";
 
-buffer.period   <- 14;
-forecast.window <- 21;
-
 options(mc.cores = parallel::detectCores());
-n.chains <- ifelse(
-    test = grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE),
-    yes  = 4,
-    no   = getOption("mc.cores")
-    );
-print( n.chains );
+
+n.iterations.chgpt <- 2000;
+n.warmup.chgpt     <- 1000;
+n.iterations.LoS   <- 1000;
+n.warmup.LoS       <-  500;
+period.thinning    <-    4;
+sampler.control    <- list(adapt_delta = 0.90, max_treedepth = 10);
+
+is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
+n.chains <- ifelse(test = is.macOS, yes = 4, no = getOption("mc.cores"));
+
+DEBUG <- FALSE;
+if ( DEBUG ) {
+    n.iterations.chgpt <- ifelse(test = is.macOS, yes = 40, no = 200);
+    n.warmup.chgpt     <- ifelse(test = is.macOS, yes = 20, no = 100);
+    n.iterations.LoS   <- ifelse(test = is.macOS, yes = 40, no = 200);
+    n.warmup.LoS       <- ifelse(test = is.macOS, yes = 20, no = 100);
+    period.thinning    <- 1;
+    sampler.control    <- NULL;
+    }
+
+buffer.period         <- 14;
+forecast.window       <- 21;
+threshold.stuck.chain <-  0.05;
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -169,7 +184,10 @@ for ( cut.off.date in cut.off.dates ) {
         buffer.period      = buffer.period,
         forecast.window    = forecast.window,
         n.chains           = n.chains,
-        DEBUG              = TRUE # FALSE
+        n.iterations       = n.iterations.chgpt,
+        n.warmup           = n.warmup.chgpt,
+        period.thinning    = period.thinning,
+        sampler.control    = sampler.control
         );
 
     visualizeModel.change.point(
@@ -183,7 +201,10 @@ for ( cut.off.date in cut.off.dates ) {
         FILE.stan.model = file.path(code.directory,'length-of-stay.stan'),
         DF.input        = DF.cut.off,
         n.chains        = n.chains,
-        DEBUG           = TRUE # FALSE
+        n.iterations    = n.iterations.LoS,
+        n.warmup        = n.warmup.LoS,
+        period.thinning = period.thinning,
+        sampler.control = sampler.control
         );
 
     visualizeModel.length.of.stay(

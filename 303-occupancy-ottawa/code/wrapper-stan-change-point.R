@@ -12,8 +12,7 @@ wrapper.stan.change.point <- function(
     n.warmup           =  500,
     period.thinning    =    4,
     sampler.control    = list(adapt_delta = 0.90, max_treedepth = 10),
-    RData.output       = paste0('stan-model-',StanModel,'.RData'),
-    DEBUG              = FALSE
+    RData.output       = paste0('stan-model-',StanModel,'.RData')
     ) {
 
     thisFunctionName <- "wrapper.stan.change.point";
@@ -41,8 +40,7 @@ wrapper.stan.change.point <- function(
             n.iterations       = n.iterations,
             n.warmup           = n.warmup,
             period.thinning    = period.thinning,
-            sampler.control    = sampler.control,
-            DEBUG              = DEBUG
+            sampler.control    = sampler.control
             );
 
         if (!is.null(RData.output)) {
@@ -101,24 +99,15 @@ wrapper.stan_inner <- function(
     n.iterations       = NULL,
     n.warmup           = NULL,
     period.thinning    = NULL,
-    sampler.control    = NULL,
-    DEBUG              = FALSE
+    sampler.control    = NULL
     ) {
 
     require(EnvStats);
     require(rstan);
 
-    jurisdictions <- unique(DF.input[,'jurisdiction']);
-    forecast      <- 0;
-
-    if( DEBUG == FALSE ) {
-        N2 = 360 # Increase this for a further forecast
-    }  else  {
-        ### For faster runs:
-        # jurisdictions <- c("Austria","Belgium") #,Spain")
-        N2 = 360
-        }
-
+    jurisdictions  <- unique(DF.input[,'jurisdiction']);
+    forecast       <- 0;
+    N2             <- 360
     dates          <- list();
     reported_cases <- list();
 
@@ -221,7 +210,8 @@ wrapper.stan_inner <- function(
             }
 
         h <- rep(0,forecast+N) # discrete hazard rate from time t = 1, ..., 100
-        if( DEBUG ) { # OLD -- but faster for testing this part of the code
+        # if( DEBUG ) { # OLD -- but faster for testing this part of the code
+        if( FALSE ) { # obsolete code segment
 
             mean <- 18.8;
             cv   <- 0.45;
@@ -315,21 +305,6 @@ wrapper.stan_inner <- function(
                 )
             }
         )
-
-    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    if( DEBUG ) {
-        if ( grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE) ) {
-            n.iterations    <-   40;
-            n.warmup        <-   20;
-            period.thinning <-    1;
-            sampler.control <- NULL;
-        } else {
-            n.iterations    <-  200;
-            n.warmup        <-  100;
-            period.thinning <-    1;
-            sampler.control <- NULL;
-           }
-        }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     results.rstan.sampling <- rstan::sampling(
