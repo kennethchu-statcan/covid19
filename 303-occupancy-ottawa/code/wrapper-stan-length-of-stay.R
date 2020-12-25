@@ -241,9 +241,25 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
     period.thinning       = NULL
     ) {
 
+    print("A-0");
+
     require(dplyr);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    thisFunctionName <- "wrapper.stan.length.of.stay_is.not.stuck";
+
+    cat(paste0("\n# ",thisFunctionName,"(): threshold.stuck.chain = ",threshold.stuck.chain,"\n"));
+    cat(paste0("\n# ",thisFunctionName,"(): n.chains = ",n.chains ,"\n"));
+    cat(paste0("\n# ",thisFunctionName,"(): n.iterations = ",n.iterations,"\n"));
+    cat(paste0("\n# ",thisFunctionName,"(): n.warmup = ",n.warmup ,"\n"));
+    cat(paste0("\n# ",thisFunctionName,"(): period.thinning = ",period.thinning ,"\n"));
+
+    cat(paste0("\n# ",thisFunctionName,"(): str(input.vector):\n"));
+    print( str(input.vector) );
+
+    ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    print("A-1");
+
     # We are NOT taking the value of n.chains (number of chains) at face value.
     # Instead,  the 'effective' number of chains is computed to guard against
     # the scenario that any given chain may encounter errors and fail to
@@ -252,6 +268,8 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
     n.chains.effective <- length(input.vector) / chain.size;
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    print("A-2");
+
     DF.samples <- data.frame(
         index    = seq(1,length(input.vector)),
         chain.ID = rep(x = seq(1,n.chains.effective), each = chain.size),
@@ -259,11 +277,18 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
         );
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    print("A-3");
+
     chain.IDs <- unique(DF.samples[,'chain.ID']);
+
+    print("A-4");
+
     DF.chains <- data.frame(
         chain.ID  = chain.IDs,
         chain.var = rep(x = 0, times = length(chain.IDs))
         );
+
+    print("A-5");
 
     for ( row.index in 1:nrow(DF.chains) ) {
         temp.chain.ID   <- DF.chains[row.index,'chain.ID'];
@@ -272,19 +297,33 @@ wrapper.stan.length.of.stay_is.not.stuck <- function(
         DF.chains[row.index,'chain.var'] <- stats::var(x = temp.vector, na.rm = TRUE);
         }
 
+    print("A-6");
+
     DF.chains[,'normalized.chain.var'] <- DF.chains[,'chain.var'] / sum(DF.chains[,'chain.var']);
+
+    print("A-7");
+
     DF.chains[,'normalized.chain.var'] <- nrow(DF.chains) * DF.chains[,'normalized.chain.var'];
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    print("A-8");
+
     DF.chains[,'is.not.stuck'] <- !(DF.chains[,'normalized.chain.var'] < threshold.stuck.chain);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+    print("A-9");
+
     DF.samples <- dplyr::left_join(
         x  = DF.samples,
         y  = DF.chains,
         by = 'chain.ID'
         );
+
+    print("A-10");
+
     DF.samples <- as.data.frame(DF.samples);
+
+    print("A-11");
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     # return( list(DF.samples = DF.samples, DF.chains = DF.chains) );
