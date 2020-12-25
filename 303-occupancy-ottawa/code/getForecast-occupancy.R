@@ -74,11 +74,11 @@ getForecast.occupancy <- function(
             posterior.sample.indexes <- seq(1,nrow(DF.Prob.LoS));
             non.stuck.sample.indexes <- posterior.sample.indexes[results.stan.LoS[['is.not.stuck']][[jurisdiction]]];
 
-            cat(paste0("\n# ",thisFunctionName,"(): results.stan.LoS[['is.not.stuck']][[jurisdiction]]","\n"));
-            print( results.stan.LoS[['is.not.stuck']][[jurisdiction]] );
-
-            cat(paste0("\n# ",thisFunctionName,"(): non.stuck.sample.indexes","\n"));
-            print( non.stuck.sample.indexes );
+            # cat(paste0("\n# ",thisFunctionName,"(): results.stan.LoS[['is.not.stuck']][[jurisdiction]]","\n"));
+            # print( results.stan.LoS[['is.not.stuck']][[jurisdiction]] );
+            #
+            # cat(paste0("\n# ",thisFunctionName,"(): non.stuck.sample.indexes","\n"));
+            # print( non.stuck.sample.indexes );
 
             indexes.LoS.posterior.samples <- base::sample(
                 x       = non.stuck.sample.indexes,
@@ -86,8 +86,8 @@ getForecast.occupancy <- function(
                 replace = TRUE
                 );
 
-            cat(paste0("\n# ",thisFunctionName,"(): indexes.LoS.posterior.samples","\n"));
-            print( indexes.LoS.posterior.samples );
+            # cat(paste0("\n# ",thisFunctionName,"(): indexes.LoS.posterior.samples","\n"));
+            # print( indexes.LoS.posterior.samples );
 
             ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
             DF.forecast.discharges <- getForecast.occupancy_forecast.discharges(
