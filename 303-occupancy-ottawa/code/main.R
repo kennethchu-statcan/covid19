@@ -84,7 +84,7 @@ if ( DEBUG ) {
     sampler.control    <- NULL;
     }
 
-buffer.period         <- 14;
+buffer.period         <- 14;
 forecast.window       <- 21;
 threshold.stuck.chain <-  0.05;
 
