@@ -54,18 +54,17 @@ for ( code.file in code.files ) {
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-#set.seed(1234567);
-#set.seed(7654321);
-#set.seed(7777777);
-set.seed(8888888);
+# set.seed(1234567);
+# set.seed(7777777);
+# set.seed(8888888);
+set.seed(7654321);
 
-#data.snapshot <- "2020-12-13.01";
 data.snapshot <- "2020-12-19.01";
 
 options(mc.cores = parallel::detectCores());
 
-n.iterations.chgpt <- 2000;
-n.warmup.chgpt     <- 1000;
+n.iterations.chgpt <- 1000;
+n.warmup.chgpt     <-  500;
 n.iterations.LoS   <- 1000;
 n.warmup.LoS       <-  500;
 period.thinning    <-    4;
