@@ -47,7 +47,7 @@ wrapper.stan.length.of.stay <- function(
         }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    list.output <- wrapper.stan.length.of.stay_patch(
+    list.output <- wrapper.stan.length.of.stay_add.is.not.stuck(
         list.input            = list.output,
         DF.input              = DF.input,
         threshold.stuck.chain = threshold.stuck.chain,
@@ -65,7 +65,7 @@ wrapper.stan.length.of.stay <- function(
     }
 
 ##################################################
-wrapper.stan.length.of.stay_patch <- function(
+wrapper.stan.length.of.stay_add.is.not.stuck <- function(
     list.input            = NULL,
     DF.input              = NULL,
     threshold.stuck.chain = NULL,
@@ -74,29 +74,23 @@ wrapper.stan.length.of.stay_patch <- function(
     n.warmup              = NULL,
     period.thinning       = NULL
     ) {
-
     list.output <- list.input;
-
-    if( threshold.stuck.chain != list.input[['threshold.stuck.chain']] ) {
-        list.input[['threshold.stuck.chain']] <- threshold.stuck.chain;
-        jurisdictions <- list.input[['jurisdictions']];
-        is.not.stuck <- list();
-        for( temp.index in 1:length(jurisdictions) ) {
-            jurisdiction <- jurisdictions[temp.index];
-            is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
-                threshold.stuck.chain = threshold.stuck.chain,
-                input.vector          = list.input[['posterior.samples']][['alpha']][,temp.index],
-                n.chains              = n.chains,
-                n.iterations          = n.iterations,
-                n.warmup              = n.warmup,
-                period.thinning       = period.thinning
-                );
-            }
-        list.output[['is.not.stuck']] <- is.not.stuck;
+    list.output[['threshold.stuck.chain']] <- threshold.stuck.chain;
+    is.not.stuck <- list();
+    jurisdictions <- list.input[['jurisdictions']];
+    for( temp.index in 1:length(jurisdictions) ) {
+        jurisdiction <- jurisdictions[temp.index];
+        is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
+            threshold.stuck.chain = threshold.stuck.chain,
+            input.vector          = list.input[['posterior.samples']][['alpha']][,temp.index],
+            n.chains              = n.chains,
+            n.iterations          = n.iterations,
+            n.warmup              = n.warmup,
+            period.thinning       = period.thinning
+            );
         }
-
+    list.output[['is.not.stuck']] <- is.not.stuck;
     return( list.output );
-
     }
 
 wrapper.stan.length.of.stay_inner <- function(
@@ -202,18 +196,18 @@ wrapper.stan.length.of.stay_inner <- function(
     posterior.samples <- rstan::extract(results.rstan.sampling);
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-    is.not.stuck <- list();
-    for( temp.index in 1:n.jurisdictions ) {
-        jurisdiction <- jurisdictions[temp.index];
-        is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
-            threshold.stuck.chain = threshold.stuck.chain,
-            input.vector          = posterior.samples[['alpha']][,temp.index],
-            n.chains              = n.chains,
-            n.iterations          = n.iterations,
-            n.warmup              = n.warmup,
-            period.thinning       = period.thinning
-            );
-        }
+    # is.not.stuck <- list();
+    # for( temp.index in 1:n.jurisdictions ) {
+    #     jurisdiction <- jurisdictions[temp.index];
+    #     is.not.stuck[[jurisdiction]] <- wrapper.stan.length.of.stay_is.not.stuck(
+    #         threshold.stuck.chain = threshold.stuck.chain,
+    #         input.vector          = posterior.samples[['alpha']][,temp.index],
+    #         n.chains              = n.chains,
+    #         n.iterations          = n.iterations,
+    #         n.warmup              = n.warmup,
+    #         period.thinning       = period.thinning
+    #         );
+    #     }
 
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
     list.output <- list(
@@ -222,8 +216,8 @@ wrapper.stan.length.of.stay_inner <- function(
         observed.data          = observed.data,
         results.rstan.sampling = results.rstan.sampling,
         posterior.samples      = posterior.samples,
-        is.not.stuck           = is.not.stuck,
-        threshold.stuck.chain  = threshold.stuck.chain,
+        # is.not.stuck           = is.not.stuck,
+        # threshold.stuck.chain  = threshold.stuck.chain,
         sampling.parameters = list(
             n.chains        = n.chains,
             n.iterations    = n.iterations,
