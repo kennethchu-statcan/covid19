@@ -74,7 +74,7 @@ sampler.control    <- list(adapt_delta = 0.90, max_treedepth = 10);
 is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
 n.chains <- ifelse(test = is.macOS, yes = 4, no = getOption("mc.cores"));
 
-DEBUG <- FALSE;
+DEBUG <- TRUE;
 if ( DEBUG ) {
     n.iterations.chgpt <- ifelse(test = is.macOS, yes = 40, no = 200);
     n.warmup.chgpt     <- ifelse(test = is.macOS, yes = 20, no = 100);
