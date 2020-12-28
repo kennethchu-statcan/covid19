@@ -63,8 +63,8 @@ data.snapshot <- "2020-12-28.01";
 
 options(mc.cores = parallel::detectCores());
 
-n.iterations.chgpt <- 1000;
-n.warmup.chgpt     <-  500;
+n.iterations.chgpt <- 2000;
+n.warmup.chgpt     <- 1000;
 n.iterations.LoS   <- 1000;
 n.warmup.LoS       <-  500;
 period.thinning    <-    4;
