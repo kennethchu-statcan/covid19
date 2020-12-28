@@ -59,7 +59,7 @@ for ( code.file in code.files ) {
 # set.seed(8888888);
 set.seed(7654321);
 
-data.snapshot <- "2020-12-19.01";
+data.snapshot <- "2020-12-28.01";
 
 options(mc.cores = parallel::detectCores());
 
@@ -161,7 +161,8 @@ DF.ottawa.01[,'jurisdiction'] <- rep('Ottawa1',nrow(DF.ottawa.01));
 DF.complete <- rbind( DF.ottawa , DF.ottawa.01 );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-cut.off.dates <- c("2020-11-20","2020-11-27","2020-12-04","2020-12-11");
+cut.off.dates <- c("2020-11-20","2020-11-27","2020-12-04","2020-12-11","2020-12-18");
+cut.off.dates <- sort(x = cut.off.dates, decreasing = TRUE);
 
 for ( cut.off.date in cut.off.dates ) {
 
