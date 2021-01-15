@@ -59,7 +59,7 @@ for ( code.file in code.files ) {
 # set.seed(8888888);
 set.seed(7654321);
 
-data.snapshot <- "2021-01-06.01";
+data.snapshot <- "2021-01-15.01";
 
 options(mc.cores = parallel::detectCores());
 
