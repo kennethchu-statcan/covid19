@@ -218,7 +218,7 @@ among one another.
        assumed to follow:
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{0}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{{0}}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
        </br>
 
        where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
