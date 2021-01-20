@@ -133,6 +133,9 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
    <br/>
 
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,\begin{array}{c}\textnormal{\#\;infections}\\\textnormal{on\;day}\;\tau\end{array}\cdot{g}_{t-\tau}"/>
+   <br/>
+
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
 
    where *R<sub>m,t</sub>* is the COVID-19 **reproduction number** of jurisdiction *m*
