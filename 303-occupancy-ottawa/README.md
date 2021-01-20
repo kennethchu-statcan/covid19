@@ -231,6 +231,10 @@ among one another.
 
        where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
 
+
+# Model 2: Ottawa COVID-19 hospital length of stay
+
+
 # Requirements
 
 *  R v4.0.2
