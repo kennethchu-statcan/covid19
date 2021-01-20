@@ -77,7 +77,7 @@ among one another.
    on day *t* is assumed to be given by:
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize&space;d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hospital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hospital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot{P}\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
