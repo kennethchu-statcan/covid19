@@ -130,6 +130,7 @@ among one another.
    newly infected on day *t* for jurisdiction *m* is assumed to satisfy
    the following recurrence relation:
    <br/>
+   <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;\textnormal{number\;of\;infections\;on\;day}\;t"/>
    <br/>
