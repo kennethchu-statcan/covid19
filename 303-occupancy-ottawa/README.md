@@ -102,12 +102,12 @@ among one another.
 
    For a COVID-19 infected individual who dies from COVID-19, Flaxman et al. assumed,
    based on earlier studies, that the infection-to-death delay is the sum of two durations:
-   the infection-to-(onset-of-symptom) delay, and the (onset-of-symptom)-to-death delay.
+   the infection-to-(symptom-onset) delay, and the (symptom-onset)-to-death delay.
    The former is assumed -- for all jurisdictions -- to have been sampled from
    the Gamma distribution *&Gamma;(5.1,0.86)*, while the latter from *&Gamma;(18.8,0.45)*,
    where the (mean,cv)-parametrization of the Gamma distribution is used.
 
-   In our case, we need to replace the (onset-of-symptom)-to-death delay with
+   In our case, we need to replace the (symptom-onset)-to-death delay with
    the (onset-of-symptom)-to-(hospital-admission) delay.
    For simplicity, we took this latter delay to be half of the former.
 
