@@ -173,7 +173,7 @@ among one another.
 *  Lastly, our change-point model assumes that the COVID-19 reproduction number
    *R<sub>t</sub>* has the following form:
 
-   <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{k}\cdot{I}_{\{t\,-\,\gamma_{k}\}}\,\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,{\alpha}_{k}\cdot{I}_{\{t\,-\,\gamma_{k}\}}\,\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,{\alpha}_{k}\;\right)"/>
