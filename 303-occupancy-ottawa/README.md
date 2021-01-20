@@ -256,7 +256,7 @@ Observed variables:
    (from which *D<sub>t</sub>* can be derived from *A<sub>t</sub>* and *C<sub>t</sub>*):
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;=\;\sum^{t}_{\tau=0}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;=\;\sum^{t}_{\tau=0}\;A_{\tau}\;-\;\sum^{t}_{\tau=0}\;D_{\tau}"/>
    <br/>
 
 
