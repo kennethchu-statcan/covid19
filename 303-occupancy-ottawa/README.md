@@ -176,6 +176,7 @@ among one another.
        the *k*-th change-point in the COVID-19
        time-varying reproduction number for jurisdiction *m*,
        with the following priors:
+       </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{1}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/01\,,2020/03/21\,])"/>
        </br>
@@ -189,14 +190,17 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,])"/>
        </br>
 
-   *   *&alpha;<sub>m,k</sub>*
+   *   *&alpha;<sub>k</sub>*
        is the (random, unobserved) log-linear change (''step size'')
        in reproduction number at the *k*-th change-point for jurisdiction *m*,
        with the following priors:
+       </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,1},\,\alpha_{m,2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)]),\;\textnormal{\small{for\;each}}\;\,m"/>
+       </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,3}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty)),\;\textnormal{\small{for\;each}}\;\,m"/>
+       </br>
 
    *   *I(t-&gamma;<sub>m,k</sub>)* is the binary indicator variable,
        for jurisdiction *m*,
