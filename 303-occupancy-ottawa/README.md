@@ -154,7 +154,7 @@ among one another.
    where *R<sub>t</sub>* is the COVID-19 **reproduction number** on day *t* (see below),
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{{3/2}}g(s)\,ds"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{{3/2}}"/>
