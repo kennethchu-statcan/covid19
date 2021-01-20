@@ -119,7 +119,7 @@ among one another.
    and
    </br>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\pi_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,\pi_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi(s)\,ds"/>
    </br>
 
    for *&tau;* = 2, 3, ... , where *&pi;* is the probability density
