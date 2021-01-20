@@ -251,6 +251,10 @@ Observed variables:
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;:=\;\textnormal{number\;of\;COVID-19\;discharges{/}deaths\;on\;day\;$t$}"/>
    <br/>
+   We assume:
+   <br/>
+   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}"/>
+   <br/>
 
 *  Relation among *A<sub>t</sub>*, *C<sub>t</sub>* and *D<sub>t</sub>*
    (from which *D<sub>t</sub>* can be derived from *A<sub>t</sub>* and *C<sub>t</sub>*):
