@@ -163,7 +163,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds\,,\;\;\textnormal{for}\;\tau\,=\,2,3,\ldots"/>
    <br/>
 
    for *&tau;* = 2, 3, ... , where *g* is, for all jurisdictions, the probability density
