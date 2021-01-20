@@ -202,7 +202,13 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,3}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)])\,"/>
+       </br>
+
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
+       </br>
+
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
        </br>
 
    *   *I(t-&gamma;<sub>m,k</sub>)* is the binary indicator variable,
