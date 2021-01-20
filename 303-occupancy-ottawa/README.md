@@ -41,7 +41,7 @@ https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
 We were able to reproduce the results of the above article
 (based on data available up to March 28, 2020, with a 7-day death count forecast window).
 
-Two sub-models
+# Two sub-models
 --------------
 For the Ottawa COVID-19 hospital occupancy forecast, we constructed two separate
 hierarchical Bayesian models: one for modelling daily new hospital admission counts,
@@ -49,7 +49,7 @@ the other for hospital length of stay.
 The desired occupancy forecast is then obtained by suitably combining
 the results of the two sub-models.
 
-Model 1: Daily new hospital admission counts (reproduction number change-point model)
+# Model 1: Daily new hospital admission counts (reproduction number change-point model)
 -------------------------------------------------------------------------------------
 We have modified the original model of Flaxman et al. in an attempt to develop a model
 that could detect significant changes in the COVID-19 time-varying reproduction numbers
