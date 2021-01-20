@@ -156,6 +156,8 @@ among one another.
 
    <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
 
+   <img src="https://latex.codecogs.com/svg.latex?\,g_{{1}}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
+
    and
 
    <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
