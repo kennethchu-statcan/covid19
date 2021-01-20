@@ -253,7 +253,7 @@ Observed variables:
    <br/>
    We assume:
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;{\sim}\;{\textnormal{NegativeBinomial}}"/>
    <br/>
 
 *  Relation among *A<sub>t</sub>*, *C<sub>t</sub>* and *D<sub>t</sub>*
