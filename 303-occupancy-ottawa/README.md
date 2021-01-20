@@ -1,6 +1,5 @@
 
-Hierarchical Bayesian model for Ottawa COVID-19 hospital occupancy forecast
-===========================================================================
+# Hierarchical Bayesian model for Ottawa COVID-19 hospital occupancy forecast
 
 This analysis/forecast pipeline is an adaptation of the hierarchical model
 described by Flaxman et al. in:
