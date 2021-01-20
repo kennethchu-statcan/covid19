@@ -133,7 +133,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{infection\;occurs\;on}\;(t-\tau)^{\textnormal{th}}\\\textnormal{on}\;(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{infection\;occurs\;on}\\\textnormal{on}\;(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection}\\\textnormal{occurs}\end{array}\right)"/>
