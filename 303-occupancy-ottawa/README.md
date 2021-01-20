@@ -208,17 +208,18 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
        </br>
 
-   *   *I(t-&gamma;<sub>m,k</sub>)* is the binary indicator variable,
-       for jurisdiction *m*,
+   *   *I(t-&gamma;<sub>k</sub>)* is the binary indicator variable,
        which indicates whether time *t* is
-       before (*I(t-&gamma;<sub>m,k</sub>) = 0*) or
-       after (*I(t-&gamma;<sub>m,k</sub>) = 1*)
-       the *k*-th change-point of jurisdiction *m*.
+       before (*I(t-&gamma;<sub>k</sub>) = 0*) or
+       after (*I(t-&gamma;<sub>k</sub>) = 1*)
+       the *k*-th change-point.
 
-   *   *R<sub>m,0</sub>* is the jurisdiction-specific initial reproduction number,
+   *   *R<sub>0</sub>* is the jurisdiction-specific initial reproduction number,
        assumed to follow:
+       </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{m,0}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;R_{0}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
+       </br>
 
        where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
 
