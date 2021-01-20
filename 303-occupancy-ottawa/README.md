@@ -183,10 +183,10 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{{3}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{4}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/22\,,2020/04/11\,])"/>
        </br>
 
    *   *&alpha;<sub>m,k</sub>*
