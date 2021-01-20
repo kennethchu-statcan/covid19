@@ -77,13 +77,13 @@ among one another.
    on day *t* is assumed to be given by:
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hospital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hospital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot{P}\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot{P}\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>
    <br/>
 
    for *t* = 1, 2, ... , where
@@ -136,29 +136,29 @@ among one another.
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,c_{t}\;=\;\textnormal{number\;of\;infections\;on\;day}\;t"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,c_{t}\;=\;\textnormal{number\;of\;infections\;on\;day}\;t"/>
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,{\color{white}c_{t}}\;=\;\left(\begin{array}{c}\textnormal{reproduction}\\\textnormal{number\;on\;day}\;t\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{effective\;number\;of}\\\textnormal{infected\;individuals\;on\;day}\;t\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}c_{t}}\;=\;\left(\begin{array}{c}\textnormal{reproduction}\\\textnormal{number\;on\;day}\;t\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{effective\;number\;of}\\\textnormal{infected\;individuals\;on\;day}\;t\end{array}\right)"/>
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,{\color{white}c_{t}}\;=\;R_{t}\;\cdot\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{on}\;(t-\tau)^{th}\;\textnormal{day\;after\;infection}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}c_{t}}\;=\;R_{t}\;\cdot\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{on}\;(t-\tau)^{th}\;\textnormal{day\;after\;infection}\end{array}\right)"/>
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,{\color{white}c_{t}}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}c_{t}}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
    <br/>
    <br/>
 
    where *R<sub>t</sub>* is the COVID-19 **reproduction number** on day *t* (see below),
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
 
    and
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
 
    for *&tau;* = 2, 3, ... , where *g* is, for all jurisdictions, the probability density
    of the *serial interval distribution*.
@@ -170,7 +170,7 @@ among one another.
 *  Lastly, our change-point model assumes that the COVID-19 reproduction number
    *R<sub>t</sub>* has the following form:
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{k}\cdot{I}_{\{t\,-\,\gamma_{k}\}}\,\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{k}\cdot{I}_{\{t\,-\,\gamma_{k}\}}\,\right)"/>
 
    where
 
@@ -181,16 +181,16 @@ among one another.
        with the following priors:
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\gamma_{1}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/01\,,2020/03/28\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{1}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/01\,,2020/03/28\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\gamma_{2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/07/05\,,2020/08/01\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/07/05\,,2020/08/01\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/0{9}/0{6}\,,2020/10/03\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/0{9}/0{6}\,,2020/10/03\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/11/01\,,\textnormal{maxChgPt4}\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/11/01\,,\textnormal{maxChgPt4}\,])"/>
        </br>
 
        where **maxChgPt4** is last day of data availability less 14 days.
@@ -201,16 +201,16 @@ among one another.
        with the following priors:
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),0])\,"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),0])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\alpha_{2}\;\sim\;\textnormal{\small{Uniform}}([0,\log(1.5)])\,"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{2}\;\sim\;\textnormal{\small{Uniform}}([0,\log(1.5)])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}([-\log({1}{.}{5}),0])\,"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}([-\log({1}{.}{5}),0])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.1),\log(1.1)))"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.1),\log(1.1)))"/>
        </br>
 
    *   *I(t-&gamma;<sub>k</sub>)* is the binary indicator variable,
@@ -223,7 +223,7 @@ among one another.
        assumed to follow:
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\normalsize\,R_{{0}}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,R_{{0}}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
        </br>
 
        where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
@@ -237,9 +237,9 @@ Observed variables:
    on day *t* is assumed to be given by:
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,A_{t}\;:=\;\textnormal{number\;of\;COVID-19\;hospital\;admissions\;on\;day\;$t$}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,A_{t}\;:=\;\textnormal{number\;of\;COVID-19\;hospital\;admissions\;on\;day\;$t$}"/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,C_{t}\;:=\;\textnormal{COVID-19\;hospital\;mid-night\;census\;count\;on\;day\;$t$}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;:=\;\textnormal{COVID-19\;hospital\;mid-night\;census\;count\;on\;day\;$t$}"/>
    <br/>
 
 
