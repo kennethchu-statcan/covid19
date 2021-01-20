@@ -130,8 +130,8 @@ among one another.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi\;\sim\;\textnormal{\small{{IHR}}}_{}\cdot\left(\,\Gamma(5.1,0.86)+\dfrac{1}{2}\cdot\Gamma(18.8,0.45)\,\right)"/>
 
-   where IHR stands for the COVID-19 *infection hospitalization rate* of Ottawa
-   (set to be 0.026).
+   where IHR stands for the COVID-19 *infection hospitalization rate* of Ottawa,
+   and it is set to be 0.026 in our model.
 
 *  The number *c<sub>t</sub>* of COVID-19 infected individuals newly infected
    on day *t* is assumed to satisfy the following recurrence relation:
