@@ -190,7 +190,7 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/07/05\,,2020/08/01\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/0{9}/05\,,2020/10/03\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/0{9}/06\,,2020/10/03\,])"/>
        </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/11/01\,,\textnormal{maxChgPt4}\,])"/>
