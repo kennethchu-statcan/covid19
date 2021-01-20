@@ -194,7 +194,7 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/0{9}/0{6}\,,2020/10/03\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/11/01\,,\textnormal{maxChgPt4}\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{4}\;\sim\;\textnormal{\small{Uniform}}([\,2020/11/01\,,\textnormal{maxChgPt4}\,])"/>
        </br>
 
        where **maxChgPt4** is last day of data availability less 14 days.
