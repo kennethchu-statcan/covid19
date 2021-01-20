@@ -75,10 +75,10 @@ the results of the two sub-models.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>  
 
    for *t* = 1, 2, ... , where
-   *  *c<sub>m,&tau;</sub>* is the *unobserved* number of **new** COVID-19 infected individuals
-      in jurisdiction *m*, on day *&tau;*, and
-   *  *&pi;<sub>m,&tau;</sub>* is the probability, for jurisdiction *m*,
-      that a COVID-19 infected person will die *&tau;* days after COVID-19 infection.
+   *  *c<sub>m,&tau;</sub>* is the *unobserved* number
+      of **new** COVID-19 infected individuals on day *&tau;*, and
+   *  *&pi;<sub>&tau;</sub>* is the probability that a COVID-19 infected
+      person will die *&tau;* days after COVID-19 infection.
 
 *  Flaxman et al. assumed that each jurisdiction *m* has its own
    (weighted) *infection fatality ratio* IFR<sub>*m*</sub> (probability of COVID-19 death given COVID-19 infection).
