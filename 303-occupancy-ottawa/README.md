@@ -265,7 +265,7 @@ Observed variables:
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected\;number\;of}\\\textnormal{dishcarges/deaths}\\\textnormal{on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected\;number\;of}\\\textnormal{dishcarges/deaths}\\\textnormal{on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;discharges/deaths\;on\;day\it\;t}\\\textnormal{among\;COVID-19\;patients\;admitted\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot{P}\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
