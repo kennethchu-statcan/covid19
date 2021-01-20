@@ -74,8 +74,6 @@ the results of the two sub-models.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>  
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot\pi_{m,t-\tau}"/>
-
    for *t* = 1, 2, ... , where
    *  *c<sub>m,&tau;</sub>* is the *unobserved* number of **new** COVID-19 infected individuals
       in jurisdiction *m*, on day *&tau;*, and
