@@ -38,8 +38,7 @@ The authors have very kindly made available their code here:
 
 https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
 
-We were able to reproduce the results of the above article
-(based on data available up to March 28, 2020, with a 7-day death count forecast window).
+We describe our adaption below.
 
 ## Two sub-models
 
