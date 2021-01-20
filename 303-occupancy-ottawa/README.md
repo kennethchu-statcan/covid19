@@ -72,7 +72,7 @@ the results of the two sub-models.
 *  The expected number *d<sub>t</sub>* of COVID-19 hopsital admissions
    on day *t* is assumed to be given by:
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{mt-\tau}"/>  
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>  
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{m,t}\;=\;\sum_{\tau=0}^{t-1}\,c_{m,\tau}\cdot\pi_{m,t-\tau}"/>
 
