@@ -249,7 +249,7 @@ Observed variables:
 *  Unobserved (but unambiguously derivable) variables
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,D_{t}\;:=\;\textnormal{number\;of\;COVID-19\;discharges\;deaths\;on\;day\;$t$}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;:=\;\textnormal{number\;of\;COVID-19\;discharges\;deaths\;on\;day\;$t$}"/>
    <br/>
 
 # Requirements
