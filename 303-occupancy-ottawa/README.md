@@ -214,9 +214,6 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}([-\log({1}{.}{5}),0])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.1),\log(1.1)))"/>
-       </br>
-
        <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}([-\log(1.1),\log(1.1)])"/>
        </br>
 
