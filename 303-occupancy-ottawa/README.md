@@ -196,9 +196,6 @@ among one another.
        with the following priors:
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,1},\,\alpha_{m,2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)]),\;\textnormal{\small{for\;each}}\;\,m"/>
-       </br>
-
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)])\,"/>
        </br>
 
