@@ -57,6 +57,8 @@ the results of the two sub-models.
 Note that the key feature of our model (we emphasize: adapted from Flaxman et al.)
 is that it models the random delay between the unobserved event of COVID-19
 infection and the observed event of hospital admission for COVID-19.
+The following is the list of the components of the model, and their relations
+among one another.
 
 *  Observed daily COVID-19 hospital admission count
 
