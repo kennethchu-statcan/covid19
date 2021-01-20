@@ -271,7 +271,7 @@ Observed variables:
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{admissions}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{proportion\;of}\\\textnormal{discharge{/}death}\\\textnormal{after}\;(t-\tau)\;\textnormal{days}\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{admissions}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{proportion\;of}\\\textnormal{discharge{/}death}\\\textnormal{after\;days}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{admissions}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{proportion\;of}\\\textnormal{discharge{/}death}\\\textnormal{after\;$(t-\tau)$\;days}\end{array}\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>
