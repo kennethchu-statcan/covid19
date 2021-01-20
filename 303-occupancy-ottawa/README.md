@@ -199,6 +199,9 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,1},\,\alpha_{m,2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)]),\;\textnormal{\small{for\;each}}\;\,m"/>
        </br>
 
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,1},\,\alpha_{m,2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)]),\;\textnormal{\small{for\;each}}"/>
+       </br>
+
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{m,3}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
        </br>
 
