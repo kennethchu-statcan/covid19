@@ -74,7 +74,7 @@ the results of the two sub-models.
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>  
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hopsital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hopsital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>  
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hopsital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\;$t$}\\\textnormal{hopsital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>  
 
    for *t* = 1, 2, ... , where
    *  *c<sub>&tau;</sub>* is the *unobserved* number
