@@ -157,7 +157,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{3/2}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,g_{1}\;=\;\int_{0}^{{3/2}}"/>
    <br/>
 
    and
