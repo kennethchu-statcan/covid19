@@ -204,16 +204,16 @@ among one another.
        with the following priors:
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)])\,"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),0])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{2}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),\log(4)])\,"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{2}\;\sim\;\textnormal{\small{Uniform}}([0,\log(1.5)])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.5),0))"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\infty,\infty))"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.1),\log(1.1)))"/>
        </br>
 
    *   *I(t-&gamma;<sub>k</sub>)* is the binary indicator variable,
