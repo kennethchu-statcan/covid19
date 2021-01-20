@@ -160,13 +160,10 @@ among one another.
    and
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds"/>
-   <br/>
-
    <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds\,,\;\;\textnormal{{for}}\;\tau\,=\,2,3,\ldots"/>
    <br/>
 
-   for *&tau;* = 2, 3, ... , where *g* is, for all jurisdictions, the probability density
+   where *g* is, for all jurisdictions, the probability density
    of the *serial interval distribution*.
    We remark that the discretized-to-the-day serial interval distribution
    (determined precisely by *g<sub>1</sub>*, *g<sub>2</sub>*, *g<sub>3</sub>*, ...)
