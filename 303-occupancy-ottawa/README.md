@@ -231,6 +231,18 @@ among one another.
 
 # Model 2: Ottawa COVID-19 hospital length of stay
 
+Observed variables:
+
+*  The expected number *d<sub>t</sub>* of COVID-19 hospital admissions
+   on day *t* is assumed to be given by:
+   <br/>
+   <br/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;A_{t}\;:=\;\textnormal{number\;of\;COVID-19\;hospital\;admissions\;on\;day\;$t$}"/>
+   <br/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;C_{t}\;:=\;\textnormal{COVID-19\;hospital\;mid-night\;census\;count\;on\;day\;$t$}"/>
+   <br/>
+
+
 
 # Requirements
 
