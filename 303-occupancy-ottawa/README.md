@@ -190,13 +190,13 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{2}\;\sim\;\textnormal{\small{Uniform}}([\,2020/07/05\,,2020/08/01\,])"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{{3}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/09/06\,,2020/10/03\,])"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{3}\;\sim\;\textnormal{\small{Uniform}}([\,2020/09/06\,,2020/10/03\,])"/>
        </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_{{4}}\;\sim\;\textnormal{\small{Uniform}}([\,2020/11/01\,,\textnormal{maxChgPt4}\,])"/>
        </br>
 
-       where *maxChgPt4* is last day of data availability less 14 days.
+       where **maxChgPt4** is last day of data availability less 14 days.
 
    *   *&alpha;<sub>k</sub>*
        is the (random, unobserved) log-linear change (''step size'')
