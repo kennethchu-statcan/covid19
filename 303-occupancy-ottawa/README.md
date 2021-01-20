@@ -108,12 +108,16 @@ among one another.
 
    More technically, these assumptions translate to the assumption that the parameter
    *&pi;<sub>m,&tau;</sub>* above is given by:
+   </br>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,1}\;=\;\int_{0}^{3/2}\pi_{m}(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{1}\;=\;\int_{0}^{3/2}\pi(s)\,ds"/>
+   </br>
 
    and
+   </br>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m,\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi_{m}(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi(s)\,ds"/>
+   </br>
 
    for *&tau;* = 2, 3, ... , where *&pi;<sub>m</sub>* is the probability density
    of the of infection-to-death time of jurisdiction *m*, and is assumed to have the form:
