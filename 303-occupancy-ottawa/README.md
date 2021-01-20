@@ -141,9 +141,6 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\;\cdot\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{on}\;(t-\tau)^{th}\;\textnormal{day\;after\;infection}\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection}\\\textnormal{occurs}\end{array}\right)"/>
-   <br/>
-
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
 
    where *R<sub>m,t</sub>* is the COVID-19 **reproduction number** of jurisdiction *m*
