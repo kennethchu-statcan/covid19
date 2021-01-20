@@ -123,7 +123,7 @@ among one another.
    of the of infection-to-hospitalization delay, and
    is assumed to have the form:
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi\;\sim\;\textnormal{\small{{IHR}}}_{}\cdot\left(\,\Gamma(5.1,cv=0.86)+\dfrac{1}{2}\cdot\Gamma(18.8,0.45)\,\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi\;\sim\;\textnormal{\small{{IHR}}}_{}\cdot\left(\,\Gamma(5.1,0.86)+\dfrac{1}{2}\cdot\Gamma(18.8,0.45)\,\right)"/>
 
    where IHR stands for the COVID-19 *infection hospitalization rate* of Ottawa
    (set to be 0.026).
