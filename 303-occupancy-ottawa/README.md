@@ -68,14 +68,14 @@ among one another.
 
    *  *d<sub>t</sub>*
       = mean of the Negative Binomial
-      = expected number of COVID-19 hopsital admission on day *t*
+      = expected number of COVID-19 hospital admission on day *t*
    *  variance of the Negative Binomial, assumed to take the form
       *d<sub>t</sub> + (d<sub>t</sub>)<sup>2</sup>/&Psi;*
 
 *  *&Psi;* is assumed to have been sampled from
    the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
 
-*  The expected number *d<sub>t</sub>* of COVID-19 hopsital admissions
+*  The expected number *d<sub>t</sub>* of COVID-19 hospital admissions
    on day *t* is assumed to be given by:
    <br/>
    <br/>
@@ -106,6 +106,10 @@ among one another.
    The former is assumed -- for all jurisdictions -- to have been sampled from
    the Gamma distribution *&Gamma;(5.1,0.86)*, while the latter from *&Gamma;(18.8,0.45)*,
    where the (mean,cv)-parametrization of the Gamma distribution is used.
+
+   In our case, we need to replace the (onset-of-symptom)-to-death delay with
+   the (onset-of-symptom)-to-(hospital-admission) delay.
+   For simplicity, we took this latter delay to be half of the former.
 
    More technically, these assumptions translate to the assumption that the parameter
    *&pi;<sub>&tau;</sub>* above is given by:
