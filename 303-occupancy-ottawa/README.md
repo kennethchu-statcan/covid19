@@ -108,7 +108,7 @@ among one another.
    where the (mean,cv)-parametrization of the Gamma distribution is used.
 
    In our case, we need to replace the (symptom-onset)-to-death delay with
-   the (onset-of-symptom)-to-(hospital-admission) delay.
+   the (symptom-onset)-to-(hospital-admission) delay.
    For simplicity, we took this latter delay to be half of the former.
 
    More technically, these assumptions translate to the assumption that the parameter
