@@ -251,12 +251,6 @@ Observed variables:
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;:=\;\textnormal{number\;of\;COVID-19\;discharges{/}deaths\;on\;day\;$t$}"/>
    <br/>
-   <br/>
-   We assume:
-   <br/>
-   <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
-   <br/>
 
 *  Relation among *A<sub>t</sub>*, *C<sub>t</sub>* and *D<sub>t</sub>*
    (from which *D<sub>t</sub>* can be derived from *A<sub>t</sub>* and *C<sub>t</sub>*):
@@ -264,6 +258,13 @@ Observed variables:
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;=\;\sum^{t}_{\tau=0}\,A_{\tau}\;-\;\sum^{t}_{\tau=0}\,D_{\tau}"/>
    <br/>
+
+*  We assume:
+   <br/>
+   <br/>
+   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
+   <br/>
+
 
 
 # Requirements
