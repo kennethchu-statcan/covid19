@@ -78,7 +78,8 @@ the results of the two sub-models.
    *  *c<sub>&tau;</sub>* is the *unobserved* number
       of **new** COVID-19 infected individuals on day *&tau;*, and
    *  *&pi;<sub>&tau;</sub>* is the probability that a COVID-19 infected
-      person will die *&tau;* days after COVID-19 infection.
+      person will be admitted to hospital for COVID-19
+      *&tau;* days after COVID-19 infection.
 
 *  Flaxman et al. assumed that each jurisdiction *m* has its own
    (weighted) *infection fatality ratio* IFR<sub>*m*</sub> (probability of COVID-19 death given COVID-19 infection).
