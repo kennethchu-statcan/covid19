@@ -171,7 +171,7 @@ among one another.
 
    where
 
-   *   *&gamma;<sub>m,k</sub>* is
+   *   *&gamma;<sub>k</sub>* is
        the (random, unobserved) time of occurrence of
        the *k*-th change-point in the COVID-19
        time-varying reproduction number for jurisdiction *m*,
