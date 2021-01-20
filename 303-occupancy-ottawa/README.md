@@ -82,7 +82,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hopsital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)P\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot{P}\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>
@@ -133,7 +133,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,\begin{array}{c}\textnormal{\#\;infections}\\\textnormal{on\;day}\end{array}{g}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,\begin{array}{c}\textnormal{\#\;infections}\\\textnormal{on\;day}\end{array}g_{t-\tau}"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
