@@ -255,8 +255,6 @@ Observed variables:
    We assume:
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t},d_{t}+\dfrac{d_{t}^{2}}{\psi}\,\right)"/>
-   <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
    <br/>
 
