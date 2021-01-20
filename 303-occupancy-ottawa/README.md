@@ -176,7 +176,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{k}\cdot{I}_{\{t\,-\,\gamma_{k}\}}\,\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{k}\;\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{{k}}\;\right)"/>
    <br/>
 
    where
