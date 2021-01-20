@@ -251,8 +251,8 @@ Observed variables:
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;:=\;\textnormal{number\;of\;COVID-19\;discharges{/}deaths\;on\;day\;$t$}"/>
    <br/>
-   <br/>
    We assume:
+   <br/>
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;"/>
    <br/>
