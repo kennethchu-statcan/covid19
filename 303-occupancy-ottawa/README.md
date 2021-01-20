@@ -60,11 +60,11 @@ the results of the two sub-models.
    (which can be regarded as Gamma-mixture of Poisson distributions),
    which is specified by two parameters:
 
-   *  *d<sub>m,t</sub>*
+   *  *d<sub>t</sub>*
       = mean of the Negative Binomial
-      = expected number of COVID-19 deaths for jurisdiction *m* on day *t*
+      = expected number of COVID-19 hopsital admission on day *t*
    *  variance of the Negative Binomial, which the authors assumed to have the form
-      *d<sub>m,t</sub> + (d<sub>m,t</sub>)<sup>2</sup>/&Psi;*
+      *d<sub>t</sub> + (d<sub>t</sub>)<sup>2</sup>/&Psi;*
 
 *  *&Psi;* is assumed to have been sampled from
    the rectified Gaussian distribution *Normal<sup>+</sup>(0,5)*.
