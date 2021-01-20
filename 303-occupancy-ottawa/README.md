@@ -44,12 +44,15 @@ We were able to reproduce the results of the above article
 ## Two sub-models
 
 For the Ottawa COVID-19 hospital occupancy forecast, we constructed two separate
-hierarchical Bayesian models: one for modelling daily new hospital admission counts,
-the other for hospital length of stay.
+hierarchical Bayesian models:
+
+*   Model 1: daily new hospital admission counts,
+*   Model 2: hospital length of stay.
+
 The desired occupancy forecast is then obtained by suitably combining
 the results of the two sub-models.
 
-## Model 1: Daily new hospital admission counts
+# Model 1: Daily new hospital admission counts
 
 (reproduction number change-point model)
 
