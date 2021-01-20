@@ -217,6 +217,9 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.1),\log(1.1)))"/>
        </br>
 
+       <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}([-\log(1.1),\log(1.1)])"/>
+       </br>
+
    *   *I(t-&gamma;<sub>k</sub>)* is the binary indicator variable,
        which indicates whether time *t* is
        before (*I(t-&gamma;<sub>k</sub>) = 0*) or
