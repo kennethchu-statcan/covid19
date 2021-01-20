@@ -54,7 +54,7 @@ the results of the two sub-models.
 
 ### Brief description of the hierarchical structure of the model of Flaxman et al.
 
-*  Observed COVID-19 death count, for given (jurisdiction,day)
+*  Observed daily COVID-19 hospital admission count
 
    Assumed to follow a **Negative Binomial** distribution
    (which can be regarded as Gamma-mixture of Poisson distributions),
