@@ -52,43 +52,6 @@ the results of the two sub-models.
 
 # Model 1: Daily new hospital admission counts (reproduction number change-point model)
 
-We have modified the original model of Flaxman et al. in an attempt to develop a model
-that could detect significant changes in the COVID-19 time-varying reproduction numbers
-for a given collection of jurisdictions, based on the COVID-19 death count time series
-for these jurisdictions.
-
-Recall that one of the key objectives of the original Flaxman et al. model was to estimate
-the effects of social distancing measures on COVID-19 transmissibility (more precisely,
-time-varying reproduction number).
-In their model, for each given jurisdiction, its time-varying reproduction number results
-from the multiplicative effects of the different types of social distancing measures
-on the initial reproduction number, as these measures are imposed in time.
-Note in particular that the Flaxman et al. model assumes that the time-varying reproduction
-number is piecewise constant in time.
-We modified the Flaxman et al. model by replacing the social distancing effects with
-a change-point model instead, so as to estimate the timing of change points in the
-(still piecewise constant) time-varying reproduction number, and the
-magnitudes of change at these change points.
-
-In addition, we have also included slight modifications in order to:
-
-*  use data up June 21, 2020 for the 11 European jurisdictions
-*  included the following four Canadian provinces in the analysis: Alberta, British Columbia, Ontario, Québec
-*  included the following one Canadian city in the analysis: Ottawa (data up to June 8, 2020)
-
-### General assumed structure of hierarchical models
-
-*  The mechanism that generated the actual observed data belongs to a certain parametric family
-   of related mechanisms (probability distributions).
-   This parametric family of distributions is parametrized by a (finite) number of parameters.
-*  These parameters are themselves considered **unobserved** random quantities, which had been
-   sampled from their own respective pobability distributions,
-   which in turn have their own (hyper)parameters.
-*  This may go on for several "layers", hence the nomenclature *hierarchical models*.
-*  (Bayesian) inference in this context refers to estimating posterior distributions
-   (or sometimes, more easily computable derived quantities)
-   for the (hyper)parameters based on observed data, and prior probabilistic assumptions.
-
 ### Brief description of the hierarchical structure of the model of Flaxman et al.
 
 *  Observed COVID-19 death count, for given (jurisdiction,day)
