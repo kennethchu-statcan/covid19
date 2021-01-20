@@ -174,6 +174,10 @@ among one another.
    *R<sub>t</sub>* has the following form:
 
    <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}\cdot\exp\!\left(\;\sum^{{4}}_{k=1}\,\alpha_{k}\cdot{I}_{\{t\,-\,\gamma_{k}\}}\,\right)"/>
+   <br/>
+
+   <img src="https://latex.codecogs.com/svg.latex?\,R_{t}\;=\;R_{0}"/>
+   <br/>
 
    where
 
