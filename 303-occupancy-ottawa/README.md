@@ -210,7 +210,7 @@ among one another.
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{2}\;\sim\;\textnormal{\small{Uniform}}([0,\log(1.5)])\,"/>
        </br>
 
-       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}([-\log(1.5),0])\,"/>
+       <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{3}\;\sim\;\textnormal{\small{Uniform}}([{-}\log(1.5),0])\,"/>
        </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\Large&space;\alpha_{4}\;\sim\;\textnormal{\small{Uniform}}((-\log(1.1),\log(1.1)))"/>
