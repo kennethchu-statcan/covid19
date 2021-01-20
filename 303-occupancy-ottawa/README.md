@@ -52,8 +52,6 @@ the results of the two sub-models.
 
 # Model 1: Daily new hospital admission counts (reproduction number change-point model)
 
-### Brief description of the hierarchical structure of the model of Flaxman et al.
-
 Note that the key feature of our model (we emphasize: adapted from Flaxman et al.)
 is that it models the random delay between the unobserved event of COVID-19
 infection and the observed event of hospital admission for COVID-19.
