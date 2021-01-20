@@ -82,8 +82,6 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected}\\\textnormal{hospital\;admission}\\\textnormal{count\;on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;admissions\;on\;day\it\;t}\\\textnormal{among\;individuals\;infected\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
    <br/>
 
-   <annotation encoding="application/x-tex">{\displaystyle X=\operatorname {Spec} (\mathbb {C} [x,x^{-1}]){\xrightarrow {i}}\operatorname {Spec} (\mathbb {C} [x])=Y}</annotation>
-
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot{P}\left(\begin{array}{c}\textnormal{being\;admitted\;on}\\(t-\tau)^{\textnormal{th}}\;\textnormal{day}\\\textnormal{after\;infection}\end{array}\right)"/>
    <br/>
 
