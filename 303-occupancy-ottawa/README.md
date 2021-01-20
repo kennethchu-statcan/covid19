@@ -63,7 +63,7 @@ the results of the two sub-models.
    *  *d<sub>t</sub>*
       = mean of the Negative Binomial
       = expected number of COVID-19 hopsital admission on day *t*
-   *  variance of the Negative Binomial, which the authors assumed to have the form
+   *  variance of the Negative Binomial, assumed to take the form
       *d<sub>t</sub> + (d<sub>t</sub>)<sup>2</sup>/&Psi;*
 
 *  *&Psi;* is assumed to have been sampled from
