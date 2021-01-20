@@ -134,11 +134,11 @@ among one another.
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;\left(\begin{array}{c}\textnormal{reproduction}\\\textnormal{number\;on\;day}\;t\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{effective\;number\;of}\\\textnormal{infected\;individuals\;on\;day}\;t\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}c_{t}}\;=\;\left(\begin{array}{c}\textnormal{reproduction}\\\textnormal{number\;on\;day}\;t\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{effective\;number\;of}\\\textnormal{infected\;individuals\;on\;day}\;t\end{array}\right)"/>
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\;\cdot\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{on}\;(t-\tau)^{th}\;\textnormal{day\;after\;infection}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}c_{t}}\;=\;R_{t}\;\cdot\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number}\\\textnormal{of\,infections}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{an\;arbitrary\;new\;infection\;occurs}\\\textnormal{on}\;(t-\tau)^{th}\;\textnormal{day\;after\;infection}\end{array}\right)"/>
    <br/>
    <br/>
 
