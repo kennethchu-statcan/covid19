@@ -107,7 +107,7 @@ among one another.
    the Gamma distribution *&Gamma;(5.1,0.86)*, while the latter from *&Gamma;(18.8,0.45)*.
 
    More technically, these assumptions translate to the assumption that the parameter
-   *&pi;<sub>m,&tau;</sub>* above is given by:
+   *&pi;<sub>&tau;</sub>* above is given by:
    </br>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{1}\;=\;\int_{0}^{3/2}\pi(s)\,ds"/>
@@ -119,20 +119,17 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi(s)\,ds"/>
    </br>
 
-   for *&tau;* = 2, 3, ... , where *&pi;<sub>m</sub>* is the probability density
-   of the of infection-to-death time of jurisdiction *m*, and is assumed to have the form:
+   for *&tau;* = 2, 3, ... , where *&pi;* is the probability density
+   of the of infection-to-hospitalization delay, and
+   is assumed to have the form:
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\textnormal{\small{IFR}}_{m}\cdot\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;\pi_{m}\;\sim\;\textnormal{\small{IHR}}_{m}\cdot\left(\,\Gamma(5.1,0.86)+\Gamma(18.8,0.45)\,\right)"/>
 
-   where IFR<sub>*m*</sub> stands for the *weighted infection fatality ratio* of jurisdiction *m*,
-   whose definition/estimation is described in the original paper by Flaxman et al. cited above,
-   as well as in
+   where IHR stands for the COVID-19 *infection hospitalization rate* of Ottawa
+   (set to be 0.026).
 
-   https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7
-
-*  The number *c<sub>m,t</sub>* of COVID-19 infected individuals
-   newly infected on day *t* for jurisdiction *m* is assumed to satisfy
-   the following recurrence relation:
+*  The number *c<sub>t</sub>* of COVID-19 infected individuals newly infected
+   on day *t* is assumed to satisfy the following recurrence relation:
    <br/>
    <br/>
 
