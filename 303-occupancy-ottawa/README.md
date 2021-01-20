@@ -212,9 +212,10 @@ In addition, we have also included slight modifications in order to:
 
 # Requirements
 
-*  R v3.6.2
-*  R packages: gdata, EnvStats, ggplot2, tidyr, dplyr, rstan, data.table, lubridate, gdata,
-   matrixStats, scales, gridExtra, ggpubr, bayesplot, cowplot, readr
+*  R v4.0.2
+*  R packages: bayesplot, cowplot, data.table dplyr, EnvStats, gdata, ggplot2,
+   ggpubr, gridExtra, lubridate, matrixStats, readr, readxl, RColorBrewer,
+   rstan, scales, tidyr
 
 # How to execute the pipeline
 
@@ -227,23 +228,18 @@ git clone https://github.com/kennethchu-statcan/covid19.git
 Change directory to the folder of this pipeline in the local cloned repository:
 
 ```
-cd <LOCAL CLONED REPOSITORY>/201-changepoint-ottawa/
+cd <LOCAL CLONED REPOSITORY>/303-occupancy-ottawa/
 ```
 
-If you are using a Linux or macOS computer, execute the following shell script (in order to run the full pipeline):
+If you are using a Linux or macOS computer, execute the following shell script
+(in order to run the full pipeline):
 
 ```
 .\run-main.sh
 ```
 
-If you are using a Windows computer, execute the following batch script at the Command Prompt instead (NOT tested):
-
-```
-.\run-main.bat
-```
-
 This will trigger the creation of the output folder
-`<LOCAL CLONED REPOSITORY>/201-changepoint-ottawa/output/`
+`<LOCAL CLONED REPOSITORY>/303-changepoint-ottawa/output/`
 if it does not already exist, followed by execution of the pipeline.
 All output and log files will be saved to the output folder.
 See below for information about the contents of the output folder.
