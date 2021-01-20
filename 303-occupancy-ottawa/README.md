@@ -101,10 +101,11 @@ among one another.
    that he/she will not die from the disease, i.e. will recover.
 
    For a COVID-19 infected individual who dies from COVID-19, Flaxman et al. assumed,
-   based on earlier studies, that the infection-to-death time is the sum of two durations:
-   the infection-to-(onset-of-symptom) time, and the (onset-of-symptom)-to-death time.
+   based on earlier studies, that the infection-to-death delay is the sum of two durations:
+   the infection-to-(onset-of-symptom) delay, and the (onset-of-symptom)-to-death delay.
    The former is assumed -- for all jurisdictions -- to have been sampled from
-   the Gamma distribution *&Gamma;(5.1,0.86)*, while the latter from *&Gamma;(18.8,0.45)*.
+   the Gamma distribution *&Gamma;(5.1,0.86)*, while the latter from *&Gamma;(18.8,0.45)*,
+   where the (mean,cv)-parametrization of the Gamma distribution is used.
 
    More technically, these assumptions translate to the assumption that the parameter
    *&pi;<sub>&tau;</sub>* above is given by:
