@@ -51,9 +51,7 @@ hierarchical Bayesian models:
 The desired occupancy forecast is then obtained by suitably combining
 the results of the two sub-models.
 
-# Model 1: Daily new hospital admission counts
-
-(reproduction number change-point model)
+# Model 1: Daily new hospital admission counts (reproduction number change-point model)
 
 We have modified the original model of Flaxman et al. in an attempt to develop a model
 that could detect significant changes in the COVID-19 time-varying reproduction numbers
@@ -79,8 +77,8 @@ In addition, we have also included slight modifications in order to:
 *  included the following four Canadian provinces in the analysis: Alberta, British Columbia, Ontario, Québec
 *  included the following one Canadian city in the analysis: Ottawa (data up to June 8, 2020)
 
-General assumed structure of hierarchical models
-------------------------------------------------
+### General assumed structure of hierarchical models
+
 *  The mechanism that generated the actual observed data belongs to a certain parametric family
    of related mechanisms (probability distributions).
    This parametric family of distributions is parametrized by a (finite) number of parameters.
@@ -92,8 +90,8 @@ General assumed structure of hierarchical models
    (or sometimes, more easily computable derived quantities)
    for the (hyper)parameters based on observed data, and prior probabilistic assumptions.
 
-Brief description of the hierarchical structure of the model of Flaxman et al.
-------------------------------------------------------------------------------
+### Brief description of the hierarchical structure of the model of Flaxman et al.
+
 *  Observed COVID-19 death count, for given (jurisdiction,day)
 
    Assumed to follow a **Negative Binomial** distribution
@@ -213,14 +211,14 @@ Brief description of the hierarchical structure of the model of Flaxman et al.
 
        where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
 
-Requirements
-------------
+# Requirements
+
 *  R v3.6.2
 *  R packages: gdata, EnvStats, ggplot2, tidyr, dplyr, rstan, data.table, lubridate, gdata,
    matrixStats, scales, gridExtra, ggpubr, bayesplot, cowplot, readr
 
-How to execute the pipeline
----------------------------
+# How to execute the pipeline
+
 Clone this repository by running the following at the command line:
 
 ```
@@ -251,8 +249,8 @@ if it does not already exist, followed by execution of the pipeline.
 All output and log files will be saved to the output folder.
 See below for information about the contents of the output folder.
 
-Input files
------------
+# Input files
+
 All required input data and metadata files are located in
 `<LOCAL CLONED REPOSITORY>/000-data/2020-05-10.01/`.
 
@@ -332,8 +330,7 @@ All required input data and metadata files are located in
     the probability that an infected individual will infect someone else
     on the *t*-th day after his/her original infection.
 
-Main output files
------------------
+# Main output files
 
 *  __output-change-point-covars-R0.png__
 
