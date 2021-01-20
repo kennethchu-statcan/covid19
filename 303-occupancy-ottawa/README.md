@@ -113,13 +113,13 @@ among one another.
    *&pi;<sub>&tau;</sub>* above is given by:
    </br>
 
-   <img src="https://latex.codecogs.com/svg.latex?\normalsize\,\pi_{1}\;=\;\int_{0}^{3/2}\pi(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\pi_{1}\;=\;\int_{0}^{3/2}\pi(s)\,ds"/>
    </br>
 
    and
    </br>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,\pi_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi(s)\,ds"/>
+   <img src="https://latex.codecogs.com/svg.latex?\pi_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}\pi(s)\,ds"/>
    </br>
 
    for *&tau;* = 2, 3, ... , where *&pi;* is the probability density
