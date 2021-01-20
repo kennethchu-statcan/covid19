@@ -129,6 +129,7 @@ among one another.
 *  The number *c<sub>m,t</sub>* of COVID-19 infected individuals
    newly infected on day *t* for jurisdiction *m* is assumed to satisfy
    the following recurrence relation:
+   <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;\textnormal{number\;of\;infections\;on\;day}\;t"/>
    <br/>
