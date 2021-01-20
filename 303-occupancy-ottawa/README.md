@@ -246,11 +246,19 @@ Observed variables:
    <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;:=\;\textnormal{COVID-19\;hospital\;mid-night\;census\;count\;on\;day\;$t$}"/>
    <br/>
 
-*  Unobserved (but unambiguously derivable) variables
+*  Unobserved (but unambiguously derivable) variables:
    <br/>
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;:=\;\textnormal{number\;of\;COVID-19\;discharges{/}deaths\;on\;day\;$t$}"/>
    <br/>
+
+*  Relation among *A<sub>t</sub>*, *C<sub>t</sub>* and *D<sub>t</sub>*
+   (from which *D<sub>t</sub>* can be derived from *A<sub>t</sub>* and *C<sub>t</sub>*):
+   <br/>
+   <br/>
+   <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;=\;\sum^{t}_{\tau=0}"/>
+   <br/>
+
 
 # Requirements
 
