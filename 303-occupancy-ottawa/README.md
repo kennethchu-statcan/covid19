@@ -154,7 +154,7 @@ among one another.
    <br/>
    <br/>
 
-   where *R<sub>m,t</sub>* is the COVID-19 **reproduction number** of jurisdiction *m*
+   where *R<sub>t</sub>* is the COVID-19 **reproduction number** of jurisdiction *m*
    on day *t* (see below),
 
    <img src="https://latex.codecogs.com/svg.latex?\Large&space;g_{1}\;=\;\int_{0}^{3/2}g(s)\,ds"/>
