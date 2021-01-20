@@ -142,7 +142,7 @@ among one another.
    <br/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\Large&space;c_{t}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\Large&space;{\color{white}c_{t}}\;=\;R_{t}\cdot\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot{g}_{t-\tau}"/>
 
    where *R<sub>m,t</sub>* is the COVID-19 **reproduction number** of jurisdiction *m*
    on day *t* (see below),
