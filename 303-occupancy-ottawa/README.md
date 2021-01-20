@@ -268,13 +268,10 @@ Observed variables:
    <img src="https://latex.codecogs.com/svg.latex?\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected\;number\;of}\\\textnormal{dis{ch}arges{/}deaths}\\\textnormal{on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;discharges{/}deaths\;on\;day\it\;t}\\\textnormal{among\;COVID{-}19\;patients\;admitted\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{admissions}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{proportion\;of}\\\textnormal{discharge{/}death}\\\textnormal{after}\;(t-\tau)\;\textnormal{days}\end{array}\right)"/>
-   <br/>
-
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{admissions}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{proportion\;of}\\\textnormal{discharge{/}death}\\\textnormal{after\;$(t-\tau)$\;days}\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,c_{\tau}\cdot\pi_{\,t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\pi_{\,t-\tau}"/>
    <br/>
 
 # Requirements
