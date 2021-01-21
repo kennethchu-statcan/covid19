@@ -478,6 +478,27 @@ All required input data and metadata files are located in
    This panel illustrates the posterior distributions of the occurrence
    times, change directions and change magnitudes of the four change points.
 
+   *  __`<LOCAL CLONED REPOSITORY>/303-changepoint-ottawa/output/cutoff-2021-01-11/plot-LoS-expected-cowplot-Ottawa1.png`__
+
+      <img src="./supplementary/cutoff-2021-01-11/plot-LoS-expected-cowplot-Ottawa1.png" width="900">
+
+      Main output graphic of Model 2.
+
+      First panel (from top):
+      The vertical black bars illustrate the observed
+      Ottawa COVID-19 daily hospital **new admission counts**.
+
+      Second panel:
+      The vertical black bars illustrate the observed
+      Ottawa COVID-19 daily hospital **discharges/deaths**.
+      The cyan ribbon indicates the 95% credibility
+      interval of the estimated *expected*
+      Ottawa COVID-19 daily hospital discharges/deaths,
+      while the red line indicates the posterior median.
+
+      Bottom panel: Similar to middle panel, but for
+      Ottawa COVID-19 daily hospital **midnight census counts**.
+
 *  __output-change-point-3-panel-Italy.png__
 
    ![three-panel plot, Italy](./supplementary/output-change-point-3-panel-Italy.png)
