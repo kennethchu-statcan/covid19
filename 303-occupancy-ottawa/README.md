@@ -286,7 +286,7 @@ Probabilistic assumptions:
 
    <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t-1}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t_{*}}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}\;+\;\sum_{\tau=t_{*}+1}^{t-1}\;\widehat{A}_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{D}_{t}}\;=\;\sum_{\tau=0}^{t_{*}}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}\;+\;\sum_{\tau=t_{*}+1}^{t-1}\;\widehat{A}_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
 
 # Requirements
 
