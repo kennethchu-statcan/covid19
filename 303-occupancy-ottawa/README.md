@@ -413,9 +413,11 @@ All required input data and metadata files are located in
 
     This CSV file contains the assumed (discrete) *serial interval distribution*
     used by the model of Flaxman et al.
-    Given a duration *t* (in days), the serial interval distribution gives
-    the probability that an infected individual will infect someone else
-    on the *t*-th day after his/her original infection.
+    For a given new infection caused by a given existing infected individual,
+    the serial interval distribution gives the probability that
+    the new infection occurs on the *t*-th day
+    after the original day of infection of the existing infected individual,
+    for *t* = 1, 2, 3, ...
 
 # Main output files
 
