@@ -260,9 +260,8 @@ Observed variables:
    <br/>
 
 Probabilistic assumptions:
-   <br/>
-   <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
+
+*  <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\,d_{t}\;=\;\left(\begin{array}{c}\textnormal{expected\;number\;of}\\\textnormal{dis{ch}arges{/}deaths}\\\textnormal{on\;day\;$t$}\end{array}\right)\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{expected\;number\;of\;discharges{/}deaths\;on\;day\it\;t}\\\textnormal{among\;COVID{-}19\;patients\;admitted\;on\;day\;}0\leq\tau\leq\;t\end{array}\right)"/>
