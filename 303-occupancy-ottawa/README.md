@@ -338,15 +338,13 @@ in terms of the (mean,cv)-parametrization.
 
    <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{D}_{t}}\;=\;\sum_{\tau=0}^{t_{*}}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}\;+\;\sum_{\tau=t_{*}+1}^{t-1}\;\widehat{A}_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
 
-# What the pipeline does
-
 # Requirements
 
 *  R (statistical computing software)
 
 *  R packages: bayesplot, cowplot, data.table dplyr, EnvStats, gdata, ggplot2,
-   ggpubr, gridExtra, lubridate, matrixStats, readr, readxl, RColorBrewer,
-   rstan, scales, tidyr
+   ggpubr, gridExtra, lubridate, matrixStats, parallel, readr, readxl,
+   RColorBrewer, rmarkdown, rstan, scales, tidyr
 
 *  Tested on:
    *  R version v4.0.3, Ubuntu 20.04.1 LTS, x86_64-conda-linux-gnu (64-bit)
