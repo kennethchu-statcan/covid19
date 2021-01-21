@@ -254,7 +254,7 @@ The main inference targets are thus simply
 the shape and rate parameters of the family of Gamma distributions.
 The observed data are the daily hospital admission counts and
 daily discharge/death counts (derived from admission and midnight census counts).
-The probabilistic assumptions of the model stipulates the random delay
+The probabilistic assumptions of Model 2 stipulates the random delay
 between hospital admission and discharge/death.
 
 Observed variables:
