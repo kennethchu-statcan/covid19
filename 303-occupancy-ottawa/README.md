@@ -51,7 +51,7 @@ The desired occupancy forecast is then obtained by suitably combining
 the results of the two sub-models.
 
 The present pipeline assesses the effectiveness of our model
-for hospital occupancy forecast by applying the model
+for hospital occupancy forecast by applying separately the model
 eight times, each time with a different training data cut-off
 (more precisely, eight consecutive Mondays: 2020-11-13, 2020-11-30, ... , 2021-01-11),
 and examines the agreement between the actual hospital occupancy
