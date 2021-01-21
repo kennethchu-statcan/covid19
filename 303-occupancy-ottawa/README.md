@@ -382,7 +382,7 @@ By default,
 *   on a macOS computer, it launches 4 parallel threads,
     while on a Linux computer it launches as many as possible.
 
-To alter the default behaviour, modify appropriately lines 57 to 89
+To alter the above default behaviour, modify appropriately lines 57 to 89
 of the main R program:
 
 `<LOCAL CLONED REPOSITORY>/303-changepoint-ottawa/code/main.R`
