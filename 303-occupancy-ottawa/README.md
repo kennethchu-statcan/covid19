@@ -279,7 +279,6 @@ Probabilistic assumptions:
 #  Ottawa COVID-19 hospital occupancy forecast (combining Model 1 & Model 2)
 
    We now describe how the expected hospital occupancy forecast
-   $`\widehat{C}_{t}`$
    ![](https://latex.codecogs.com/svg.latex?\widehat{C}_{t_{*}})
    can be obtained from the estimates and forecasts from Model 1 and Model 2:
    <br/>
