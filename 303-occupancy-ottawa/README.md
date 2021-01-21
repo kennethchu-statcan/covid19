@@ -411,8 +411,8 @@ All required input data and metadata files are located in
 
 *   __serial-interval.csv__
 
-    This CSV file contains the assumed (discrete) *serial interval distribution*
-    used by the model of Flaxman et al.
+    This CSV file contains the assumed (discretized to the day)
+    *serial interval distribution* used by the model of Flaxman et al.
     For a given new infection caused by a given existing infected individual,
     the serial interval distribution gives the probability that
     the new infection occurs on the *t*-th day
