@@ -292,10 +292,10 @@ Likelihood assumptions:
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\left(\begin{array}{c}\textnormal{number\;of}\\\textnormal{admissions}\\\textnormal{on\;day}\;\tau\end{array}\right)\cdot\left(\begin{array}{c}\textnormal{proportion\;of}\\\textnormal{discharge{/}death}\\\textnormal{after\;$(t-\tau)$\;days}\end{array}\right)"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\pi_{\,t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\rho_{\,t-\tau}"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\pi_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)\;=\;\left\{\begin{array}{ll}{\;\;}\int_{0}^{3{/}2}\;\,f_{{\textnormal{Gamma}}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;\tau=1\,\\{\,}\\\int_{\tau-1{/}2}^{\tau+1{/}2}\,f_{\textnormal{Gamma}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;{\tau=2,3,\ldots}\end{array}\right."/>
+   <img src="https://latex.codecogs.com/svg.latex?\rho_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)\;=\;\left\{\begin{array}{ll}{\;\;}\int_{0}^{3{/}2}\;\,f_{{\textnormal{Gamma}}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;\tau=1\,\\{\,}\\\int_{\tau-1{/}2}^{\tau+1{/}2}\,f_{\textnormal{Gamma}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;{\tau=2,3,\ldots}\end{array}\right."/>
    <br/>
 
 Prior distribution assumptions:
@@ -334,9 +334,9 @@ in terms of the (mean,cv)-parametrization.
    denotes last day of data availability (training data cut-off), and
    <br/>
    <br/>
-   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t-1}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t-1}\;A_{\tau}\cdot\widehat{\rho}_{t-\tau}"/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{D}_{t}}\;=\;\sum_{\tau=0}^{t_{*}}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}\;+\;\sum_{\tau=t_{*}+1}^{t-1}\;\widehat{A}_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{D}_{t}}\;=\;\sum_{\tau=0}^{t_{*}}\;A_{\tau}\cdot\widehat{\rho}_{t-\tau}\;+\;\sum_{\tau=t_{*}+1}^{t-1}\;\widehat{A}_{\tau}\cdot\widehat{\rho}_{t-\tau}"/>
 
 # Requirements
 
