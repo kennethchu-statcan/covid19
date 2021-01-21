@@ -406,7 +406,7 @@ All required input data and metadata files are located in
    The vertical dashed line towards the right indicates the training data
    cut-off, which is 2021-01-11 in the plot above.
    The light orange ribbon indicates the 95% credibility interval of the
-   forecast expected daily new hospital admissions,
+   **forecast** expected daily new hospital admissions,
    while the dark orange indicates the 50% credibility interval.
 
    Middle panel: The vertical black bars illustrate the observed
@@ -443,8 +443,40 @@ All required input data and metadata files are located in
 
    <img src="./supplementary/cutoff-2021-01-11/plot-ChgPt-cowplot-Ottawa.png" width="900">
 
-   Posterior means and 90% credible intervals of the
-   jurisdiction-specific final COVID-19 reproduction numbers.
+   Main output graphic of Model 1.
+
+   First panel (from top):
+   The vertical red bars illustrate the observed
+   Ottawa COVID-19 daily **new confirmed case counts**.
+   (Note that the true infection counts are unknown.)
+   The dark blue ribbon indicates the 95% credibility interval
+   of the estimated *expected*
+   Ottawa COVID-19 daily true new infection counts,
+   while the light blue indicates the 50% credibility interval.
+   The vertical dashed line towards the right indicates the training data
+   cut-off, which is 2021-01-11 in the plot above.
+
+   Second panel:
+   The vertical red bars illustrate the observed
+   Ottawa COVID-19 daily **new hospital admission counts**.
+   The dark blue ribbon indicates the 95% credibility
+   interval of the estimated *expected*
+   Ottawa COVID-19 daily new hospital admission counts,
+   while the light blue indicates the 50% credibility interval.
+   The light orange ribbon indicates the 95% credibility interval of the
+   **forecast** expected daily new hospital admissions,
+   while the dark orange indicates the 50% credibility interval.
+
+   Third panel:
+   The light green ribbon indicates the 95% credibility interval of the
+   expected daily reproduction number,
+   while the dark green indicates the 50% credibility interval.
+
+   Fourth panel:
+   The daily reproduction number in Model 1 is modelled via a
+   change point model, with four change points.
+   This panel illustrates the posterior distributions of the occurrence
+   times, change directions and change magnitudes of the four change points.
 
 *  __output-change-point-3-panel-Italy.png__
 
