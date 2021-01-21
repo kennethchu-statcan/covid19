@@ -295,7 +295,7 @@ Likelihood assumptions:
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\rho_{\,t-\tau}"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?{\rho}_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)\;=\;\left\{\begin{array}{ll}{\;\;}\int_{0}^{3{/}2}\;\,f_{{\textnormal{Gamma}}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;\tau=1\,\\{\,}\\\int_{\tau-1{/}2}^{\tau+1{/}2}\,f_{\textnormal{Gamma}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;{\tau=2,3,\ldots}\end{array}\right."/>
+   <img src="https://latex.codecogs.com/svg.latex?{\rho}_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)\;=\;\left\{\begin{array}{ll}{\;\;}\int_{0}^{3{/}2}\;\,f_{{\textnormal{Gamma}}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;\tau=1\,\\{\,}\\\displaystyle\int_{\tau-1{/}2}^{\tau+1{/}2}\,f_{\textnormal{Gamma}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;{\tau=2,3,\ldots}\end{array}\right."/>
    <br/>
 
 Prior distribution assumptions:
