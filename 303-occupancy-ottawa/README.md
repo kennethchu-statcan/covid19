@@ -430,10 +430,10 @@ All required input data and metadata files are located in
    <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png" width="900">
 
    Top panel: The vertical red bars illustrate the observed
-   Ottawa COVID-19 daily **new hospital admissions**.
+   Ottawa COVID-19 daily **new hospital admission counts**.
    The dark blue ribbon indicates the 95% credibility
    interval of the estimated *expected*
-   Ottawa COVID-19 daily new hospital admissions,
+   Ottawa COVID-19 daily new hospital admission counts,
    while the light blue indicates the 50% credibility interval.
    The vertical dashed line towards the right indicates the training data
    cut-off, which is 2021-01-11 in the plot above.
