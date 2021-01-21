@@ -415,9 +415,9 @@ All required input data and metadata files are located in
 
 # Main output files
 
-*  __plot-ChgPt-cowplot-Ottawa.png__
+*  __plot-occupancy-cowplot-01-Ottawa.png__
 
-   <img src="./supplementary/cutoff-2021-01-11/plot-ChgPt-cowplot-Ottawa.png" width="900">
+   <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png" width="900">
 
    Posterior means and 90% credible intervals of the
    jurisdiction-specific initial COVID-19 reproduction numbers.
