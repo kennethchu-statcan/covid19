@@ -50,6 +50,14 @@ hierarchical Bayesian models:
 The desired occupancy forecast is then obtained by suitably combining
 the results of the two sub-models.
 
+The present pipeline assesses the effectiveness of our model
+for hospital occupancy forecast by applying the model
+eight times, each time with a different training data cut-off
+(more precisely, eight consecutive Mondays: 2020-11-13, 2020-11-30, ... , 2021-01-11),
+and examines the agreement between the actual hospital occupancy
+and the model forecast in the three-week window immediately folllowing
+the training data cut-off.
+
 # Model 1: Daily new hospital admission counts (reproduction number change-point model)
 
 Note that the key feature of our model (we emphasize: adapted from Flaxman et al.)
