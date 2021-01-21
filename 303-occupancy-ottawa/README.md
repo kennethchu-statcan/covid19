@@ -352,21 +352,16 @@ See below for information about the contents of the output folder.
 All required input data and metadata files are located in
 `<LOCAL CLONED REPOSITORY>/000-data/2021-01-15.01/`.
 
-*   __raw-covid19-ECDC.csv__
+*   __raw-covid19-Ottawa.csv__
 
-    COVID-19 case and death count time series for the eleven European jurisdictions
-    considered by Flaxman et al.
-    It was downloaded on May 10, 2020 from
-    the European Centre for Disease Prevention and Control open-data URL:
+    Ottawa COVID-19 open data (including daily new confirmed case counts,
+    daily new hospital admission counts, daily hospital midnight census counts).
 
-    https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+    Downloadable at: https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0.csv
 
-*   __raw-covid19-GoCInfobase.csv__
+    See the following download script to examine how the data file was retrieved:
 
-    COVID-19 case and death count time series for the Canadian provinces and territories.
-    It was downloaded on May 10, 2020 from the following URL of PHAC:
-
-    https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
+    `<LOCAL CLONED REPOSITORY>/000-data/2021-01-15.01/run-wget.sh`
 
 *   __infection-hospitalization-rate.csv__
 
