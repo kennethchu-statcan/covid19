@@ -499,6 +499,16 @@ All required input data and metadata files are located in
    Bottom panel: Similar to second panel, but for
    Ottawa COVID-19 daily hospital **midnight census counts**.
 
+*  __`<LOCAL CLONED REPOSITORY>/303-changepoint-ottawa/output/cutoff-2021-01-11/plot-LoS-scatter-mu-cv-Ottawa.png`__
+
+   <img src="./supplementary/cutoff-2021-01-11/plot-LoS-scatter-mu-cv-Ottawa.png" width="900">
+
+   (Joint) posterior distribution of the model parameters of Model 2.
+   For ease of interpretation, we illustrate the posterior distribution
+   with respect to the (mean,cv)-parametrization
+   of the family of Gamma distributions,
+   instead of the more stand (shape,rate)-parametrization.
+
 *  __output-change-point-3-panel-Italy.png__
 
    ![three-panel plot, Italy](./supplementary/output-change-point-3-panel-Italy.png)
