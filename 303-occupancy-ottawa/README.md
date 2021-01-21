@@ -290,6 +290,8 @@ Probabilistic assumptions:
    <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{C}_{t}}\;=\;{C_{t_{*}}}\;+\;\left(\,{\sum_{\tau=t_{*}}^{t}\,\widehat{A}_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\widehat{D}_{\tau}}\,\right)"/>
 
    where
+   ![](https://latex.codecogs.com/svg.latex?{\color{white}.}t_{*}{\color{white}.})
+   denotes last day of data availability (training data cut-off), and
    <br/>
    <br/>
    <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t-1}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
