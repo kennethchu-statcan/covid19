@@ -427,7 +427,7 @@ All required input data and metadata files are located in
 
 *  __`<LOCAL CLONED REPOSITORY>`/303-changepoint-ottawa/output/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png__
 
-   <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png" width="900">
+   <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa1.png" width="900">
 
    Top panel: The vertical red bars illustrate the observed
    Ottawa COVID-19 daily **new hospital admission counts**.
