@@ -309,7 +309,10 @@ Prior distribution assumptions:
 <img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;\textnormal{Uniform}([2,50])"/>
 <br/>
 
-<img src="https://latex.codecogs.com/svg.latex?\nu\;\sim\;\textnormal{Uniform}([{0.1},2])"/>
+<img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;"/>
+<br/>
+
+<img src="https://latex.codecogs.com/svg.latex?\nu\;\sim\;\textnormal{Uniform}([0.1,2])"/>
 <br/>
 
 Note that
