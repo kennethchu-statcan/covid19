@@ -368,7 +368,7 @@ If you are using a Linux or macOS computer, execute the following shell script
 (in order to run the full pipeline):
 
 ```
-.\run-main.sh
+sh .\run-main.sh
 ```
 
 This will trigger the creation of the output folder
