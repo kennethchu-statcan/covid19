@@ -65,7 +65,8 @@ The main inference target of Model 1 is
 Model 1 stipulates probabilistic assumptions on how
 (observed) daily new admission counts are related to
 (unobserved) daily new infection counts (via a **random delay**) and
-(unobserved) time-varying reproduction number.
+(unobserved) time-varying reproduction number,
+treating the latter two as latent variables (or, secondary inference targets).
 
 The following is the list of the components of the model, and their relations
 among one another.
