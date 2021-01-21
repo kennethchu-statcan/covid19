@@ -278,6 +278,9 @@ Probabilistic assumptions:
 
 # Ottawa COVID-19 hospital occupancy forecast (combining Model 1 & Model 2)
 
+   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{t}\,-\,\sum_{\tau=0}^{t}\,D_{t}"/>
+   <br/>
+
 
 
 # Requirements
