@@ -395,7 +395,7 @@ All required input data and metadata files are located in
 
 *  __`<LOCAL CLONED REPOSITORY>`/303-changepoint-ottawa/output/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png__
 
-   <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa1.png" width="900">
+   <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png" width="900">
 
    Top panel: The vertical red bars illustrate the observed
    Ottawa COVID-19 daily **new hospital admission counts**.
@@ -422,6 +422,16 @@ All required input data and metadata files are located in
 
    Bottom panel: Similar to middle panel, but for
    Ottawa COVID-19 daily hospital **midnight census counts**.
+
+*  __`<LOCAL CLONED REPOSITORY>`/303-changepoint-ottawa/output/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa1.png__
+
+   <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa1.png" width="900">
+
+   This plot illustrates the results of a replicate run
+   (which we call **Ottawa1**).
+   The purpose of the replication here is to provide minimal assessment
+   of the stability of the model with respect to random initializations
+   of the MCMC inference procedure.
 
 *  __output-change-point-covars-final-rt.png__
 
