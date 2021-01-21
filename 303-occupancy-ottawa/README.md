@@ -299,15 +299,13 @@ Likelihood assumptions:
    <br/>
 
 Prior distribution assumptions:
+<br/>
 
 <img src="https://latex.codecogs.com/svg.latex?\alpha\;=\;\dfrac{1}{\mu\cdot\nu}"/>
-<br/>
 
 <img src="https://latex.codecogs.com/svg.latex?\beta\;=\;\dfrac{\alpha}{\mu}\;=\;\dfrac{1}{\mu^{2}\cdot\nu}"/>
-<br/>
 
 <img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;{\textnormal{Uniform}}{([2,50])}"/>
-<br/>
 
 <img src="https://latex.codecogs.com/svg.latex?\nu\;\sim\;\textnormal{Uniform}([0.1,2])"/>
 <br/>
