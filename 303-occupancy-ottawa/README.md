@@ -276,7 +276,9 @@ Probabilistic assumptions:
    <img src="https://latex.codecogs.com/svg.latex?\pi_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)\;=\;\left\{\begin{array}{ll}{\;\;}\int_{0}^{3{/}2}\;\,f_{{\textnormal{Gamma}}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;\tau=1\,\\{\,}\\\int_{\tau-1{/}2}^{\tau+1{/}2}\,f_{\textnormal{Gamma}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;{\tau=2,3,\ldots}\end{array}\right."/>
    <br/>
 
-# Ottawa COVID-19 hospital occupancy forecast (combining Model 1 & Model 2)
+#  Ottawa COVID-19 hospital occupancy forecast (combining Model 1 & Model 2)
+
+   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{\tau}\,-\,\sum_{\tau=0}^{t}\,D_{\tau}\;=\;\left(\,{\sum_{\tau=0}^{t}\,A_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t}\,D_{\tau}}\,\right)\;=\;\left(\,{\sum_{\tau=0}^{t_{*}}\,A_{\tau}}\,-\,{\sum_{\tau=t_{*}+1}^{t}\,A_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t}\,D_{\tau}}\,\right)"/>
 
    <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{\tau}\,-\,\sum_{\tau=0}^{t}\,D_{\tau}\;=\;\left(\,{\sum_{\tau=0}^{t}\,A_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t}\,D_{\tau}}\,\right)\;=\;\left(\,{\sum_{\tau=0}^{t_{*}}\,A_{\tau}}\,-\,{\sum_{\tau=t_{*}+1}^{t}\,A_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t}\,D_{\tau}}\,\right)"/>
 
