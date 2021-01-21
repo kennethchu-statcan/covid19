@@ -350,7 +350,7 @@ See below for information about the contents of the output folder.
 # Input files
 
 All required input data and metadata files are located in
-`<LOCAL CLONED REPOSITORY>/000-data/2020-05-10.01/`.
+`<LOCAL CLONED REPOSITORY>/000-data/2021-01-15.01/`.
 
 *   __raw-covid19-ECDC.csv__
 
@@ -368,57 +368,11 @@ All required input data and metadata files are located in
 
     https://health-infobase.canada.ca/src/data/covidLive/covid19.csv
 
-*   __interventions-europe.csv__
+*   __infection-hospitalization-rate.csv__
 
-    This CSV file contains the COVID-19 intervention histories
-    (social distancing measures and the dates they were instituted)
-    of the eleven European jurisdictions.
-
-    It is a simplified version of the original one supplied
-    by Flaxman et al, in the sense that data not directly used
-    by the model have been removed.
-
-*   __interventions-canada.csv__
-
-    The counterpart of interventions-europe.csv for the Canadian provinces
-
-*   __weighted-fatality-europe.csv__
-
-    This CSV file contains the estimates of the
-    _weighted infection fatality ratio_ (wIFR)
-    for the eleven Europe jurisdictions.
-    These are fixed jurisdiction-specific parameters used by the model
-    of Flaxman et al.
-
-    The *infection fatality ratio* refers to the conditional probability
-    of COVID-19 death given COVID-19 infection.
-    The weighting refers to the adjustment required when generating
-    these estimates in order to mitigate the severe and
-    demography/age-dependent COVID-19 underreporting.
-    The estimation procedure of the weighted infection fatality
-    ratios is described in this article:
-
-    https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext
-
-*   __weighted-fatality-canada.csv__
-
-    The counterpart of weighted-fatality-europe.csv for the Canadian provinces
-
-    However, we are still in the process of estimating
-    the weighted infection fatality ratios
-    for the Canadian provinces.
-    As a result, this input parameter file currently contains NULL values.
-    For the time being, this file is populated at run-time via donor imputation
-    using the European jurisdictions as donor pool.
-
-    The current (temporary) imputed wIFR values for the Canadian provinces can be seen here:
-
-    https://github.com/kennethchu-statcan/covid19/blob/master/201-changepoint-ottawa/supplementary/input-wIFR.csv
-
-*   __ages.csv__
-
-    This CSV file contains the estimates of the sizes of different age groups
-    in the respective populations of the eleven European jurisdictions.
+    This CSV file contains the estimates of the infection hospitalization rate
+    (IHR) for Ottawa, estimated to be 0.026 at time of implementation
+    of the present model.
 
 *   __serial-interval.csv__
 
