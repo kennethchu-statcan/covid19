@@ -280,6 +280,7 @@ Probabilistic assumptions:
 
    We now describe how the expected hospital occupancy forecast
    $`\widehat{C}_{t}`$
+   ![](https://latex.codecogs.com/svg.latex?y%3Dx%5E2)
    can be obtained from the estimates and forecasts from Model 1 and Model 2:
    <br/>
 
