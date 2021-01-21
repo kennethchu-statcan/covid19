@@ -63,6 +63,14 @@ the training data cut-off.
 Note that the key feature of our model (we emphasize: adapted from Flaxman et al.)
 is that it models the random delay between the unobserved event of COVID-19
 infection and the observed event of hospital admission for COVID-19.
+
+The main inference target of Model 1 is
+(observed) COVID-19 daily new hospital admission counts.
+Model 1 stipulates probabilistic assumptions on how
+(observed) daily new admission counts are related to
+(unobserved) daily new infection counts (via a random delay) and
+(unobserved) time-varying reproduction number.
+
 The following is the list of the components of the model, and their relations
 among one another.
 
