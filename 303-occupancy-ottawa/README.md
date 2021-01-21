@@ -306,9 +306,6 @@ Prior distribution assumptions:
 <img src="https://latex.codecogs.com/svg.latex?\beta\;=\;\dfrac{\alpha}{\mu}\;=\;\dfrac{1}{\mu^{2}\cdot\nu}"/>
 <br/>
 
-<img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;\textnormal{Uniform}([2,50])"/>
-<br/>
-
 <img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;{\textnormal{Uniform}}{([2,50])}"/>
 <br/>
 
@@ -316,7 +313,7 @@ Prior distribution assumptions:
 <br/>
 
 Note that
-![](https://latex.codecogs.com/svg.latex?{\color{white}.}(\mu,\nu){\color{white}.})
+![](https://latex.codecogs.com/svg.latex?{\color{white}.}\mu,\nu{\color{white}.})
 gives the (mean,cv)-parametrization of the family of Gamma distributions,
 instead of the more standard (shape,rate)-parametrization.
 We find it intuitively easier to impose prior distributions
