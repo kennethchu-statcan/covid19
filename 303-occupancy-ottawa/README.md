@@ -315,7 +315,6 @@ Probabilistic assumptions:
    rstan, scales, tidyr
 
 *  Tested on:
-
    *   R version v4.0.3, Ubuntu 20.04.1 LTS, x86_64-conda-linux-gnu (64-bit)
    *   R version v4.0.2, macOS 10.16, x86_64-apple-darwin17.0 (64-bit)
 
