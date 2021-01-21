@@ -439,9 +439,9 @@ All required input data and metadata files are located in
    dates (8 consecutive Mondays):
    2020-11-23, 2020-11-30, ... , 2021-01-11.
 
-*  __output-change-point-covars-final-rt.png__
+*  __`<LOCAL CLONED REPOSITORY>/303-changepoint-ottawa/output/cutoff-2021-01-11/plot-ChgPt-cowplot-Ottawa.png`__
 
-   <img src="./supplementary/output-change-point-covars-final-rt.png" width="500">
+   <img src="./supplementary/cutoff-2021-01-11/plot-ChgPt-cowplot-Ottawa.png" width="900">
 
    Posterior means and 90% credible intervals of the
    jurisdiction-specific final COVID-19 reproduction numbers.
