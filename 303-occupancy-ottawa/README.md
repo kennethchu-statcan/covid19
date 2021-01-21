@@ -377,6 +377,16 @@ if it does not already exist, followed by execution of the pipeline.
 All output and log files will be saved to the output folder.
 See below for information about the contents of the output folder.
 
+By default,
+*   the pipeline runs in DEBUG mode (fewer iterations), and
+*   on a macOS computer, it launches 4 parallel threads,
+    while on a Linux computer it launches as many as possible.
+
+To alter the default behaviour, modify appropriately lines 57 to 89
+of the main R program:
+
+`<LOCAL CLONED REPOSITORY>/303-changepoint-ottawa/code/main.R`
+
 # Input files
 
 All required input data and metadata files are located in
