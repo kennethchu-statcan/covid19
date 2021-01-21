@@ -278,7 +278,7 @@ Probabilistic assumptions:
 
 #  Ottawa COVID-19 hospital occupancy forecast (combining Model 1 & Model 2)
 
-   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{\tau}\,-\,\sum_{\tau=0}^{t}\,D_{\tau}\;=\;\left(\,{\sum_{\tau=0}^{t_{*}}\,A_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\,\widehat{A}_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t_{*}}\,D_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\widehat{D}_{\tau}}\,\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{\tau}\;-\;\sum_{\tau=0}^{t}\,D_{\tau}\;=\;\left(\,{\sum_{\tau=0}^{t_{*}}\,A_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\,\widehat{A}_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t_{*}}\,D_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\widehat{D}_{\tau}}\,\right)"/>
 
    <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{C}_{t}}\;=\;\left(\,{\sum_{\tau=0}^{t_{*}}\,A_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\,\widehat{A}_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t_{*}}\,D_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\widehat{D}_{\tau}}\,\right)"/>
 
