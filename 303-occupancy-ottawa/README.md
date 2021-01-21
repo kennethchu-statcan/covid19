@@ -448,7 +448,8 @@ All required input data and metadata files are located in
    Ottawa COVID-19 daily hospital discharges/deaths,
    while the red line indicates the posterior median.
    The light orange ribbon indicates the 95% credibility interval of the
-   forecast expected daily hospital midnight census counts,
+   forecast expected
+   Ottawa COVID-19 daily hospital discharges/deaths,
    while the dark orange indicates the 50% credibility interval.
 
    Bottom panel: Similar to middle panel, but for
