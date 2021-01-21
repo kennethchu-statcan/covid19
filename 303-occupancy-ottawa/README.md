@@ -429,8 +429,30 @@ All required input data and metadata files are located in
 
    <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png" width="900">
 
-   Posterior means and 90% credible intervals of the
-   jurisdiction-specific initial COVID-19 reproduction numbers.
+   Top panel: The vertical red bars illustrate the observed
+   Ottawa COVID-19 daily **new hospital admissions**.
+   The dark blue ribbon indicates the 95% credibility
+   interval of the estimated *expected*
+   Ottawa COVID-19 daily new hospital admissions,
+   while the light blue indicates the 50% credibility interval.
+   The vertical dashed line towards the right indicates the training data
+   cut-off, which is 2021-01-11 in the plot above.
+   The light orange ribbon indicates the 95% credibility interval of the
+   forecast expected daily new hospital admissions,
+   while the dark orange indicates the 50% credibility interval.
+
+   Middle panel: The vertical black bars illustrate the observed
+   Ottawa COVID-19 daily hospital **discharges/deaths**.
+   The cyan ribbon indicates the 95% credibility
+   interval of the estimated *expected*
+   Ottawa COVID-19 daily hospital discharges/deaths,
+   while the red line indicates the posterior median.
+   The light orange ribbon indicates the 95% credibility interval of the
+   forecast expected daily hospital midnight census counts,
+   while the dark orange indicates the 50% credibility interval.
+
+   Bottom panel: Similar to middle panel, but for
+   Ottawa COVID-19 daily hospital **midnight census counts**.
 
 *  __output-change-point-covars-final-rt.png__
 
