@@ -280,7 +280,7 @@ Probabilistic assumptions:
 
    <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{t}\,-\,\sum_{\tau=0}^{t}\,D_{t}"/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\left({\sum_{\tau=0}^{t}\,A_{t}}\right)\,-\,\left({\sum_{\tau=0}^{t}\,D_{t}}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\left(\,{\sum_{\tau=0}^{t}\,A_{t}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t}\,D_{t}}\,\right)"/>
 
 # Requirements
 
