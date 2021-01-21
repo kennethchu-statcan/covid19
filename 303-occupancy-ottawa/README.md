@@ -176,7 +176,7 @@ among one another.
    <img src="https://latex.codecogs.com/svg.latex?\,g_{\tau}\;=\;\int_{\tau-1/2}^{\tau+1/2}g(s)\,ds\,,\;\;\textnormal{{for}}\;\tau\,=\,2,3,\ldots"/>
    <br/>
 
-   where *g* is, for all jurisdictions, the probability density
+   where *g* is the probability density
    of the *serial interval distribution*.
    We remark that the discretized-to-the-day serial interval distribution
    (determined precisely by *g<sub>1</sub>*, *g<sub>2</sub>*, *g<sub>3</sub>*, ...)
@@ -194,8 +194,7 @@ among one another.
    *   *&gamma;<sub>k</sub>* is
        the (random, unobserved) time of occurrence of
        the *k*-th change-point in the COVID-19
-       time-varying reproduction number for jurisdiction *m*,
-       with the following priors:
+       time-varying reproduction number with the following priors:
        </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\,\gamma_{1}\;\sim\;\textnormal{\small{Uniform}}([\,2020/03/01\,,2020/03/28\,])"/>
@@ -214,8 +213,7 @@ among one another.
 
    *   *&alpha;<sub>k</sub>*
        is the (random, unobserved) log-linear change (''step size'')
-       in reproduction number at the *k*-th change-point for jurisdiction *m*,
-       with the following priors:
+       in reproduction number at the *k*-th change-point with the following priors:
        </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\,\alpha_{1}\;\sim\;\textnormal{\small{Uniform}}([-\log(4),0])\,"/>
@@ -236,14 +234,14 @@ among one another.
        after (*I(t-&gamma;<sub>k</sub>) = 1*)
        the *k*-th change-point.
 
-   *   *R<sub>0</sub>* is the jurisdiction-specific initial reproduction number,
+   *   *R<sub>0</sub>* is the initial reproduction number,
        assumed to follow:
        </br>
 
        <img src="https://latex.codecogs.com/svg.latex?\,R_{{0}}\;\sim\;\textnormal{\small{Normal}}(2.4,\vert\,\kappa\,\vert),\;\textnormal{\small{with}}\;\;\kappa\,\sim\,\textnormal{\small{Normal}}(0,0.5)"/>
        </br>
 
-       where *&kappa;* is also a jurisdiction-independent (random, unobserved) parameter.
+       where *&kappa;* is also a (random, unobserved) parameter.
 
 
 # Model 2: Ottawa COVID-19 hospital length of stay
