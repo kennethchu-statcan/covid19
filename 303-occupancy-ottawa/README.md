@@ -273,7 +273,7 @@ Probabilistic assumptions:
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}d_{t}}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\pi_{\,t-\tau}"/>
    <br/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\pi_{\tau}\;:=\;P\!\left(\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right)"/>
+   <img src="https://latex.codecogs.com/svg.latex?\pi_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)"/>
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?{\color{white}\pi_{\tau}}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\pi_{\,t-\tau}"/>
