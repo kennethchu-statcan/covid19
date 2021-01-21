@@ -496,7 +496,7 @@ All required input data and metadata files are located in
       Ottawa COVID-19 daily hospital discharges/deaths,
       while the red line indicates the posterior median.
 
-      Bottom panel: Similar to middle panel, but for
+      Bottom panel: Similar to second panel, but for
       Ottawa COVID-19 daily hospital **midnight census counts**.
 
 *  __output-change-point-3-panel-Italy.png__
