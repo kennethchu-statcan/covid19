@@ -39,7 +39,7 @@ https://github.com/ImperialCollegeLondon/covid19model/releases/tag/v1.0
 
 We describe our adaption below.
 
-### Summary of our adaptation of the Flaxman et al. model for Ottawa COVID-19 hospital occupancy forecast
+## Summary of our adaptation of the Flaxman et al. model for Ottawa COVID-19 hospital occupancy forecast
 
 For the Ottawa COVID-19 hospital occupancy forecast, we constructed two separate
 hierarchical Bayesian models:
