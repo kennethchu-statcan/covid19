@@ -313,7 +313,7 @@ Prior distribution assumptions:
 <br/>
 
 Note that
-![](https://latex.codecogs.com/svg.latex?{\color{white}.}\mu,\nu{\color{white}.})
+(![](https://latex.codecogs.com/svg.latex?{\color{white}.}\mu,\nu{\color{white}.}))
 gives the (mean,cv)-parametrization of the family of Gamma distributions,
 instead of the more standard (shape,rate)-parametrization.
 We find it intuitively easier to impose prior distributions
