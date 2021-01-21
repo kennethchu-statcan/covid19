@@ -248,6 +248,15 @@ among one another.
 
 # Model 2: Ottawa COVID-19 hospital length of stay
 
+Model 2 assumes that the Ottawa COVID-19 hospital length of stay follows
+a Gamma distribution.
+The main inference targets are thus simply
+the shape and rate parameter of the family of Gamma distributions.
+The observed data are the daily hospital admission counts and
+daily discharge/death counts (derived from admission and midnight census counts).
+The probabilistic assumptions of the model stipulates the random delay
+between hospital admission and discharge/death.
+
 Observed variables:
 
 *  The expected number *d<sub>t</sub>* of COVID-19 hospital admissions
