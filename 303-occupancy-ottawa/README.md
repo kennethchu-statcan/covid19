@@ -507,7 +507,7 @@ All required input data and metadata files are located in
    For ease of interpretation, we illustrate the posterior distribution
    with respect to the (mean,cv)-parametrization
    of the family of Gamma distributions,
-   instead of the more stand (shape,rate)-parametrization.
+   instead of the more standard (shape,rate)-parametrization.
 
 *  __output-change-point-3-panel-Italy.png__
 
