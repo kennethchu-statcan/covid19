@@ -281,7 +281,7 @@ Deterministic relation among *A<sub>t</sub>*, *C<sub>t</sub>* and *D<sub>t</sub>
    <img src="https://latex.codecogs.com/svg.latex?\,C_{t}\;=\;\sum^{t}_{\tau=0}\,A_{\tau}\;-\;\sum^{t}_{\tau=0}\,D_{\tau}"/>
    <br/>
 
-Probabilistic assumptions:
+Likelihood assumptions:
 
    <img src="https://latex.codecogs.com/svg.latex?\,{D}_{t}\;\sim\;\textnormal{NegativeBinomial}\!\left(\,d_{t}\,,\,d_{t}+{\dfrac{d_{t}^{2}}{\psi}}\,\right)"/>
    <br/>
@@ -297,6 +297,27 @@ Probabilistic assumptions:
 
    <img src="https://latex.codecogs.com/svg.latex?\pi_{\tau}\;:=\;P\!\left(\left.\begin{array}{c}\textnormal{discharge{/}death}\\\textnormal{on\;the\;$\tau^{\textnormal{th}}$\;day}\\\textnormal{after\;admission}\end{array}\right\vert\begin{array}{c}\textnormal{COVID-19}\\\textnormal{hospital}\\\textnormal{admission}\end{array}\right)\;=\;\left\{\begin{array}{ll}{\;\;}\int_{0}^{3{/}2}\;\,f_{{\textnormal{Gamma}}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;\tau=1\,\\{\,}\\\int_{\tau-1{/}2}^{\tau+1{/}2}\,f_{\textnormal{Gamma}}(s;\alpha,\beta)\,d{s},&\textnormal{for}\;{\tau=2,3,\ldots}\end{array}\right."/>
    <br/>
+
+Prior distribution assumptions:
+
+    <img src="https://latex.codecogs.com/svg.latex?\alpha\;=\;\dfrac{1}{\mu\cdot\nu}"/>
+    <br/>
+
+    <img src="https://latex.codecogs.com/svg.latex?\beta\;=\;\dfrac{\alpha}{\mu}\;=\;\dfrac{1}{\mu^{2}\cdot\nu}"/>
+    <br/>
+
+    <img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;\textnormal{Uniform}([2,50])"/>
+    <br/>
+
+    <img src="https://latex.codecogs.com/svg.latex?\nu\;\sim\;\textnormal{Uniform}([0.1,2])"/>
+    <br/>
+
+    Note that
+    ![](https://latex.codecogs.com/svg.latex?{\color{white}.}(\mu,\nu){\color{white}.})
+    gives the (mean,cv)-parametrization of the family of Gamma distributions,
+    instead of the more standard (shape,rate)-parametrization.
+    We find it intuitively easier to impose prior distributions
+    in terms of the (mean,cv)-parametrization.
 
 #  Ottawa COVID-19 hospital occupancy forecast
 
