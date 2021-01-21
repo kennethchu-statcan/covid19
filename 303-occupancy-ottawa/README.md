@@ -425,7 +425,7 @@ All required input data and metadata files are located in
 
 # Main output files
 
-*  __plot-occupancy-cowplot-01-Ottawa.png__
+*  __output/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png__
 
    <img src="./supplementary/cutoff-2021-01-11/plot-occupancy-cowplot-01-Ottawa.png" width="900">
 
