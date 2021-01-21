@@ -284,7 +284,7 @@ Probabilistic assumptions:
 
    <img src="https://latex.codecogs.com/svg.latex?\,{\color{white}\widehat{C}_{t}}\;=\;{C_{t_{*}}}\;+\;\left(\,{\sum_{\tau=t_{*}}^{t}\,\widehat{A}_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\widehat{D}_{\tau}}\,\right)"/>
 
-   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t-1}\,A_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
+   <img src="https://latex.codecogs.com/svg.latex?\,\widehat{D}_{t}\;=\;\sum_{\tau=0}^{t-1}\;A_{\tau}\cdot\widehat{\pi}_{t-\tau}"/>
 
 # Requirements
 
