@@ -299,7 +299,7 @@ Likelihood assumptions:
 Prior distribution assumptions:
 <br/>
 
-<img src="https://latex.codecogs.com/svg.latex?\alpha\;=\;\dfrac{1}{\mu\cdot\nu}"/>
+<img src="https://latex.codecogs.com/svg.latex?\alpha\;=\;\dfrac{1}{\nu^{2}}"/>
 
 <img src="https://latex.codecogs.com/svg.latex?\beta\;=\;\dfrac{\alpha}{\mu}\;=\;\dfrac{1}{\mu^{2}\cdot\nu}"/>
 
