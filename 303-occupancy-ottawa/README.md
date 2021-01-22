@@ -301,7 +301,7 @@ Prior distribution assumptions:
 
 <img src="https://latex.codecogs.com/svg.latex?\alpha\;=\;\dfrac{1}{\nu^{2}}"/>
 
-<img src="https://latex.codecogs.com/svg.latex?\beta\;=\;\dfrac{\alpha}{\mu}\;=\;\dfrac{1}{\mu\cdot\nu^{2}}"/>
+<img src="https://latex.codecogs.com/svg.latex?\beta\;=\;\dfrac{\alpha}{\mu}\;=\;\dfrac{1}{\mu\cdot{\nu^{2}}}"/>
 
 <img src="https://latex.codecogs.com/svg.latex?\mu\;\sim\;{\textnormal{Uniform}}{([2,50])}"/>
 
