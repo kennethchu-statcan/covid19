@@ -44,8 +44,8 @@ We describe our adaption below.
 For the Ottawa COVID-19 hospital occupancy forecast, we constructed two separate
 hierarchical Bayesian models:
 
-*   Model 1: daily new hospital admission counts,
-*   Model 2: hospital length of stay.
+*   Sub-model 1: daily new hospital admission counts,
+*   Sub-model 2: hospital length of stay.
 
 The desired occupancy forecast is then obtained by suitably combining
 the results of the two sub-models.
@@ -58,11 +58,11 @@ and examines the agreement between the actual hospital occupancy
 and the model forecast in the three-week window immediately folllowing
 the training data cut-off.
 
-# Model 1: Daily new hospital admission counts (reproduction number change-point model)
+# Sub-model 1: Daily new hospital admission counts (reproduction number change-point model)
 
-The main inference target of Model 1 is
+The main inference target of Sub-model 1 is
 (observed) COVID-19 daily new hospital admission counts.
-Model 1 stipulates probabilistic assumptions on how
+Sub-model 1 stipulates probabilistic assumptions on how
 (observed) daily new admission counts are related to
 (unobserved) daily new infection counts (via a **random delay**) and
 (unobserved) time-varying reproduction number,
@@ -244,15 +244,15 @@ among one another.
        where *&kappa;* is also a (random, unobserved) parameter.
 
 
-# Model 2: Ottawa COVID-19 hospital length of stay
+# Sub-model 2: Ottawa COVID-19 hospital length of stay
 
-Model 2 assumes that the Ottawa COVID-19 hospital length of stay follows
+Sub-model 2 assumes that the Ottawa COVID-19 hospital length of stay follows
 a Gamma distribution.
 The main inference targets are thus simply
 the shape and rate parameters of the family of Gamma distributions.
 The observed data are the daily hospital admission counts and
 daily discharge/death counts (derived from admission and midnight census counts).
-The probabilistic assumptions of Model 2 stipulates the random delay
+The probabilistic assumptions of Sub-model 2 stipulates the random delay
 between hospital admission and discharge/death.
 
 Observed variables:
@@ -318,7 +318,7 @@ in terms of the (mean,cv)-parametrization.
 
    We now describe how the expected hospital occupancy forecast
    ![](https://latex.codecogs.com/svg.latex?{\color{white}.}\widehat{C}_{t}{\color{white}.})
-   can be obtained from the estimates and forecasts from Model 1 and Model 2:
+   can be obtained from the estimates and forecasts from Sub-model 1 and Sub-model 2:
    <br/>
 
    <img src="https://latex.codecogs.com/svg.latex?\,\widehat{C}_{t}\;=\;\sum_{\tau=0}^{t}\,A_{\tau}{\;}{-}{\;}\sum_{\tau=0}^{t}\,D_{\tau}\;=\;\left(\,{\sum_{\tau=0}^{t_{*}}\,A_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\,\widehat{A}_{\tau}}\,\right)\,-\,\left(\,{\sum_{\tau=0}^{t_{*}}\,D_{\tau}}\,-{\sum_{\tau=t_{*}+1}^{t}\widehat{D}_{\tau}}\,\right)"/>
@@ -469,7 +469,7 @@ All required input data and metadata files are located in
 
    <img src="./supplementary/cutoff-2021-01-11/plot-ChgPt-cowplot-Ottawa.png" width="900">
 
-   Main output graphic of Model 1.
+   Main output graphic of Sub-model 1.
 
    First panel (from top):
    The vertical red bars illustrate the observed
@@ -499,7 +499,7 @@ All required input data and metadata files are located in
    while the dark green indicates the 50% credibility interval.
 
    Fourth panel:
-   The daily reproduction number in Model 1 is modelled via a
+   The daily reproduction number in Sub-model 1 is modelled via a
    change point model, with four change points.
    This panel illustrates the posterior distributions of the occurrence
    times, change directions and change magnitudes of the four change points.
@@ -508,7 +508,7 @@ All required input data and metadata files are located in
 
    <img src="./supplementary/cutoff-2021-01-11/plot-LoS-expected-cowplot-Ottawa1.png" width="900">
 
-   Main output graphic of Model 2.
+   Main output graphic of Sub-model 2.
 
    First panel (from top):
    The vertical black bars illustrate the observed
@@ -529,7 +529,7 @@ All required input data and metadata files are located in
 
    <img src="./supplementary/cutoff-2021-01-11/plot-LoS-scatter-mu-cv-Ottawa.png" width="900">
 
-   (Joint) posterior distribution of the model parameters of Model 2.
+   (Joint) posterior distribution of the model parameters of Sub-model 2.
    For ease of interpretation, we illustrate the posterior distribution
    with respect to the (mean,cv)-parametrization
    of the family of Gamma distributions,
