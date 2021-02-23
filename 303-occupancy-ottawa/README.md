@@ -425,10 +425,10 @@ All required input data and metadata files are located in
 
    Top panel: The vertical red bars illustrate the observed
    Ottawa COVID-19 daily **new hospital admission counts**.
-   The dark blue ribbon indicates the 95% credibility
+   The light blue ribbon indicates the 95% credibility
    interval of the estimated *expected*
    Ottawa COVID-19 daily new hospital admission counts,
-   while the light blue indicates the 50% credibility interval.
+   while the dark blue indicates the 50% credibility interval.
    The vertical dashed line towards the right indicates the training data
    cut-off, which is 2021-01-11 in the plot above.
    The light orange ribbon indicates the 95% credibility interval of the
@@ -475,20 +475,20 @@ All required input data and metadata files are located in
    The vertical red bars illustrate the observed
    Ottawa COVID-19 daily **new confirmed case counts**.
    (Note that the true infection counts are unknown.)
-   The dark blue ribbon indicates the 95% credibility interval
+   The light blue ribbon indicates the 95% credibility interval
    of the estimated *expected*
    Ottawa COVID-19 daily true new infection counts,
-   while the light blue indicates the 50% credibility interval.
+   while the dark blue indicates the 50% credibility interval.
    The vertical dashed line towards the right indicates the training data
    cut-off, which is 2021-01-11 in the plot above.
 
    Second panel:
    The vertical red bars illustrate the observed
    Ottawa COVID-19 daily **new hospital admission counts**.
-   The dark blue ribbon indicates the 95% credibility
+   The light blue ribbon indicates the 95% credibility
    interval of the estimated *expected*
    Ottawa COVID-19 daily new hospital admission counts,
-   while the light blue indicates the 50% credibility interval.
+   while the dark blue indicates the 50% credibility interval.
    The light orange ribbon indicates the 95% credibility interval of the
    **forecast** expected daily new hospital admissions,
    while the dark orange indicates the 50% credibility interval.
