@@ -1,7 +1,8 @@
 
 getData.serial.interval <- function(
     csv.serial.interval = NULL,
-    csv.output          = "input-serial-interval.csv"
+    csv.output          = "input-serial-interval.csv",
+    length.tail         = 10000
     ) {
 
     thisFunctionName <- "getData.serial.interval";
@@ -22,6 +23,31 @@ getData.serial.interval <- function(
     } else {
 
         DF.output <- read.csv( file = csv.serial.interval, stringsAsFactors = FALSE );
+
+        DF.output[nrow(DF.output),'fit'] <- DF.output[nrow(DF.output),'fit'] / 2;
+
+        cat("\nstr(DF.output)\n");
+        print( str(DF.output)   );
+
+        last.X   <- DF.output[nrow(DF.output),'X'  ];
+        last.fit <- DF.output[nrow(DF.output),'fit'];
+
+        DF.tail <- data.frame(
+            X   = seq(last.X+1,last.X+length.tail),
+            fit = rep(last.fit/length.tail, times = length.tail)
+            );
+
+        cat("\nstr(DF.tail)\n");
+        print( str(DF.tail)   );
+
+        DF.output <- rbind(DF.output,DF.tail);
+
+        cat("\nstr(DF.output)\n");
+        print( str(DF.output)   );
+
+        cat("\nsum(DF.output[,'fit'])\n");
+        print( sum(DF.output[,'fit'])   );
+
         write.csv(
             x         = DF.output,
             file      = csv.output,
@@ -38,4 +64,3 @@ getData.serial.interval <- function(
     }
 
 ##################################################
-
