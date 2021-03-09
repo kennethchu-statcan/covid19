@@ -107,7 +107,7 @@ wrapper.stan_inner <- function(
 
     jurisdictions  <- unique(DF.input[,'jurisdiction']);
     forecast       <- 0;
-    N2             <- 720; # 360;
+    N2             <- 450; # 360;
     dates          <- list();
     reported_cases <- list();
 
