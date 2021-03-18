@@ -388,7 +388,7 @@ of the main R program:
 # Input files
 
 All required input data and metadata files are located in
-`<LOCAL CLONED REPOSITORY>/000-data/2021-01-15.01/`.
+`<LOCAL CLONED REPOSITORY>/000-data/2021-03-09.01/`.
 
 *   __raw-covid19-Ottawa.csv__
 
@@ -399,7 +399,7 @@ All required input data and metadata files are located in
 
     See the following download script to examine how the data file was retrieved:
 
-    `<LOCAL CLONED REPOSITORY>/000-data/2021-01-15.01/run-wget.sh`
+    `<LOCAL CLONED REPOSITORY>/000-data/2021-03-09.01/run-wget.sh`
 
 *   __infection-hospitalization-rate.csv__
 
